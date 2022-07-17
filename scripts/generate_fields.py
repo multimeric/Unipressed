@@ -7,8 +7,9 @@ import typer
 from uniprot_rest.types.dataset import Dataset
 import ast
 import humps
+from pathlib import Path
 
-app = typer.Typer()
+app = typer.Typer(result_callback=lambda x: print(x))
 
 
 def sanitize(name: str) -> str:
@@ -205,9 +206,82 @@ def query_fields():
     print(ast.unparse(ast.fix_missing_locations(generated)))
 
 
+def generate_return_fields(dataset: Dataset) -> tuple[
+    Iterable[ast.AST],
+    Iterable[ast.Constant],
+]:
+    """
+    :return: A tuple of (top level statements, exports as string constants)
+    """
+    top_level = []
+    exports = []
+    groups = ast.Tuple(elts=[])
+
+    for group in requests.get(
+            f"https://rest.uniprot.org/configure/{dataset.value}/result-fields"
+    ).json():
+        group_name = humps.pascalize( sanitize(dataset.name.capitalize() + group["groupName"]))
+        # Create a new Literal for all fields in this group
+        top_level.append(make_literal(ast.Name(group_name), [ast.Constant(it["name"]) for it in group["fields"]]))
+        # Keep track of all the groups so we can union them together
+        groups.elts.append(ast.Name(group_name))
+
+    # Make a type union over all the Literals which is user facing
+    group_union_name = f"{dataset.name.capitalize()}Fields"
+    top_level.append(ast.AnnAssign(
+        target=ast.Name(group_union_name),
+        annotation=ast.Name("TypeAlias"),
+        value=ast.Subscript(
+            value=ast.Name("Union"),
+            slice=groups
+        ),
+        simple=True
+    ))
+
+    # Export this high-level Union
+    exports.append(ast.Constant(group_union_name))
+
+    return top_level, exports
+
+def generate_query_fields(dataset: Dataset) -> tuple[
+    Iterable[ast.AST],
+    Iterable[ast.Constant]
+]:
+    """
+    :return: A tuple of (top level statements, exports as string constants)
+    """
+    top_level = []
+    exports: list[ast.Constant] = []
+    fields: list[ast.AnnAssign] = []
+
+    # Iterate over all query fields
+    response = requests.get( f"https://rest.uniprot.org/configure/{dataset.value}/search-fields" )
+    response.raise_for_status()
+    for field in response.json():
+        for subfield in iter_subfields(field):
+            typ, extra = convert_type(subfield)
+            top_level += extra
+
+            # For each field, annotate the top level query TypedDict
+            fields.append(
+                ast.AnnAssign(
+                    target=ast.Name(subfield["id"]), annotation=typ, simple=True
+                )
+            )
+
+    # Create the top level TypedDict
+    dataset_class_name = dataset.name.capitalize() + "Query"
+    top_level.append(
+        make_dataclass(name=dataset_class_name, fields=fields)
+    )
+    # Export this
+    exports.append(ast.Constant(dataset_class_name))
+
+    return top_level, exports
+
 @app.command()
-def return_fields():
-    generated = ast.Module(body=[
+def make_dataset(dataset: Dataset):
+    module = ast.Module(body=[
         ast.ImportFrom(
             module="typing",
             names=[
@@ -223,39 +297,49 @@ def return_fields():
             ],
             level=0,
         ),
+        ast.ImportFrom(
+            module="dataclasses",
+            names=[
+                ast.alias("dataclass"),
+            ],
+            level=0,
+        ),
+        ast.ImportFrom(
+            module="datetime",
+            names=[
+                ast.alias("date"),
+            ],
+            level=0,
+        ),
+        ast.ImportFrom(
+            module="uniprot_rest.types.util",
+            names=[
+                ast.alias("UniprotMixin"),
+            ],
+            level=0,
+        ),
     ], type_ignores=[])
     exports = []
-    for dataset in Dataset:
-        groups = ast.Tuple(elts=[])
-        for group in requests.get(
-                f"https://rest.uniprot.org/configure/{dataset.name}/result-fields"
-        ).json():
-            options = [ast.Constant(it["name"]) for it in group["fields"]]
-            group_name = humps.pascalize(sanitize(dataset.name.capitalize() + group["groupName"]))
-            generated.body.append(make_literal(ast.Name(group_name), options))
-            groups.elts.append(ast.Name(group_name))
 
-        group_union_name = f"{dataset.name.capitalize()}Fields"
-        generated.body.append(ast.AnnAssign(
-            target=ast.Name(group_union_name),
-            annotation=ast.Name("TypeAlias"),
-            value=ast.Subscript(
-                value=ast.Name("Union"),
-                slice=groups
-            ),
-            simple=True
-        ))
-        exports.append(ast.Constant(group_union_name))
+    for func in (generate_query_fields, generate_return_fields):
+        new_top_level, new_exports = func(dataset)
+        exports += new_exports
+        module.body += new_top_level
 
     # All the __all__ export
-    generated.body.append(
+    module.body.append(
         ast.Assign(
             targets=[ast.Name("__all__")],
             value=ast.List(elts=exports)
         )
     )
-    print(ast.unparse(ast.fix_missing_locations(generated)))
+    return ast.unparse(ast.fix_missing_locations(module))
 
+@app.command()
+def make_all_datasets(root: Path):
+    for dataset in Dataset:
+        result = make_dataset(dataset)
+        (root / f"{dataset.value}.py").write_text(result)
 
 if __name__ == "__main__":
     app()

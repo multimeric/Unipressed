@@ -5,6 +5,8 @@ from dataclasses import dataclass
 import gzip
 from typing import Literal, Iterable, TypedDict, TextIO
 
+from uniprot_rest.types import Dataset, Format
+
 import requests
 
 def lookup(id: str, dataset: Dataset, format: Format) -> requests.Response:

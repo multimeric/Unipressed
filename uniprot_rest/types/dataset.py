@@ -2,15 +2,15 @@ from enum import Enum, auto
 
 class Dataset(Enum):
     # uniprot = auto()
-    uniref = auto()
-    uniparc = auto()
-    taxonomy = auto()
-    uniprotkb = auto()
-    proteomes = auto()
-    locations = auto()
-    unirule = auto()
-    diseases = auto()
-    keywords = auto()
-    citations = auto()
-    database = auto()
-    arba = auto()
+    UNIREF = "uniref"
+    UNIPARC = "uniparc"
+    TAXONOMY = "taxonomy"
+    UNIPROTKB = "uniprotkb"
+    PROTEOMES = "proteomes"
+    LOCATIONS = "locations"
+    UNIRULE = "unirule"
+    DISEASES = "diseases"
+    KEYWORDS = "keywords"
+    CITATIONS = "citations"
+    DATABASE = "database"
+    ARBA = "arba"
