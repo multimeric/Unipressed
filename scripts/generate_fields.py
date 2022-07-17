@@ -104,20 +104,20 @@ def convert_type(field: dict) -> tuple[ast.Name, Iterable[ast.AST]]:
     body to support it (ie class definitions)
     """
     if field["dataType"] == "string":
-        return ast.Name("str"), []
+        return ast.Name("Optional[str]"), []
     elif field["dataType"] == "enum":
-        name = ast.Name(field["id"].capitalize())
-        return name, [
+        name = field['id'].capitalize()
+        return ast.Name(f"Optional[{name}]"), [
             make_literal(
-                name=name, fields=[ast.Constant(it["value"]) for it in field["values"]]
+                name=ast.Name(name), fields=[ast.Constant(it["value"]) for it in field["values"]]
             )
         ]
     elif field["dataType"] == "integer":
-        return ast.Name("int"), []
+        return ast.Name("Optional[int]"), []
     elif field["dataType"] == "date":
-        return ast.Name("date"), []
+        return ast.Name("Optional[date]"), []
     elif field["dataType"] == "boolean":
-        return ast.Name("bool"), []
+        return ast.Name("Optional[bool]"), []
     else:
         raise Exception()
 
@@ -272,7 +272,7 @@ def generate_query_fields(dataset: Dataset) -> tuple[
     # Create the top level TypedDict
     dataset_class_name = dataset.name.capitalize() + "Query"
     top_level.append(
-        make_dataclass(name=dataset_class_name, fields=fields)
+        make_typed_dict(name=dataset_class_name, fields=fields)
     )
     # Export this
     exports.append(ast.Constant(dataset_class_name))
@@ -286,6 +286,7 @@ def make_dataset(dataset: Dataset):
             module="typing",
             names=[
                 ast.alias("Union"),
+                ast.alias("Optional"),
             ],
             level=0,
         ),
@@ -294,6 +295,7 @@ def make_dataset(dataset: Dataset):
             names=[
                 ast.alias("TypeAlias"),
                 ast.alias("Literal"),
+                ast.alias("TypedDict"),
             ],
             level=0,
         ),
