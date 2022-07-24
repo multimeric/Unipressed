@@ -3,11 +3,15 @@ from __future__ import annotations
 import dataclasses
 from dataclasses import dataclass
 import gzip
-from typing import Literal, Iterable, TypedDict, TextIO
+from typing import TYPE_CHECKING, Any, Iterable, Mapping, TypedDict, TextIO, TypeVar
 
-from uniprot_rest.types import Dataset, Format
+from uniprot_rest.dataset import Dataset
+from uniprot_rest.format import Format
 
 import requests
+
+if TYPE_CHECKING:
+    from xml.etree.ElementTree import Element
 
 def lookup(id: str, dataset: Dataset, format: Format) -> requests.Response:
     return requests.get(f"https://www.uniprot.org/{dataset}/{id}.{format}")
@@ -19,7 +23,7 @@ class SearchRequest:
     compressed: bool = True
     cursor: str | None = None
 
-    def params(self) -> dict:
+    def params(self) -> dict[str, str]:
         """
         :return:
         """
@@ -38,27 +42,35 @@ class SearchRequest:
 def unzip_response(response: requests.Response) -> str:
     return gzip.decompress(response.raw).decode()
 
-class JsonResults(TypedDict):
-    pass
+# class JsonResults(TypedDict):
+#     pass
 
-class JsonRecord(TypedDict):
-    results: JsonResults
+# class JsonRecord(TypedDict):
+#     results: JsonResults
+
+DatasetType = TypeVar("DatasetType")
+QueryType = TypeVar("QueryType")
+FieldType = TypeVar("FieldType")
+
+class JsonRecord(TypedDict, total=False):
+    primaryAccession: str
 
 @dataclass
 class Search:
-    query: str
-    dataset: Dataset
+    query: str | Mapping[str, Any]
+    dataset: Dataset = "uniprotkb"
     format: Format = "json"
-    fields: Iterable[Field] | None = None
+    fields: Iterable[str] | None = None
     include_isoform: bool = True
     size: int = 500
 
-    def params(self) -> dict:
+    def params(self) -> dict[str, str]:
         """
         Returns the URL query parameters that can be derived from this object
         """
         params = dataclasses.asdict(self)
-        params["fields"] = ",".join(params.get("fields"))
+        if self.fields:
+            params["fields"] = ",".join(self.fields)
         params.pop("dataset")
         return params
 
@@ -68,7 +80,9 @@ class Search:
         while True:
             response = session.send(request, stream=True)
             yield gzip.open(response.raw, mode="rt", encoding=response.encoding)
-            if link := response.links.get("next"):
+            link: dict[str, Any] | None = response.links.get("next")
+            if link is not None:
+                # pyright: ignore
                 request = requests.Request("GET", link["url"]).prepare()
             else:
                 break
@@ -82,19 +96,19 @@ class Search:
         # "html", "txt", "xml", "rdf", "fasta", "gff", "json", "list", "tsv", "obo", "xlsx"
 
     @staticmethod
-    def each_json(page: TextIO) -> Iterable[TypedDict('JsonRecord', {'primaryAccession': str}, total=False)]:
+    def each_json(page: TextIO) -> Iterable[JsonRecord]:
         import json
         parsed = json.load(page)
         yield from parsed["results"]
 
     @staticmethod
-    def each_tsv(page: TextIO) -> dict:
+    def each_tsv(page: TextIO) -> Iterable[dict[str, str]]:
         import csv
         reader = csv.DictReader(page, delimiter="\t")
         yield from reader
 
     @staticmethod
-    def each_xml(page: TextIO) -> dict:
+    def each_xml(page: TextIO) -> Iterable[Element]:
         from xml.etree import ElementTree
         tree = ElementTree.parse(page)
         yield from tree.getroot().findall("{*}entry")
