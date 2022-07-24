@@ -52,12 +52,12 @@ def make_literal(name: ast.Name, fields: Iterable[ast.Constant]) -> ast.AnnAssig
     )
 
 
-def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> tuple[ast.ClassDef, ast.Dict]:
+def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.ClassDef:
     """Makes a TypedDict that defines the structure of some dictionary used in the query tree
 
     Args:
         name (str): The name of the type
-        fields (Iterable[ast.AnnAssign]): A list of fields for this dictionary 
+        fields (Iterable[ast.AnnAssign]): A list of fields for this dictionary
 
     Raises:
         Exception: If any of the fields are complex assignments such as tuple unpacking
@@ -65,10 +65,6 @@ def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> tuple[ast.Cla
     Returns:
         tuple[ast.ClassDef, ast.Dict]: The first element is the newly generated TypedDict, and the second a Dict containing new entries to the lookup table
     """
-    lookup = ast.Dict(
-        keys = [],
-        values = []
-    )
     cls = ast.ClassDef(
         name=name,
         bases=[ast.Name("TypedDict", ast.Load)],
@@ -77,21 +73,22 @@ def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> tuple[ast.Cla
         starargs=[],
         decorator_list=[],
     )
+    string_keys = ast.Dict(keys=[], values=[])
 
     for field in fields:
         if not isinstance(field.target, ast.Name):
             raise Exception("")
 
-        sanitized = sanitize(field.target.id)
-        if sanitized != field.target.id:
-            # If the sanitization process changed the key, we need to save the new and old keys in a lookup table
-            lookup.keys.append(ast.Constant(sanitized))
-            lookup.values.append(ast.Constant(field.target.id))
-            field.target.id = sanitized
+        if field.target.id.isidentifier():
+            cls.body.append(field)
+        else:
+            string_keys.keys.append(ast.Constant(field.target.id))
+            string_keys.values.append(field.annotation)
 
-        cls.body.append(field)
+    if string_keys:
+        cls.bases = [ast.Call(func=ast.Name("TypedDict"), args=[ast.Constant(name), string_keys], keywords=[])]
 
-    return cls, lookup
+    return cls
 
 
 def make_typed_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.ClassDef:
@@ -210,7 +207,7 @@ def generate_return_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stm
         f"https://rest.uniprot.org/configure/{dataset}/result-fields"
     ).json():
         group_name: str = humps.pascalize(
-            sanitize(dataset.capitalize() + group["groupName"])
+            sanitize(dataset.capitalize() + "_" + group["id"])
         )
         # Create a new Literal for all fields in this group
         top_level.append(
@@ -263,12 +260,7 @@ def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt
             )
 
     # Create the top level TypedDict
-    query_type, lookup = make_query_dict(name=type_name, fields=fields)
-    top_level.append(query_type)
-    top_level.append(ast.Assign(
-        targets = [ast.Name("lookup")],
-        value = lookup
-    ))
+    top_level.append(make_query_dict(name=type_name, fields=fields))
 
     return top_level
 
@@ -277,18 +269,16 @@ def generate_search_subclass(
     dataset: Dataset, query_type: ast.Name, field_type: ast.Name
 ) -> ast.ClassDef:
     return make_dataclass(
-        name=dataset.capitalize() + "Seach",
+        name=dataset.capitalize() + "Search",
         base="uniprot_rest.Search",
         fields=[
             ast.AnnAssign(
                 target=ast.Name("dataset"),
                 annotation=ast.Name(f'Literal["{dataset}"]'),
                 simple=True,
-                value=ast.Name('field(default="uniref", init=False)'),
+                value=ast.Name(f'field(default="{dataset}", init=False)'),
             ),
-            ast.AnnAssign(
-                target=ast.Name("query"), annotation=query_type, simple=True
-            ),
+            ast.AnnAssign(target=ast.Name("query"), annotation=query_type, simple=True),
             ast.AnnAssign(
                 target=ast.Name("fields"), annotation=field_type, simple=True
             ),
@@ -305,7 +295,6 @@ def make_dataset(dataset: str):
                 module="typing",
                 names=[
                     ast.alias("Union"),
-                    ast.alias("Optional"),
                 ],
                 level=0,
             ),
@@ -371,7 +360,11 @@ def make_dataset(dataset: str):
     #         value=ast.List(elts=exports)
     #     )
     # )
-    return black.format_file_contents(ast.unparse(ast.fix_missing_locations(module)), fast=False, mode=black.FileMode())
+    return black.format_file_contents(
+        ast.unparse(ast.fix_missing_locations(module)),
+        fast=False,
+        mode=black.FileMode(),
+    )
 
 
 @app.command()
