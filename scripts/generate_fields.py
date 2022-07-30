@@ -27,19 +27,6 @@ def sanitize(name: str) -> str:
     )
 
 
-def make_enum(name: str, fields: Iterable[ast.Name]) -> ast.ClassDef:
-    return ast.ClassDef(
-        name=name,
-        bases=[ast.Name("Enum", ast.Load)],
-        keywords=[],
-        starargs=[],
-        decorator_list=[],
-        body=[
-            ast.Assign(targets=[it], value=ast.Call(name=ast.Name("auto")))
-            for it in fields
-        ],
-    )
-
 
 def make_literal(name: ast.Name, fields: Iterable[ast.Constant]) -> ast.AnnAssign:
     return ast.AnnAssign(
@@ -52,7 +39,7 @@ def make_literal(name: ast.Name, fields: Iterable[ast.Constant]) -> ast.AnnAssig
     )
 
 
-def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.ClassDef:
+def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.AnnAssign:
     """Makes a TypedDict that defines the structure of some dictionary used in the query tree
 
     Args:
@@ -65,83 +52,20 @@ def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.ClassDef:
     Returns:
         tuple[ast.ClassDef, ast.Dict]: The first element is the newly generated TypedDict, and the second a Dict containing new entries to the lookup table
     """
-    cls = ast.ClassDef(
-        name=name,
-        bases=[ast.Name("TypedDict", ast.Load)],
-        body=[],
-        keywords=[],
-        starargs=[],
-        decorator_list=[],
-    )
-    string_keys = ast.Dict(keys=[], values=[])
+    mapping = ast.Dict(keys=[], values=[])
 
     for field in fields:
         if not isinstance(field.target, ast.Name):
             raise Exception("")
 
-        if field.target.id.isidentifier():
-            cls.body.append(field)
-        else:
-            string_keys.keys.append(ast.Constant(field.target.id))
-            string_keys.values.append(field.annotation)
+        mapping.keys.append(ast.Constant(field.target.id))
+        mapping.values.append(field.annotation)
 
-    if string_keys:
-        cls.bases = [ast.Call(func=ast.Name("TypedDict"), args=[ast.Constant(name), string_keys], keywords=[])]
-
-    return cls
-
-
-def make_typed_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.ClassDef:
-    return ast.ClassDef(
-        name=name,
-        bases=[ast.Name("TypedDict", ast.Load)],
-        body=fields,
-        keywords=[],
-        starargs=[],
-        decorator_list=[],
-    )
-
-
-def make_dataclass(
-    name: str, fields: Iterable[ast.AnnAssign], base: str = None
-) -> ast.ClassDef:
-    mapping = ast.Dict(keys=[], values=[])
-
-    new_fields: list[ast.AnnAssign] = []
-
-    # Sanitize each field, to ensure that they're valid Python names, then
-    # save a lookup table that allows us to find the original names
-    for field in fields:
-        if isinstance(field.target, ast.Name):
-            field_name = field.target.id
-        else:
-            raise Exception()
-
-        sanitized = sanitize(field_name)
-        if field_name != sanitized:
-            mapping.keys.append(ast.Constant(sanitized))
-            mapping.values.append(ast.Constant(field_name))
-            field.target.id = sanitized
-        new_fields.append(field)
-
-    # Add the lookup
-    if len(mapping.keys) > 0:
-        new_fields.append(
-            ast.AnnAssign(
-                target=ast.Name("field_map"),
-                annotation=ast.Name("ClassVar[dict]"),
-                value=mapping,
-                simple=True,
-            )
-        )
-
-    return ast.ClassDef(
-        name=name,
-        bases=[ast.Name(base, ast.Load)] if base else [],
-        body=new_fields,
-        keywords=[],
-        starargs=[],
-        decorator_list=[ast.Name(id="dataclass")],
+    return ast.AnnAssign(
+        target=ast.Name(name),
+        annotation=ast.Name("TypeAlias"),
+        value=ast.Call(func=ast.Name("TypedDict"), args=[ast.Constant(name), mapping], keywords=[]),
+        simple=True
     )
 
 
@@ -182,6 +106,9 @@ def convert_type(
 
 
 def iter_subfields(field: dict[str, Any]) -> Iterable[dict[str, Any]]:
+    """
+    Returns a generator that recursively generates all fields within groups and subgroups
+    """
     if field["itemType"] == "group":
         for subfield in field["items"]:
             yield from iter_subfields(subfield)
@@ -224,7 +151,7 @@ def generate_return_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stm
         ast.AnnAssign(
             target=ast.Name(type_name),
             annotation=ast.Name("TypeAlias"),
-            value=ast.Subscript(value=ast.Name("Union"), slice=groups),
+            value=ast.Subscript(value=ast.Name("Literal"), slice=groups),
             simple=True,
         )
     )
@@ -268,10 +195,17 @@ def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt
 def generate_search_subclass(
     dataset: Dataset, query_type: ast.Name, field_type: ast.Name
 ) -> ast.ClassDef:
-    return make_dataclass(
+    """Makes the definition of a dataset-specific Search class such as UnirefSearch
+
+    Args:
+        dataset (Dataset): The dataset for which to generate the class
+        query_type (ast.Name): The name of the type the defines valid queries to this database
+        field_type (ast.Name): The name of the type that defines valid fields for this database
+    """
+    return ast.ClassDef(
         name=dataset.capitalize() + "Search",
-        base="uniprot_rest.Search",
-        fields=[
+        bases=[ast.Name("uniprot_rest.Search")],
+        body=[
             ast.AnnAssign(
                 target=ast.Name("dataset"),
                 annotation=ast.Name(f'Literal["{dataset}"]'),
@@ -283,6 +217,9 @@ def generate_search_subclass(
                 target=ast.Name("fields"), annotation=field_type, simple=True
             ),
         ],
+        keywords=[],
+        starargs=[],
+        decorator_list=[ast.Name(id="dataclass")],
     )
 
 
@@ -323,13 +260,6 @@ def make_dataset(dataset: str):
                 ],
                 level=0,
             ),
-            # ast.ImportFrom(
-            #     module="uniprot_rest.types.util",
-            #     names=[
-            #         ast.alias("UniprotMixin"),
-            #     ],
-            #     level=0,
-            # ),
             ast.Import(names=[ast.alias("uniprot_rest")]),
         ],
         type_ignores=[],
@@ -353,13 +283,6 @@ def make_dataset(dataset: str):
         )
     )
 
-    # # All the __all__ export
-    # module.body.append(
-    #     ast.Assign(
-    #         targets=[ast.Name("__all__")],
-    #         value=ast.List(elts=exports)
-    #     )
-    # )
     return black.format_file_contents(
         ast.unparse(ast.fix_missing_locations(module)),
         fast=False,
@@ -371,7 +294,7 @@ def make_dataset(dataset: str):
 def make_all_datasets(root: Path):
     for dataset in get_args(Dataset):
         result = make_dataset(dataset)
-        (root / f"{dataset.value}.py").write_text(result)
+        (root / f"{dataset}.py").write_text(result)
 
 
 if __name__ == "__main__":
