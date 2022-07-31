@@ -102,17 +102,13 @@ def convert_type(
         else:
             raise Exception()
     elif field["fieldType"] == "evidence" and field["dataType"] == "string":
-        name = humps.camelize(field["id"])
+        name = humps.pascalize(field["id"])
         evidence_literal = make_literal(
             name=ast.Name(name + "Evidence"),
             fields=[
                 ast.Constant(item["code"]) for group in field["evidenceGroups"] for item in group["items"]
             ]
         )
-        evidence_docstring = "\n".join([
-                f"{item['code']}: {item['name']}" for group in field["evidenceGroups"] for item in group["items"]
-            ])
-
         ret = ast.Name(name), [
             evidence_literal,
             ast.ClassDef(
@@ -131,7 +127,6 @@ def convert_type(
                     annotation = evidence_literal.target,
                     simple=True
                 ),
-                ast.Expr(ast.Constant(evidence_docstring))
             ]
         )
         ]
@@ -224,6 +219,36 @@ def generate_return_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stm
 
     return top_level
 
+def dedup_stmts(stmts: Iterable[ast.stmt]) -> Iterable[ast.stmt]:
+    """Given a list of statements, deduplicates them.
+    """
+    hash: dict[str, str] = {}
+    for stmt in stmts:
+        hashed = None
+        name = None
+
+        if isinstance(stmt, ast.ClassDef):
+            hashed = ast.dump(ast.Module(body=stmt.body))
+            name = stmt.name
+        elif isinstance(stmt, ast.AnnAssign) and stmt.value is not None and isinstance(stmt.target, ast.Name):
+            hashed = ast.dump(stmt.value)
+            name = stmt.target.id
+
+        if hashed is not None and name is not None:
+            if hashed in hash:
+                yield ast.AnnAssign(
+                    target = ast.Name(name),
+                    annotation = ast.Name("TypeAlias"),
+                    value = ast.Name(hash[hashed]),
+                    simple=True
+                )
+            else:
+                hash[hashed] = name
+                yield stmt
+        else:
+            yield stmt
+
+
 
 def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt]:
     """
@@ -298,6 +323,7 @@ def make_dataset(dataset: str):
                 module="typing",
                 names=[
                     ast.alias("Union"),
+                    ast.alias("Iterable"),
                 ],
                 level=0,
             ),
@@ -348,6 +374,8 @@ def make_dataset(dataset: str):
             field_type=ast.Name(field_type_name),
         )
     )
+
+    module.body = list(dedup_stmts(module.body))
 
     return black.format_file_contents(
         ast.unparse(ast.fix_missing_locations(module)),

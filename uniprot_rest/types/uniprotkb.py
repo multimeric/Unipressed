@@ -1,11 +1,11 @@
-from typing import Union
+from typing import Union, Iterable
 from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from dataclasses import dataclass, field
 from datetime import date
 import uniprot_rest
 
 Existence: TypeAlias = Literal["1", "2", "3", "4", "5"]
-ccevCofactorChebiEvidence: TypeAlias = Literal[
+CcevCofactorChebiEvidence: TypeAlias = Literal[
     "any",
     "manual",
     "automatic",
@@ -24,1835 +24,593 @@ ccevCofactorChebiEvidence: TypeAlias = Literal[
 ]
 
 
-class ccevCofactorChebi(TypedDict):
+class CcevCofactorChebi(TypedDict):
     query: str
-    evidence: ccevCofactorChebiEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevCofactorChebiEvidence
 
 
-ccevCofactorNoteEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevCofactorNoteEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevCofactorNote(TypedDict):
+class CcevCofactorNote(TypedDict):
     query: str
-    evidence: ccevCofactorNoteEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevCofactorNoteEvidence
 
 
-ccevBpcpEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevBpcpEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevBpcp(TypedDict):
+class CcevBpcp(TypedDict):
     query: str
-    evidence: ccevBpcpEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevBpcpEvidence
 
 
-ccevBpcpAbsorptionEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevBpcpAbsorptionEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevBpcpAbsorption(TypedDict):
+class CcevBpcpAbsorption(TypedDict):
     query: str
-    evidence: ccevBpcpAbsorptionEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevBpcpAbsorptionEvidence
 
 
-ccevBpcpKineticsEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevBpcpKineticsEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevBpcpKinetics(TypedDict):
+class CcevBpcpKinetics(TypedDict):
     query: str
-    evidence: ccevBpcpKineticsEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevBpcpKineticsEvidence
 
 
-ccevBpcpPhDependenceEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevBpcpPhDependenceEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevBpcpPhDependence(TypedDict):
+class CcevBpcpPhDependence(TypedDict):
     query: str
-    evidence: ccevBpcpPhDependenceEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevBpcpPhDependenceEvidence
 
 
-ccevBpcpRedoxPotentialEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevBpcpRedoxPotentialEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevBpcpRedoxPotential(TypedDict):
+class CcevBpcpRedoxPotential(TypedDict):
     query: str
-    evidence: ccevBpcpRedoxPotentialEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevBpcpRedoxPotentialEvidence
 
 
-ccevBpcpTempDependenceEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevBpcpTempDependenceEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevBpcpTempDependence(TypedDict):
+class CcevBpcpTempDependence(TypedDict):
     query: str
-    evidence: ccevBpcpTempDependenceEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevBpcpTempDependenceEvidence
 
 
-ccevCatalyticActivityEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevCatalyticActivityEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevCatalyticActivity(TypedDict):
+class CcevCatalyticActivity(TypedDict):
     query: str
-    evidence: ccevCatalyticActivityEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevCatalyticActivityEvidence
 
 
-ccevActivityRegulationEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevActivityRegulationEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevActivityRegulation(TypedDict):
+class CcevActivityRegulation(TypedDict):
     query: str
-    evidence: ccevActivityRegulationEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevActivityRegulationEvidence
 
 
-ccevFunctionEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevFunctionEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevFunction(TypedDict):
+class CcevFunction(TypedDict):
     query: str
-    evidence: ccevFunctionEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevFunctionEvidence
 
 
-ccevCautionEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevCautionEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevCaution(TypedDict):
+class CcevCaution(TypedDict):
     query: str
-    evidence: ccevCautionEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevCautionEvidence
 
 
-ftevSitesEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevSitesEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevSites(TypedDict):
+class FtevSites(TypedDict):
     query: str
-    evidence: ftevSitesEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevSitesEvidence
 
 
-ftevActSiteEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevActSiteEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevActSite(TypedDict):
+class FtevActSite(TypedDict):
     query: str
-    evidence: ftevActSiteEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevActSiteEvidence
 
 
-ftevMetalEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevMetalEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevMetal(TypedDict):
+class FtevMetal(TypedDict):
     query: str
-    evidence: ftevMetalEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevMetalEvidence
 
 
-ftevBindingEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevBindingEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevBinding(TypedDict):
+class FtevBinding(TypedDict):
     query: str
-    evidence: ftevBindingEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevBindingEvidence
 
 
-ftevSiteEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevSiteEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevSite(TypedDict):
+class FtevSite(TypedDict):
     query: str
-    evidence: ftevSiteEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevSiteEvidence
 
 
-ftevCaBindEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevCaBindEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevCaBind(TypedDict):
+class FtevCaBind(TypedDict):
     query: str
-    evidence: ftevCaBindEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevCaBindEvidence
 
 
-ftevDnaBindEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevDnaBindEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevDnaBind(TypedDict):
+class FtevDnaBind(TypedDict):
     query: str
-    evidence: ftevDnaBindEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevDnaBindEvidence
 
 
-ftevNpBindEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevNpBindEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevNpBind(TypedDict):
+class FtevNpBind(TypedDict):
     query: str
-    evidence: ftevNpBindEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevNpBindEvidence
 
 
-ccevPathwayEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevPathwayEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevPathway(TypedDict):
+class CcevPathway(TypedDict):
     query: str
-    evidence: ccevPathwayEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevPathwayEvidence
 
 
-ccevMiscellaneousEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevMiscellaneousEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevMiscellaneous(TypedDict):
+class CcevMiscellaneous(TypedDict):
     query: str
-    evidence: ccevMiscellaneousEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevMiscellaneousEvidence
 
 
-ccevSclTermEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevSclTermEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevSclTerm(TypedDict):
+class CcevSclTerm(TypedDict):
     query: str
-    evidence: ccevSclTermEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevSclTermEvidence
 
 
-ccevSclNoteEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevSclNoteEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevSclNote(TypedDict):
+class CcevSclNote(TypedDict):
     query: str
-    evidence: ccevSclNoteEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevSclNoteEvidence
 
 
-ftevTransmemEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevTransmemEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevTransmem(TypedDict):
+class FtevTransmem(TypedDict):
     query: str
-    evidence: ftevTransmemEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevTransmemEvidence
 
 
-ftevTopoDomEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevTopoDomEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevTopoDom(TypedDict):
+class FtevTopoDom(TypedDict):
     query: str
-    evidence: ftevTopoDomEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevTopoDomEvidence
 
 
-ftevIntramemEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevIntramemEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevIntramem(TypedDict):
+class FtevIntramem(TypedDict):
     query: str
-    evidence: ftevIntramemEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevIntramemEvidence
 
 
-ccevDiseaseEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevDiseaseEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevDisease(TypedDict):
+class CcevDisease(TypedDict):
     query: str
-    evidence: ccevDiseaseEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevDiseaseEvidence
 
 
-ccevAllergenEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevAllergenEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevAllergen(TypedDict):
+class CcevAllergen(TypedDict):
     query: str
-    evidence: ccevAllergenEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevAllergenEvidence
 
 
-ccevToxicDoseEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevToxicDoseEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevToxicDose(TypedDict):
+class CcevToxicDose(TypedDict):
     query: str
-    evidence: ccevToxicDoseEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevToxicDoseEvidence
 
 
-ccevBiotechnologyEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevBiotechnologyEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevBiotechnology(TypedDict):
+class CcevBiotechnology(TypedDict):
     query: str
-    evidence: ccevBiotechnologyEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevBiotechnologyEvidence
 
 
-ccevPharmaceuticalEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevPharmaceuticalEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevPharmaceutical(TypedDict):
+class CcevPharmaceutical(TypedDict):
     query: str
-    evidence: ccevPharmaceuticalEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevPharmaceuticalEvidence
 
 
-ccevDisruptionPhenotypeEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevDisruptionPhenotypeEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevDisruptionPhenotype(TypedDict):
+class CcevDisruptionPhenotype(TypedDict):
     query: str
-    evidence: ccevDisruptionPhenotypeEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevDisruptionPhenotypeEvidence
 
 
-ftevMutagenEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevMutagenEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevMutagen(TypedDict):
+class FtevMutagen(TypedDict):
     query: str
-    evidence: ftevMutagenEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevMutagenEvidence
 
 
-ccevPtmEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevPtmEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevPtm(TypedDict):
+class CcevPtm(TypedDict):
     query: str
-    evidence: ccevPtmEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevPtmEvidence
 
 
-ftevModResEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevModResEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevModRes(TypedDict):
+class FtevModRes(TypedDict):
     query: str
-    evidence: ftevModResEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevModResEvidence
 
 
-ftevLipidEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevLipidEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevLipid(TypedDict):
+class FtevLipid(TypedDict):
     query: str
-    evidence: ftevLipidEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevLipidEvidence
 
 
-ftevCarbohydEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevCarbohydEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevCarbohyd(TypedDict):
+class FtevCarbohyd(TypedDict):
     query: str
-    evidence: ftevCarbohydEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevCarbohydEvidence
 
 
-ftevDisulfidEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevDisulfidEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevDisulfid(TypedDict):
+class FtevDisulfid(TypedDict):
     query: str
-    evidence: ftevDisulfidEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevDisulfidEvidence
 
 
-ftevCrosslnkEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevCrosslnkEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevCrosslnk(TypedDict):
+class FtevCrosslnk(TypedDict):
     query: str
-    evidence: ftevCrosslnkEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevCrosslnkEvidence
 
 
-ftevMoleculeProcessingEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevMoleculeProcessingEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevMoleculeProcessing(TypedDict):
+class FtevMoleculeProcessing(TypedDict):
     query: str
-    evidence: ftevMoleculeProcessingEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevMoleculeProcessingEvidence
 
 
-ftevChainEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevChainEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevChain(TypedDict):
+class FtevChain(TypedDict):
     query: str
-    evidence: ftevChainEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevChainEvidence
 
 
-ftevInitMetEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevInitMetEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevInitMet(TypedDict):
+class FtevInitMet(TypedDict):
     query: str
-    evidence: ftevInitMetEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevInitMetEvidence
 
 
-ftevPeptideEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevPeptideEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevPeptide(TypedDict):
+class FtevPeptide(TypedDict):
     query: str
-    evidence: ftevPeptideEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevPeptideEvidence
 
 
-ftevSignalEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevSignalEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevSignal(TypedDict):
+class FtevSignal(TypedDict):
     query: str
-    evidence: ftevSignalEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevSignalEvidence
 
 
-ftevPropepEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevPropepEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevPropep(TypedDict):
+class FtevPropep(TypedDict):
     query: str
-    evidence: ftevPropepEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevPropepEvidence
 
 
-ftevTransitEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevTransitEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevTransit(TypedDict):
+class FtevTransit(TypedDict):
     query: str
-    evidence: ftevTransitEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevTransitEvidence
 
 
-ccevDevelopmentalStageEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevDevelopmentalStageEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevDevelopmentalStage(TypedDict):
+class CcevDevelopmentalStage(TypedDict):
     query: str
-    evidence: ccevDevelopmentalStageEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevDevelopmentalStageEvidence
 
 
-ccevInductionEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevInductionEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevInduction(TypedDict):
+class CcevInduction(TypedDict):
     query: str
-    evidence: ccevInductionEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevInductionEvidence
 
 
-ccevTissueSpecificityEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevTissueSpecificityEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevTissueSpecificity(TypedDict):
+class CcevTissueSpecificity(TypedDict):
     query: str
-    evidence: ccevTissueSpecificityEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevTissueSpecificityEvidence
 
 
-ccevSubunitEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevSubunitEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevSubunit(TypedDict):
+class CcevSubunit(TypedDict):
     query: str
-    evidence: ccevSubunitEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevSubunitEvidence
 
 
-ftevSecstructEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevSecstructEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevSecstruct(TypedDict):
+class FtevSecstruct(TypedDict):
     query: str
-    evidence: ftevSecstructEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevSecstructEvidence
 
 
-ftevHelixEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevHelixEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevHelix(TypedDict):
+class FtevHelix(TypedDict):
     query: str
-    evidence: ftevHelixEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevHelixEvidence
 
 
-ftevTurnEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevTurnEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevTurn(TypedDict):
+class FtevTurn(TypedDict):
     query: str
-    evidence: ftevTurnEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevTurnEvidence
 
 
-ftevStrandEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevStrandEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevStrand(TypedDict):
+class FtevStrand(TypedDict):
     query: str
-    evidence: ftevStrandEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevStrandEvidence
 
 
-ccevApEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevApEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevAp(TypedDict):
+class CcevAp(TypedDict):
     query: str
-    evidence: ccevApEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevApEvidence
 
 
-ccevApApuEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevApApuEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevApApu(TypedDict):
+class CcevApApu(TypedDict):
     query: str
-    evidence: ccevApApuEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
-
+    evidence: CcevApApuEvidence
 
-ccevApAsEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
 
+CcevApAsEvidence: TypeAlias = CcevCofactorChebiEvidence
 
-class ccevApAs(TypedDict):
+
+class CcevApAs(TypedDict):
     query: str
-    evidence: ccevApAsEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevApAsEvidence
 
 
-ccevApAiEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevApAiEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevApAi(TypedDict):
+class CcevApAi(TypedDict):
     query: str
-    evidence: ccevApAiEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevApAiEvidence
 
 
-ccevApRfEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevApRfEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevApRf(TypedDict):
+class CcevApRf(TypedDict):
     query: str
-    evidence: ccevApRfEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevApRfEvidence
 
 
-ccevSequenceCautionEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevSequenceCautionEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevSequenceCaution(TypedDict):
+class CcevSequenceCaution(TypedDict):
     query: str
-    evidence: ccevSequenceCautionEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevSequenceCautionEvidence
 
 
-ccevScMiscEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevScMiscEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevScMisc(TypedDict):
+class CcevScMisc(TypedDict):
     query: str
-    evidence: ccevScMiscEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevScMiscEvidence
 
 
-ccevMassSpectrometryEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevMassSpectrometryEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevMassSpectrometry(TypedDict):
+class CcevMassSpectrometry(TypedDict):
     query: str
-    evidence: ccevMassSpectrometryEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevMassSpectrometryEvidence
 
 
-ccevPolymorphismEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevPolymorphismEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevPolymorphism(TypedDict):
+class CcevPolymorphism(TypedDict):
     query: str
-    evidence: ccevPolymorphismEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevPolymorphismEvidence
 
 
-ccevRnaEditingEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevRnaEditingEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevRnaEditing(TypedDict):
+class CcevRnaEditing(TypedDict):
     query: str
-    evidence: ccevRnaEditingEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevRnaEditingEvidence
 
 
-ftevVariantsEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevVariantsEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevVariants(TypedDict):
+class FtevVariants(TypedDict):
     query: str
-    evidence: ftevVariantsEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevVariantsEvidence
 
 
-ftevVariantEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevVariantEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevVariant(TypedDict):
+class FtevVariant(TypedDict):
     query: str
-    evidence: ftevVariantEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevVariantEvidence
 
 
-ftevVarSeqEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevVarSeqEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevVarSeq(TypedDict):
+class FtevVarSeq(TypedDict):
     query: str
-    evidence: ftevVarSeqEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevVarSeqEvidence
 
 
-ftevNonStdEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevNonStdEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevNonStd(TypedDict):
+class FtevNonStd(TypedDict):
     query: str
-    evidence: ftevNonStdEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevNonStdEvidence
 
 
-ftevNonTerEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevNonTerEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevNonTer(TypedDict):
+class FtevNonTer(TypedDict):
     query: str
-    evidence: ftevNonTerEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevNonTerEvidence
 
 
-ftevNonConsEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevNonConsEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevNonCons(TypedDict):
+class FtevNonCons(TypedDict):
     query: str
-    evidence: ftevNonConsEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevNonConsEvidence
 
 
-ftevConflictEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevConflictEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevConflict(TypedDict):
+class FtevConflict(TypedDict):
     query: str
-    evidence: ftevConflictEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevConflictEvidence
 
 
-ftevUnsureEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevUnsureEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevUnsure(TypedDict):
+class FtevUnsure(TypedDict):
     query: str
-    evidence: ftevUnsureEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevUnsureEvidence
 
 
-ftevPositionalEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevPositionalEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevPositional(TypedDict):
+class FtevPositional(TypedDict):
     query: str
-    evidence: ftevPositionalEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevPositionalEvidence
 
 
 Organelle: TypeAlias = Literal[
@@ -1866,257 +624,87 @@ Organelle: TypeAlias = Literal[
     "nucleomorph",
     "hydrogenosome",
 ]
-ftevDomainEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevDomainEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevDomain(TypedDict):
+class FtevDomain(TypedDict):
     query: str
-    evidence: ftevDomainEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevDomainEvidence
 
 
-ccevDomainEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevDomainEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevDomain(TypedDict):
+class CcevDomain(TypedDict):
     query: str
-    evidence: ccevDomainEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevDomainEvidence
 
 
-ftevCoiledEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevCoiledEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevCoiled(TypedDict):
+class FtevCoiled(TypedDict):
     query: str
-    evidence: ftevCoiledEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevCoiledEvidence
 
 
-ftevCompbiasEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevCompbiasEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevCompbias(TypedDict):
+class FtevCompbias(TypedDict):
     query: str
-    evidence: ftevCompbiasEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevCompbiasEvidence
 
 
-ftevMotifEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevMotifEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevMotif(TypedDict):
+class FtevMotif(TypedDict):
     query: str
-    evidence: ftevMotifEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevMotifEvidence
 
 
-ftevRegionEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevRegionEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevRegion(TypedDict):
+class FtevRegion(TypedDict):
     query: str
-    evidence: ftevRegionEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevRegionEvidence
 
 
-ftevRepeatEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevRepeatEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevRepeat(TypedDict):
+class FtevRepeat(TypedDict):
     query: str
-    evidence: ftevRepeatEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevRepeatEvidence
 
 
-ccevSimilarityEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevSimilarityEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevSimilarity(TypedDict):
+class CcevSimilarity(TypedDict):
     query: str
-    evidence: ccevSimilarityEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevSimilarityEvidence
 
 
-ftevZnFingEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+FtevZnFingEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ftevZnFing(TypedDict):
+class FtevZnFing(TypedDict):
     query: str
-    evidence: ftevZnFingEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: FtevZnFingEvidence
 
 
-ccevWebresourceEvidence: TypeAlias = Literal[
-    "any",
-    "manual",
-    "automatic",
-    "experimental",
-    "ECO_0000269",
-    "ECO_0000303",
-    "ECO_0000305",
-    "ECO_0000250",
-    "ECO_0000255",
-    "ECO_0000244",
-    "ECO_0000312",
-    "ECO_0000256",
-    "ECO_0000213",
-    "ECO_0000313",
-    "ECO_0000259",
-]
+CcevWebresourceEvidence: TypeAlias = CcevCofactorChebiEvidence
 
 
-class ccevWebresource(TypedDict):
+class CcevWebresource(TypedDict):
     query: str
-    evidence: ccevWebresourceEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexperimental: Any experimental assertion\nECO_0000269: Experimental\nECO_0000303: Non-traceable author statement\nECO_0000305: Curator inference\nECO_0000250: Sequence similarity\nECO_0000255: Sequence model\nECO_0000244: Combinatorial\nECO_0000312: Imported information\nECO_0000256: Sequence model\nECO_0000213: Combinatorial\nECO_0000313: Imported information\nECO_0000259: Sequence motif match (InterPro)"
+    evidence: CcevWebresourceEvidence
 
 
-goEvidenceEvidence: TypeAlias = Literal[
+GoEvidenceEvidence: TypeAlias = Literal[
     "any",
     "manual",
     "automatic",
@@ -2144,10 +732,9 @@ goEvidenceEvidence: TypeAlias = Literal[
 ]
 
 
-class goEvidence(TypedDict):
+class GoEvidence(TypedDict):
     query: str
-    evidence: goEvidenceEvidence
-    "any: Any assertion method\nmanual: Any manual assertion\nautomatic: Any automatic assertion\nexp: Inferred from experiment [EXP]\niba: Inferred from biological aspect of ancestor [IBA]\nic: Inferred by curator [IC]\nida: Inferred from direct assay [IDA]\niep: Inferred from expression pattern [IEP]\nigc: Inferred from genomic context [IGC]\nigi: Inferred from genetic interaction [IGI]\nimp: Inferred from mutant phenotype [IMP]\nipi: Inferred from physical interaction [IPI]\nisa: Inferred from sequence alignment [ISA]\nism: Inferred from sequence mode [ISM]\niso: Inferred from sequence orthology [ISO]\niss: Inferred from sequence or structural similarity [ISS]\nnas: Non-traceable author statement [NAS]\ntas: Traceable author statement [TAS]\nhda: Inferred from high throughput direct assay [HDA]\nhmp: Inferred from high throughput mutant phenotype [HMP]\nhgi: Inferred from high throughput genetic interaction [HGI]\nhep: Interred from high throughput expression pattern [HEP]\nhtp: Inferred from high throughput experiment [HTP]\niea: Inferred from electronic annotation [IEA]"
+    evidence: GoEvidenceEvidence
 
 
 UniprotkbQuery: TypeAlias = TypedDict(
@@ -2165,199 +752,199 @@ UniprotkbQuery: TypeAlias = TypedDict(
         "existence": NotRequired[Existence],
         "ec": NotRequired[str],
         "cc_cofactor_chebi": NotRequired[str],
-        "ccev_cofactor_chebi": NotRequired[ccevCofactorChebi],
+        "ccev_cofactor_chebi": NotRequired[CcevCofactorChebi],
         "cc_cofactor_note": NotRequired[str],
-        "ccev_cofactor_note": NotRequired[ccevCofactorNote],
+        "ccev_cofactor_note": NotRequired[CcevCofactorNote],
         "cc_bpcp": NotRequired[str],
-        "ccev_bpcp": NotRequired[ccevBpcp],
+        "ccev_bpcp": NotRequired[CcevBpcp],
         "cc_bpcp_absorption": NotRequired[str],
-        "ccev_bpcp_absorption": NotRequired[ccevBpcpAbsorption],
+        "ccev_bpcp_absorption": NotRequired[CcevBpcpAbsorption],
         "cc_bpcp_kinetics": NotRequired[str],
-        "ccev_bpcp_kinetics": NotRequired[ccevBpcpKinetics],
+        "ccev_bpcp_kinetics": NotRequired[CcevBpcpKinetics],
         "cc_bpcp_ph_dependence": NotRequired[str],
-        "ccev_bpcp_ph_dependence": NotRequired[ccevBpcpPhDependence],
+        "ccev_bpcp_ph_dependence": NotRequired[CcevBpcpPhDependence],
         "cc_bpcp_redox_potential": NotRequired[str],
-        "ccev_bpcp_redox_potential": NotRequired[ccevBpcpRedoxPotential],
+        "ccev_bpcp_redox_potential": NotRequired[CcevBpcpRedoxPotential],
         "cc_bpcp_temp_dependence": NotRequired[str],
-        "ccev_bpcp_temp_dependence": NotRequired[ccevBpcpTempDependence],
+        "ccev_bpcp_temp_dependence": NotRequired[CcevBpcpTempDependence],
         "cc_catalytic_activity_field": NotRequired[str],
-        "ccev_catalytic_activity": NotRequired[ccevCatalyticActivity],
+        "ccev_catalytic_activity": NotRequired[CcevCatalyticActivity],
         "cc_activity_regulation": NotRequired[str],
-        "ccev_activity_regulation": NotRequired[ccevActivityRegulation],
+        "ccev_activity_regulation": NotRequired[CcevActivityRegulation],
         "cc_function": NotRequired[str],
-        "ccev_function": NotRequired[ccevFunction],
+        "ccev_function": NotRequired[CcevFunction],
         "cc_caution": NotRequired[str],
-        "ccev_caution": NotRequired[ccevCaution],
+        "ccev_caution": NotRequired[CcevCaution],
         "ft_sites": NotRequired[str],
         "ftlen_sites": NotRequired[tuple[int, int]],
-        "ftev_sites": NotRequired[ftevSites],
+        "ftev_sites": NotRequired[FtevSites],
         "ft_act_site": NotRequired[str],
         "ftlen_act_site": NotRequired[tuple[int, int]],
-        "ftev_act_site": NotRequired[ftevActSite],
+        "ftev_act_site": NotRequired[FtevActSite],
         "ft_metal": NotRequired[str],
         "ftlen_metal": NotRequired[tuple[int, int]],
-        "ftev_metal": NotRequired[ftevMetal],
+        "ftev_metal": NotRequired[FtevMetal],
         "ft_binding": NotRequired[str],
         "ftlen_binding": NotRequired[tuple[int, int]],
-        "ftev_binding": NotRequired[ftevBinding],
+        "ftev_binding": NotRequired[FtevBinding],
         "ft_site": NotRequired[str],
         "ftlen_site": NotRequired[tuple[int, int]],
-        "ftev_site": NotRequired[ftevSite],
+        "ftev_site": NotRequired[FtevSite],
         "ft_ca_bind": NotRequired[str],
         "ftlen_ca_bind": NotRequired[tuple[int, int]],
-        "ftev_ca_bind": NotRequired[ftevCaBind],
+        "ftev_ca_bind": NotRequired[FtevCaBind],
         "ft_dna_bind": NotRequired[str],
         "ftlen_dna_bind": NotRequired[tuple[int, int]],
-        "ftev_dna_bind": NotRequired[ftevDnaBind],
+        "ftev_dna_bind": NotRequired[FtevDnaBind],
         "ft_np_bind": NotRequired[str],
         "ftlen_np_bind": NotRequired[tuple[int, int]],
-        "ftev_np_bind": NotRequired[ftevNpBind],
+        "ftev_np_bind": NotRequired[FtevNpBind],
         "cc_pathway": NotRequired[str],
-        "ccev_pathway": NotRequired[ccevPathway],
+        "ccev_pathway": NotRequired[CcevPathway],
         "cc_miscellaneous": NotRequired[str],
-        "ccev_miscellaneous": NotRequired[ccevMiscellaneous],
+        "ccev_miscellaneous": NotRequired[CcevMiscellaneous],
         "cc_scl_term_field": NotRequired[str],
-        "ccev_scl_term": NotRequired[ccevSclTerm],
+        "ccev_scl_term": NotRequired[CcevSclTerm],
         "cc_scl_note": NotRequired[str],
-        "ccev_scl_note": NotRequired[ccevSclNote],
+        "ccev_scl_note": NotRequired[CcevSclNote],
         "ft_transmem": NotRequired[str],
         "ftlen_transmem": NotRequired[tuple[int, int]],
-        "ftev_transmem": NotRequired[ftevTransmem],
+        "ftev_transmem": NotRequired[FtevTransmem],
         "ft_topo_dom": NotRequired[str],
         "ftlen_topo_dom": NotRequired[tuple[int, int]],
-        "ftev_topo_dom": NotRequired[ftevTopoDom],
+        "ftev_topo_dom": NotRequired[FtevTopoDom],
         "ft_intramem": NotRequired[str],
         "ftlen_intramem": NotRequired[tuple[int, int]],
-        "ftev_intramem": NotRequired[ftevIntramem],
+        "ftev_intramem": NotRequired[FtevIntramem],
         "cc_disease": NotRequired[str],
-        "ccev_disease": NotRequired[ccevDisease],
+        "ccev_disease": NotRequired[CcevDisease],
         "cc_allergen": NotRequired[str],
-        "ccev_allergen": NotRequired[ccevAllergen],
+        "ccev_allergen": NotRequired[CcevAllergen],
         "cc_toxic_dose": NotRequired[str],
-        "ccev_toxic_dose": NotRequired[ccevToxicDose],
+        "ccev_toxic_dose": NotRequired[CcevToxicDose],
         "cc_biotechnology": NotRequired[str],
-        "ccev_biotechnology": NotRequired[ccevBiotechnology],
+        "ccev_biotechnology": NotRequired[CcevBiotechnology],
         "cc_pharmaceutical": NotRequired[str],
-        "ccev_pharmaceutical": NotRequired[ccevPharmaceutical],
+        "ccev_pharmaceutical": NotRequired[CcevPharmaceutical],
         "cc_disruption_phenotype": NotRequired[str],
-        "ccev_disruption_phenotype": NotRequired[ccevDisruptionPhenotype],
+        "ccev_disruption_phenotype": NotRequired[CcevDisruptionPhenotype],
         "ft_mutagen": NotRequired[str],
         "ftlen_mutagen": NotRequired[tuple[int, int]],
-        "ftev_mutagen": NotRequired[ftevMutagen],
+        "ftev_mutagen": NotRequired[FtevMutagen],
         "cc_ptm": NotRequired[str],
-        "ccev_ptm": NotRequired[ccevPtm],
+        "ccev_ptm": NotRequired[CcevPtm],
         "ft_mod_res": NotRequired[str],
         "ftlen_mod_res": NotRequired[tuple[int, int]],
-        "ftev_mod_res": NotRequired[ftevModRes],
+        "ftev_mod_res": NotRequired[FtevModRes],
         "ft_lipid": NotRequired[str],
         "ftlen_lipid": NotRequired[tuple[int, int]],
-        "ftev_lipid": NotRequired[ftevLipid],
+        "ftev_lipid": NotRequired[FtevLipid],
         "ft_carbohyd": NotRequired[str],
         "ftlen_carbohyd": NotRequired[tuple[int, int]],
-        "ftev_carbohyd": NotRequired[ftevCarbohyd],
+        "ftev_carbohyd": NotRequired[FtevCarbohyd],
         "ft_disulfid": NotRequired[str],
         "ftlen_disulfid": NotRequired[tuple[int, int]],
-        "ftev_disulfid": NotRequired[ftevDisulfid],
+        "ftev_disulfid": NotRequired[FtevDisulfid],
         "ft_crosslnk": NotRequired[str],
         "ftlen_crosslnk": NotRequired[tuple[int, int]],
-        "ftev_crosslnk": NotRequired[ftevCrosslnk],
+        "ftev_crosslnk": NotRequired[FtevCrosslnk],
         "ft_molecule_processing": NotRequired[str],
         "ftlen_molecule_processing": NotRequired[tuple[int, int]],
-        "ftev_molecule_processing": NotRequired[ftevMoleculeProcessing],
+        "ftev_molecule_processing": NotRequired[FtevMoleculeProcessing],
         "ft_chain": NotRequired[str],
         "ftlen_chain": NotRequired[tuple[int, int]],
-        "ftev_chain": NotRequired[ftevChain],
+        "ftev_chain": NotRequired[FtevChain],
         "ft_init_met": NotRequired[str],
         "ftlen_init_met": NotRequired[tuple[int, int]],
-        "ftev_init_met": NotRequired[ftevInitMet],
+        "ftev_init_met": NotRequired[FtevInitMet],
         "ft_peptide": NotRequired[str],
         "ftlen_peptide": NotRequired[tuple[int, int]],
-        "ftev_peptide": NotRequired[ftevPeptide],
+        "ftev_peptide": NotRequired[FtevPeptide],
         "ft_signal": NotRequired[str],
         "ftlen_signal": NotRequired[tuple[int, int]],
-        "ftev_signal": NotRequired[ftevSignal],
+        "ftev_signal": NotRequired[FtevSignal],
         "ft_propep": NotRequired[str],
         "ftlen_propep": NotRequired[tuple[int, int]],
-        "ftev_propep": NotRequired[ftevPropep],
+        "ftev_propep": NotRequired[FtevPropep],
         "ft_transit": NotRequired[str],
         "ftlen_transit": NotRequired[tuple[int, int]],
-        "ftev_transit": NotRequired[ftevTransit],
+        "ftev_transit": NotRequired[FtevTransit],
         "cc_developmental_stage": NotRequired[str],
-        "ccev_developmental_stage": NotRequired[ccevDevelopmentalStage],
+        "ccev_developmental_stage": NotRequired[CcevDevelopmentalStage],
         "cc_induction": NotRequired[str],
-        "ccev_induction": NotRequired[ccevInduction],
+        "ccev_induction": NotRequired[CcevInduction],
         "cc_tissue_specificity": NotRequired[str],
-        "ccev_tissue_specificity": NotRequired[ccevTissueSpecificity],
+        "ccev_tissue_specificity": NotRequired[CcevTissueSpecificity],
         "interactor": NotRequired[str],
         "cc_subunit": NotRequired[str],
-        "ccev_subunit": NotRequired[ccevSubunit],
+        "ccev_subunit": NotRequired[CcevSubunit],
         "structure_3d": NotRequired[bool],
         "ft_secstruct": NotRequired[str],
         "ftlen_secstruct": NotRequired[tuple[int, int]],
-        "ftev_secstruct": NotRequired[ftevSecstruct],
+        "ftev_secstruct": NotRequired[FtevSecstruct],
         "ft_helix": NotRequired[str],
         "ftlen_helix": NotRequired[tuple[int, int]],
-        "ftev_helix": NotRequired[ftevHelix],
+        "ftev_helix": NotRequired[FtevHelix],
         "ft_turn": NotRequired[str],
         "ftlen_turn": NotRequired[tuple[int, int]],
-        "ftev_turn": NotRequired[ftevTurn],
+        "ftev_turn": NotRequired[FtevTurn],
         "ft_strand": NotRequired[str],
         "ftlen_strand": NotRequired[tuple[int, int]],
-        "ftev_strand": NotRequired[ftevStrand],
+        "ftev_strand": NotRequired[FtevStrand],
         "mass_range": NotRequired[tuple[int, int]],
         "length_range": NotRequired[tuple[int, int]],
         "cc_ap": NotRequired[str],
-        "ccev_ap": NotRequired[ccevAp],
+        "ccev_ap": NotRequired[CcevAp],
         "cc_ap_apu": NotRequired[str],
-        "ccev_ap_apu": NotRequired[ccevApApu],
+        "ccev_ap_apu": NotRequired[CcevApApu],
         "cc_ap_as": NotRequired[str],
-        "ccev_ap_as": NotRequired[ccevApAs],
+        "ccev_ap_as": NotRequired[CcevApAs],
         "cc_ap_ai": NotRequired[str],
-        "ccev_ap_ai": NotRequired[ccevApAi],
+        "ccev_ap_ai": NotRequired[CcevApAi],
         "cc_ap_rf": NotRequired[str],
-        "ccev_ap_rf": NotRequired[ccevApRf],
+        "ccev_ap_rf": NotRequired[CcevApRf],
         "cc_sequence_caution": NotRequired[str],
-        "ccev_sequence_caution": NotRequired[ccevSequenceCaution],
+        "ccev_sequence_caution": NotRequired[CcevSequenceCaution],
         "cc_sc_framesh": NotRequired[str],
         "cc_sc_einit": NotRequired[str],
         "cc_sc_eterm": NotRequired[str],
         "cc_sc_epred": NotRequired[str],
         "cc_sc_etran": NotRequired[str],
         "cc_sc_misc": NotRequired[str],
-        "ccev_sc_misc": NotRequired[ccevScMisc],
+        "ccev_sc_misc": NotRequired[CcevScMisc],
         "cc_mass_spectrometry": NotRequired[str],
-        "ccev_mass_spectrometry": NotRequired[ccevMassSpectrometry],
+        "ccev_mass_spectrometry": NotRequired[CcevMassSpectrometry],
         "cc_polymorphism": NotRequired[str],
-        "ccev_polymorphism": NotRequired[ccevPolymorphism],
+        "ccev_polymorphism": NotRequired[CcevPolymorphism],
         "cc_rna_editing": NotRequired[str],
-        "ccev_rna_editing": NotRequired[ccevRnaEditing],
+        "ccev_rna_editing": NotRequired[CcevRnaEditing],
         "ft_variants": NotRequired[str],
         "ftlen_variants": NotRequired[tuple[int, int]],
-        "ftev_variants": NotRequired[ftevVariants],
+        "ftev_variants": NotRequired[FtevVariants],
         "ft_variant": NotRequired[str],
         "ftlen_variant": NotRequired[tuple[int, int]],
-        "ftev_variant": NotRequired[ftevVariant],
+        "ftev_variant": NotRequired[FtevVariant],
         "ft_var_seq": NotRequired[str],
         "ftlen_var_seq": NotRequired[tuple[int, int]],
-        "ftev_var_seq": NotRequired[ftevVarSeq],
+        "ftev_var_seq": NotRequired[FtevVarSeq],
         "ft_non_std": NotRequired[str],
         "ftlen_non_std": NotRequired[tuple[int, int]],
-        "ftev_non_std": NotRequired[ftevNonStd],
+        "ftev_non_std": NotRequired[FtevNonStd],
         "ft_non_ter": NotRequired[str],
         "ftlen_non_ter": NotRequired[tuple[int, int]],
-        "ftev_non_ter": NotRequired[ftevNonTer],
+        "ftev_non_ter": NotRequired[FtevNonTer],
         "ft_non_cons": NotRequired[str],
         "ftlen_non_cons": NotRequired[tuple[int, int]],
-        "ftev_non_cons": NotRequired[ftevNonCons],
+        "ftev_non_cons": NotRequired[FtevNonCons],
         "ft_conflict": NotRequired[str],
         "ftlen_conflict": NotRequired[tuple[int, int]],
-        "ftev_conflict": NotRequired[ftevConflict],
+        "ftev_conflict": NotRequired[FtevConflict],
         "ft_unsure": NotRequired[str],
         "ftlen_unsure": NotRequired[tuple[int, int]],
-        "ftev_unsure": NotRequired[ftevUnsure],
+        "ftev_unsure": NotRequired[FtevUnsure],
         "ft_positional": NotRequired[str],
         "ftlen_positional": NotRequired[tuple[int, int]],
-        "ftev_positional": NotRequired[ftevPositional],
+        "ftev_positional": NotRequired[FtevPositional],
         "fragment": NotRequired[bool],
         "organelle": NotRequired[Organelle],
         "precursor": NotRequired[bool],
@@ -2367,30 +954,30 @@ UniprotkbQuery: TypeAlias = TypedDict(
         "transposon": NotRequired[str],
         "ft_domain": NotRequired[str],
         "ftlen_domain": NotRequired[tuple[int, int]],
-        "ftev_domain": NotRequired[ftevDomain],
+        "ftev_domain": NotRequired[FtevDomain],
         "cc_domain": NotRequired[str],
-        "ccev_domain": NotRequired[ccevDomain],
+        "ccev_domain": NotRequired[CcevDomain],
         "family": NotRequired[str],
         "ft_coiled": NotRequired[str],
         "ftlen_coiled": NotRequired[tuple[int, int]],
-        "ftev_coiled": NotRequired[ftevCoiled],
+        "ftev_coiled": NotRequired[FtevCoiled],
         "ft_compbias": NotRequired[str],
         "ftlen_compbias": NotRequired[tuple[int, int]],
-        "ftev_compbias": NotRequired[ftevCompbias],
+        "ftev_compbias": NotRequired[FtevCompbias],
         "ft_motif": NotRequired[str],
         "ftlen_motif": NotRequired[tuple[int, int]],
-        "ftev_motif": NotRequired[ftevMotif],
+        "ftev_motif": NotRequired[FtevMotif],
         "ft_region": NotRequired[str],
         "ftlen_region": NotRequired[tuple[int, int]],
-        "ftev_region": NotRequired[ftevRegion],
+        "ftev_region": NotRequired[FtevRegion],
         "ft_repeat": NotRequired[str],
         "ftlen_repeat": NotRequired[tuple[int, int]],
-        "ftev_repeat": NotRequired[ftevRepeat],
+        "ftev_repeat": NotRequired[FtevRepeat],
         "cc_similarity": NotRequired[str],
-        "ccev_similarity": NotRequired[ccevSimilarity],
+        "ccev_similarity": NotRequired[CcevSimilarity],
         "ft_zn_fing": NotRequired[str],
         "ftlen_zn_fing": NotRequired[tuple[int, int]],
-        "ftev_zn_fing": NotRequired[ftevZnFing],
+        "ftev_zn_fing": NotRequired[FtevZnFing],
         "xref_any": NotRequired[str],
         "xref_embl": NotRequired[str],
         "xref_ccds": NotRequired[str],
@@ -2566,12 +1153,12 @@ UniprotkbQuery: TypeAlias = TypedDict(
         "xref_proteomes": NotRequired[str],
         "database": NotRequired[str],
         "cc_webresource": NotRequired[str],
-        "ccev_webresource": NotRequired[ccevWebresource],
+        "ccev_webresource": NotRequired[CcevWebresource],
         "date_created": NotRequired[tuple[date, date]],
         "date_modified": NotRequired[tuple[date, date]],
         "date_sequence_modified": NotRequired[tuple[date, date]],
         "go_field": NotRequired[str],
-        "go_evidence": NotRequired[goEvidence],
+        "go_evidence": NotRequired[GoEvidence],
         "chebi_field": NotRequired[str],
         "inchikey_field": NotRequired[str],
         "keyword_field": NotRequired[str],
