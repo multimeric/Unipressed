@@ -3,7 +3,8 @@ from __future__ import annotations
 import dataclasses
 from dataclasses import dataclass
 import gzip
-from typing import TYPE_CHECKING, Any, Iterable, Mapping, TypedDict, TextIO, TypeVar
+from typing import TYPE_CHECKING, Any, Iterable, Mapping, TextIO, TypeVar
+from typing_extensions import Self, TypeAlias, TypedDict
 
 from uniprot_rest.dataset import Dataset
 from uniprot_rest.format import Format
@@ -47,6 +48,34 @@ def unzip_response(response: requests.Response) -> str:
 
 # class JsonRecord(TypedDict):
 #     results: JsonResults
+def serialize_query(query: Mapping[str, Any], level: int = 0) -> str:
+    if len(query) > 1:
+        # If we ever find a dictionary with more than one key, we treat it as an AND
+        return serialize_query({
+            "and": [{key: value} for key, value in query.items()]
+        })
+    key, value = next(iter(query.items()))
+    if key == "and":
+        ret = " AND ".join([
+            serialize_query(it, level=level+1) for it in value
+        ])
+    elif key == "or":
+        ret = " OR ".join([
+            serialize_query(it, level=level+1) for it in value
+        ])
+    elif key == "not":
+        ret = f"NOT {serialize_query(value, level=level+1)}"
+    else:
+        return f"{key}:{value}"
+    
+    if level > 0:
+        return f"({ret})"
+    else:
+        return ret
+
+
+
+
 
 DatasetType = TypeVar("DatasetType")
 QueryType = TypeVar("QueryType")
@@ -54,6 +83,14 @@ FieldType = TypeVar("FieldType")
 
 class JsonRecord(TypedDict, total=False):
     primaryAccession: str
+
+# Query: TypeAlias = TypedDict("Query", {
+#     "and": QueryType,
+#     "or": QueryType
+# })
+# class Query(TypedDict, total=False):
+#     and: Self
+#     or: Self
 
 @dataclass
 class Search:
@@ -68,6 +105,9 @@ class Search:
         """
         Returns the URL query parameters that can be derived from this object
         """
+        # return {
+        #     query = 
+        # }
         params = dataclasses.asdict(self)
         if self.fields:
             params["fields"] = ",".join(self.fields)
@@ -117,166 +157,3 @@ class Search:
     def each_list(page: TextIO) -> Iterable[str]:
         yield from page.read().splitlines()
 
-
-
-# class KbQuery:
-#     pass
-#
-#
-# class Search(BaseModel):
-#     """
-#     Kwargs common to any UniProt search
-#     """
-#     query: str
-#     dataset: Dataset
-#     format: Format
-#     fields: Iterable[str]
-#     compressed: bool
-#     size: int
-#     cursor: str | None
-#
-#     def execute(self):
-#         query = urllib.parse.urlencode({
-#             "query": self.query,
-#             "format": format,
-#             "includeIsoform": "true",
-#             # "force": "true",
-#             # "sort": "score",
-#             "size": "500",
-#             "compressed": "true"
-#         })
-#         url = f"https://www.uniprot.org/{dataset}/search"
-#         while True:
-#             response = requests.get(url)
-#             yield response
-#             if link_header := response.headers.get("Link"):
-#                 if url := RE_NEXT_LINK.match(link_header):
-#                     continue
-#             break
-#
-#     @root_validator
-#     def fields_format(self, values: dict):
-#         if format not in ["tsv", "json", "xlsx"] and len(values.get("fields", [])) > 0:
-#             raise ValueError(
-#                 "Fields can only be specified when the format is TSV, JSON or XLSX")
-#
-#     @root_validator
-#     def fields_format(self, values: dict):
-#         if values.get("uniprotIsoform") and values.get("dataset") != "uniprotkb":
-#             raise ValueError(
-#                 "Fields can only be specified when the format is TSV, JSON or XLSX")
-#
-#
-# class ConfigurableFieldSearchKwargs(SearchKwargs):
-#     """
-#     Kwargs for any UniProt search, when we have specified a format that has
-#     configurable fields
-#     """
-#     format: Literal["tsv", "json", "xlsx"]
-#     fields: Iterable[str] | None
-#
-#
-# class UnconfigurableFieldSearchKwargs(SearchKwargs):
-#     """
-#     Kwargs for any UniProt search, when we have specified a format that does not have
-#     configurable fields
-#     """
-#     format: Literal["html", "txt", "xml", "rdf", "fasta", "gff", "list", "obo"]
-#
-#
-# @overload
-# def search(query: str,
-#            **kwargs: Unpack[ConfigurableFieldSearchKwargs]) -> requests.Response:
-#     ...
-#
-#
-# @overload
-# def search(query: str,
-#            **kwargs: Unpack[UnconfigurableFieldSearchKwargs]) -> requests.Response:
-#     ...
-#
-#
-# def search(query, *, dataset="uniprotkb", format="json", fields=None, compressed=False,
-#            size=500, cursor=None, **kwargs):
-#     """
-#     :param query: The UniProt query, as described on `the UniProt website <https://www.uniprot.org/help/text-search>`_
-#     :param dataset: The UniProt database to query
-#     :param format: The requested return format
-#     :param fields: A list of fields to return, or None to return the default fields
-#     :param compressed: Return
-#     :param size:
-#     :param cursor:
-#     :param kwargs:
-#     :return:
-#     """
-#     query = urllib.parse.urlencode({
-#         "query": query,
-#         "format": format,
-#         "includeIsoform": "true",
-#         # "force": "true",
-#         # "sort": "score",
-#         "size": "500",
-#         "compressed": "true"
-#     })
-#     url = f"https://www.uniprot.org/{dataset}/search"
-#     while True:
-#         response = requests.get(url)
-#         yield response
-#         if link_header := response.headers.get("Link"):
-#             if url := RE_NEXT_LINK.match(link_header):
-#                 continue
-#         break
-#
-#
-# @overload
-# def foo(a: int, b: str):
-#     ...
-#
-#
-# @overload
-# def foo(a: bool):
-#     ...
-#
-#
-# def foo(*args):
-#     pass
-#
-#
-# class KbKwargs(BaseModel):
-#     """
-#     Shared kwargs by all UniProtKB search functions
-#     """
-#     includeIsoform: bool
-#
-#
-# class ConfigurableFieldKbKwargs(SearchKwargs, KbKwargs):
-#     """
-#     Kwargs for searching the UniProtKB, when we have specified a format that has
-#     configurable fields
-#     """
-#     format: Literal["tsv", "json", "xlsx"]
-#     field: Iterable[str]
-#
-#
-# class UnconfigurableFieldKbKwargs(SearchKwargs, KbKwargs):
-#     """
-#     Kwargs for searching the UniProtKB, when we have specified a format that does not
-#     have configurable fields
-#     """
-#     format: Literal["html", "txt", "xml", "rdf", "fasta", "gff", "list", "obo"]
-#
-#
-# @overload
-# def search_kb(query: str | KbQuery,
-#               **kwargs: Unpack[ConfigurableFieldKbKwargs]) -> requests.Response:
-#     ...
-#
-#
-# @overload
-# def search_kb(query: str | KbQuery,
-#               **kwargs: Unpack[UnconfigurableFieldKbKwargs]) -> requests.Response:
-#     ...
-#
-#
-# def search_kb(query, **kwargs):
-#     return

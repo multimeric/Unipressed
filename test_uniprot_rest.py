@@ -1,4 +1,4 @@
-from uniprot_rest import Search
+from uniprot_rest import Search, serialize_query
 
 
 def make_request(**kwargs) -> Search:
@@ -64,3 +64,62 @@ def test_search_records_list():
 
     # Test that we get many records
     assert i > 500
+
+def test_serialize_basic_query():
+    assert serialize_query({
+        "a": 3
+    }) == "a:3"
+
+def test_serialize_not_query():
+    assert serialize_query({
+        "not": {
+            "a": 3
+        }
+    }) == "NOT a:3"
+
+
+def test_serialize_and():
+    assert serialize_query({
+        "and": [
+            {"a": 3},
+            {"b": 4}
+        ]
+    }) == "a:3 AND b:4"
+
+
+def test_serialize_or():
+    assert serialize_query({
+        "or": [
+            {"a": 3},
+            {"b": 4},
+        ]
+    }) == "a:3 OR b:4"
+
+
+def test_serialize_and_or():
+    assert serialize_query({
+        "or": [
+            {"a": 3},
+            {
+                "and": [
+                    {"b": 4},
+                    {"c": 5},
+                ]
+            }
+        ]
+    }) == "a:3 OR (b:4 AND c:5)"
+
+def test_serialize_and_not():
+    assert serialize_query({
+        "or": [
+            {"a": 3},
+            {
+                "not": {
+                    "and": [
+                        {"b": 4},
+                        {"c": 5},
+                    ]
+                }
+            }
+        ]
+    }) == "a:3 OR (NOT (b:4 AND c:5))"

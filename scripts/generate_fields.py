@@ -52,8 +52,10 @@ def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.AnnAssign
     Returns:
         tuple[ast.ClassDef, ast.Dict]: The first element is the newly generated TypedDict, and the second a Dict containing new entries to the lookup table
     """
-    mapping = ast.Dict(keys=[], values=[])
+    # Add the baseline conjunctions
+    mapping = ast.Dict(keys=[ast.Constant("and"), ast.Constant("or")], values=[ast.Name(f"Iterable[{name}]")] * 2)
 
+    # Add the fields for this dataset
     for field in fields:
         if not isinstance(field.target, ast.Name):
             raise Exception("")
@@ -71,7 +73,7 @@ def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.AnnAssign
 
 def convert_type(
     field: dict[str, Any], enclose: Optional[str] = None
-) -> tuple[ast.Name, Iterable[ast.stmt]]:
+) -> tuple[ast.expr, Iterable[ast.stmt]]:
     """Returns the annotation type, and then a collection of stuff to add to the module
     body to support it (ie class definitions).
 
@@ -80,27 +82,91 @@ def convert_type(
         enclose: An optional type to wrap around the generated type annotation, e.g. Optional or NotRequired
     """
     ret: tuple[ast.Name, Iterable[ast.stmt]]
-    if field["dataType"] == "string":
-        ret = ast.Name("str"), []
-    elif field["dataType"] == "enum":
-        name = field["id"].capitalize()
-        ret = ast.Name(f"{name}"), [
-            make_literal(
-                name=ast.Name(name),
-                fields=[ast.Constant(it["value"]) for it in field["values"]],
-            )
+    if field["fieldType"] == "general":
+        if field["dataType"] == "string":
+            ret = ast.Name("str"), []
+        elif field["dataType"] == "enum":
+            name = field["id"].capitalize()
+            ret = ast.Name(f"{name}"), [
+                make_literal(
+                    name=ast.Name(name),
+                    fields=[ast.Constant(it["value"]) for it in field["values"]],
+                )
+            ]
+        elif field["dataType"] == "integer":
+            ret = ast.Name("int"), []
+        elif field["dataType"] == "date":
+            ret = ast.Name("date"), []
+        elif field["dataType"] == "boolean":
+            ret = ast.Name("bool"), []
+        else:
+            raise Exception()
+    elif field["fieldType"] == "evidence" and field["dataType"] == "string":
+        name = humps.camelize(field["id"])
+        evidence_literal = make_literal(
+            name=ast.Name(name + "Evidence"),
+            fields=[
+                ast.Constant(item["code"]) for group in field["evidenceGroups"] for item in group["items"]
+            ]
+        )
+        evidence_docstring = "\n".join([
+                f"{item['code']}: {item['name']}" for group in field["evidenceGroups"] for item in group["items"]
+            ])
+
+        ret = ast.Name(name), [
+            evidence_literal,
+            ast.ClassDef(
+            name = name,
+            bases = [ast.Name("TypedDict")],
+            keywords = [],
+            decorator_list = [],
+            body = [
+                ast.AnnAssign(
+                    target = ast.Name("query"),
+                    annotation = ast.Name("str"),
+                    simple=True
+                ),
+                ast.AnnAssign(
+                    target = ast.Name("evidence"),
+                    annotation = evidence_literal.target,
+                    simple=True
+                ),
+                ast.Expr(ast.Constant(evidence_docstring))
+            ]
+        )
         ]
-    elif field["dataType"] == "integer":
-        ret = ast.Name("int"), []
-    elif field["dataType"] == "date":
-        ret = ast.Name("date"), []
-    elif field["dataType"] == "boolean":
-        ret = ast.Name("bool"), []
+    elif field["fieldType"] == "range":
+        if field["dataType"] == "integer":
+            ret = ast.Subscript(
+                value = ast.Name("tuple"),
+                slice = ast.Tuple(
+                    elts = [
+                        ast.Name("int"),
+                        ast.Name("int")
+                    ]
+                )
+            ), []
+        elif field["dataType"] == "date":
+            ret = ast.Subscript(
+                value = ast.Name("tuple"),
+                slice = ast.Tuple(
+                    elts = [
+                        ast.Name("date"),
+                        ast.Name("date")
+                    ]
+                )
+            ), []
+        else:
+            raise Exception()
     else:
         raise Exception()
 
+
     if enclose is not None:
-        ret[0].id = f"{enclose}[{ret[0].id}]"
+        return ast.Subscript(
+            value = ast.Name(enclose),
+            slice = ret[0]
+        ), ret[1]
 
     return ret
 
