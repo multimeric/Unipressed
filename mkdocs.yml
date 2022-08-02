@@ -1,0 +1,13 @@
+site_name: "Unipressed"
+theme:
+  name: "material"
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          show_source: true
+          heading_level: 4
+          show_root_toc_entry: true
+- include-markdown

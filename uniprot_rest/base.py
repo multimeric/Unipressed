@@ -32,7 +32,7 @@ class SearchRequest:
         """
         params = dataclasses.asdict(self)
         params.pop("high_level")
-        return {**params, **self.high_level.params()}
+        return {**params, **self.high_level._params()}
 
     def to_request(self) -> requests.PreparedRequest:
         return requests.Request(
@@ -95,13 +95,21 @@ class Search:
     Base class for all search requests
     """
     query: Union[str, Mapping[str, Any]]
+    "A query that filters the returned proteins"
     dataset: Dataset = "uniprotkb"
+    """
+    The Uniprot database. You are advised to use the appropriate subclass (e.g. [uniprot_rest.UniprotkbSearch][] where available.
+    """
     format: Format = "json"
+    "Format for the returned data. Defaults to `'json'`"
     fields: Union[Iterable[str], None] = None
+    "Fields to return in the result object"
     include_isoform: bool = True
+    "For uniprotkb only: if true, returns isoforms other than just the canonical isoform"
     size: int = 500
+    "The size of each page. This may slightly affect performance, and you aren't recommended to change the default unless you have a reason to"
 
-    def params(self) -> dict[str, str]:
+    def _params(self) -> dict[str, str]:
         """
         Returns the URL query parameters that can be derived from this object
         """
