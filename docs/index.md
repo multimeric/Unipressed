@@ -3,19 +3,19 @@
 ## API
 
 ### `Search`
-::: uniprot_rest.base.Search
+::: unipressed.base.Search
 
 ### `UniprotkbSearch`
-::: uniprot_rest.UniprotkbSearch
+::: unipressed.UniprotkbSearch
 
 ### `Arba`
-::: uniprot_rest.ArbaSearch
+::: unipressed.ArbaSearch
 
 ### `Citations`
-::: uniprot_rest.CitationsSearch
+::: unipressed.CitationsSearch
 
 ### `Diseases`
-::: uniprot_rest.DiseasesSearch
+::: unipressed.DiseasesSearch
 
 ### `Keywords`
-::: uniprot_rest.KeywordsSearch
+::: unipressed.KeywordsSearch

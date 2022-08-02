@@ -1,9 +1,9 @@
 from typing import Type, get_args, get_type_hints
 import pytest
-from uniprot_rest.base import Search, serialize_query
+from unipressed.base import Search, serialize_query
 from datetime import date
 
-import uniprot_rest.types
+import unipressed.types
 
 
 def make_request(**kwargs) -> Search:
@@ -157,13 +157,14 @@ def test_serialize_bool():
 
 @pytest.mark.parametrize([
     "client"
-], [[it] for it in uniprot_rest.types.all_clients])
+], [[it] for it in unipressed.types.all_clients])
 def test_valid_query_fields(client: Type[Search]):
     """
     Test that all the query fields defined by our schemas are accepted by Uniprot
     """
     query = {}
-    for query_field in get_type_hints(client)["query"].__optional_keys__:
+    query_cls = get_type_hints(client)["query"]
+    for query_field in query_cls.__optional_keys__ | query_cls.__required_keys__:
         if query_field not in {"and_", "or_", "not_"}:
             query[query_field] = "foo"
     response = next(iter(client( query=query    ).each_response()))
@@ -176,11 +177,13 @@ def test_valid_query_fields(client: Type[Search]):
 
 @pytest.mark.parametrize([
     "client"
-], [[it] for it in uniprot_rest.types.all_clients])
+], [[it] for it in unipressed.types.all_clients])
 def test_valid_return_fields(client: Type[Search]):
     """
     Test that all the return fields defined by our schemas are accepted by Uniprot
     """
     # We get a response such as "Invalid fields parameter value 'foo'" with a 400 status code if we provide an invalid field
-    response = next(iter(client( query="ThisQueryShouldReturnNoResults", fields=get_args(get_type_hints(client)["fields"])).each_response()))
+    fields_field = get_type_hints(client)["fields"]
+    literal, = get_args(fields_field)
+    response = next(iter(client( query="ThisQueryShouldReturnNoResults", fields=get_args(literal)).each_response()))
     response.raise_for_status()

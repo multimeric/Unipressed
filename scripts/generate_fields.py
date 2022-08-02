@@ -4,7 +4,7 @@ from typing import Any, Iterable, Optional, cast, get_args
 import black
 import requests
 import typer
-from uniprot_rest.dataset import Dataset
+from unipressed.dataset import Dataset
 import ast
 import humps
 from pathlib import Path
@@ -352,8 +352,11 @@ def generate_search_subclass(
     """
     return ast.ClassDef(
         name=dataset.capitalize() + "Search",
-        bases=[ast.Name("uniprot_rest.base.Search")],
+        bases=[ast.Name("unipressed.base.Search")],
         body=[
+            ast.Expr(ast.Constant(
+                f"Client for querying the {dataset} Uniprot dataset"
+            )),
             ast.AnnAssign(
                 target=ast.Name("dataset"),
                 annotation=ast.Name(f'Literal["{dataset}"]'),
@@ -422,7 +425,7 @@ def make_dataset(dataset: str):
                 ],
                 level=0,
             ),
-            ast.Import(names=[ast.alias("uniprot_rest.base")]),
+            ast.Import(names=[ast.alias("unipressed.base")]),
         ],
         type_ignores=[],
     )
