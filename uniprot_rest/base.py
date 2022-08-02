@@ -1,0 +1,175 @@
+
+from __future__ import annotations
+
+import dataclasses
+from dataclasses import dataclass
+import datetime
+import gzip
+from typing import TYPE_CHECKING, Any, Iterable, Mapping, TextIO, Union
+from typing_extensions import TypedDict
+
+from uniprot_rest.dataset import Dataset
+from uniprot_rest.format import Format
+
+import requests
+
+if TYPE_CHECKING:
+    from xml.etree.ElementTree import Element
+
+
+@dataclasses.dataclass
+class SearchRequest:
+    """
+    Low level options for a Uniprot request, which the user generally doesn't need to consider
+    """
+    high_level: Search
+    compressed: bool = True
+    cursor: str | None = None
+
+    def params(self) -> dict[str, str]:
+        """
+        :return:
+        """
+        params = dataclasses.asdict(self)
+        params.pop("high_level")
+        return {**params, **self.high_level.params()}
+
+    def to_request(self) -> requests.PreparedRequest:
+        return requests.Request(
+            method="GET",
+            url=f"https://rest.uniprot.org/{self.high_level.dataset}/search",
+            params=self.params()
+        ).prepare()
+
+
+def serialize_query(query: Any, level: int = 0) -> str:
+    """
+    Recursively converts a query object into a Uniprot query string
+
+    Args:
+        query (Any): A dict, str, or any other type to convert to string
+        level (int, optional): The current depth into the query
+    """
+    if isinstance(query, dict):
+        if len(query) > 1:
+            # If we ever find a dictionary with more than one key, we treat it as an AND
+            return serialize_query({
+                "and_": [{key: value} for key, value in query.items()]
+            })
+        key, value = next(iter(query.items()))
+        if key == "and_":
+            ret = " AND ".join([
+                serialize_query(it, level=level+1) for it in value
+            ])
+        elif key == "or_":
+            ret = " OR ".join([
+                serialize_query(it, level=level+1) for it in value
+            ])
+        elif key == "not_":
+            ret = f"NOT {serialize_query(value, level=level+1)}"
+        else:
+            return f"{key}:{serialize_query(value)}"
+        
+        if level > 0:
+            return f"({ret})"
+        else:
+            return ret
+    elif isinstance(query, tuple) and len(query) == 2:
+        a, b = query
+        return f"[{serialize_query(a)} TO {serialize_query(b)}]"
+    elif isinstance(query, datetime.date):
+        return query.strftime("%Y-%m-%d")
+    elif isinstance(query, bool):
+        return str(query).lower()
+    else:
+        return str(query)
+
+
+class JsonRecord(TypedDict, total=False):
+    primaryAccession: str
+
+
+@dataclass
+class Search:
+    """
+    Base class for all search requests
+    """
+    query: Union[str, Mapping[str, Any]]
+    dataset: Dataset = "uniprotkb"
+    format: Format = "json"
+    fields: Union[Iterable[str], None] = None
+    include_isoform: bool = True
+    size: int = 500
+
+    def params(self) -> dict[str, str]:
+        """
+        Returns the URL query parameters that can be derived from this object
+        """
+        ret = {
+            "query": serialize_query(self.query),
+            "dataset": self.dataset,
+            "format": self.format,
+            "includeIsoform": str(self.include_isoform).lower(),
+            "size": str(self.size)
+        }
+        if self.fields:
+            ret["fields"] = ",".join(self.fields)
+        return ret
+
+    def each_response(self) -> Iterable[requests.Response]:
+        """
+        Returns a generator of Response objects, one for each page of the result
+        """
+        session = requests.Session()
+        request = SearchRequest(self).to_request()
+        while True:
+            response = session.send(request, stream=True)
+            yield response
+            link: dict[str, Any] | None = response.links.get("next")
+            if link is not None:
+                # pyright: ignore
+                request = requests.Request("GET", link["url"]).prepare()
+            else:
+                break
+
+    def each_page(self) -> Iterable[TextIO]:
+        """
+        Returns a generator of unzipped file objects, one for each page of the result
+        """
+        for response in self.each_response():
+            yield gzip.open(response.raw, mode="rt", encoding=response.encoding)
+
+    def each_record(self):
+        """
+        Returns a generator of records, which are defined by the format field of the original request.
+        For example, with format="json", this will be an iterator over dictionaries.
+        """
+        if parser := getattr(self, f"_each_{self.format}", None):
+            for page in self.each_page():
+                yield from parser(page)
+        else:
+            raise NotImplementedError(f'No parser is implemented for the "{self.format}" format.')
+        # "html", "txt", "xml", "rdf", "fasta", "gff", "json", "list", "tsv", "obo", "xlsx"
+
+    @staticmethod
+    def _each_json(page: TextIO) -> Iterable[JsonRecord]:
+        import json
+        parsed = json.load(page)
+        yield from parsed["results"]
+
+    @staticmethod
+    def _each_tsv(page: TextIO) -> Iterable[dict[str, str]]:
+        import csv
+        reader = csv.DictReader(page, delimiter="\t")
+        yield from reader
+
+    @staticmethod
+    def _each_xml(page: TextIO) -> Iterable[Element]:
+        from xml.etree import ElementTree
+        tree = ElementTree.parse(page)
+        yield from tree.getroot().findall("{*}entry")
+
+    @staticmethod
+    def _each_list(page: TextIO) -> Iterable[str]:
+        yield from page.read().splitlines()
+

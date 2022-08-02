@@ -1,25 +1,87 @@
-from typing import Union
+from __future__ import annotations
+from typing import Union, Iterable
 from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from dataclasses import dataclass, field
 from datetime import date
-import uniprot_rest
+import uniprot_rest.base
 
 Identity: TypeAlias = Literal["1.0", "0.9", "0.5"]
-UnirefQuery: TypeAlias = TypedDict(
-    "UnirefQuery",
-    {
-        "id": NotRequired[str],
-        "name": NotRequired[str],
-        "identity": NotRequired[Identity],
-        "count": NotRequired[int],
-        "length": NotRequired[int],
-        "created": NotRequired[date],
-        "uniprot_id": NotRequired[str],
-        "upi": NotRequired[str],
-        "taxonomy_name": NotRequired[str],
-        "cluster": NotRequired[str],
-    },
-)
+
+
+class UnirefQuery(TypedDict("UnirefQuery", {})):
+    and_: NotRequired[Iterable["UnirefQuery"]]
+    "Two or more filters that must both be satisfied"
+    or_: NotRequired[Iterable["UnirefQuery"]]
+    "Two or more filters, any of which can be satisfied"
+    not_: NotRequired[Iterable["UnirefQuery"]]
+    "Negate a filter"
+    id: NotRequired[str]
+    "UniRef ID"
+    name: NotRequired[str]
+    "Cluster name"
+    identity: NotRequired[Identity]
+    "Sequence identity\n1.0: 100%\n0.9: 90%\n0.5: 50%"
+    count: NotRequired[
+        tuple[
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+        ]
+    ]
+    "Cluster size"
+    length: NotRequired[
+        tuple[
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+        ]
+    ]
+    "Sequence length"
+    created: NotRequired[
+        tuple[
+            Union[
+                date,
+                Literal[
+                    "*",
+                ],
+            ],
+            Union[
+                date,
+                Literal[
+                    "*",
+                ],
+            ],
+        ]
+    ]
+    "Date published"
+    uniprot_id: NotRequired[str]
+    "UniProtKB ID/AC"
+    upi: NotRequired[str]
+    "UniParc ID"
+    taxonomy_name: NotRequired[str]
+    "Taxonomy [OC]"
+    cluster: NotRequired[str]
+    "Related clusters"
+
+
 UnirefNamesTaxonomy: TypeAlias = Literal[
     "id", "name", "common_taxon", "common_taxonid", "organism_id", "organism"
 ]
@@ -34,7 +96,9 @@ UnirefFields: TypeAlias = Literal[
 
 
 @dataclass
-class UnirefSearch(uniprot_rest.Search):
+class UnirefSearch(uniprot_rest.base.Search):
     dataset: Literal["uniref"] = field(default="uniref", init=False)
     query: UnirefQuery
-    fields: UnirefFields
+    "A query that filters the returned proteins"
+    fields: Iterable[UnirefFields]
+    "Fields to return in the result object"

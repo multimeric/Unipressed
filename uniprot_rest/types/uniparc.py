@@ -1,28 +1,63 @@
-from typing import Union
+from __future__ import annotations
+from typing import Union, Iterable
 from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from dataclasses import dataclass, field
 from datetime import date
-import uniprot_rest
+import uniprot_rest.base
 
-UniparcQuery: TypeAlias = TypedDict(
-    "UniparcQuery",
-    {
-        "upi": NotRequired[str],
-        "uniprotkb": NotRequired[str],
-        "isoform": NotRequired[str],
-        "upid": NotRequired[str],
-        "taxonomy_name": NotRequired[str],
-        "gene": NotRequired[str],
-        "protein": NotRequired[str],
-        "database": NotRequired[str],
-        "active": NotRequired[str],
-        "checksum": NotRequired[str],
-        "length": NotRequired[int],
-        "dbid": NotRequired[str],
-        "feature_id": NotRequired[str],
-        "proteomecomponent": NotRequired[str],
-    },
-)
+
+class UniparcQuery(TypedDict("UniparcQuery", {})):
+    and_: NotRequired[Iterable["UniparcQuery"]]
+    "Two or more filters that must both be satisfied"
+    or_: NotRequired[Iterable["UniparcQuery"]]
+    "Two or more filters, any of which can be satisfied"
+    not_: NotRequired[Iterable["UniparcQuery"]]
+    "Negate a filter"
+    upi: NotRequired[str]
+    "UniParc ID"
+    uniprotkb: NotRequired[str]
+    "UniProtKB AC"
+    isoform: NotRequired[str]
+    "UniProtKB isoform ID"
+    upid: NotRequired[str]
+    "Proteome ID"
+    taxonomy_name: NotRequired[str]
+    "Taxonomy [OC]"
+    gene: NotRequired[str]
+    "Gene name [GN]"
+    protein: NotRequired[str]
+    "Protein name"
+    database: NotRequired[str]
+    "Database"
+    active: NotRequired[str]
+    "Active"
+    checksum: NotRequired[str]
+    "Checksum (CRC64/MD5)"
+    length: NotRequired[
+        tuple[
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+        ]
+    ]
+    "Sequence length"
+    dbid: NotRequired[str]
+    "Database ID"
+    feature_id: NotRequired[str]
+    "Feature ID"
+    proteomecomponent: NotRequired[str]
+    "Proteome Component"
+
+
 UniparcNamesTaxonomy: TypeAlias = Literal[
     "upi", "gene", "organism_id", "organism", "protein", "proteome"
 ]
@@ -55,7 +90,9 @@ UniparcFields: TypeAlias = Literal[
 
 
 @dataclass
-class UniparcSearch(uniprot_rest.Search):
+class UniparcSearch(uniprot_rest.base.Search):
     dataset: Literal["uniparc"] = field(default="uniparc", init=False)
     query: UniparcQuery
-    fields: UniparcFields
+    "A query that filters the returned proteins"
+    fields: Iterable[UniparcFields]
+    "Fields to return in the result object"

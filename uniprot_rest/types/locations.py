@@ -1,12 +1,24 @@
-from typing import Union
+from __future__ import annotations
+from typing import Union, Iterable
 from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from dataclasses import dataclass, field
 from datetime import date
-import uniprot_rest
+import uniprot_rest.base
 
-LocationsQuery: TypeAlias = TypedDict(
-    "LocationsQuery", {"name": NotRequired[str], "id": NotRequired[str]}
-)
+
+class LocationsQuery(TypedDict("LocationsQuery", {})):
+    and_: NotRequired[Iterable["LocationsQuery"]]
+    "Two or more filters that must both be satisfied"
+    or_: NotRequired[Iterable["LocationsQuery"]]
+    "Two or more filters, any of which can be satisfied"
+    not_: NotRequired[Iterable["LocationsQuery"]]
+    "Negate a filter"
+    name: NotRequired[str]
+    "Name"
+    id: NotRequired[str]
+    "Location [AC]"
+
+
 LocationsSubcellularLocation: TypeAlias = Literal[
     "id",
     "name",
@@ -29,7 +41,9 @@ LocationsFields: TypeAlias = Literal[
 
 
 @dataclass
-class LocationsSearch(uniprot_rest.Search):
+class LocationsSearch(uniprot_rest.base.Search):
     dataset: Literal["locations"] = field(default="locations", init=False)
     query: LocationsQuery
-    fields: LocationsFields
+    "A query that filters the returned proteins"
+    fields: Iterable[LocationsFields]
+    "Fields to return in the result object"

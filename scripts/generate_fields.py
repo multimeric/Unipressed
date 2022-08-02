@@ -8,10 +8,27 @@ from uniprot_rest.dataset import Dataset
 import ast
 import humps
 from pathlib import Path
+from dataclasses import dataclass
 
 # If the functions return anything, print it
 app = typer.Typer(result_callback=lambda x: print(x))
 
+@dataclass
+class FieldDefinition:
+    name: str
+    description: Optional[str]
+    type: ast.expr
+
+    def to_ann_assign(self) -> ast.AnnAssign:
+        return ast.AnnAssign(
+                target=ast.Name(self.name), annotation=self.type, simple=True
+                )
+
+    def to_dict(self) -> tuple[
+        ast.expr,
+        ast.expr
+    ]:
+        return ast.Constant(self.name), self.type
 
 def sanitize(name: str) -> str:
     # Don't need a more generalizable solution here since it's unlikely the possible
@@ -39,7 +56,7 @@ def make_literal(name: ast.Name, fields: Iterable[ast.Constant]) -> ast.AnnAssig
     )
 
 
-def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.AnnAssign:
+def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDef:
     """Makes a TypedDict that defines the structure of some dictionary used in the query tree
 
     Args:
@@ -53,16 +70,38 @@ def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.AnnAssign
         tuple[ast.ClassDef, ast.Dict]: The first element is the newly generated TypedDict, and the second a Dict containing new entries to the lookup table
     """
     # Add the baseline conjunctions
-    mapping = ast.Dict(keys=[ast.Constant("and"), ast.Constant("or")], values=[ast.Name(f"Iterable[{name}]")] * 2)
+    body: list[ast.stmt] = [
+        ast.AnnAssign(ast.Name("and_"), annotation = ast.Subscript(ast.Name("NotRequired"), ast.Subscript(ast.Name("Iterable"), ast.Constant(name))), simple=True),
+        ast.Expr(ast.Constant("Two or more filters that must both be satisfied")),
+        ast.AnnAssign(ast.Name("or_"), annotation = ast.Subscript(ast.Name("NotRequired"), ast.Subscript(ast.Name("Iterable"), ast.Constant(name))), simple=True),
+        ast.Expr(ast.Constant("Two or more filters, any of which can be satisfied")),
+        ast.AnnAssign(ast.Name("not_"), annotation = ast.Subscript(ast.Name("NotRequired"), ast.Subscript(ast.Name("Iterable"), ast.Constant(name))), simple=True),
+        ast.Expr(ast.Constant("Negate a filter")),
+    ]
+    mapping = ast.Dict(keys=[], values=[] )
 
-    # Add the fields for this dataset
+    # We have to sort the fields into those that can be class variables and those that have to be defined as strings (because they aren't valid identifiers)
     for field in fields:
-        if not isinstance(field.target, ast.Name):
-            raise Exception("")
+        if field.name.isidentifier():
+            body.append(field.to_ann_assign())
+            # Add the docstring
+            if field.description:
+                body.append(ast.Expr(ast.Constant(field.description)))
+        else:
+            key, value = field.to_dict()
+            mapping.keys.append(key)
+            mapping.values.append(value)
 
-        mapping.keys.append(ast.Constant(field.target.id))
-        mapping.values.append(field.annotation)
-
+    return ast.ClassDef(
+        name = name,
+        bases  = [ast.Call(ast.Name("TypedDict"), args=[
+            ast.Constant(name),
+            mapping
+        ], keywords=[])],
+        body = body,
+        decorator_list = [],
+        keywords = []
+    )
     return ast.AnnAssign(
         target=ast.Name(name),
         annotation=ast.Name("TypeAlias"),
@@ -71,9 +110,13 @@ def make_query_dict(name: str, fields: Iterable[ast.AnnAssign]) -> ast.AnnAssign
     )
 
 
+
 def convert_type(
     field: dict[str, Any], enclose: Optional[str] = None
-) -> tuple[ast.expr, Iterable[ast.stmt]]:
+) -> tuple[
+        Iterable[FieldDefinition],
+        Iterable[ast.stmt]
+    ]:
     """Returns the annotation type, and then a collection of stuff to add to the module
     body to support it (ie class definitions).
 
@@ -81,89 +124,100 @@ def convert_type(
         field: Uniprot field description, as obtained from the API
         enclose: An optional type to wrap around the generated type annotation, e.g. Optional or NotRequired
     """
-    ret: tuple[ast.Name, Iterable[ast.stmt]]
+    fields: list[FieldDefinition] = []
+    extra: list[ast.stmt] = []
+    def add_entry(rhs: ast.expr):
+        fields.append(FieldDefinition(
+            name = field["term"],
+            type = rhs,
+            description = field.get("label")
+        ))
+    # ret: tuple[Iterable[ast.AnnAssign], Iterable[ast.stmt]]
     if field["fieldType"] == "general":
         if field["dataType"] == "string":
-            ret = ast.Name("str"), []
+            add_entry(ast.Name("str"))
         elif field["dataType"] == "enum":
-            name = field["id"].capitalize()
-            ret = ast.Name(f"{name}"), [
+            # We try to document all the enum options within the TypedDict, since Literals don't support docstrings
+            name = humps.pascalize(field["id"])
+            docstring = field.get("label", "")
+            for value in field["values"]:
+                docstring += f"\n{value['value']}: {value['name']}"
+            fields.append(FieldDefinition(
+                name = field["term"],
+                type = ast.Name(f"{name}"),
+                description = docstring
+            ))
+            extra.append(
                 make_literal(
                     name=ast.Name(name),
                     fields=[ast.Constant(it["value"]) for it in field["values"]],
                 )
-            ]
+            )
         elif field["dataType"] == "integer":
-            ret = ast.Name("int"), []
+            add_entry(ast.Name("int"))
         elif field["dataType"] == "date":
-            ret = ast.Name("date"), []
+            add_entry(ast.Name("date"))
         elif field["dataType"] == "boolean":
-            ret = ast.Name("bool"), []
+            add_entry(ast.Name("bool"))
         else:
             raise Exception()
     elif field["fieldType"] == "evidence" and field["dataType"] == "string":
-        name = humps.pascalize(field["id"])
-        evidence_literal = make_literal(
-            name=ast.Name(name + "Evidence"),
-            fields=[
-                ast.Constant(item["code"]) for group in field["evidenceGroups"] for item in group["items"]
-            ]
-        )
-        ret = ast.Name(name), [
-            evidence_literal,
-            ast.ClassDef(
-            name = name,
-            bases = [ast.Name("TypedDict")],
-            keywords = [],
-            decorator_list = [],
-            body = [
-                ast.AnnAssign(
-                    target = ast.Name("query"),
-                    annotation = ast.Name("str"),
-                    simple=True
-                ),
-                ast.AnnAssign(
-                    target = ast.Name("evidence"),
-                    annotation = evidence_literal.target,
-                    simple=True
-                ),
-            ]
-        )
-        ]
+        # For some reason, the go field has implicit subfields, but none of the other evidence fields does this
+        if field["id"].endswith("evidence"):
+            for group in field["evidenceGroups"]:
+                for item in group["items"]:
+                    if item["code"] != "any":
+                        fields.append(
+                            FieldDefinition(
+                                name=f"{field['term']}_{item['code']}",
+                                type=ast.Name("str"),
+                                description=f'{field["term"]}, {item["name"].lower()}'
+                            )
+                        )
+        else:
+            add_entry(ast.Name("str"))
+
     elif field["fieldType"] == "range":
         if field["dataType"] == "integer":
-            ret = ast.Subscript(
+            add_entry(ast.Subscript(
                 value = ast.Name("tuple"),
-                slice = ast.Tuple(
-                    elts = [
-                        ast.Name("int"),
-                        ast.Name("int")
-                    ]
-                )
-            ), []
+                slice = ast.Tuple([
+                    ast.Subscript(
+                        ast.Name("Union"),
+                        slice=ast.Tuple([
+                            ast.Name("int"),
+                            ast.Subscript(ast.Name("Literal"), slice=ast.Tuple([ast.Constant("*")]))
+                        ])
+                    )
+                ] * 2)
+            ))
         elif field["dataType"] == "date":
-            ret = ast.Subscript(
+            add_entry(ast.Subscript(
                 value = ast.Name("tuple"),
-                slice = ast.Tuple(
-                    elts = [
-                        ast.Name("date"),
-                        ast.Name("date")
-                    ]
-                )
-            ), []
+                slice = ast.Tuple([
+                    ast.Subscript(
+                        ast.Name("Union"),
+                        slice=ast.Tuple([
+                            ast.Name("date"),
+                            ast.Subscript(ast.Name("Literal"), slice=ast.Tuple([ast.Constant("*")]))
+                        ])
+                    )
+                ] * 2)
+            ))
         else:
             raise Exception()
     else:
         raise Exception()
 
-
+    # Add the e.g. NotRequired annotation
     if enclose is not None:
-        return ast.Subscript(
-            value = ast.Name(enclose),
-            slice = ret[0]
-        ), ret[1]
+        for field_def in fields:
+            field_def.type = ast.Subscript(
+                value = ast.Name(enclose),
+                slice = field_def.type
+            )
 
-    return ret
+    return fields, extra
 
 
 def iter_subfields(field: dict[str, Any]) -> Iterable[dict[str, Any]]:
@@ -258,7 +312,9 @@ def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt
     :return: A tuple of (top level statements, exports as string constants)
     """
     top_level: list[ast.stmt] = []
-    fields: list[ast.AnnAssign] = []
+    fields: list[FieldDefinition] = []
+    # We use a set here to deduplicate fields with the same name
+    field_names: set[str] = set()
 
     # Iterate over all query fields
     response = requests.get(
@@ -267,15 +323,16 @@ def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt
     response.raise_for_status()
     for field in response.json():
         for subfield in iter_subfields(field):
-            typ, extra = convert_type(subfield, enclose="NotRequired")
+            new_fields, extra = convert_type(subfield, enclose="NotRequired")
             top_level += extra
 
-            # For each field, annotate the top level query TypedDict
-            fields.append(
-                ast.AnnAssign(
-                    target=ast.Name(subfield["id"]), annotation=typ, simple=True
-                )
-            )
+            for field in new_fields:
+                # If we see an assignment expression, skip it if we've seen that field name before
+                if field.name in field_names:
+                    continue
+                else:
+                    fields.append(field)
+                    field_names.add(field.name)
 
     # Create the top level TypedDict
     top_level.append(make_query_dict(name=type_name, fields=fields))
@@ -295,7 +352,7 @@ def generate_search_subclass(
     """
     return ast.ClassDef(
         name=dataset.capitalize() + "Search",
-        bases=[ast.Name("uniprot_rest.Search")],
+        bases=[ast.Name("uniprot_rest.base.Search")],
         body=[
             ast.AnnAssign(
                 target=ast.Name("dataset"),
@@ -304,9 +361,15 @@ def generate_search_subclass(
                 value=ast.Name(f'field(default="{dataset}", init=False)'),
             ),
             ast.AnnAssign(target=ast.Name("query"), annotation=query_type, simple=True),
+            ast.Expr(ast.Constant(
+                "A query that filters the returned proteins"
+            )),
             ast.AnnAssign(
-                target=ast.Name("fields"), annotation=field_type, simple=True
+                target=ast.Name("fields"), annotation=ast.Subscript(ast.Name("Iterable"), field_type), simple=True
             ),
+            ast.Expr(ast.Constant(
+                "Fields to return in the result object"
+            ))
         ],
         keywords=[],
         starargs=[],
@@ -319,6 +382,13 @@ def make_dataset(dataset: str):
     dataset = cast(Dataset, dataset)
     module = ast.Module(
         body=[
+            ast.ImportFrom(
+                module="__future__",
+                names=[
+                    ast.alias("annotations"),
+                ],
+                level=0,
+            ),
             ast.ImportFrom(
                 module="typing",
                 names=[
@@ -352,7 +422,7 @@ def make_dataset(dataset: str):
                 ],
                 level=0,
             ),
-            ast.Import(names=[ast.alias("uniprot_rest")]),
+            ast.Import(names=[ast.alias("uniprot_rest.base")]),
         ],
         type_ignores=[],
     )
@@ -374,8 +444,6 @@ def make_dataset(dataset: str):
             field_type=ast.Name(field_type_name),
         )
     )
-
-    module.body = list(dedup_stmts(module.body))
 
     return black.format_file_contents(
         ast.unparse(ast.fix_missing_locations(module)),

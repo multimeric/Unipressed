@@ -1,8 +1,9 @@
-from typing import Union
+from __future__ import annotations
+from typing import Union, Iterable
 from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from dataclasses import dataclass, field
 from datetime import date
-import uniprot_rest
+import uniprot_rest.base
 
 Rank: TypeAlias = Literal[
     "SUPERKINGDOM",
@@ -37,21 +38,37 @@ Rank: TypeAlias = Literal[
     "FORMA",
     "NO_RANK",
 ]
-TaxonomyQuery: TypeAlias = TypedDict(
-    "TaxonomyQuery",
-    {
-        "tax_id": NotRequired[int],
-        "scientific": NotRequired[str],
-        "common": NotRequired[str],
-        "mnemonic": NotRequired[str],
-        "rank": NotRequired[Rank],
-        "strain": NotRequired[str],
-        "host": NotRequired[int],
-        "linked": NotRequired[bool],
-        "parent": NotRequired[str],
-        "ancestor": NotRequired[str],
-    },
-)
+
+
+class TaxonomyQuery(TypedDict("TaxonomyQuery", {})):
+    and_: NotRequired[Iterable["TaxonomyQuery"]]
+    "Two or more filters that must both be satisfied"
+    or_: NotRequired[Iterable["TaxonomyQuery"]]
+    "Two or more filters, any of which can be satisfied"
+    not_: NotRequired[Iterable["TaxonomyQuery"]]
+    "Negate a filter"
+    tax_id: NotRequired[int]
+    "Taxon ID"
+    scientific: NotRequired[str]
+    "Scientific name"
+    common: NotRequired[str]
+    "Common name"
+    mnemonic: NotRequired[str]
+    "Mnemonic"
+    rank: NotRequired[Rank]
+    "Rank\nSUPERKINGDOM: Superkingdom\nKINGDOM: Kingdom\nSUBKINGDOM: Subkingdom\nSUPERPHYLUM: Superphylum\nPHYLUM: Phylum\nSUBPHYLUM: Subphylum\nSUPERCLASS: Superclass\nCLASS: Class\nSUBCLASS: Subclass\nINFRACLASS: Infraclass\nCOHORT: Cohort\nSUBCOHORT: Subcohort\nSUPERORDER: Superorder\nORDER: Order\nSUBORDER: Suborder\nINFRAORDER: Infraorder\nPARVORDER: Parvorder\nSUPERFAMILY: Superfamily\nFAMILY: Family\nSUBFAMILY: Subfamily\nTRIBE: Tribe\nSUBTRIBE: Subtribe\nGENUS: Genus\nSUBGENUS: Subgenus\nSPECIES_GROUP: Species group\nSPECIES_SUBGROUP: Species subgroup\nSPECIES: Species\nSUBSPECIES: Subspecies\nVARIETAS: Varietas\nFORMA: Forma\nNO_RANK: No rank"
+    strain: NotRequired[str]
+    "Strain"
+    host: NotRequired[int]
+    "Virus host"
+    linked: NotRequired[bool]
+    "With external info"
+    parent: NotRequired[str]
+    "Parent"
+    ancestor: NotRequired[str]
+    "Ancestor"
+
+
 TaxonomyTaxonomy: TypeAlias = Literal[
     "id",
     "mnemonic",
@@ -74,7 +91,9 @@ TaxonomyFields: TypeAlias = Literal[
 
 
 @dataclass
-class TaxonomySearch(uniprot_rest.Search):
+class TaxonomySearch(uniprot_rest.base.Search):
     dataset: Literal["taxonomy"] = field(default="taxonomy", init=False)
     query: TaxonomyQuery
-    fields: TaxonomyFields
+    "A query that filters the returned proteins"
+    fields: Iterable[TaxonomyFields]
+    "Fields to return in the result object"

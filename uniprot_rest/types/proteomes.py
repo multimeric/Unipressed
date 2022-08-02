@@ -1,24 +1,54 @@
-from typing import Union
+from __future__ import annotations
+from typing import Union, Iterable
 from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from dataclasses import dataclass, field
 from datetime import date
-import uniprot_rest
+import uniprot_rest.base
 
-Proteome_type: TypeAlias = Literal["1", "2", "3", "4"]
+ProteomeType: TypeAlias = Literal["1", "2", "3", "4"]
 Cpd: TypeAlias = Literal["1", "2", "3", "4", "5", "6"]
-ProteomesQuery: TypeAlias = TypedDict(
-    "ProteomesQuery",
-    {
-        "upid": NotRequired[str],
-        "proteome_type": NotRequired[Proteome_type],
-        "organism_name": NotRequired[str],
-        "taxonomy_name": NotRequired[str],
-        "genome_accession": NotRequired[str],
-        "genome_assembly": NotRequired[str],
-        "cpd": NotRequired[Cpd],
-        "busco": NotRequired[int],
-    },
-)
+
+
+class ProteomesQuery(TypedDict("ProteomesQuery", {})):
+    and_: NotRequired[Iterable["ProteomesQuery"]]
+    "Two or more filters that must both be satisfied"
+    or_: NotRequired[Iterable["ProteomesQuery"]]
+    "Two or more filters, any of which can be satisfied"
+    not_: NotRequired[Iterable["ProteomesQuery"]]
+    "Negate a filter"
+    upid: NotRequired[str]
+    "Proteome ID"
+    proteome_type: NotRequired[ProteomeType]
+    "Proteome Type\n1: Reference\n2: Other\n3: Redundant\n4: Excluded"
+    organism_name: NotRequired[str]
+    "Organism [OS]"
+    taxonomy_name: NotRequired[str]
+    "Taxonomy [OC]"
+    genome_accession: NotRequired[str]
+    "Genome Accession"
+    genome_assembly: NotRequired[str]
+    "Genome Assembly"
+    cpd: NotRequired[Cpd]
+    "CPD (Complete Proteome Detector)\n1: Standard\n2: Close to standard (high value)\n3: Close to standard (low value)\n4: Outlier (high value)\n5: Outlier (low value)\n6: Unknown"
+    busco: NotRequired[
+        tuple[
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+            Union[
+                int,
+                Literal[
+                    "*",
+                ],
+            ],
+        ]
+    ]
+    "BUSCO (Complete %)"
+
+
 ProteomesNamesTaxonomy: TypeAlias = Literal[
     "upid", "organism", "organism_id", "components", "mnemonic", "lineage"
 ]
@@ -29,7 +59,9 @@ ProteomesFields: TypeAlias = Literal[ProteomesNamesTaxonomy, ProteomesMiscellane
 
 
 @dataclass
-class ProteomesSearch(uniprot_rest.Search):
+class ProteomesSearch(uniprot_rest.base.Search):
     dataset: Literal["proteomes"] = field(default="proteomes", init=False)
     query: ProteomesQuery
-    fields: ProteomesFields
+    "A query that filters the returned proteins"
+    fields: Iterable[ProteomesFields]
+    "Fields to return in the result object"
