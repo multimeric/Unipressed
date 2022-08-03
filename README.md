@@ -61,6 +61,18 @@ This will print:
 
 ## Usage
 
+### Installation
+
+If you're using poetry:
+```bash
+poetry add unipressed
+```
+
+Otherwise:
+```bash
+pip install unipressed
+```
+
 ### Query Syntax
 
 You can't go wrong by following the type hints.
