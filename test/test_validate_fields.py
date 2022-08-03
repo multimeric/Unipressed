@@ -1,13 +1,18 @@
 import sys
-from typing import Type, get_args, get_type_hints
 
 import pytest
+
+if sys.version_info < (3, 8):
+    pytest.skip(
+        reason="Python 3.8 required for this set of tests", allow_module_level=True
+    )
+
+from typing import Type, get_args, get_type_hints
 
 import unipressed.types
 from unipressed.base import Search
 
 
-@pytest.mark.skipif(sys.version_info < (3, 8), reason="requires Python 3.8")
 @pytest.mark.parametrize(["client"], [[it] for it in unipressed.types.all_clients])
 def test_valid_query_fields(client: Type[Search]):
     """
@@ -27,7 +32,6 @@ def test_valid_query_fields(client: Type[Search]):
             assert "is not a valid search field" not in warning
 
 
-@pytest.mark.skipif(sys.version_info < (3, 8), reason="requires Python 3.8")
 @pytest.mark.parametrize(["client"], [[it] for it in unipressed.types.all_clients])
 def test_valid_return_fields(client: Type[Search]):
     """
