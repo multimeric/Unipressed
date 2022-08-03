@@ -2,9 +2,11 @@ import sys
 
 import pytest
 
-if sys.version_info < (3, 8):
+if sys.version_info < (3, 9):
+    # Python 3.7 doesn't have get_args(), and Python 3.8 has it, but it doesn't simplify the type of a Literal[Literal[...]] which
+    # would require an awkward workaround
     pytest.skip(
-        reason="Python 3.8 required for this set of tests", allow_module_level=True
+        reason="Python 3.9 required for this set of tests", allow_module_level=True
     )
 
 from typing import Type, get_args, get_type_hints
