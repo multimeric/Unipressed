@@ -31,3 +31,4 @@ profile = "black"
 [tool.mypy]
 disable_error_code = "misc"
 show_error_codes = true
+files = "unipressed/"
