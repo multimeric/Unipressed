@@ -13,7 +13,14 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v2
 
+      - name: Python Poetry Action
+        uses: abatilo/actions-poetry@v2.1.3
+
+      - name: Export dependencies
+        run: poetry export --dev > requirements.txt
+
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIREMENTS: requirements.txt
