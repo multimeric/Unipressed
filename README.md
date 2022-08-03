@@ -49,14 +49,9 @@ This will print:
 
 ### Advantages
 
-* Detailed type hints for autocompleting queries as you type ![](docs/media/query_keys.png) ![](docs/media/enum_values.png)
-* Autocompletion for return fields ![](docs/media/field_completion.png)
-* Documentation for each field:
-
-    <figure markdown>
-    ![](docs/media/docstrings.png){width="300"}
-    </figure>
-
+* Detailed type hints for autocompleting queries as you type
+* Autocompletion for return fields
+* Documentation for each field
 * Automatic results parsing, for `json`, `tsv`, `list`, and `xml`
 * Built-in pagination, so you don't have to handle any of that yourself!
 * Most of the API is automatically generated, ensuring very rapid updates whenever the API changes
@@ -93,10 +88,10 @@ These first two operators take a list of query dictionaries:
 }
 ```
 
-Most "leaf" nodes of the query tree are strings. 
+Most "leaf" nodes of the query tree (ie those that aren't operators like `and_`) are strings. 
 A few are integers or floats, and a few are *ranges*, which you input using a tuple with two elements, indicating the start and end of the range.
-If you use the literal "*" then you can leave the range open at one end. 
-For example, this query returns and protein that is in the range $(5000, \infty)$
+If you use the literal `"*"` then you can leave the range open at one end. 
+For example, this query returns any protein that is in the range $(5000, \infty)$
 ```python
 {"length": (5000, "*")}
 ```

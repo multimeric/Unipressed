@@ -1,17 +1,20 @@
 from __future__ import annotations
 
+import ast
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Iterable, Optional, cast, get_args
+
 import black
+import humps
 import requests
 import typer
+
 from unipressed.dataset import Dataset
-import ast
-import humps
-from pathlib import Path
-from dataclasses import dataclass
 
 # If the functions return anything, print it
 app = typer.Typer(result_callback=lambda x: print(x))
+
 
 @dataclass
 class FieldDefinition:
@@ -21,14 +24,12 @@ class FieldDefinition:
 
     def to_ann_assign(self) -> ast.AnnAssign:
         return ast.AnnAssign(
-                target=ast.Name(self.name), annotation=self.type, simple=True
-                )
+            target=ast.Name(self.name), annotation=self.type, simple=True
+        )
 
-    def to_dict(self) -> tuple[
-        ast.expr,
-        ast.expr
-    ]:
+    def to_dict(self) -> tuple[ast.expr, ast.expr]:
         return ast.Constant(self.name), self.type
+
 
 def sanitize(name: str) -> str:
     # Don't need a more generalizable solution here since it's unlikely the possible
@@ -42,7 +43,6 @@ def sanitize(name: str) -> str:
         .replace("(", "")
         .replace(")", "")
     )
-
 
 
 def make_literal(name: ast.Name, fields: Iterable[ast.Constant]) -> ast.AnnAssign:
@@ -71,14 +71,35 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
     """
     # Add the baseline conjunctions
     body: list[ast.stmt] = [
-        ast.AnnAssign(ast.Name("and_"), annotation = ast.Subscript(ast.Name("NotRequired"), ast.Subscript(ast.Name("Iterable"), ast.Constant(name))), simple=True),
+        ast.AnnAssign(
+            ast.Name("and_"),
+            annotation=ast.Subscript(
+                ast.Name("NotRequired"),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+            ),
+            simple=True,
+        ),
         ast.Expr(ast.Constant("Two or more filters that must both be satisfied")),
-        ast.AnnAssign(ast.Name("or_"), annotation = ast.Subscript(ast.Name("NotRequired"), ast.Subscript(ast.Name("Iterable"), ast.Constant(name))), simple=True),
+        ast.AnnAssign(
+            ast.Name("or_"),
+            annotation=ast.Subscript(
+                ast.Name("NotRequired"),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+            ),
+            simple=True,
+        ),
         ast.Expr(ast.Constant("Two or more filters, any of which can be satisfied")),
-        ast.AnnAssign(ast.Name("not_"), annotation = ast.Subscript(ast.Name("NotRequired"), ast.Subscript(ast.Name("Iterable"), ast.Constant(name))), simple=True),
+        ast.AnnAssign(
+            ast.Name("not_"),
+            annotation=ast.Subscript(
+                ast.Name("NotRequired"),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+            ),
+            simple=True,
+        ),
         ast.Expr(ast.Constant("Negate a filter")),
     ]
-    mapping = ast.Dict(keys=[], values=[] )
+    mapping = ast.Dict(keys=[], values=[])
 
     # We have to sort the fields into those that can be class variables and those that have to be defined as strings (because they aren't valid identifiers)
     for field in fields:
@@ -93,30 +114,23 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
             mapping.values.append(value)
 
     return ast.ClassDef(
-        name = name,
-        bases  = [ast.Call(ast.Name("TypedDict"), args=[
-            ast.Constant(name),
-            mapping
-        ], keywords=[])],
-        body = body,
-        decorator_list = [],
-        keywords = []
+        name=name,
+        bases=[
+            ast.Call(
+                ast.Name("TypedDict"), args=[ast.Constant(name), mapping], keywords=[]
+            )
+            if len(mapping.keys) > 0
+            else ast.Name("TypedDict")
+        ],
+        body=body,
+        decorator_list=[],
+        keywords=[],
     )
-    return ast.AnnAssign(
-        target=ast.Name(name),
-        annotation=ast.Name("TypeAlias"),
-        value=ast.Call(func=ast.Name("TypedDict"), args=[ast.Constant(name), mapping], keywords=[]),
-        simple=True
-    )
-
 
 
 def convert_type(
     field: dict[str, Any], enclose: Optional[str] = None
-) -> tuple[
-        Iterable[FieldDefinition],
-        Iterable[ast.stmt]
-    ]:
+) -> tuple[Iterable[FieldDefinition], Iterable[ast.stmt]]:
     """Returns the annotation type, and then a collection of stuff to add to the module
     body to support it (ie class definitions).
 
@@ -126,12 +140,14 @@ def convert_type(
     """
     fields: list[FieldDefinition] = []
     extra: list[ast.stmt] = []
+
     def add_entry(rhs: ast.expr):
-        fields.append(FieldDefinition(
-            name = field["term"],
-            type = rhs,
-            description = field.get("label")
-        ))
+        fields.append(
+            FieldDefinition(
+                name=field["term"], type=rhs, description=field.get("label")
+            )
+        )
+
     # ret: tuple[Iterable[ast.AnnAssign], Iterable[ast.stmt]]
     if field["fieldType"] == "general":
         if field["dataType"] == "string":
@@ -142,11 +158,11 @@ def convert_type(
             docstring = field.get("label", "")
             for value in field["values"]:
                 docstring += f"\n{value['value']}: {value['name']}"
-            fields.append(FieldDefinition(
-                name = field["term"],
-                type = ast.Name(f"{name}"),
-                description = docstring
-            ))
+            fields.append(
+                FieldDefinition(
+                    name=field["term"], type=ast.Name(f"{name}"), description=docstring
+                )
+            )
             extra.append(
                 make_literal(
                     name=ast.Name(name),
@@ -171,7 +187,7 @@ def convert_type(
                             FieldDefinition(
                                 name=f"{field['term']}_{item['code']}",
                                 type=ast.Name("str"),
-                                description=f'{field["term"]}, {item["name"].lower()}'
+                                description=f'{field["term"]}, {item["name"].lower()}',
                             )
                         )
         else:
@@ -179,31 +195,51 @@ def convert_type(
 
     elif field["fieldType"] == "range":
         if field["dataType"] == "integer":
-            add_entry(ast.Subscript(
-                value = ast.Name("tuple"),
-                slice = ast.Tuple([
-                    ast.Subscript(
-                        ast.Name("Union"),
-                        slice=ast.Tuple([
-                            ast.Name("int"),
-                            ast.Subscript(ast.Name("Literal"), slice=ast.Tuple([ast.Constant("*")]))
-                        ])
-                    )
-                ] * 2)
-            ))
+            add_entry(
+                ast.Subscript(
+                    value=ast.Name("tuple"),
+                    slice=ast.Tuple(
+                        [
+                            ast.Subscript(
+                                ast.Name("Union"),
+                                slice=ast.Tuple(
+                                    [
+                                        ast.Name("int"),
+                                        ast.Subscript(
+                                            ast.Name("Literal"),
+                                            slice=ast.Tuple([ast.Constant("*")]),
+                                        ),
+                                    ]
+                                ),
+                            )
+                        ]
+                        * 2
+                    ),
+                )
+            )
         elif field["dataType"] == "date":
-            add_entry(ast.Subscript(
-                value = ast.Name("tuple"),
-                slice = ast.Tuple([
-                    ast.Subscript(
-                        ast.Name("Union"),
-                        slice=ast.Tuple([
-                            ast.Name("date"),
-                            ast.Subscript(ast.Name("Literal"), slice=ast.Tuple([ast.Constant("*")]))
-                        ])
-                    )
-                ] * 2)
-            ))
+            add_entry(
+                ast.Subscript(
+                    value=ast.Name("tuple"),
+                    slice=ast.Tuple(
+                        [
+                            ast.Subscript(
+                                ast.Name("Union"),
+                                slice=ast.Tuple(
+                                    [
+                                        ast.Name("date"),
+                                        ast.Subscript(
+                                            ast.Name("Literal"),
+                                            slice=ast.Tuple([ast.Constant("*")]),
+                                        ),
+                                    ]
+                                ),
+                            )
+                        ]
+                        * 2
+                    ),
+                )
+            )
         else:
             raise Exception()
     else:
@@ -213,8 +249,7 @@ def convert_type(
     if enclose is not None:
         for field_def in fields:
             field_def.type = ast.Subscript(
-                value = ast.Name(enclose),
-                slice = field_def.type
+                value=ast.Name(enclose), slice=field_def.type
             )
 
     return fields, extra
@@ -273,9 +308,9 @@ def generate_return_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stm
 
     return top_level
 
+
 def dedup_stmts(stmts: Iterable[ast.stmt]) -> Iterable[ast.stmt]:
-    """Given a list of statements, deduplicates them.
-    """
+    """Given a list of statements, deduplicates them."""
     hash: dict[str, str] = {}
     for stmt in stmts:
         hashed = None
@@ -284,24 +319,27 @@ def dedup_stmts(stmts: Iterable[ast.stmt]) -> Iterable[ast.stmt]:
         if isinstance(stmt, ast.ClassDef):
             hashed = ast.dump(ast.Module(body=stmt.body))
             name = stmt.name
-        elif isinstance(stmt, ast.AnnAssign) and stmt.value is not None and isinstance(stmt.target, ast.Name):
+        elif (
+            isinstance(stmt, ast.AnnAssign)
+            and stmt.value is not None
+            and isinstance(stmt.target, ast.Name)
+        ):
             hashed = ast.dump(stmt.value)
             name = stmt.target.id
 
         if hashed is not None and name is not None:
             if hashed in hash:
                 yield ast.AnnAssign(
-                    target = ast.Name(name),
-                    annotation = ast.Name("TypeAlias"),
-                    value = ast.Name(hash[hashed]),
-                    simple=True
+                    target=ast.Name(name),
+                    annotation=ast.Name("TypeAlias"),
+                    value=ast.Name(hash[hashed]),
+                    simple=True,
                 )
             else:
                 hash[hashed] = name
                 yield stmt
         else:
             yield stmt
-
 
 
 def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt]:
@@ -354,9 +392,11 @@ def generate_search_subclass(
         name=dataset.capitalize() + "Search",
         bases=[ast.Name("unipressed.base.Search")],
         body=[
-            ast.Expr(ast.Constant(
-                f"Client for querying the {dataset} Uniprot dataset"
-            )),
+            ast.Expr(
+                ast.Constant(
+                    f"Client for querying the [{dataset} Uniprot dataset](https://www.uniprot.org/help/{dataset})"
+                )
+            ),
             ast.AnnAssign(
                 target=ast.Name("dataset"),
                 annotation=ast.Name(f'Literal["{dataset}"]'),
@@ -364,15 +404,13 @@ def generate_search_subclass(
                 value=ast.Name(f'field(default="{dataset}", init=False)'),
             ),
             ast.AnnAssign(target=ast.Name("query"), annotation=query_type, simple=True),
-            ast.Expr(ast.Constant(
-                "A query that filters the returned proteins"
-            )),
+            ast.Expr(ast.Constant("A query that filters the returned proteins")),
             ast.AnnAssign(
-                target=ast.Name("fields"), annotation=ast.Subscript(ast.Name("Iterable"), field_type), simple=True
+                target=ast.Name("fields"),
+                annotation=ast.Subscript(ast.Name("Iterable"), field_type),
+                simple=True,
             ),
-            ast.Expr(ast.Constant(
-                "Fields to return in the result object"
-            ))
+            ast.Expr(ast.Constant("Fields to return in the result object")),
         ],
         keywords=[],
         starargs=[],

@@ -10,6 +10,7 @@ plugins:
           show_source: true
           heading_level: 4
           show_root_toc_entry: true
+          show_signature_annotations: true
 - include-markdown
 markdown_extensions:
   - pymdownx.highlight:
@@ -20,6 +21,7 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - attr_list
+  - md_in_html
 extra_javascript:
   - javascript/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
