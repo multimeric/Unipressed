@@ -13,3 +13,4 @@ repos:
   - id: mypy
     additional_dependencies: [types-requests==2.28.7]
     args: [--verbose]
+    exclude: "^(scripts|test)/"
