@@ -149,7 +149,8 @@ class Search:
         Returns a generator of records, which are defined by the format field of the original request.
         For example, with `format="json"`, this will be an iterator over dictionaries parsed from JSON.
         """
-        if parser := getattr(self, f"_each_{self.format}", None):
+        parser = getattr(self, f"_each_{self.format}", None)
+        if parser is not None:
             for page in self.each_page():
                 yield from parser(page)
         else:
