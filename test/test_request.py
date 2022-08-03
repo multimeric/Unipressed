@@ -51,7 +51,7 @@ def test_search_records_xml():
     i = 0
 
     for i, record in enumerate(make_request(format="xml").each_record()):
-        seq = record.find("{*}sequence")
+        seq = record.find("{http://uniprot.org/uniprot}sequence")
         assert int(seq.attrib["length"]) >= 2500
 
     # Test that we get many records

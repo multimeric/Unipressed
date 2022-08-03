@@ -177,7 +177,7 @@ class Search:
         from xml.etree import ElementTree
 
         tree = ElementTree.parse(page)
-        yield from tree.getroot().findall("{*}entry")
+        yield from tree.getroot().findall("{http://uniprot.org/uniprot}entry")
 
     @staticmethod
     def _each_list(page: TextIO) -> Iterable[str]:
