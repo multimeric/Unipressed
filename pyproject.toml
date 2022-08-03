@@ -1,8 +1,12 @@
 [tool.poetry]
 name = "unipressed"
 version = "0.1.0"
-description = ""
+description = "Comprehensive Python client for the Uniprot REST API"
 authors = ["Michael Milton <michael.r.milton@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://multimeric.github.io/Unipressed"
+repository = "https://github.com/multimeric/Unipressed"
 
 [tool.poetry.dependencies]
 python = "^3.7"
