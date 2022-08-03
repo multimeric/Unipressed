@@ -1,4 +1,5 @@
 site_name: "Unipressed"
+repo_url: https://github.com/multimeric/Unipressed
 theme:
   name: "material"
 plugins:
@@ -22,6 +23,7 @@ markdown_extensions:
       generic: true
   - attr_list
   - md_in_html
+  - meta
 extra_javascript:
   - javascript/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
