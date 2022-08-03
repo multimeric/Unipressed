@@ -1,5 +1,7 @@
 # Unipressed
 
+**Please visit the [project website](https://multimeric.github.io/Unipressed/) for more comprehensive documentation.**
+
 ## Introduction
 
 Unipressed (Uniprot REST) is an API client for the protein database [Uniprot](https://www.uniprot.org/).
