@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "unipressed"
-version = "0.1.0"
+version = "0.1.1"
 description = "Comprehensive Python client for the Uniprot REST API"
 authors = ["Michael Milton <michael.r.milton@gmail.com>"]
 license = "MIT"
