@@ -50,7 +50,7 @@ class UniprotkbQuery(TypedDict):
     virus_host_id: NotRequired[str]
     "Virus host id"
     existence: NotRequired[Existence]
-    "Protein Existence [PE]\n1: Evidence at protein level\n2: Evidence at transcript level\n3: Inferred from homology\n4: Predicted\n5: Uncertain\ne.g. 1"
+    "Protein Existence [PE]\ne.g. 1\n* 1: Evidence at protein level\n* 2: Evidence at transcript level\n* 3: Inferred from homology\n* 4: Predicted\n* 5: Uncertain"
     ec: NotRequired[str]
     "Enzyme classification [EC]\ne.g. 1.1.2.3"
     cc_cofactor_chebi: NotRequired[str]
@@ -605,7 +605,7 @@ class UniprotkbQuery(TypedDict):
     ccev_subunit: NotRequired[str]
     "Ccev subunit\ne.g. manual"
     structure_3d: NotRequired[bool]
-    "3D Structure\ntrue: Yes\nfalse: No\ne.g. true"
+    "3D Structure\ne.g. true\n* true: Yes\n* false: No"
     ft_secstruct: NotRequired[str]
     "Ft secstruct\ne.g. *"
     ftlen_secstruct: NotRequired[
@@ -964,11 +964,11 @@ class UniprotkbQuery(TypedDict):
     ftev_positional: NotRequired[str]
     "Ftev positional\ne.g. manual"
     fragment: NotRequired[bool]
-    "Fragment\ntrue: Yes\nfalse: No\ne.g. true"
+    "Fragment\ne.g. true\n* true: Yes\n* false: No"
     organelle: NotRequired[Organelle]
-    "Encoded in\nmitochondrion: Mitochondrion\nplastid: Plastid\nchloroplast: Chloroplast\ncyanelle: Cyanelle\napicoplast: Apicoplast\norganellar chromatophore: Organellar chromatophore\nnon-photosynthetic plastid: Non-photosynthetic plastid\nnucleomorph: Nucleomorph\nhydrogenosome: Hydrogenosome\ne.g. mitochondrion"
+    "Encoded in\ne.g. mitochondrion\n* mitochondrion: Mitochondrion\n* plastid: Plastid\n* chloroplast: Chloroplast\n* cyanelle: Cyanelle\n* apicoplast: Apicoplast\n* organellar chromatophore: Organellar chromatophore\n* non-photosynthetic plastid: Non-photosynthetic plastid\n* nucleomorph: Nucleomorph\n* hydrogenosome: Hydrogenosome"
     precursor: NotRequired[bool]
-    "Precursor\ntrue: Yes\nfalse: No\ne.g. true"
+    "Precursor\ne.g. true\n* true: Yes\n* false: No"
     tissue: NotRequired[str]
     "Tissue\ne.g. head"
     strain: NotRequired[str]
@@ -1285,9 +1285,9 @@ class UniprotkbQuery(TypedDict):
     scope: NotRequired[str]
     "Cited for\ne.g. microtubule"
     reviewed: NotRequired[bool]
-    "Reviewed\ntrue: Yes\nfalse: No\ne.g. true"
+    "Reviewed\ne.g. true\n* true: Yes\n* false: No"
     active: NotRequired[bool]
-    "Active\ntrue: Yes\nfalse: No\ne.g. true"
+    "Active\ne.g. true\n* true: Yes\n* false: No"
     uniref_cluster_50: NotRequired[str]
     "UniRef50\ne.g. UniRef50_P05067"
     uniref_cluster_90: NotRequired[str]

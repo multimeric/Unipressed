@@ -59,13 +59,13 @@ class TaxonomyQuery(TypedDict):
     mnemonic: NotRequired[str]
     "Mnemonic\ne.g. sample mnemonic"
     rank: NotRequired[Rank]
-    "Rank\nSUPERKINGDOM: Superkingdom\nKINGDOM: Kingdom\nSUBKINGDOM: Subkingdom\nSUPERPHYLUM: Superphylum\nPHYLUM: Phylum\nSUBPHYLUM: Subphylum\nSUPERCLASS: Superclass\nCLASS: Class\nSUBCLASS: Subclass\nINFRACLASS: Infraclass\nCOHORT: Cohort\nSUBCOHORT: Subcohort\nSUPERORDER: Superorder\nORDER: Order\nSUBORDER: Suborder\nINFRAORDER: Infraorder\nPARVORDER: Parvorder\nSUPERFAMILY: Superfamily\nFAMILY: Family\nSUBFAMILY: Subfamily\nTRIBE: Tribe\nSUBTRIBE: Subtribe\nGENUS: Genus\nSUBGENUS: Subgenus\nSPECIES_GROUP: Species group\nSPECIES_SUBGROUP: Species subgroup\nSPECIES: Species\nSUBSPECIES: Subspecies\nVARIETAS: Varietas\nFORMA: Forma\nNO_RANK: No rank\ne.g. SPECIES_GROUP"
+    "Rank\ne.g. SPECIES_GROUP\n* SUPERKINGDOM: Superkingdom\n* KINGDOM: Kingdom\n* SUBKINGDOM: Subkingdom\n* SUPERPHYLUM: Superphylum\n* PHYLUM: Phylum\n* SUBPHYLUM: Subphylum\n* SUPERCLASS: Superclass\n* CLASS: Class\n* SUBCLASS: Subclass\n* INFRACLASS: Infraclass\n* COHORT: Cohort\n* SUBCOHORT: Subcohort\n* SUPERORDER: Superorder\n* ORDER: Order\n* SUBORDER: Suborder\n* INFRAORDER: Infraorder\n* PARVORDER: Parvorder\n* SUPERFAMILY: Superfamily\n* FAMILY: Family\n* SUBFAMILY: Subfamily\n* TRIBE: Tribe\n* SUBTRIBE: Subtribe\n* GENUS: Genus\n* SUBGENUS: Subgenus\n* SPECIES_GROUP: Species group\n* SPECIES_SUBGROUP: Species subgroup\n* SPECIES: Species\n* SUBSPECIES: Subspecies\n* VARIETAS: Varietas\n* FORMA: Forma\n* NO_RANK: No rank"
     strain: NotRequired[str]
     "Strain\ne.g. SPECIES_GROUP"
     host: NotRequired[int]
     "Virus host\ne.g. 85621"
     linked: NotRequired[bool]
-    "With external info\ntrue: Yes\nfalse: No\ne.g. true"
+    "With external info\ne.g. true\n* true: Yes\n* false: No"
     parent: NotRequired[str]
     "Parent\ne.g. 9606"
     ancestor: NotRequired[str]

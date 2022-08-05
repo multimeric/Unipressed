@@ -21,7 +21,7 @@ class KeywordsQuery(TypedDict):
     keyword_id: NotRequired[str]
     "Keyword [AC]\ne.g. KW-0001"
     category: NotRequired[str]
-    "Category\ntechnical_term: Technical term [KW-9990]\nptm: PTM [KW-9991]\nmolecular_function: Molecular function [KW-9992]\nligand: Ligand [KW-9993]\ndomain: Domain [KW-9994]\ndisease: Disease [KW-9995]\ndevelopmental_stage: Developmental stage [KW-9996]\ncoding_sequence_diversity: Coding sequence diversity [KW-9997]\ncellular_component: Cellular component [KW-9998]\nbiological_process: Biological process [KW-9999]\ne.g. Domain"
+    "Category\ne.g. Domain\n* technical_term: Technical term [KW-9990]\n* ptm: PTM [KW-9991]\n* molecular_function: Molecular function [KW-9992]\n* ligand: Ligand [KW-9993]\n* domain: Domain [KW-9994]\n* disease: Disease [KW-9995]\n* developmental_stage: Developmental stage [KW-9996]\n* coding_sequence_diversity: Coding sequence diversity [KW-9997]\n* cellular_component: Cellular component [KW-9998]\n* biological_process: Biological process [KW-9999]"
 
 
 KeywordsKeyword: TypeAlias = Literal[
