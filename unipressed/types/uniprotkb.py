@@ -50,7 +50,7 @@ class UniprotkbQuery(TypedDict):
     virus_host_id: NotRequired[str]
     "Virus host id"
     existence: NotRequired[Existence]
-    "Protein Existence [PE]\n\n1: Evidence at protein level\n\n2: Evidence at transcript level\n\n3: Inferred from homology\n\n4: Predicted\n\n5: Uncertain\ne.g. 1"
+    "Protein Existence [PE]\n1: Evidence at protein level\n2: Evidence at transcript level\n3: Inferred from homology\n4: Predicted\n5: Uncertain\ne.g. 1"
     ec: NotRequired[str]
     "Enzyme classification [EC]\ne.g. 1.1.2.3"
     cc_cofactor_chebi: NotRequired[str]
@@ -86,7 +86,7 @@ class UniprotkbQuery(TypedDict):
     ccev_bpcp_temp_dependence: NotRequired[str]
     "Ccev bpcp temp dependence\ne.g. manual"
     cc_catalytic_activity: NotRequired[str]
-    "Cc catalytic activity field\ne.g. tyrosine"
+    "Cc catalytic activity\ne.g. tyrosine"
     ccev_catalytic_activity: NotRequired[str]
     "Ccev catalytic activity\ne.g. manual"
     cc_activity_regulation: NotRequired[str]
@@ -215,7 +215,7 @@ class UniprotkbQuery(TypedDict):
     ccev_miscellaneous: NotRequired[str]
     "Ccev miscellaneous\ne.g. any"
     cc_scl_term: NotRequired[str]
-    "Cc scl term field\ne.g. membrane"
+    "Cc scl term\ne.g. membrane"
     ccev_scl_term: NotRequired[str]
     "Ccev scl term\ne.g. manual"
     cc_scl_note: NotRequired[str]
@@ -605,7 +605,7 @@ class UniprotkbQuery(TypedDict):
     ccev_subunit: NotRequired[str]
     "Ccev subunit\ne.g. manual"
     structure_3d: NotRequired[bool]
-    "3D Structure\n\ntrue: Yes\n\nfalse: No\ne.g. true"
+    "3D Structure\ntrue: Yes\nfalse: No\ne.g. true"
     ft_secstruct: NotRequired[str]
     "Ft secstruct\ne.g. *"
     ftlen_secstruct: NotRequired[
@@ -964,11 +964,11 @@ class UniprotkbQuery(TypedDict):
     ftev_positional: NotRequired[str]
     "Ftev positional\ne.g. manual"
     fragment: NotRequired[bool]
-    "Fragment\n\ntrue: Yes\n\nfalse: No\ne.g. true"
+    "Fragment\ntrue: Yes\nfalse: No\ne.g. true"
     organelle: NotRequired[Organelle]
-    "Encoded in\n\nmitochondrion: Mitochondrion\n\nplastid: Plastid\n\nchloroplast: Chloroplast\n\ncyanelle: Cyanelle\n\napicoplast: Apicoplast\n\norganellar chromatophore: Organellar chromatophore\n\nnon-photosynthetic plastid: Non-photosynthetic plastid\n\nnucleomorph: Nucleomorph\n\nhydrogenosome: Hydrogenosome\ne.g. mitochondrion"
+    "Encoded in\nmitochondrion: Mitochondrion\nplastid: Plastid\nchloroplast: Chloroplast\ncyanelle: Cyanelle\napicoplast: Apicoplast\norganellar chromatophore: Organellar chromatophore\nnon-photosynthetic plastid: Non-photosynthetic plastid\nnucleomorph: Nucleomorph\nhydrogenosome: Hydrogenosome\ne.g. mitochondrion"
     precursor: NotRequired[bool]
-    "Precursor\n\ntrue: Yes\n\nfalse: No\ne.g. true"
+    "Precursor\ntrue: Yes\nfalse: No\ne.g. true"
     tissue: NotRequired[str]
     "Tissue\ne.g. head"
     strain: NotRequired[str]
@@ -1194,7 +1194,7 @@ class UniprotkbQuery(TypedDict):
     ]
     "Date of last sequence modification\ne.g. [2018-03-04 TO 2018-03-08]"
     go: NotRequired[str]
-    "Go field\ne.g. 0009986"
+    "Go\ne.g. 0009986"
     go_manual: NotRequired[str]
     "go, any manual assertion"
     go_automatic: NotRequired[str]
@@ -1285,9 +1285,9 @@ class UniprotkbQuery(TypedDict):
     scope: NotRequired[str]
     "Cited for\ne.g. microtubule"
     reviewed: NotRequired[bool]
-    "Reviewed\n\ntrue: Yes\n\nfalse: No\ne.g. true"
+    "Reviewed\ntrue: Yes\nfalse: No\ne.g. true"
     active: NotRequired[bool]
-    "Active\n\ntrue: Yes\n\nfalse: No\ne.g. true"
+    "Active\ntrue: Yes\nfalse: No\ne.g. true"
     uniref_cluster_50: NotRequired[str]
     "UniRef50\ne.g. UniRef50_P05067"
     uniref_cluster_90: NotRequired[str]

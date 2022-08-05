@@ -23,7 +23,7 @@ class UnirefQuery(TypedDict):
     name: NotRequired[str]
     "Cluster name\ne.g. sample name"
     identity: NotRequired[Identity]
-    "Sequence identity\n\n1.0: 100%\n\n0.9: 90%\n\n0.5: 50%\ne.g. sample identity"
+    "Sequence identity\n1.0: 100%\n0.9: 90%\n0.5: 50%\ne.g. sample identity"
     count: NotRequired[
         tuple[
             Union[

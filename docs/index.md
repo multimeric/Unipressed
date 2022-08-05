@@ -90,8 +90,36 @@ hide:
 
 ### 0.1.2
 
-* Move from `pyhumps` to `inflection`
-* Include certain missing fields like `organism_id` in the query fields list
+#### Added
+* Auto generated docstrings for all fields
+* Certain missing query fields for the `arba` dataset:
+    * `cc_scl_term`
+* Certain missing query fields for the `proteomes` dataset:
+    * `organism_id`
+    * `taxonomy_id`
+* Certain missing query fields for the `unirule` dataset:
+    * `cc_scl_term`
+* Certain missing query fields for the `uniparc` dataset:
+    * `taxonomy_id`
+* Certain missing query fields for the `uniprotkb` dataset:
+    * `organism_id`
+    * `taxonomy_id`
+    * `virus_host_id`
+
+#### Removed
+* Uniprot seem to have removed certain `uniprokb` query fields, so these are now not part of the accepted query type:
+    * `ft_metal`
+    * `ftlen_metal`
+    * `ft_ca_bind`
+    * `ftlen_ca_bind`
+    * `ft_np_bind`
+    * `ftlen_np_bind`
+* Likewise, some `uniprotkb` return fields have been removed:
+    * `ft_ca_bind`
+    * `ft_metal`
+    * `ft_np_bind`
+
+#### Internal
+* Move from `pyhumps` to `inflection` for code generation
 * Add a test for the date field
 * Add types for code generation API
-* Auto generate docstrings for all fields

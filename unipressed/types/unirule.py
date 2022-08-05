@@ -31,17 +31,17 @@ class UniruleQuery(TypedDict):
     cc_cofactor_note: NotRequired[str]
     "Cc cofactor note\ne.g. subunit"
     cc_catalytic_activity: NotRequired[str]
-    "Cc catalytic activity field\ne.g. tyrosine"
+    "Cc catalytic activity\ne.g. tyrosine"
     cc_activity_regulation: NotRequired[str]
     "Cc activity regulation\ne.g. inhibited"
     cc_pathway: NotRequired[str]
     "Cc pathway\ne.g. metabolism"
     cc_subcellular_location: NotRequired[str]
-    "Cc scl term field\ne.g. membrane"
+    "Cc subcellular location\ne.g. membrane"
     cc_scl_term: NotRequired[str]
     "Cc scl term"
     cc_subcellular_location_note: NotRequired[str]
-    "Cc scl note\ne.g. membrane"
+    "Cc subcellular location note\ne.g. membrane"
     cc_induction: NotRequired[str]
     "Cc induction\ne.g. calcium"
     cc_domain: NotRequired[str]

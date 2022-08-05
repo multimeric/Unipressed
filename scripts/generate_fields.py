@@ -21,11 +21,11 @@ def make_description(field: UniprotSearchField) -> str:
     """
     Generate a docstring for a field
     """
-    ret = [field.get("label", make_placeholder_description(field["id"]))]
+    ret = [field.get("label", make_placeholder_description(field["term"]))]
 
     # We try to document all the enum options within the TypedDict, since Literals don't support docstrings
     for value in field.get("values", []):
-        ret.append(f"\n{value['value']}: {value['name']}")
+        ret.append(f"{value['value']}: {value['name']}")
     if "example" in field:
         ret.append(f"e.g. {field['example']}")
     return "\n".join(ret)

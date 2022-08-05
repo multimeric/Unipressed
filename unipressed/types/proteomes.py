@@ -22,7 +22,7 @@ class ProteomesQuery(TypedDict):
     upid: NotRequired[str]
     "Proteome ID\ne.g. UP000000718"
     proteome_type: NotRequired[ProteomeType]
-    "Proteome Type\n\n1: Reference\n\n2: Other\n\n3: Redundant\n\n4: Excluded\ne.g. 1"
+    "Proteome Type\n1: Reference\n2: Other\n3: Redundant\n4: Excluded\ne.g. 1"
     organism_name: NotRequired[str]
     "Organism [OS]\ne.g. Human"
     organism_id: NotRequired[str]
@@ -36,7 +36,7 @@ class ProteomesQuery(TypedDict):
     genome_assembly: NotRequired[str]
     "Genome Assembly\ne.g. GCA_000001405.27"
     cpd: NotRequired[Cpd]
-    "CPD (Complete Proteome Detector)\n\n1: Standard\n\n2: Close to standard (high value)\n\n3: Close to standard (low value)\n\n4: Outlier (high value)\n\n5: Outlier (low value)\n\n6: Unknown\ne.g. 1"
+    "CPD (Complete Proteome Detector)\n1: Standard\n2: Close to standard (high value)\n3: Close to standard (low value)\n4: Outlier (high value)\n5: Outlier (low value)\n6: Unknown\ne.g. 1"
     busco: NotRequired[
         tuple[
             Union[
