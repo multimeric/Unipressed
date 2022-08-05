@@ -17,25 +17,35 @@ class ArbaQuery(TypedDict):
     not_: NotRequired[Iterable["ArbaQuery"]]
     "Negate a filter"
     protein_name: NotRequired[str]
-    "Protein Name [DE]"
+    "Protein Name [DE]\ne.g. mas5"
     organism: NotRequired[str]
-    "Organism [OS]"
+    "Organism [OS]\ne.g. saccharomyces"
     taxonomy: NotRequired[str]
-    "Taxonomy [OC]"
+    "Taxonomy [OC]\ne.g. human"
     ec: NotRequired[str]
-    "Enzyme classification [EC]"
+    "Enzyme classification [EC]\ne.g. 1.1.2.3"
     cc_cofactor: NotRequired[str]
+    "Cc cofactor\ne.g. 29105"
     cc_catalytic_activity: NotRequired[str]
+    "Cc catalytic activity field\ne.g. tyrosine"
     cc_activity_regulation: NotRequired[str]
+    "Cc activity regulation\ne.g. inhibited"
     cc_pathway: NotRequired[str]
+    "Cc pathway\ne.g. metabolism"
     cc_subcellular_location: NotRequired[str]
+    "Cc scl term field\ne.g. membrane"
+    cc_scl_term: NotRequired[str]
+    "Cc scl term"
     cc_subcellular_location_note: NotRequired[str]
+    "Cc scl note\ne.g. membrane"
     cc_domain: NotRequired[str]
+    "Cc domain\ne.g. conformation"
     family: NotRequired[str]
-    "Protein family"
+    "Protein family\ne.g. pa28"
     cc_similarity: NotRequired[str]
+    "Cc similarity\ne.g. phosphatase"
     keyword: NotRequired[str]
-    "Keyword [KW]"
+    "Keyword [KW]\ne.g. chromosomal"
 
 
 ArbaArba: TypeAlias = Literal[

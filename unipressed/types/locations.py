@@ -17,9 +17,9 @@ class LocationsQuery(TypedDict):
     not_: NotRequired[Iterable["LocationsQuery"]]
     "Negate a filter"
     name: NotRequired[str]
-    "Name"
+    "Name\ne.g. A band"
     id: NotRequired[str]
-    "Location [AC]"
+    "Location [AC]\ne.g. SL-0476"
 
 
 LocationsSubcellularLocation: TypeAlias = Literal[

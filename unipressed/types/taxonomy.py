@@ -51,25 +51,25 @@ class TaxonomyQuery(TypedDict):
     not_: NotRequired[Iterable["TaxonomyQuery"]]
     "Negate a filter"
     tax_id: NotRequired[int]
-    "Taxon ID"
+    "Taxon ID\ne.g. 85621"
     scientific: NotRequired[str]
-    "Scientific name"
+    "Scientific name\ne.g. 16SrII"
     common: NotRequired[str]
-    "Common name"
+    "Common name\ne.g. sample name"
     mnemonic: NotRequired[str]
-    "Mnemonic"
+    "Mnemonic\ne.g. sample mnemonic"
     rank: NotRequired[Rank]
-    "Rank\nSUPERKINGDOM: Superkingdom\nKINGDOM: Kingdom\nSUBKINGDOM: Subkingdom\nSUPERPHYLUM: Superphylum\nPHYLUM: Phylum\nSUBPHYLUM: Subphylum\nSUPERCLASS: Superclass\nCLASS: Class\nSUBCLASS: Subclass\nINFRACLASS: Infraclass\nCOHORT: Cohort\nSUBCOHORT: Subcohort\nSUPERORDER: Superorder\nORDER: Order\nSUBORDER: Suborder\nINFRAORDER: Infraorder\nPARVORDER: Parvorder\nSUPERFAMILY: Superfamily\nFAMILY: Family\nSUBFAMILY: Subfamily\nTRIBE: Tribe\nSUBTRIBE: Subtribe\nGENUS: Genus\nSUBGENUS: Subgenus\nSPECIES_GROUP: Species group\nSPECIES_SUBGROUP: Species subgroup\nSPECIES: Species\nSUBSPECIES: Subspecies\nVARIETAS: Varietas\nFORMA: Forma\nNO_RANK: No rank"
+    "Rank\n\nSUPERKINGDOM: Superkingdom\n\nKINGDOM: Kingdom\n\nSUBKINGDOM: Subkingdom\n\nSUPERPHYLUM: Superphylum\n\nPHYLUM: Phylum\n\nSUBPHYLUM: Subphylum\n\nSUPERCLASS: Superclass\n\nCLASS: Class\n\nSUBCLASS: Subclass\n\nINFRACLASS: Infraclass\n\nCOHORT: Cohort\n\nSUBCOHORT: Subcohort\n\nSUPERORDER: Superorder\n\nORDER: Order\n\nSUBORDER: Suborder\n\nINFRAORDER: Infraorder\n\nPARVORDER: Parvorder\n\nSUPERFAMILY: Superfamily\n\nFAMILY: Family\n\nSUBFAMILY: Subfamily\n\nTRIBE: Tribe\n\nSUBTRIBE: Subtribe\n\nGENUS: Genus\n\nSUBGENUS: Subgenus\n\nSPECIES_GROUP: Species group\n\nSPECIES_SUBGROUP: Species subgroup\n\nSPECIES: Species\n\nSUBSPECIES: Subspecies\n\nVARIETAS: Varietas\n\nFORMA: Forma\n\nNO_RANK: No rank\ne.g. SPECIES_GROUP"
     strain: NotRequired[str]
-    "Strain"
+    "Strain\ne.g. SPECIES_GROUP"
     host: NotRequired[int]
-    "Virus host"
+    "Virus host\ne.g. 85621"
     linked: NotRequired[bool]
-    "With external info"
+    "With external info\n\ntrue: Yes\n\nfalse: No\ne.g. true"
     parent: NotRequired[str]
-    "Parent"
+    "Parent\ne.g. 9606"
     ancestor: NotRequired[str]
-    "Ancestor"
+    "Ancestor\ne.g. 85621"
 
 
 TaxonomyTaxonomy: TypeAlias = Literal[

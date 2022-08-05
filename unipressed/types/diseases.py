@@ -17,9 +17,9 @@ class DiseasesQuery(TypedDict):
     not_: NotRequired[Iterable["DiseasesQuery"]]
     "Negate a filter"
     name: NotRequired[str]
-    "Name"
+    "Name\ne.g. alzheimer disease"
     id: NotRequired[str]
-    "Disease [AC]"
+    "Disease [AC]\ne.g. DI-12345"
 
 
 DiseasesDisease: TypeAlias = Literal[

@@ -1,3 +1,5 @@
+from datetime import date
+
 from unipressed import UniprotkbSearch
 from unipressed.base import Search
 
@@ -68,13 +70,26 @@ def test_search_records_list():
     assert i > 500
 
 
-def test_example():
+def test_main_example():
     """
     Validate the readme example
     """
     for record in UniprotkbSearch(
         query={"and_": [{"organelle": "chloroplast"}, {"length": (5000, "*")}]},
         fields=["length", "gene_names"],
+    ).each_record():
+        assert isinstance(record, dict)
+        assert set(record.keys()) == {"primaryAccession", "genes", "sequence"}
+        assert record["sequence"]["length"] > 5000
+
+
+def test_date_field():
+    """
+    Validate the readme example
+    """
+    for record in UniprotkbSearch(
+        query={"date_created": (date(2022, 7, 1), "*")},
+        fields=["date_created", "protein_name"],
     ).each_record():
         assert isinstance(record, dict)
         assert set(record.keys()) == {"primaryAccession", "genes", "sequence"}

@@ -17,9 +17,9 @@ class DatabaseQuery(TypedDict):
     not_: NotRequired[Iterable["DatabaseQuery"]]
     "Negate a filter"
     name: NotRequired[str]
-    "Name"
+    "Name\ne.g. Arabidopsis Information Portal"
     id: NotRequired[str]
-    "Database [AC]"
+    "Database [AC]\ne.g. DB-0236"
 
 
 DatabaseCrossReference: TypeAlias = Literal[

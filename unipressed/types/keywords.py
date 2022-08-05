@@ -17,11 +17,11 @@ class KeywordsQuery(TypedDict):
     not_: NotRequired[Iterable["KeywordsQuery"]]
     "Negate a filter"
     name: NotRequired[str]
-    "Name"
+    "Name\ne.g. 2Fe-2S"
     keyword_id: NotRequired[str]
-    "Keyword [AC]"
+    "Keyword [AC]\ne.g. KW-0001"
     category: NotRequired[str]
-    "Category"
+    "Category\n\ntechnical_term: Technical term [KW-9990]\n\nptm: PTM [KW-9991]\n\nmolecular_function: Molecular function [KW-9992]\n\nligand: Ligand [KW-9993]\n\ndomain: Domain [KW-9994]\n\ndisease: Disease [KW-9995]\n\ndevelopmental_stage: Developmental stage [KW-9996]\n\ncoding_sequence_diversity: Coding sequence diversity [KW-9997]\n\ncellular_component: Cellular component [KW-9998]\n\nbiological_process: Biological process [KW-9999]\ne.g. Domain"
 
 
 KeywordsKeyword: TypeAlias = Literal[

@@ -123,7 +123,7 @@ class Search:
 
     def each_response(self) -> Iterable[requests.Response]:
         """
-        Returns a generator of [`requsets.Response`](https://requests.readthedocs.io/en/latest/api/#requests.Response) objects, one for each page of the result
+        Returns a generator of [`requests.Response`](https://requests.readthedocs.io/en/latest/api/#requests.Response) objects, one for each page of the result
         """
         session = requests.Session()
         request = SearchRequest(self).to_request()

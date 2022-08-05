@@ -13,7 +13,8 @@ from .locations import LocationsSearch
 from .proteomes import ProteomesSearch
 from .taxonomy import TaxonomySearch
 from .uniparc import UniparcSearch
-from .uniprotkb import UniprotkbSearch
+
+# from .uniprotkb import UniprotkbSearch
 from .uniref import UnirefSearch
 from .unirule import UniruleSearch
 
@@ -27,7 +28,7 @@ all_clients: list[Type[Search]] = [
     ProteomesSearch,
     TaxonomySearch,
     UniparcSearch,
-    UniprotkbSearch,
+    # UniprotkbSearch,
     UnirefSearch,
     UniruleSearch,
 ]

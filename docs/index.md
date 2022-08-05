@@ -85,3 +85,13 @@ hide:
 ::: unipressed.UniruleSearch
     options:
         members: None
+
+## Changelog
+
+### 0.1.2
+
+* Move from `pyhumps` to `inflection`
+* Include certain missing fields like `organism_id` in the query fields list
+* Add a test for the date field
+* Add types for code generation API
+* Auto generate docstrings for all fields
