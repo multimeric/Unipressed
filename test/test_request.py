@@ -87,10 +87,13 @@ def test_date_field():
     """
     Validate the readme example
     """
-    for record in UniprotkbSearch(
-        query={"date_created": (date(2022, 7, 1), "*")},
-        fields=["date_created", "protein_name"],
-    ).each_record():
-        assert isinstance(record, dict)
-        assert set(record.keys()) == {"primaryAccession", "genes", "sequence"}
-        assert record["sequence"]["length"] > 5000
+    records = list(
+        UniprotkbSearch(
+            query={
+                "date_created": (date(2022, 1, 18), date(2022, 1, 19)),
+                "organism_id": "9606",
+            },
+            fields=["date_created", "protein_name"],
+        ).each_record()
+    )
+    assert len(records) == 544

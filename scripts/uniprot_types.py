@@ -21,29 +21,46 @@ class UniprotEnumEntry(TypedDict):
 class UniprotBaseSearchField(TypedDict):
     id: str
     label: str
+
+
+class UniprotGroupField(UniprotBaseSearchField):
+    itemType: Literal["group"]
+    items: list["UniprotSearchField"]
+
+
+class UniprotSiblingField(UniprotBaseSearchField):
+    itemType: Literal["sibling_group"]
+    siblings: list["UniprotSearchField"]
+
+
+class UniprotLeafField(UniprotBaseSearchField):
     itemType: Literal["single"]
     term: str
     example: NotRequired[str]
     regex: NotRequired[str]
 
 
-class UniprotEnumField(UniprotBaseSearchField):
+class UniprotEnumField(UniprotLeafField):
     fieldType: Literal["general"]
     dataType: Literal["enum"]
     values: list[UniprotEnumEntry]
 
 
-class UniprotGeneralField(UniprotBaseSearchField):
+class UniprotGeneralField(UniprotLeafField):
     fieldType: Literal["general", "range"]
     dataType: Literal["string", "integer", "date", "boolean"]
 
 
-class UniprotEvidenceField(UniprotBaseSearchField):
+class UniprotEvidenceField(UniprotLeafField):
     fieldType: Literal["evidence"]
     dataType: Literal["string", "integer", "date", "boolean"]
     evidenceGroups: list[EvidenceGroup]
 
 
-UniprotSearchField: TypeAlias = Union[
+UniprotConcreteLeafField: TypeAlias = Union[
     UniprotEnumField, UniprotGeneralField, UniprotEvidenceField
+]
+
+UniprotSearchField: TypeAlias = Union[
+    UniprotConcreteLeafField, UniprotGroupField, UniprotSiblingField
 ]

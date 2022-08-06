@@ -34,8 +34,6 @@ class ArbaQuery(TypedDict):
     "Cc pathway\ne.g. metabolism"
     cc_subcellular_location: NotRequired[str]
     "Cc subcellular location\ne.g. membrane"
-    cc_scl_term: NotRequired[str]
-    "Cc scl term"
     cc_subcellular_location_note: NotRequired[str]
     "Cc subcellular location note\ne.g. membrane"
     cc_domain: NotRequired[str]

@@ -3,21 +3,24 @@ from __future__ import annotations
 import ast
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Optional, cast, get_args
+from typing import TYPE_CHECKING, Iterable, Optional, cast, get_args
 
 import black
 import inflection
 import requests
 import typer
-from uniprot_types import UniprotSearchField
 
+from scripts.validate import validate_query_fields
 from unipressed.dataset import Dataset
+
+if TYPE_CHECKING:
+    from .uniprot_types import UniprotConcreteLeafField, UniprotSearchField
 
 # If the functions return anything, print it
 app = typer.Typer(result_callback=lambda x: print(x))
 
 
-def make_description(field: UniprotSearchField) -> str:
+def make_description(field: UniprotConcreteLeafField) -> str:
     """
     Generate a docstring for a field
     """
@@ -162,7 +165,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
 
 
 def convert_type(
-    field: UniprotSearchField, enclose: Optional[str] = None
+    field: UniprotConcreteLeafField, enclose: Optional[str] = None
 ) -> tuple[Iterable[FieldDefinition], Iterable[ast.stmt]]:
     """Returns the annotation type, and then a collection of stuff to add to the module
     body to support it (ie class definitions).
@@ -296,7 +299,7 @@ def convert_type(
     return fields, extra
 
 
-def iter_subfields(field: dict[str, Any]) -> Iterable[dict[str, Any]]:
+def iter_subfields(field: UniprotSearchField) -> Iterable[UniprotConcreteLeafField]:
     """
     Returns a generator that recursively generates all fields within groups and subgroups
     """
@@ -368,21 +371,24 @@ def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt
         f"https://rest.uniprot.org/configure/{dataset}/search-fields"
     )
     response.raise_for_status()
+    field: UniprotSearchField
     for field in response.json():
         for subfield in iter_subfields(field):
             new_fields, extra = convert_type(subfield, enclose="NotRequired")
             top_level += extra
 
-            for field in new_fields:
+            for field_def in new_fields:
                 # If we see an assignment expression, skip it if we've seen that field name before
-                if field.name in field_names:
+                if field_def.name in field_names:
                     continue
                 else:
-                    fields.append(field)
-                    field_names.add(field.name)
+                    fields.append(field_def)
+                    field_names.add(field_def.name)
+
+    validated_fields = validate_query_fields(fields, dataset)
 
     # Create the top level TypedDict
-    top_level.append(make_query_dict(name=type_name, fields=fields))
+    top_level.append(make_query_dict(name=type_name, fields=validated_fields))
 
     return top_level
 
