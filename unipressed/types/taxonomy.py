@@ -43,7 +43,7 @@ Rank: TypeAlias = Literal[
 ]
 
 
-class TaxonomyQuery(TypedDict):
+class TaxonomyQueryDict(TypedDict):
     and_: NotRequired[Iterable["TaxonomyQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["TaxonomyQuery"]]
@@ -72,6 +72,7 @@ class TaxonomyQuery(TypedDict):
     "Ancestor\ne.g. 85621"
 
 
+TaxonomyQuery: TypeAlias = Union[TaxonomyQueryDict, str]
 TaxonomyTaxonomy: TypeAlias = Literal[
     "id",
     "mnemonic",

@@ -12,7 +12,7 @@ ProteomeType: TypeAlias = Literal["1", "2", "3", "4"]
 Cpd: TypeAlias = Literal["1", "2", "3", "4", "5", "6"]
 
 
-class ProteomesQuery(TypedDict):
+class ProteomesQueryDict(TypedDict):
     and_: NotRequired[Iterable["ProteomesQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["ProteomesQuery"]]
@@ -56,6 +56,7 @@ class ProteomesQuery(TypedDict):
     "BUSCO (Complete %)\ne.g. 97"
 
 
+ProteomesQuery: TypeAlias = Union[ProteomesQueryDict, str]
 ProteomesNamesTaxonomy: TypeAlias = Literal[
     "upid", "organism", "organism_id", "components", "mnemonic", "lineage"
 ]

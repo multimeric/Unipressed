@@ -9,7 +9,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 import unipressed.base
 
 
-class UniruleQuery(TypedDict):
+class UniruleQueryDict(TypedDict):
     and_: NotRequired[Iterable["UniruleQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["UniruleQuery"]]
@@ -54,6 +54,7 @@ class UniruleQuery(TypedDict):
     "Keyword [KW]\ne.g. chromosomal"
 
 
+UniruleQuery: TypeAlias = Union[UniruleQueryDict, str]
 UniruleUnirule: TypeAlias = Literal[
     "rule_id",
     "template_entries",

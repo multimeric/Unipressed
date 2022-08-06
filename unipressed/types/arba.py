@@ -9,7 +9,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 import unipressed.base
 
 
-class ArbaQuery(TypedDict):
+class ArbaQueryDict(TypedDict):
     and_: NotRequired[Iterable["ArbaQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["ArbaQuery"]]
@@ -46,6 +46,7 @@ class ArbaQuery(TypedDict):
     "Keyword [KW]\ne.g. chromosomal"
 
 
+ArbaQuery: TypeAlias = Union[ArbaQueryDict, str]
 ArbaArba: TypeAlias = Literal[
     "rule_id", "statistics", "taxonomic_scope", "annotation_covered"
 ]

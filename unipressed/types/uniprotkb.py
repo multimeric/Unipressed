@@ -22,7 +22,7 @@ Organelle: TypeAlias = Literal[
 ]
 
 
-class UniprotkbQuery(TypedDict):
+class UniprotkbQueryDict(TypedDict):
     and_: NotRequired[Iterable["UniprotkbQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["UniprotkbQuery"]]
@@ -1298,6 +1298,7 @@ class UniprotkbQuery(TypedDict):
     "UniParc ID\ne.g. UPI000002DB1C"
 
 
+UniprotkbQuery: TypeAlias = Union[UniprotkbQueryDict, str]
 UniprotkbNamesTaxonomy: TypeAlias = Literal[
     "accession",
     "id",

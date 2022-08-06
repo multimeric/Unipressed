@@ -22,7 +22,8 @@ def test_valid_query_fields(client: Type[Search]):
     """
     query = {}
     query_cls = get_type_hints(client)["query"]
-    for query_field in query_cls.__optional_keys__ | query_cls.__required_keys__:
+    query_dict = get_args(query_cls)[0]
+    for query_field in query_dict.__optional_keys__ | query_dict.__required_keys__:
         if query_field not in {"and_", "or_", "not_"}:
             query[query_field] = "foo"
     response = next(iter(client(query=query).each_response()))

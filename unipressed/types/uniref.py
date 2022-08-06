@@ -11,7 +11,7 @@ import unipressed.base
 Identity: TypeAlias = Literal["1.0", "0.9", "0.5"]
 
 
-class UnirefQuery(TypedDict):
+class UnirefQueryDict(TypedDict):
     and_: NotRequired[Iterable["UnirefQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["UnirefQuery"]]
@@ -87,6 +87,7 @@ class UnirefQuery(TypedDict):
     "Related clusters\ne.g. UniRef100_A0A001"
 
 
+UnirefQuery: TypeAlias = Union[UnirefQueryDict, str]
 UnirefNamesTaxonomy: TypeAlias = Literal[
     "id", "name", "common_taxon", "common_taxonid", "organism_id", "organism"
 ]

@@ -92,12 +92,15 @@ def make_literal(name: ast.Name, fields: Iterable[ast.Constant]) -> ast.AnnAssig
     )
 
 
-def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDef:
+def make_query_dict(
+    name: str, recursive_type: str, fields: Iterable[FieldDefinition]
+) -> ast.ClassDef:
     """Makes a TypedDict that defines the structure of some dictionary used in the query tree
 
     Args:
-        name (str): The name of the type
-        fields (Iterable[ast.AnnAssign]): A list of fields for this dictionary
+        name: The name of the type
+        recursive_type: The type to use for and_, or_ etc
+        fields: A list of fields for this dictionary
 
     Raises:
         Exception: If any of the fields are complex assignments such as tuple unpacking
@@ -111,7 +114,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
             ast.Name("and_"),
             annotation=ast.Subscript(
                 ast.Name("NotRequired"),
-                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(recursive_type)),
             ),
             simple=True,
         ),
@@ -120,7 +123,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
             ast.Name("or_"),
             annotation=ast.Subscript(
                 ast.Name("NotRequired"),
-                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(recursive_type)),
             ),
             simple=True,
         ),
@@ -129,7 +132,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
             ast.Name("not_"),
             annotation=ast.Subscript(
                 ast.Name("NotRequired"),
-                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(recursive_type)),
             ),
             simple=True,
         ),
@@ -387,8 +390,22 @@ def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt
 
     validated_fields = validate_query_fields(fields, dataset)
 
-    # Create the top level TypedDict
-    top_level.append(make_query_dict(name=type_name, fields=validated_fields))
+    # Create the query TypedDict, but also a top level type alias
+    type_dict_name = type_name + "Dict"
+    top_level += [
+        make_query_dict(
+            name=type_dict_name, recursive_type=type_name, fields=validated_fields
+        ),
+        ast.AnnAssign(
+            ast.Name(type_name),
+            annotation=ast.Name("TypeAlias"),
+            value=ast.Subscript(
+                ast.Name("Union"),
+                ast.Tuple([ast.Name(type_dict_name), ast.Name("str")]),
+            ),
+            simple=True,
+        ),
+    ]
 
     return top_level
 

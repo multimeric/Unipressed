@@ -9,7 +9,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 import unipressed.base
 
 
-class UniparcQuery(TypedDict):
+class UniparcQueryDict(TypedDict):
     and_: NotRequired[Iterable["UniparcQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["UniparcQuery"]]
@@ -63,6 +63,7 @@ class UniparcQuery(TypedDict):
     "Proteome Component\ne.g. chromosome"
 
 
+UniparcQuery: TypeAlias = Union[UniparcQueryDict, str]
 UniparcNamesTaxonomy: TypeAlias = Literal[
     "upi", "gene", "organism_id", "organism", "protein", "proteome"
 ]

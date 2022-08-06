@@ -1,6 +1,7 @@
 from datetime import date
+from typing import Iterable
 
-from unipressed import UniprotkbSearch
+from unipressed import *
 from unipressed.base import Search
 
 
@@ -85,7 +86,7 @@ def test_main_example():
 
 def test_date_field():
     """
-    Validate the readme example
+    Validate a date field
     """
     records = list(
         UniprotkbSearch(
@@ -97,3 +98,45 @@ def test_date_field():
         ).each_record()
     )
     assert len(records) == 544
+
+
+def test_uniref():
+    # This is an example from the uniprot website
+    assert (
+        len(
+            list(
+                UnirefSearch(
+                    query={
+                        "and_": [
+                            {
+                                "uniprot_id": "q9h9k5",
+                            },
+                            {"identity": "1.0"},
+                        ]
+                    }
+                ).each_record()
+            )
+        )
+        == 1
+    )
+
+
+def test_uniprac():
+    # This is an example from the uniprot website
+    assert (
+        len(
+            list(
+                UnirefSearch(
+                    query={
+                        "and_": [
+                            {
+                                "uniprot_id": "q9h9k5",
+                            },
+                            {"identity": "1.0"},
+                        ]
+                    }
+                ).each_record()
+            )
+        )
+        == 1
+    )
