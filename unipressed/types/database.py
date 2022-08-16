@@ -9,7 +9,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 import unipressed.base
 
 
-class DatabaseQuery(TypedDict):
+class DatabaseQueryDict(TypedDict):
     and_: NotRequired[Iterable["DatabaseQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["DatabaseQuery"]]
@@ -17,11 +17,12 @@ class DatabaseQuery(TypedDict):
     not_: NotRequired[Iterable["DatabaseQuery"]]
     "Negate a filter"
     name: NotRequired[str]
-    "Name"
+    "Name\ne.g. Arabidopsis Information Portal"
     id: NotRequired[str]
-    "Database [AC]"
+    "Database [AC]\ne.g. DB-0236"
 
 
+DatabaseQuery: TypeAlias = Union[DatabaseQueryDict, str]
 DatabaseCrossReference: TypeAlias = Literal[
     "id",
     "name",

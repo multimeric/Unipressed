@@ -1,4 +1,8 @@
-from unipressed import UniprotkbSearch
+from datetime import date
+from re import A
+from typing import Iterable
+
+from unipressed import types
 from unipressed.base import Search
 
 
@@ -11,6 +15,10 @@ def make_request(**kwargs) -> Search:
     )
     defaults.update(kwargs)
     return Search(**defaults)  # type: ignore
+
+
+def assert_valid_request(search: Search):
+    next(iter(search.each_response())).raise_for_status()
 
 
 def test_search_pages():
@@ -68,14 +76,130 @@ def test_search_records_list():
     assert i > 500
 
 
-def test_example():
+def test_main_example():
     """
     Validate the readme example
     """
-    for record in UniprotkbSearch(
+    for record in types.UniprotkbSearch(
         query={"and_": [{"organelle": "chloroplast"}, {"length": (5000, "*")}]},
         fields=["length", "gene_names"],
     ).each_record():
         assert isinstance(record, dict)
         assert set(record.keys()) == {"primaryAccession", "genes", "sequence"}
         assert record["sequence"]["length"] > 5000
+
+
+def test_date_field():
+    """
+    Validate a date field
+    """
+    records = list(
+        types.UniprotkbSearch(
+            query={
+                "date_created": (date(2022, 1, 18), date(2022, 1, 19)),
+                "organism_id": "9606",
+            },
+            fields=["date_created", "protein_name"],
+        ).each_record()
+    )
+    assert len(records) == 544
+
+
+def test_uniref():
+    # This is an example from the uniprot website
+    assert (
+        len(
+            list(
+                types.UnirefSearch(
+                    query={
+                        "and_": [
+                            {
+                                "uniprot_id": "q9h9k5",
+                            },
+                            {"identity": "1.0"},
+                        ]
+                    }
+                ).each_record()
+            )
+        )
+        == 1
+    )
+
+
+def test_uniparc():
+    # This is an example from the uniprot website
+    assert_valid_request(
+        types.UniparcSearch(query={"and_": [{"database": "RefSeq"}, "APP"]})
+    )
+
+
+def test_proteomes():
+    next(
+        iter(
+            types.ProteomesSearch(
+                query={"and_": [{"busco": (90, 100)}, {"proteome_type": "1"}]}
+            ).each_response()
+        )
+    ).raise_for_status()
+
+
+def test_taxonomy():
+    assert_valid_request(
+        types.TaxonomySearch(query={"and_": [{"rank": "FAMILY"}, "hominidae"]})
+    )
+
+
+def test_keywords():
+    assert_valid_request(
+        types.KeywordsSearch(
+            query={"and_": [{"category": "technical_term"}, {"name": "food"}]}
+        )
+    )
+
+
+def test_citations():
+    assert_valid_request(
+        types.CitationsSearch(query={"and_": [{"published": "2022"}, "COVID-19"]})
+    )
+
+
+def test_diseases():
+    assert_valid_request(types.DiseasesSearch(query={"id": "DI-00001"}))
+
+
+def test_cross_refs():
+    assert_valid_request(
+        types.DatabaseSearch(
+            query={
+                # Find all databases that contain the word "Gene"
+                "name": "Gene"
+            }
+        )
+    )
+
+
+def test_subcellular():
+    assert_valid_request(
+        types.LocationsSearch(
+            query={
+                # Find the location with id SL-0011
+                "id": "SL-0011"
+            }
+        )
+    )
+
+
+def test_unirule():
+    assert_valid_request(
+        types.UniruleSearch(
+            query={"and_": [{"taxonomy": "fungi"}, {"protein_name": "glucanase"}]}
+        )
+    )
+
+
+def test_arba():
+    assert_valid_request(
+        types.ArbaSearch(
+            query={"and_": [{"taxonomy": "chloroflexi"}, {"keyword": "metal-binding"}]}
+        )
+    )

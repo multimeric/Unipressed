@@ -9,7 +9,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 import unipressed.base
 
 
-class DiseasesQuery(TypedDict):
+class DiseasesQueryDict(TypedDict):
     and_: NotRequired[Iterable["DiseasesQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["DiseasesQuery"]]
@@ -17,11 +17,12 @@ class DiseasesQuery(TypedDict):
     not_: NotRequired[Iterable["DiseasesQuery"]]
     "Negate a filter"
     name: NotRequired[str]
-    "Name"
+    "Name\ne.g. alzheimer disease"
     id: NotRequired[str]
-    "Disease [AC]"
+    "Disease [AC]\ne.g. DI-12345"
 
 
+DiseasesQuery: TypeAlias = Union[DiseasesQueryDict, str]
 DiseasesDisease: TypeAlias = Literal[
     "id",
     "name",

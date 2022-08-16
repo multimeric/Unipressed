@@ -3,17 +3,52 @@ from __future__ import annotations
 import ast
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Optional, cast, get_args
+from typing import TYPE_CHECKING, Iterable, Optional, cast, get_args
 
 import black
-import humps
+import inflection
 import requests
 import typer
 
+from scripts.validate import validate_query_fields
 from unipressed.dataset import Dataset
+
+if TYPE_CHECKING:
+    from .uniprot_types import UniprotConcreteLeafField, UniprotSearchField
 
 # If the functions return anything, print it
 app = typer.Typer(result_callback=lambda x: print(x))
+
+
+def make_description(field: UniprotConcreteLeafField) -> str:
+    """
+    Generate a docstring for a field
+    """
+    ret = [field.get("label", make_placeholder_description(field["term"]))]
+    if "example" in field:
+        ret.append(f"e.g. {field['example']}")
+    # We try to document all the enum options within the TypedDict, since Literals don't support docstrings
+    for value in field.get("values", []):
+        ret.append(f"* {value['value']}: {value['name']}")
+    return "\n".join(ret)
+
+
+def make_placeholder_description(field_name: str) -> str:
+    """
+    Generates a sentence from a field name, where no description was provided
+    """
+
+    def _gen():
+        for i, field in enumerate(field_name.split("_")):
+            if field == field.upper():
+                yield field
+            elif i == 0:
+                yield field.capitalize()
+            else:
+                yield field.lower()
+
+    return " ".join(_gen())
+    # return inflection.titleize(field_name).replace("id", "ID")
 
 
 @dataclass
@@ -42,6 +77,7 @@ def sanitize(name: str) -> str:
         .replace("/", "")
         .replace("(", "")
         .replace(")", "")
+        .replace("__", "_")
     )
 
 
@@ -56,12 +92,15 @@ def make_literal(name: ast.Name, fields: Iterable[ast.Constant]) -> ast.AnnAssig
     )
 
 
-def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDef:
+def make_query_dict(
+    name: str, recursive_type: str, fields: Iterable[FieldDefinition]
+) -> ast.ClassDef:
     """Makes a TypedDict that defines the structure of some dictionary used in the query tree
 
     Args:
-        name (str): The name of the type
-        fields (Iterable[ast.AnnAssign]): A list of fields for this dictionary
+        name: The name of the type
+        recursive_type: The type to use for and_, or_ etc
+        fields: A list of fields for this dictionary
 
     Raises:
         Exception: If any of the fields are complex assignments such as tuple unpacking
@@ -75,7 +114,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
             ast.Name("and_"),
             annotation=ast.Subscript(
                 ast.Name("NotRequired"),
-                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(recursive_type)),
             ),
             simple=True,
         ),
@@ -84,7 +123,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
             ast.Name("or_"),
             annotation=ast.Subscript(
                 ast.Name("NotRequired"),
-                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(recursive_type)),
             ),
             simple=True,
         ),
@@ -93,7 +132,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
             ast.Name("not_"),
             annotation=ast.Subscript(
                 ast.Name("NotRequired"),
-                ast.Subscript(ast.Name("Iterable"), ast.Constant(name)),
+                ast.Subscript(ast.Name("Iterable"), ast.Constant(recursive_type)),
             ),
             simple=True,
         ),
@@ -129,7 +168,7 @@ def make_query_dict(name: str, fields: Iterable[FieldDefinition]) -> ast.ClassDe
 
 
 def convert_type(
-    field: dict[str, Any], enclose: Optional[str] = None
+    field: UniprotConcreteLeafField, enclose: Optional[str] = None
 ) -> tuple[Iterable[FieldDefinition], Iterable[ast.stmt]]:
     """Returns the annotation type, and then a collection of stuff to add to the module
     body to support it (ie class definitions).
@@ -140,12 +179,11 @@ def convert_type(
     """
     fields: list[FieldDefinition] = []
     extra: list[ast.stmt] = []
+    description: str = make_description(field)
 
     def add_entry(rhs: ast.expr):
         fields.append(
-            FieldDefinition(
-                name=field["term"], type=rhs, description=field.get("label")
-            )
+            FieldDefinition(name=field["term"], type=rhs, description=description)
         )
 
     # ret: tuple[Iterable[ast.AnnAssign], Iterable[ast.stmt]]
@@ -153,14 +191,12 @@ def convert_type(
         if field["dataType"] == "string":
             add_entry(ast.Name("str"))
         elif field["dataType"] == "enum":
-            # We try to document all the enum options within the TypedDict, since Literals don't support docstrings
-            name = humps.pascalize(field["id"])
-            docstring = field.get("label", "")
-            for value in field["values"]:
-                docstring += f"\n{value['value']}: {value['name']}"
+            name = inflection.camelize(field["id"], True)
             fields.append(
                 FieldDefinition(
-                    name=field["term"], type=ast.Name(f"{name}"), description=docstring
+                    name=field["term"],
+                    type=ast.Name(f"{name}"),
+                    description=description,
                 )
             )
             extra.append(
@@ -245,6 +281,17 @@ def convert_type(
     else:
         raise Exception()
 
+    autocomplete = field.get("autoCompleteQueryTerm")
+    if autocomplete is not None and autocomplete != field["term"]:
+        fields.append(
+            FieldDefinition(
+                # We don't have a propert description for autocomplete fields
+                name=autocomplete,
+                type=ast.Name("str"),
+                description=make_placeholder_description(autocomplete),
+            )
+        )
+
     # Add the e.g. NotRequired annotation
     if enclose is not None:
         for field_def in fields:
@@ -255,7 +302,7 @@ def convert_type(
     return fields, extra
 
 
-def iter_subfields(field: dict[str, Any]) -> Iterable[dict[str, Any]]:
+def iter_subfields(field: UniprotSearchField) -> Iterable[UniprotConcreteLeafField]:
     """
     Returns a generator that recursively generates all fields within groups and subgroups
     """
@@ -283,8 +330,9 @@ def generate_return_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stm
     for group in requests.get(
         f"https://rest.uniprot.org/configure/{dataset}/result-fields"
     ).json():
-        group_name: str = humps.pascalize(
-            sanitize(dataset.capitalize() + "_" + group["id"])
+        group_name: str = inflection.camelize(
+            sanitize(dataset.capitalize() + "_" + group["id"]),
+            uppercase_first_letter=True,
         )
         # Create a new Literal for all fields in this group
         top_level.append(
@@ -309,39 +357,6 @@ def generate_return_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stm
     return top_level
 
 
-def dedup_stmts(stmts: Iterable[ast.stmt]) -> Iterable[ast.stmt]:
-    """Given a list of statements, deduplicates them."""
-    hash: dict[str, str] = {}
-    for stmt in stmts:
-        hashed = None
-        name = None
-
-        if isinstance(stmt, ast.ClassDef):
-            hashed = ast.dump(ast.Module(body=stmt.body))
-            name = stmt.name
-        elif (
-            isinstance(stmt, ast.AnnAssign)
-            and stmt.value is not None
-            and isinstance(stmt.target, ast.Name)
-        ):
-            hashed = ast.dump(stmt.value)
-            name = stmt.target.id
-
-        if hashed is not None and name is not None:
-            if hashed in hash:
-                yield ast.AnnAssign(
-                    target=ast.Name(name),
-                    annotation=ast.Name("TypeAlias"),
-                    value=ast.Name(hash[hashed]),
-                    simple=True,
-                )
-            else:
-                hash[hashed] = name
-                yield stmt
-        else:
-            yield stmt
-
-
 def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt]:
     """
     Generates the code describing the query types for this dataset
@@ -359,21 +374,38 @@ def generate_query_fields(dataset: Dataset, type_name: str) -> Iterable[ast.stmt
         f"https://rest.uniprot.org/configure/{dataset}/search-fields"
     )
     response.raise_for_status()
+    field: UniprotSearchField
     for field in response.json():
         for subfield in iter_subfields(field):
             new_fields, extra = convert_type(subfield, enclose="NotRequired")
             top_level += extra
 
-            for field in new_fields:
+            for field_def in new_fields:
                 # If we see an assignment expression, skip it if we've seen that field name before
-                if field.name in field_names:
+                if field_def.name in field_names:
                     continue
                 else:
-                    fields.append(field)
-                    field_names.add(field.name)
+                    fields.append(field_def)
+                    field_names.add(field_def.name)
 
-    # Create the top level TypedDict
-    top_level.append(make_query_dict(name=type_name, fields=fields))
+    validated_fields = validate_query_fields(fields, dataset)
+
+    # Create the query TypedDict, but also a top level type alias
+    type_dict_name = type_name + "Dict"
+    top_level += [
+        make_query_dict(
+            name=type_dict_name, recursive_type=type_name, fields=validated_fields
+        ),
+        ast.AnnAssign(
+            ast.Name(type_name),
+            annotation=ast.Name("TypeAlias"),
+            value=ast.Subscript(
+                ast.Name("Union"),
+                ast.Tuple([ast.Name(type_dict_name), ast.Name("str")]),
+            ),
+            simple=True,
+        ),
+    ]
 
     return top_level
 

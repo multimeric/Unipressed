@@ -11,7 +11,7 @@ import unipressed.base
 Identity: TypeAlias = Literal["1.0", "0.9", "0.5"]
 
 
-class UnirefQuery(TypedDict):
+class UnirefQueryDict(TypedDict):
     and_: NotRequired[Iterable["UnirefQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["UnirefQuery"]]
@@ -19,11 +19,11 @@ class UnirefQuery(TypedDict):
     not_: NotRequired[Iterable["UnirefQuery"]]
     "Negate a filter"
     id: NotRequired[str]
-    "UniRef ID"
+    "UniRef ID\ne.g. UniRef100_A0A001"
     name: NotRequired[str]
-    "Cluster name"
+    "Cluster name\ne.g. sample name"
     identity: NotRequired[Identity]
-    "Sequence identity\n1.0: 100%\n0.9: 90%\n0.5: 50%"
+    "Sequence identity\ne.g. sample identity\n* 1.0: 100%\n* 0.9: 90%\n* 0.5: 50%"
     count: NotRequired[
         tuple[
             Union[
@@ -40,7 +40,7 @@ class UnirefQuery(TypedDict):
             ],
         ]
     ]
-    "Cluster size"
+    "Cluster size\ne.g. [100 TO 300]"
     length: NotRequired[
         tuple[
             Union[
@@ -57,7 +57,7 @@ class UnirefQuery(TypedDict):
             ],
         ]
     ]
-    "Sequence length"
+    "Sequence length\ne.g. [100 TO 300]"
     created: NotRequired[
         tuple[
             Union[
@@ -74,17 +74,20 @@ class UnirefQuery(TypedDict):
             ],
         ]
     ]
-    "Date published"
+    "Date published\ne.g. [2011-10-10 TO 2019-10-10]"
     uniprot_id: NotRequired[str]
-    "UniProtKB ID/AC"
+    "UniProtKB ID/AC\ne.g. sample uniprot id"
     upi: NotRequired[str]
-    "UniParc ID"
+    "UniParc ID\ne.g. UPI0123456789"
     taxonomy_name: NotRequired[str]
-    "Taxonomy [OC]"
+    "Taxonomy [OC]\ne.g. sample name"
+    taxonomy_id: NotRequired[str]
+    "Taxonomy id"
     cluster: NotRequired[str]
-    "Related clusters"
+    "Related clusters\ne.g. UniRef100_A0A001"
 
 
+UnirefQuery: TypeAlias = Union[UnirefQueryDict, str]
 UnirefNamesTaxonomy: TypeAlias = Literal[
     "id", "name", "common_taxon", "common_taxonid", "organism_id", "organism"
 ]

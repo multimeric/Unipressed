@@ -43,7 +43,7 @@ Rank: TypeAlias = Literal[
 ]
 
 
-class TaxonomyQuery(TypedDict):
+class TaxonomyQueryDict(TypedDict):
     and_: NotRequired[Iterable["TaxonomyQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["TaxonomyQuery"]]
@@ -51,27 +51,28 @@ class TaxonomyQuery(TypedDict):
     not_: NotRequired[Iterable["TaxonomyQuery"]]
     "Negate a filter"
     tax_id: NotRequired[int]
-    "Taxon ID"
+    "Taxon ID\ne.g. 85621"
     scientific: NotRequired[str]
-    "Scientific name"
+    "Scientific name\ne.g. 16SrII"
     common: NotRequired[str]
-    "Common name"
+    "Common name\ne.g. sample name"
     mnemonic: NotRequired[str]
-    "Mnemonic"
+    "Mnemonic\ne.g. sample mnemonic"
     rank: NotRequired[Rank]
-    "Rank\nSUPERKINGDOM: Superkingdom\nKINGDOM: Kingdom\nSUBKINGDOM: Subkingdom\nSUPERPHYLUM: Superphylum\nPHYLUM: Phylum\nSUBPHYLUM: Subphylum\nSUPERCLASS: Superclass\nCLASS: Class\nSUBCLASS: Subclass\nINFRACLASS: Infraclass\nCOHORT: Cohort\nSUBCOHORT: Subcohort\nSUPERORDER: Superorder\nORDER: Order\nSUBORDER: Suborder\nINFRAORDER: Infraorder\nPARVORDER: Parvorder\nSUPERFAMILY: Superfamily\nFAMILY: Family\nSUBFAMILY: Subfamily\nTRIBE: Tribe\nSUBTRIBE: Subtribe\nGENUS: Genus\nSUBGENUS: Subgenus\nSPECIES_GROUP: Species group\nSPECIES_SUBGROUP: Species subgroup\nSPECIES: Species\nSUBSPECIES: Subspecies\nVARIETAS: Varietas\nFORMA: Forma\nNO_RANK: No rank"
+    "Rank\ne.g. SPECIES_GROUP\n* SUPERKINGDOM: Superkingdom\n* KINGDOM: Kingdom\n* SUBKINGDOM: Subkingdom\n* SUPERPHYLUM: Superphylum\n* PHYLUM: Phylum\n* SUBPHYLUM: Subphylum\n* SUPERCLASS: Superclass\n* CLASS: Class\n* SUBCLASS: Subclass\n* INFRACLASS: Infraclass\n* COHORT: Cohort\n* SUBCOHORT: Subcohort\n* SUPERORDER: Superorder\n* ORDER: Order\n* SUBORDER: Suborder\n* INFRAORDER: Infraorder\n* PARVORDER: Parvorder\n* SUPERFAMILY: Superfamily\n* FAMILY: Family\n* SUBFAMILY: Subfamily\n* TRIBE: Tribe\n* SUBTRIBE: Subtribe\n* GENUS: Genus\n* SUBGENUS: Subgenus\n* SPECIES_GROUP: Species group\n* SPECIES_SUBGROUP: Species subgroup\n* SPECIES: Species\n* SUBSPECIES: Subspecies\n* VARIETAS: Varietas\n* FORMA: Forma\n* NO_RANK: No rank"
     strain: NotRequired[str]
-    "Strain"
+    "Strain\ne.g. SPECIES_GROUP"
     host: NotRequired[int]
-    "Virus host"
+    "Virus host\ne.g. 85621"
     linked: NotRequired[bool]
-    "With external info"
+    "With external info\ne.g. true\n* true: Yes\n* false: No"
     parent: NotRequired[str]
-    "Parent"
+    "Parent\ne.g. 9606"
     ancestor: NotRequired[str]
-    "Ancestor"
+    "Ancestor\ne.g. 85621"
 
 
+TaxonomyQuery: TypeAlias = Union[TaxonomyQueryDict, str]
 TaxonomyTaxonomy: TypeAlias = Literal[
     "id",
     "mnemonic",

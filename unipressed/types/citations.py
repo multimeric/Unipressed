@@ -9,7 +9,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 import unipressed.base
 
 
-class CitationsQuery(TypedDict):
+class CitationsQueryDict(TypedDict):
     and_: NotRequired[Iterable["CitationsQuery"]]
     "Two or more filters that must both be satisfied"
     or_: NotRequired[Iterable["CitationsQuery"]]
@@ -17,19 +17,20 @@ class CitationsQuery(TypedDict):
     not_: NotRequired[Iterable["CitationsQuery"]]
     "Negate a filter"
     title: NotRequired[str]
-    "Title"
+    "Title\ne.g. sample title"
     author: NotRequired[str]
-    "Author"
+    "Author\ne.g. sample author name"
     journal: NotRequired[str]
-    "Journal"
+    "Journal\ne.g. sample journal"
     published: NotRequired[str]
-    "Year published"
+    "Year published\ne.g. sample"
     id: NotRequired[str]
-    "Citation Id"
+    "Citation Id\ne.g. 15772651"
     doi: NotRequired[str]
-    "DOI"
+    "DOI\ne.g. 10.1007/s11882-009-0055-9"
 
 
+CitationsQuery: TypeAlias = Union[CitationsQueryDict, str]
 CitationsLiterature: TypeAlias = Literal[
     "id",
     "doi",

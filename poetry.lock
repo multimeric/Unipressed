@@ -36,6 +36,29 @@ html5lib = ["html5lib"]
 lxml = ["lxml"]
 
 [[package]]
+name = "black"
+version = "22.6.0"
+description = "The uncompromising code formatter."
+category = "dev"
+optional = false
+python-versions = ">=3.6.2"
+
+[package.dependencies]
+click = ">=8.0.0"
+mypy-extensions = ">=0.4.3"
+pathspec = ">=0.9.0"
+platformdirs = ">=2"
+tomli = {version = ">=1.1.0", markers = "python_full_version < \"3.11.0a7\""}
+typed-ast = {version = ">=1.4.2", markers = "python_version < \"3.8\" and implementation_name == \"cpython\""}
+typing-extensions = {version = ">=3.10.0.0", markers = "python_version < \"3.10\""}
+
+[package.extras]
+colorama = ["colorama (>=0.4.3)"]
+d = ["aiohttp (>=3.7.4)"]
+jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
+uvloop = ["uvloop (>=0.15.2)"]
+
+[[package]]
 name = "cached-property"
 version = "1.5.2"
 description = "A decorator for caching properties in classes."
@@ -140,7 +163,7 @@ async = ["aiofiles (>=0.7,<1.0)"]
 
 [[package]]
 name = "identify"
-version = "2.5.2"
+version = "2.5.3"
 description = "File identification library for Python"
 category = "dev"
 optional = false
@@ -173,6 +196,14 @@ zipp = ">=0.5"
 docs = ["sphinx", "jaraco.packaging (>=9)", "rst.linker (>=1.9)"]
 perf = ["ipython"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.3)", "packaging", "pyfakefs", "flufl.flake8", "pytest-perf (>=0.9.2)", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "importlib-resources (>=1.3)"]
+
+[[package]]
+name = "inflection"
+version = "0.5.1"
+description = "A port of Ruby on Rails inflector to Python"
+category = "dev"
+optional = false
+python-versions = ">=3.5"
 
 [[package]]
 name = "iniconfig"
@@ -332,6 +363,14 @@ griffe = ">=0.11.1"
 mkdocstrings = ">=0.19"
 
 [[package]]
+name = "mypy-extensions"
+version = "0.4.3"
+description = "Experimental type system extensions for programs checked with the mypy typechecker."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "nodeenv"
 version = "1.7.0"
 description = "Node.js virtual environment builder"
@@ -349,6 +388,14 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
+
+[[package]]
+name = "pathspec"
+version = "0.9.0"
+description = "Utility library for gitignore style pattern matching of file paths."
+category = "dev"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
 name = "platformdirs"
@@ -409,14 +456,6 @@ description = "Pygments is a syntax highlighting package written in Python."
 category = "dev"
 optional = false
 python-versions = ">=3.6"
-
-[[package]]
-name = "pyhumps"
-version = "3.7.2"
-description = "🐫  Convert strings (and dictionary keys) between snake case, camel case and pascal case in Python. Inspired by Humps for Node"
-category = "dev"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "pymdown-extensions"
@@ -543,6 +582,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "typed-ast"
+version = "1.5.4"
+description = "a fork of Python 2 and 3 ast modules with type comment support"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "typer"
 version = "0.6.1"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
@@ -561,7 +608,7 @@ test = ["shellingham (>=1.3.0,<2.0.0)", "pytest (>=4.4.0,<5.4.0)", "pytest-cov (
 
 [[package]]
 name = "types-requests"
-version = "2.28.7"
+version = "2.28.8"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false
@@ -572,7 +619,7 @@ types-urllib3 = "<1.27"
 
 [[package]]
 name = "types-urllib3"
-version = "1.26.21"
+version = "1.26.22"
 description = "Typing stubs for urllib3"
 category = "dev"
 optional = false
@@ -601,21 +648,21 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [[package]]
 name = "virtualenv"
-version = "20.16.2"
+version = "20.16.3"
 description = "Virtual Python Environment builder"
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-distlib = ">=0.3.1,<1"
-filelock = ">=3.2,<4"
-importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
-platformdirs = ">=2,<3"
+distlib = ">=0.3.5,<1"
+filelock = ">=3.4.1,<4"
+importlib-metadata = {version = ">=4.8.3", markers = "python_version < \"3.8\""}
+platformdirs = ">=2.4,<3"
 
 [package.extras]
-docs = ["proselint (>=0.10.2)", "sphinx (>=3)", "sphinx-argparse (>=0.2.5)", "sphinx-rtd-theme (>=0.4.3)", "towncrier (>=21.3)"]
-testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", "packaging (>=20.0)", "pytest (>=4)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.1)", "pytest-mock (>=2)", "pytest-randomly (>=1)", "pytest-timeout (>=1)"]
+docs = ["proselint (>=0.13)", "sphinx (>=5.1.1)", "sphinx-argparse (>=0.3.1)", "sphinx-rtd-theme (>=1)", "towncrier (>=21.9)"]
+testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=21.3)", "pytest (>=7.0.1)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.2)", "pytest-mock (>=3.6.1)", "pytest-randomly (>=3.10.3)", "pytest-timeout (>=2.1)"]
 
 [[package]]
 name = "watchdog"
@@ -643,7 +690,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "92224cd7b3aaa58c4cddee8cf89ef38a7bd7c368c2f77a7bd659dd5a24a22927"
+content-hash = "cb08ba86d045bb95ecf1c0658b6e169db7ff1fb84f4cc8aadbe0a43cf7cbb13a"
 
 [metadata.files]
 atomicwrites = []
@@ -652,6 +699,7 @@ beautifulsoup4 = [
     {file = "beautifulsoup4-4.11.1-py3-none-any.whl", hash = "sha256:58d5c3d29f5a36ffeb94f02f0d786cd53014cf9b3b3951d42e0080d8a9498d30"},
     {file = "beautifulsoup4-4.11.1.tar.gz", hash = "sha256:ad9aa55b65ef2808eb405f46cf74df7fcb7044d5cbc26487f96eb2ef2e436693"},
 ]
+black = []
 cached-property = []
 certifi = []
 cfgv = []
@@ -671,6 +719,10 @@ idna = [
     {file = "idna-3.3.tar.gz", hash = "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"},
 ]
 importlib-metadata = []
+inflection = [
+    {file = "inflection-0.5.1-py2.py3-none-any.whl", hash = "sha256:f38b2b640938a4f35ade69ac3d053042959b62a0f1076a5bbaa1b9526605a8a2"},
+    {file = "inflection-0.5.1.tar.gz", hash = "sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"},
+]
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
@@ -730,10 +782,18 @@ mkdocs-material = []
 mkdocs-material-extensions = []
 mkdocstrings = []
 mkdocstrings-python = []
+mypy-extensions = [
+    {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
+    {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
+]
 nodeenv = []
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
     {file = "packaging-21.3.tar.gz", hash = "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb"},
+]
+pathspec = [
+    {file = "pathspec-0.9.0-py2.py3-none-any.whl", hash = "sha256:7d15c4ddb0b5c802d161efc417ec1a2558ea2653c2e8ad9c19098201dc1c993a"},
+    {file = "pathspec-0.9.0.tar.gz", hash = "sha256:e564499435a2673d586f6b2130bb5b95f04a3ba06f81b8f895b651a3c76aabb1"},
 ]
 platformdirs = []
 pluggy = [
@@ -749,7 +809,6 @@ pygments = [
     {file = "Pygments-2.12.0-py3-none-any.whl", hash = "sha256:dc9c10fb40944260f6ed4c688ece0cd2048414940f1cea51b8b226318411c519"},
     {file = "Pygments-2.12.0.tar.gz", hash = "sha256:5eb116118f9612ff1ee89ac96437bb6b49e8f04d8a13b514ba26f620208e26eb"},
 ]
-pyhumps = []
 pymdown-extensions = []
 pyparsing = [
     {file = "pyparsing-3.0.9-py3-none-any.whl", hash = "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"},
@@ -813,6 +872,7 @@ tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
+typed-ast = []
 typer = []
 types-requests = []
 types-urllib3 = []
