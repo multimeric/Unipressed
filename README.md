@@ -139,10 +139,13 @@ Secondly, to get live access to the documentation, you can either use the `Show 
 
 ## Changelog
 
-### 0.1.2
+### 0.2.0
+
+**Note, if you are using Visual Studio Code, please update Pylance to at least version 2022.8.20.
+A bug in earlier versions will give you false errors with this new release of `unipressed`**.
 
 #### Added
-* Allow strings instead of dictionaries within the query dictionary, so that e.g. this is now allowed:
+* Also allow strings within the query dictionary, so that e.g. this is now allowed:
     ```python
     {
         "and_": [
@@ -154,6 +157,7 @@ Secondly, to get live access to the documentation, you can either use the `Show 
     This will search for all proteins that have any field that starts with `foo` and any field that ends with `bar`.
 
 * Auto generated docstrings for all fields
+* Examples to the documentation of each field
 * Certain missing query fields for the `arba` dataset:
     * `cc_scl_term`
 * Certain missing query fields for the `proteomes` dataset:
