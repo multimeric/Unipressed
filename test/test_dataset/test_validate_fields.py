@@ -11,11 +11,11 @@ if sys.version_info < (3, 9):
 
 from typing import Type, get_args, get_type_hints
 
-import unipressed.types
-from unipressed.base import Search
+from unipressed.dataset import all_clients
+from unipressed.dataset.search import Search
 
 
-@pytest.mark.parametrize(["client"], [[it] for it in unipressed.types.all_clients])
+@pytest.mark.parametrize(["client"], [[it] for it in all_clients])
 def test_valid_query_fields(client: Type[Search]):
     """
     Test that all the query fields defined by our schemas are accepted by Uniprot
@@ -35,7 +35,7 @@ def test_valid_query_fields(client: Type[Search]):
             assert "is not a valid search field" not in warning
 
 
-@pytest.mark.parametrize(["client"], [[it] for it in unipressed.types.all_clients])
+@pytest.mark.parametrize(["client"], [[it] for it in all_clients])
 def test_valid_return_fields(client: Type[Search]):
     """
     Test that all the return fields defined by our schemas are accepted by Uniprot

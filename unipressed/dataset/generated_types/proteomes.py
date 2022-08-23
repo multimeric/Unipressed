@@ -6,7 +6,7 @@ from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
-import unipressed.base
+from unipressed.dataset.search import Search
 
 ProteomeType: TypeAlias = Literal["1", "2", "3", "4"]
 Cpd: TypeAlias = Literal["1", "2", "3", "4", "5", "6"]
@@ -67,7 +67,7 @@ ProteomesFields: TypeAlias = Literal[ProteomesNamesTaxonomy, ProteomesMiscellane
 
 
 @dataclass
-class ProteomesSearch(unipressed.base.Search):
+class ProteomesSearch(Search):
     """Client for querying the [proteomes Uniprot dataset](https://www.uniprot.org/help/proteomes)"""
 
     dataset: Literal["proteomes"] = field(default="proteomes", init=False)

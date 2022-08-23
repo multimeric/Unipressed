@@ -6,7 +6,7 @@ from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
-import unipressed.base
+from unipressed.dataset.search import Search
 
 
 class LocationsQueryDict(TypedDict):
@@ -45,7 +45,7 @@ LocationsFields: TypeAlias = Literal[
 
 
 @dataclass
-class LocationsSearch(unipressed.base.Search):
+class LocationsSearch(Search):
     """Client for querying the [locations Uniprot dataset](https://www.uniprot.org/help/locations)"""
 
     dataset: Literal["locations"] = field(default="locations", init=False)

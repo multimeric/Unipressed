@@ -1,9 +1,7 @@
 from datetime import date
-from re import A
-from typing import Iterable
 
-from unipressed import types
-from unipressed.base import Search
+from unipressed import Uniprotkb, dataset
+from unipressed.dataset.search import Search
 
 
 def make_request(**kwargs) -> Search:
@@ -80,7 +78,9 @@ def test_main_example():
     """
     Validate the readme example
     """
-    for record in types.UniprotkbSearch(
+    from unipressed import Uniprotkb
+
+    for record in Uniprotkb.search(
         query={"and_": [{"organelle": "chloroplast"}, {"length": (5000, "*")}]},
         fields=["length", "gene_names"],
     ).each_record():
@@ -94,7 +94,7 @@ def test_date_field():
     Validate a date field
     """
     records = list(
-        types.UniprotkbSearch(
+        Uniprotkb.search(
             query={
                 "date_created": (date(2022, 1, 18), date(2022, 1, 19)),
                 "organism_id": "9606",
@@ -110,7 +110,7 @@ def test_uniref():
     assert (
         len(
             list(
-                types.UnirefSearch(
+                Uniref.search(
                     query={
                         "and_": [
                             {
@@ -129,14 +129,14 @@ def test_uniref():
 def test_uniparc():
     # This is an example from the uniprot website
     assert_valid_request(
-        types.UniparcSearch(query={"and_": [{"database": "RefSeq"}, "APP"]})
+        dataset.UniparcSearch(query={"and_": [{"database": "RefSeq"}, "APP"]})
     )
 
 
 def test_proteomes():
     next(
         iter(
-            types.ProteomesSearch(
+            dataset.ProteomesSearch(
                 query={"and_": [{"busco": (90, 100)}, {"proteome_type": "1"}]}
             ).each_response()
         )
@@ -145,13 +145,13 @@ def test_proteomes():
 
 def test_taxonomy():
     assert_valid_request(
-        types.TaxonomySearch(query={"and_": [{"rank": "FAMILY"}, "hominidae"]})
+        dataset.TaxonomySearch(query={"and_": [{"rank": "FAMILY"}, "hominidae"]})
     )
 
 
 def test_keywords():
     assert_valid_request(
-        types.KeywordsSearch(
+        dataset.KeywordsSearch(
             query={"and_": [{"category": "technical_term"}, {"name": "food"}]}
         )
     )
@@ -159,17 +159,17 @@ def test_keywords():
 
 def test_citations():
     assert_valid_request(
-        types.CitationsSearch(query={"and_": [{"published": "2022"}, "COVID-19"]})
+        dataset.CitationsSearch(query={"and_": [{"published": "2022"}, "COVID-19"]})
     )
 
 
 def test_diseases():
-    assert_valid_request(types.DiseasesSearch(query={"id": "DI-00001"}))
+    assert_valid_request(dataset.DiseasesSearch(query={"id": "DI-00001"}))
 
 
 def test_cross_refs():
     assert_valid_request(
-        types.DatabaseSearch(
+        dataset.DatabaseSearch(
             query={
                 # Find all databases that contain the word "Gene"
                 "name": "Gene"
@@ -180,7 +180,7 @@ def test_cross_refs():
 
 def test_subcellular():
     assert_valid_request(
-        types.LocationsSearch(
+        dataset.LocationsSearch(
             query={
                 # Find the location with id SL-0011
                 "id": "SL-0011"
@@ -191,7 +191,7 @@ def test_subcellular():
 
 def test_unirule():
     assert_valid_request(
-        types.UniruleSearch(
+        dataset.UniruleSearch(
             query={"and_": [{"taxonomy": "fungi"}, {"protein_name": "glucanase"}]}
         )
     )
@@ -199,7 +199,7 @@ def test_unirule():
 
 def test_arba():
     assert_valid_request(
-        types.ArbaSearch(
+        dataset.ArbaSearch(
             query={"and_": [{"taxonomy": "chloroflexi"}, {"keyword": "metal-binding"}]}
         )
     )

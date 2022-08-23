@@ -1,6 +1,6 @@
 from datetime import date
 
-from unipressed.base import serialize_query
+from unipressed.dataset.search import serialize_query
 
 
 def test_serialize_basic_query():

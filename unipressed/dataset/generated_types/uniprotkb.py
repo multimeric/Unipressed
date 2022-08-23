@@ -6,7 +6,7 @@ from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
-import unipressed.base
+from unipressed.dataset.search import Search
 
 Existence: TypeAlias = Literal["1", "2", "3", "4", "5"]
 Organelle: TypeAlias = Literal[
@@ -1650,7 +1650,7 @@ UniprotkbFields: TypeAlias = Literal[
 
 
 @dataclass
-class UniprotkbSearch(unipressed.base.Search):
+class UniprotkbSearch(Search):
     """Client for querying the [uniprotkb Uniprot dataset](https://www.uniprot.org/help/uniprotkb)"""
 
     dataset: Literal["uniprotkb"] = field(default="uniprotkb", init=False)

@@ -6,7 +6,7 @@ from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
-import unipressed.base
+from unipressed.dataset.search import Search
 
 Identity: TypeAlias = Literal["1.0", "0.9", "0.5"]
 
@@ -102,7 +102,7 @@ UnirefFields: TypeAlias = Literal[
 
 
 @dataclass
-class UnirefSearch(unipressed.base.Search):
+class UnirefSearch(Search):
     """Client for querying the [uniref Uniprot dataset](https://www.uniprot.org/help/uniref)"""
 
     dataset: Literal["uniref"] = field(default="uniref", init=False)

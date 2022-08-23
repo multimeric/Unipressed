@@ -6,7 +6,7 @@ from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
-import unipressed.base
+from unipressed.dataset.search import Search
 
 Rank: TypeAlias = Literal[
     "SUPERKINGDOM",
@@ -95,7 +95,7 @@ TaxonomyFields: TypeAlias = Literal[
 
 
 @dataclass
-class TaxonomySearch(unipressed.base.Search):
+class TaxonomySearch(Search):
     """Client for querying the [taxonomy Uniprot dataset](https://www.uniprot.org/help/taxonomy)"""
 
     dataset: Literal["taxonomy"] = field(default="taxonomy", init=False)

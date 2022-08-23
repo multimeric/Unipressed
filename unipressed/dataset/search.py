@@ -4,13 +4,13 @@ import dataclasses
 import datetime
 import gzip
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Iterable, Mapping, TextIO, Union, overload
+from typing import TYPE_CHECKING, Any, Iterable, Mapping, TextIO, Union
 
 import requests
 from typing_extensions import TypedDict
 
-from unipressed.dataset import Dataset
-from unipressed.format import Format
+# from unipressed.dataset.core import Dataset
+from unipressed.dataset.format import Format
 
 if TYPE_CHECKING:
     from xml.etree.ElementTree import Element
@@ -93,7 +93,7 @@ class Search:
 
     query: Union[str, Mapping[str, Any]]
     "A query that filters the returned proteins. Either a string if you have an existing query and want to bypass the type checker, or a dict if you want code completion and validation."
-    dataset: Dataset = "uniprotkb"
+    dataset: str = "uniprotkb"
     """
     The Uniprot database. You are advised to use the appropriate subclass (e.g. [unipressed.UniprotkbSearch][] where available.
     """
@@ -142,6 +142,7 @@ class Search:
         Returns a generator of unzipped [file objects](https://docs.python.org/3/library/io.html#io.TextIOBase), one for each page of the result
         """
         for response in self.each_response():
+            response.raise_for_status()
             yield gzip.open(response.raw, mode="rt", encoding=response.encoding)
 
     def each_record(self) -> Any:
