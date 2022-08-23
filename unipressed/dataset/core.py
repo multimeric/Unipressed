@@ -19,15 +19,16 @@ from typing import (
 )
 
 import requests
-from typing_extensions import TypeAlias
 
 from unipressed.dataset.search import Search
+from unipressed.dataset.type_vars import (
+    FieldsType,
+    FormatType,
+    JsonResultType,
+    QueryType,
+)
 
-QueryType = TypeVar("QueryType")
-JsonResultType = TypeVar("JsonResultType", bound=Mapping[str, Any])
-FieldsType = TypeVar("FieldsType", bound=Iterable[str])
 SearchType = TypeVar("SearchType", bound=Search)
-FormatType = TypeVar("FormatType", bound=str)
 
 
 class UniprotDataset(
@@ -35,12 +36,15 @@ class UniprotDataset(
     metaclass=ABCMeta,
 ):
     @classmethod
-    def id_field(cls) -> str:
-        return "primaryAccession"
+    def id_field(cls, record: JsonResultType) -> str:
+        """
+        Given a record, extracts the accession/ID field from it
+        """
+        return record["id"]
 
-    @staticmethod
+    @classmethod
     @abstractmethod
-    def name() -> str:
+    def name(cls) -> str:
         ...
 
     @classmethod
@@ -51,7 +55,10 @@ class UniprotDataset(
         fields: Iterable[FieldsType] | None = None,
         size: int = 500,
     ) -> Search:
-        return Search(
+        """
+        Creates an object that can be used to perform a search query over this dataset
+        """
+        return Search[QueryType, JsonResultType, FieldsType, FormatType](
             query=query, format=format, dataset=cls.name(), fields=fields, size=size
         )
 
@@ -71,12 +78,22 @@ class UniprotDataset(
 
     @classmethod
     def fetch_one(cls, id, format="json", parse=True):
+        """
+        Fetches a single record from this dataset from its ID
+
+        Args:
+            id : The ID of the record to fetch. The format of this will depend on the dataset
+            format : The format of the result
+            parse : If true, parse the result into a JSON dictionary. Defaults to True.
+        """
         res = requests.get(
             f"https://rest.uniprot.org/{cls.name()}/{id}.{format}", stream=True
         )
         res.raise_for_status()
         if parse and format == "json":
             return res.json()
+        elif res.headers.get("Content-Encoding", None) == "gzip":
+            return gzip.open(res.raw, "rb")
         else:
             return res.raw
 
@@ -85,7 +102,7 @@ class UniprotDataset(
         """
         Returns the type arguments for this dataset
         """
-        return get_args(cls.__orig_bases__[0])
+        return get_args(cls.__orig_bases__[0])  # type: ignore
 
     @classmethod
     def _query_type(cls):
@@ -196,5 +213,7 @@ class FetchManyDataset(
         res.raise_for_status()
         if parse and format == "json":
             return res.json()["results"]
-        else:
+        elif res.headers.get("Content-Encoding", None) == "gzip":
             return gzip.open(res.raw, "rb")
+        else:
+            return res.raw

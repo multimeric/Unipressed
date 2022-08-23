@@ -26,3 +26,7 @@ class Taxonomy(
     @classmethod
     def bulk_endpoint(cls):
         return "taxonIds"
+
+    @classmethod
+    def id_field(cls, record: Mapping[str, Any]) -> str:
+        return record["taxonId"]

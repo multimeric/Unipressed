@@ -4,13 +4,26 @@ import dataclasses
 import datetime
 import gzip
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Iterable, Mapping, TextIO, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Generic,
+    Iterable,
+    Literal,
+    Mapping,
+    TextIO,
+    Union,
+)
 
 import requests
 from typing_extensions import TypedDict
 
-# from unipressed.dataset.core import Dataset
-from unipressed.dataset.format import Format
+from unipressed.dataset.type_vars import (
+    FieldsType,
+    FormatType,
+    JsonResultType,
+    QueryType,
+)
 
 if TYPE_CHECKING:
     from xml.etree.ElementTree import Element
@@ -86,20 +99,22 @@ class JsonRecord(TypedDict, total=False):
 
 
 @dataclass
-class Search:
+class Search(
+    Generic[QueryType, JsonResultType, FieldsType, FormatType],
+):
     """
     Base class for all search requests.
     """
 
-    query: Union[str, Mapping[str, Any]]
+    query: QueryType
     "A query that filters the returned proteins. Either a string if you have an existing query and want to bypass the type checker, or a dict if you want code completion and validation."
     dataset: str = "uniprotkb"
     """
     The Uniprot database. You are advised to use the appropriate subclass (e.g. [unipressed.UniprotkbSearch][] where available.
     """
-    format: Format = "json"
+    format: FormatType | Literal["json"] = "json"
     "Format for the returned data. Defaults to `'json'`."
-    fields: Union[Iterable[str], None] = None
+    fields: Iterable[FieldsType] | None = None
     "An iterable of fields to return in the result object."
     include_isoform: bool = True
     "For uniprotkb only: if `True`, returns isoforms other than just the canonical isoform."
@@ -145,7 +160,7 @@ class Search:
             response.raise_for_status()
             yield gzip.open(response.raw, mode="rt", encoding=response.encoding)
 
-    def each_record(self) -> Any:
+    def each_record(self) -> Iterable[Any]:
         """
         Returns a generator of records, which are defined by the format field of the original request.
         For example, with `format="json"`, this will be an iterator over dictionaries parsed from JSON.

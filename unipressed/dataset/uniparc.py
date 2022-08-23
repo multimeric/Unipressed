@@ -7,7 +7,7 @@ from unipressed.dataset.generated_types.uniparc import (
     UniparcSearch,
 )
 
-UniparcFormats = Literal["fasta", "tsv", "xlsx", "json", "rdf", "xml", "list"]
+UniparcFormats = Literal["fasta", "tsv", "xlsx", "json", "xml"]
 
 
 class Uniparc(
@@ -22,3 +22,7 @@ class Uniparc(
     @classmethod
     def bulk_endpoint(cls):
         return "upis"
+
+    @classmethod
+    def id_field(cls, record: Mapping[str, Any]) -> str:
+        return record["uniParcId"]

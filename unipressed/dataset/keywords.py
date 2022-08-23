@@ -22,3 +22,7 @@ class Keywords(
     @classmethod
     def name(cls):
         return "keywords"
+
+    @classmethod
+    def id_field(cls, record: Mapping[str, Any]) -> str:
+        return record["keyword"]["id"]

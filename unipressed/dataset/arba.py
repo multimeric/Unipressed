@@ -8,11 +8,11 @@ ArbaFormats = Literal["json", "list"]
 
 class Arba(
     UniprotDataset[ArbaQuery, Mapping[str, Any], ArbaFields, ArbaSearch, ArbaFormats]
-    @ classmethod
 ):
+    @classmethod
     def name(cls):
         return "arba"
 
     @classmethod
-    def id_field(cls) -> str:
-        return "uniRuleId"
+    def id_field(cls, record: Any) -> str:
+        return record["uniRuleId"]

@@ -18,3 +18,7 @@ class Unirule(
     @classmethod
     def name(cls):
         return "unirule"
+
+    @classmethod
+    def id_field(cls, record: Mapping[str, Any]) -> str:
+        return record["uniRuleId"]

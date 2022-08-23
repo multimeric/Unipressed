@@ -7,7 +7,7 @@ from unipressed.dataset.generated_types.proteomes import (
     ProteomesSearch,
 )
 
-ProteomesFormats = Literal["json", "tsv", "xlsx", "list", "xml", "rdf"]
+ProteomesFormats = Literal["json", "tsv", "xlsx", "list", "xml"]
 
 
 class Proteomes(
