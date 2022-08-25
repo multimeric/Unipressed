@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Iterable, Optional
@@ -404,6 +405,10 @@ def generate_query_fields(dataset: str, type_name: str) -> Iterable[ast.stmt]:
     ]
 
     return top_level
+
+
+# We use some python 3.8+ features here
+assert sys.version_info >= (3, 8)
 
 
 @app.command()

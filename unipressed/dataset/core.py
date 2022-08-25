@@ -3,9 +3,10 @@ from __future__ import annotations
 import gzip
 from abc import ABCMeta, abstractmethod
 from io import IOBase
-from typing import Generic, Iterable, Literal, Type, get_args, overload
+from typing import Generic, Iterable, Type, overload
 
 import requests
+from typing_extensions import Literal, get_args
 
 from unipressed.dataset.search import Search
 from unipressed.dataset.type_vars import (

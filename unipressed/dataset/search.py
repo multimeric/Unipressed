@@ -4,10 +4,10 @@ import dataclasses
 import datetime
 import gzip
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Generic, Iterable, Literal, TextIO
+from typing import TYPE_CHECKING, Any, Generic, Iterable, TextIO
 
 import requests
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 from unipressed.dataset.type_vars import (
     FieldsType,

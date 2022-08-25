@@ -1,4 +1,6 @@
-from typing import Any, Literal, Mapping
+from typing import Any, Mapping
+
+from typing_extensions import Literal
 
 from unipressed.dataset.core import FetchManyDataset
 from unipressed.dataset.generated_types.taxonomy import TaxonomyFields, TaxonomyQuery
