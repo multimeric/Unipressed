@@ -26,6 +26,7 @@ inflection = "^0.5.1"
 black = "^22.6.0"
 scikit-bio = { version = "^0.5.7", python = ">=3.8, <4.0"}
 jupyter = { version = "^1.0.0", python = ">=3.8" }
+rich = { git = "git@github.com:multimeric/rich.git", branch = "max-depth-install" }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

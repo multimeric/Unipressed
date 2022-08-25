@@ -68,12 +68,15 @@ The `unipressed` module exports a client object for each UniProt dataset:
 ```python
 # TODO: once https://github.com/Textualize/rich/issues/2485 and https://github.com/Textualize/rich/issues/2486
 # are closed, we can change to using Rich's pretty printing
+from rich.pretty import install
+
+install(max_depth=1)
 
 # This replaces the default Jupyter print with pprint, which elides deep nested objects for concision
-import pprint
-printer = pprint.PrettyPrinter(depth=1, indent=4)
-for key in ["text/html", "text/markdown"]:
-     get_ipython().display_formatter.formatters[key].for_type(object, printer.pformat)
+# import pprint
+# printer = pprint.PrettyPrinter(depth=1, indent=4)
+# for key in ["text/html", "text/markdown"]:
+#      get_ipython().display_formatter.formatters[key].for_type(object, printer.pformat)
 ```
 
 
@@ -94,25 +97,27 @@ next(records)
 ```
 
 
-
-
-{   'annotationScore': 5.0,
-    'comments': [...],
-    'entryAudit': {...},
-    'entryType': 'UniProtKB reviewed (Swiss-Prot)',
-    'extraAttributes': {...},
-    'features': [...],
-    'genes': [...],
-    'keywords': [...],
-    'organism': {...},
-    'primaryAccession': 'Q96RW7',
-    'proteinDescription': {...},
-    'proteinExistence': '1: Evidence at protein level',
-    'references': [...],
-    'secondaryAccessions': [...],
-    'sequence': {...},
-    'uniProtKBCrossReferences': [...],
-    'uniProtkbId': 'HMCN1_HUMAN'}
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">{</span>
+    <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'Q96RW7'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'secondaryAccessions'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'HMCN1_HUMAN'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+<span style="font-weight: bold">}</span>
+</pre>
 
 
 
@@ -124,25 +129,27 @@ Uniprotkb.fetch_one("Q96RW7")
 ```
 
 
-
-
-{   'annotationScore': 5.0,
-    'comments': [...],
-    'entryAudit': {...},
-    'entryType': 'UniProtKB reviewed (Swiss-Prot)',
-    'extraAttributes': {...},
-    'features': [...],
-    'genes': [...],
-    'keywords': [...],
-    'organism': {...},
-    'primaryAccession': 'Q96RW7',
-    'proteinDescription': {...},
-    'proteinExistence': '1: Evidence at protein level',
-    'references': [...],
-    'secondaryAccessions': [...],
-    'sequence': {...},
-    'uniProtKBCrossReferences': [...],
-    'uniProtkbId': 'HMCN1_HUMAN'}
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">{</span>
+    <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'Q96RW7'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'secondaryAccessions'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'HMCN1_HUMAN'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+<span style="font-weight: bold">}</span>
+</pre>
 
 
 
@@ -150,7 +157,7 @@ You can also request multiple records:
 
 
 ```python
-printer._depth = 2
+install(max_depth=2)
 ```
 
 
@@ -159,42 +166,48 @@ Uniprotkb.fetch_many(["A0A0C5B5G6", "A0A1B0GTW7"])
 ```
 
 
-
-
-[   {   'annotationScore': 5.0,
-        'comments': [...],
-        'entryAudit': {...},
-        'entryType': 'UniProtKB reviewed (Swiss-Prot)',
-        'extraAttributes': {...},
-        'features': [...],
-        'geneLocations': [...],
-        'genes': [...],
-        'keywords': [...],
-        'organism': {...},
-        'primaryAccession': 'A0A0C5B5G6',
-        'proteinDescription': {...},
-        'proteinExistence': '1: Evidence at protein level',
-        'references': [...],
-        'sequence': {...},
-        'uniProtKBCrossReferences': [...],
-        'uniProtkbId': 'MOTSC_HUMAN'},
-    {   'annotationScore': 5.0,
-        'comments': [...],
-        'entryAudit': {...},
-        'entryType': 'UniProtKB reviewed (Swiss-Prot)',
-        'extraAttributes': {...},
-        'features': [...],
-        'genes': [...],
-        'keywords': [...],
-        'organism': {...},
-        'primaryAccession': 'A0A1B0GTW7',
-        'proteinDescription': {...},
-        'proteinExistence': '1: Evidence at protein level',
-        'references': [...],
-        'secondaryAccessions': [...],
-        'sequence': {...},
-        'uniProtKBCrossReferences': [...],
-        'uniProtkbId': 'CIROP_HUMAN'}]
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">[</span>
+    <span style="font-weight: bold">{</span>
+        <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A0C5B5G6'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'MOTSC_HUMAN'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'geneLocations'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+    <span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span>
+        <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A1B0GTW7'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'secondaryAccessions'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'CIROP_HUMAN'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+    <span style="font-weight: bold">}</span>
+<span style="font-weight: bold">]</span>
+</pre>
 
 
 
