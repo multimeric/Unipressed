@@ -1,3 +1,9 @@
+```python
+from rich.pretty import install
+# Use rich to pretty print outputs, but truncate nested objects
+install(max_depth=2)
+```
+
 # Unipressed
 
 **Please visit the [project website](https://multimeric.github.io/Unipressed/) for more comprehensive documentation.**
@@ -28,12 +34,9 @@ for record in Uniprotkb.search(
 ```
 
 
-    {'primaryAccession': 'A0A088CK67',
-     'genes': [{'geneName': {'evidences': [{'evidenceCode': 'ECO:0000313',
-          'source': 'EMBL',
-          'id': 'AID67672.1'}],
-        'value': 'ftsH'}}],
-     'sequence': {'length': 5242}}
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A088CK67'</span>, <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>, <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span><span style="font-weight: bold">}</span>
+</pre>
+
 
 
 ### Advantages
@@ -63,21 +66,6 @@ pip install unipressed
 ### Dataset Clients
 
 The `unipressed` module exports a client object for each UniProt dataset:
-
-
-```python
-# TODO: once https://github.com/Textualize/rich/issues/2485 and https://github.com/Textualize/rich/issues/2486
-# are closed, we can change to using Rich's pretty printing
-from rich.pretty import install
-
-install(max_depth=1)
-
-# This replaces the default Jupyter print with pprint, which elides deep nested objects for concision
-# import pprint
-# printer = pprint.PrettyPrinter(depth=1, indent=4)
-# for key in ["text/html", "text/markdown"]:
-#      get_ipython().display_formatter.formatters[key].for_type(object, printer.pformat)
-```
 
 
 ```python
@@ -225,11 +213,13 @@ list(request.each_result())
 ```
 
 
-
-
-[   {'from': 'A0PK11', 'to': 'CLRN2'},
-    {'from': 'A0JP26', 'to': 'POTEB3'},
-    {'from': 'A1L190', 'to': 'SYCE3'}]
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">[</span>
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0PK11'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'CLRN2'</span><span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0JP26'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'POTEB3'</span><span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A1L190'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'SYCE3'</span><span style="font-weight: bold">}</span>
+<span style="font-weight: bold">]</span>
+</pre>
 
 
 
