@@ -20,7 +20,6 @@ class IdMappingRequest:
     source: From
     dest: To
     ids: Iterable[str]
-    poll_freq: timedelta = timedelta(seconds=10)
 
     def _submit(self) -> requests.Response:
         return requests.post(

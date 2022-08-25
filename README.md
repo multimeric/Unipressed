@@ -9,11 +9,13 @@ It provides thoroughly typed and documented code to ensure your use of the libra
 
 ### Example
 Let's say we're interested in very long proteins that are encoded within a chloroplast, in any organism:
+
+
 ```python
 import json
-from unipressed import UniprotkbSearch
+from unipressed import Uniprotkb
 
-for record in UniprotkbSearch(
+for record in Uniprotkb.search(
     query={
         "and_": [
             {"organelle": "chloroplast"},
@@ -22,32 +24,17 @@ for record in UniprotkbSearch(
     },
     fields=["length", "gene_names"]
 ).each_record():
-    print(json.dumps(record, indent=4))
+    display(record)
 ```
 
-This will print:
-```json
-{
-    "primaryAccession": "A0A088CK67",
-    "genes": [
-        {
-            "geneName": {
-                "evidences": [
-                    {
-                        "evidenceCode": "ECO:0000313",
-                        "source": "EMBL",
-                        "id": "AID67672.1"
-                    }
-                ],
-                "value": "ftsH"
-            }
-        }
-    ],
-    "sequence": {
-        "length": 5242
-    }
-}
-```
+
+    {'primaryAccession': 'A0A088CK67',
+     'genes': [{'geneName': {'evidences': [{'evidenceCode': 'ECO:0000313',
+          'source': 'EMBL',
+          'id': 'AID67672.1'}],
+        'value': 'ftsH'}}],
+     'sequence': {'length': 5242}}
+
 
 ### Advantages
 
@@ -73,6 +60,167 @@ Otherwise:
 pip install unipressed
 ```
 
+### Dataset Clients
+
+The `unipressed` module exports a client object for each UniProt dataset:
+
+
+```python
+# TODO: once https://github.com/Textualize/rich/issues/2485 and https://github.com/Textualize/rich/issues/2486
+# are closed, we can change to using Rich's pretty printing
+
+# This replaces the default Jupyter print with pprint, which elides deep nested objects for concision
+import pprint
+printer = pprint.PrettyPrinter(depth=1, indent=4)
+for key in ["text/html", "text/markdown"]:
+     get_ipython().display_formatter.formatters[key].for_type(object, printer.pformat)
+```
+
+
+```python
+from unipressed import Uniprotkb, Uniparc
+```
+
+With one of these clients, you can search the dataset:
+
+
+```python
+records = Uniprotkb.search({
+    "length": (5000, 6000)
+}).each_record()
+
+# Show the first record
+next(records)
+```
+
+
+
+
+{   'annotationScore': 5.0,
+    'comments': [...],
+    'entryAudit': {...},
+    'entryType': 'UniProtKB reviewed (Swiss-Prot)',
+    'extraAttributes': {...},
+    'features': [...],
+    'genes': [...],
+    'keywords': [...],
+    'organism': {...},
+    'primaryAccession': 'Q96RW7',
+    'proteinDescription': {...},
+    'proteinExistence': '1: Evidence at protein level',
+    'references': [...],
+    'secondaryAccessions': [...],
+    'sequence': {...},
+    'uniProtKBCrossReferences': [...],
+    'uniProtkbId': 'HMCN1_HUMAN'}
+
+
+
+You can request a single record by ID:
+
+
+```python
+Uniprotkb.fetch_one("Q96RW7")
+```
+
+
+
+
+{   'annotationScore': 5.0,
+    'comments': [...],
+    'entryAudit': {...},
+    'entryType': 'UniProtKB reviewed (Swiss-Prot)',
+    'extraAttributes': {...},
+    'features': [...],
+    'genes': [...],
+    'keywords': [...],
+    'organism': {...},
+    'primaryAccession': 'Q96RW7',
+    'proteinDescription': {...},
+    'proteinExistence': '1: Evidence at protein level',
+    'references': [...],
+    'secondaryAccessions': [...],
+    'sequence': {...},
+    'uniProtKBCrossReferences': [...],
+    'uniProtkbId': 'HMCN1_HUMAN'}
+
+
+
+You can also request multiple records:
+
+
+```python
+printer._depth = 2
+```
+
+
+```python
+Uniprotkb.fetch_many(["A0A0C5B5G6", "A0A1B0GTW7"])
+```
+
+
+
+
+[   {   'annotationScore': 5.0,
+        'comments': [...],
+        'entryAudit': {...},
+        'entryType': 'UniProtKB reviewed (Swiss-Prot)',
+        'extraAttributes': {...},
+        'features': [...],
+        'geneLocations': [...],
+        'genes': [...],
+        'keywords': [...],
+        'organism': {...},
+        'primaryAccession': 'A0A0C5B5G6',
+        'proteinDescription': {...},
+        'proteinExistence': '1: Evidence at protein level',
+        'references': [...],
+        'sequence': {...},
+        'uniProtKBCrossReferences': [...],
+        'uniProtkbId': 'MOTSC_HUMAN'},
+    {   'annotationScore': 5.0,
+        'comments': [...],
+        'entryAudit': {...},
+        'entryType': 'UniProtKB reviewed (Swiss-Prot)',
+        'extraAttributes': {...},
+        'features': [...],
+        'genes': [...],
+        'keywords': [...],
+        'organism': {...},
+        'primaryAccession': 'A0A1B0GTW7',
+        'proteinDescription': {...},
+        'proteinExistence': '1: Evidence at protein level',
+        'references': [...],
+        'secondaryAccessions': [...],
+        'sequence': {...},
+        'uniProtKBCrossReferences': [...],
+        'uniProtkbId': 'CIROP_HUMAN'}]
+
+
+
+### ID Mapping
+
+Unipressed also provides one other unique client, which is designed for mapping identifiers. You provide the source and destination database (both of which will autocomplete in VS Code), and a list of identifiers for the source database.
+
+
+```python
+from unipressed import IdMappingRequest
+request = IdMappingRequest(
+    source="UniProtKB_AC-ID", dest="Gene_Name", ids={"A1L190", "A0JP26", "A0PK11"}
+).submit()
+list(request.each_result())
+```
+
+
+
+
+[   {'from': 'A0PK11', 'to': 'CLRN2'},
+    {'from': 'A0JP26', 'to': 'POTEB3'},
+    {'from': 'A1L190', 'to': 'SYCE3'}]
+
+
+
+Note that, if you submit a large number of IDs, you might need to add a `sleep()` call between submitting the request and retrieving the results:
 
 ### Query Syntax
 
@@ -136,57 +284,3 @@ To get VS Code to offer suggestions, press the `Trigger Suggest` shortcut which 
 In particular, code completion generally won't work *until* you open a string literal using a quotation mark.
 
 Secondly, to get live access to the documentation, you can either use the `Show Hover` shortcut, which is usually bound to `Ctrl + K, Ctrl + I`, or you can install the [`docs-view`](https://marketplace.visualstudio.com/items?itemName=bierner.docs-view) extension, which lets you view the docstrings in the sidebar without interfering with your code.
-
-## Changelog
-
-### 0.2.0
-
-**Note, if you are using Visual Studio Code, please update Pylance to at least version 2022.8.20.
-A bug in earlier versions will give you false errors with this new release of `unipressed`**.
-
-#### Added
-* Also allow strings within the query dictionary, so that e.g. this is now allowed:
-    ```python
-    {
-        "and_": [
-            "foo*",
-            "*bar"
-        ]
-    }
-    ```
-    This will search for all proteins that have any field that starts with `foo` and any field that ends with `bar`.
-
-* Auto generated docstrings for all fields
-* Examples to the documentation of each field
-* Certain missing query fields for the `arba` dataset:
-    * `cc_scl_term`
-* Certain missing query fields for the `proteomes` dataset:
-    * `organism_id`
-    * `taxonomy_id`
-* Certain missing query fields for the `unirule` dataset:
-    * `cc_scl_term`
-* Certain missing query fields for the `uniparc` dataset:
-    * `taxonomy_id`
-* Certain missing query fields for the `uniprotkb` dataset:
-    * `organism_id`
-    * `taxonomy_id`
-    * `virus_host_id`
-
-#### Removed
-* Uniprot seem to have removed certain `uniprokb` query fields, so these are now not part of the accepted query type:
-    * `ft_metal`
-    * `ftlen_metal`
-    * `ft_ca_bind`
-    * `ftlen_ca_bind`
-    * `ft_np_bind`
-    * `ftlen_np_bind`
-* Likewise, some `uniprotkb` return fields have been removed:
-    * `ft_ca_bind`
-    * `ft_metal`
-    * `ft_np_bind`
-
-#### Internal
-* Move from `pyhumps` to `inflection` for code generation
-* Add a test for the date field
-* Added tests for all datasets
-* Add types for code generation API

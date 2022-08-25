@@ -25,6 +25,7 @@ typer = "^0.6.1"
 inflection = "^0.5.1"
 black = "^22.6.0"
 scikit-bio = { version = "^0.5.7", python = ">=3.8, <4.0"}
+jupyter = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

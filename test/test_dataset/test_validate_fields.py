@@ -11,22 +11,21 @@ if sys.version_info < (3, 9):
 
 from typing import Type, get_args, get_type_hints
 
-from unipressed.dataset import all_clients
-from unipressed.dataset.search import Search
+from unipressed.dataset import UniprotDataset, all_clients
 
 
 @pytest.mark.parametrize(["client"], [[it] for it in all_clients])
-def test_valid_query_fields(client: Type[Search]):
+def test_valid_query_fields(client: Type[UniprotDataset]):
     """
     Test that all the query fields defined by our schemas are accepted by Uniprot
     """
-    query = {}
-    query_cls = get_type_hints(client)["query"]
-    query_dict = get_args(query_cls)[0]
-    for query_field in query_dict.__optional_keys__ | query_dict.__required_keys__:
-        if query_field not in {"and_", "or_", "not_"}:
-            query[query_field] = "foo"
-    response = next(iter(client(query=query).each_response()))
+    response = next(
+        iter(
+            client.search(
+                query={field: "foo" for field in client._allowed_query_fields()}
+            ).each_response()
+        )
+    )
 
     # Only raise an error if the request failed, and then only if because we provided an invalid field
     # We aren't interested in other types of validation error in this test
@@ -36,17 +35,16 @@ def test_valid_query_fields(client: Type[Search]):
 
 
 @pytest.mark.parametrize(["client"], [[it] for it in all_clients])
-def test_valid_return_fields(client: Type[Search]):
+def test_valid_return_fields(client: Type[UniprotDataset]):
     """
     Test that all the return fields defined by our schemas are accepted by Uniprot
     """
     # We get a response such as "Invalid fields parameter value 'foo'" with a 400 status code if we provide an invalid field
-    fields_field = get_type_hints(client)["fields"]
-    (literal,) = get_args(fields_field)
     response = next(
         iter(
-            client(
-                query="ThisQueryShouldReturnNoResults", fields=get_args(literal)
+            client.search(
+                query="ThisQueryShouldReturnNoResults",
+                fields=client._allowed_return_fields(),
             ).each_response()
         )
     )

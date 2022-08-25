@@ -105,6 +105,25 @@ class UniprotDataset(
         return get_args(cls.__orig_bases__[0])  # type: ignore
 
     @classmethod
+    def _allowed_query_fields(cls) -> set[str]:
+        """
+        Returns the type arguments for the queries to this dataset
+        """
+        query_dict, _ = get_args(cls._query_type())
+        return query_dict.__optional_keys__ | query_dict.__required_keys__ - {
+            "and_",
+            "or_",
+            "not_",
+        }
+
+    @classmethod
+    def _allowed_return_fields(cls) -> set[str]:
+        """
+        Returns the type arguments for the queries to this dataset
+        """
+        return set(get_args(cls._field_type()))
+
+    @classmethod
     def _query_type(cls):
         """
         Returns the type arguments for the queries to this dataset
