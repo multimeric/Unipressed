@@ -1,19 +1,13 @@
 from typing import Any, Literal, Mapping
 
 from unipressed.dataset.core import FetchManyDataset
-from unipressed.dataset.generated_types.uniref import (
-    UnirefFields,
-    UnirefQuery,
-    UnirefSearch,
-)
+from unipressed.dataset.generated_types.uniref import UnirefFields, UnirefQuery
 
 UnirefFormats = Literal["fasta", "tsv", "json", "xlsx", "list"]
 
 
 class Uniref(
-    FetchManyDataset[
-        UnirefQuery, Mapping[str, Any], UnirefFields, UnirefSearch, UnirefFormats
-    ]
+    FetchManyDataset[UnirefQuery, Mapping[str, Any], UnirefFields, UnirefFormats]
 ):
     @classmethod
     def name(cls):

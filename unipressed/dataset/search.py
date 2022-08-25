@@ -4,16 +4,7 @@ import dataclasses
 import datetime
 import gzip
 from dataclasses import dataclass
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Generic,
-    Iterable,
-    Literal,
-    Mapping,
-    TextIO,
-    Union,
-)
+from typing import TYPE_CHECKING, Any, Generic, Iterable, Literal, TextIO
 
 import requests
 from typing_extensions import TypedDict

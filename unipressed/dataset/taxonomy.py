@@ -1,11 +1,7 @@
 from typing import Any, Literal, Mapping
 
 from unipressed.dataset.core import FetchManyDataset
-from unipressed.dataset.generated_types.taxonomy import (
-    TaxonomyFields,
-    TaxonomyQuery,
-    TaxonomySearch,
-)
+from unipressed.dataset.generated_types.taxonomy import TaxonomyFields, TaxonomyQuery
 
 TaxonomyFormats = Literal["json", "tsv", "xlsx", "list"]
 
@@ -15,7 +11,6 @@ class Taxonomy(
         TaxonomyQuery,
         Mapping[str, Any],
         TaxonomyFields,
-        TaxonomySearch,
         TaxonomyFormats,
     ]
 ):

@@ -1,11 +1,7 @@
 from typing import Any, Literal, Mapping
 
 from unipressed.dataset.core import UniprotDataset
-from unipressed.dataset.generated_types.keywords import (
-    KeywordsFields,
-    KeywordsQuery,
-    KeywordsSearch,
-)
+from unipressed.dataset.generated_types.keywords import KeywordsFields, KeywordsQuery
 
 KeywordsFormats = Literal["json", "tsv", "xlsx", "list", "obo"]
 
@@ -15,7 +11,6 @@ class Keywords(
         KeywordsQuery,
         Mapping[str, Any],
         KeywordsFields,
-        KeywordsSearch,
         KeywordsFormats,
     ]
 ):

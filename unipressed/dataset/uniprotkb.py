@@ -1,11 +1,7 @@
 from typing import Any, Literal, Mapping
 
 from unipressed.dataset.core import FetchManyDataset, UniprotDataset
-from unipressed.dataset.generated_types.uniprotkb import (
-    UniprotkbFields,
-    UniprotkbQuery,
-    UniprotkbSearch,
-)
+from unipressed.dataset.generated_types.uniprotkb import UniprotkbFields, UniprotkbQuery
 
 UniprotkbFormats = Literal["txt", "xml", "fasta", "gff", "json", "list", "tsv", "xlsx"]
 
@@ -15,7 +11,6 @@ class Uniprotkb(
         UniprotkbQuery,
         Mapping[str, Any],
         UniprotkbFields,
-        UniprotkbSearch,
         UniprotkbFormats,
     ]
 ):

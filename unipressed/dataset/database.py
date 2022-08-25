@@ -1,11 +1,7 @@
 from typing import Any, Literal, Mapping
 
 from unipressed.dataset.core import UniprotDataset
-from unipressed.dataset.generated_types.database import (
-    DatabaseFields,
-    DatabaseQuery,
-    DatabaseSearch,
-)
+from unipressed.dataset.generated_types.database import DatabaseFields, DatabaseQuery
 
 DatabaseFormats = Literal["json"]
 
@@ -15,7 +11,6 @@ class Database(
         DatabaseQuery,
         Mapping[str, Any],
         DatabaseFields,
-        DatabaseSearch,
         DatabaseFormats,
     ]
 ):

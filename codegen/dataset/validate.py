@@ -8,7 +8,7 @@ from unipressed.dataset.search import Search
 INVALID_FIELD_REGEX = re.compile(r"'(\w+)' is not a valid search field")
 
 if TYPE_CHECKING:
-    from codegen.search.generate_fields import FieldDefinition
+    from codegen.dataset.generate_fields import FieldDefinition
 
 
 def validate_query_fields(

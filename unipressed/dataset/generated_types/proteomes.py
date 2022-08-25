@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 ProteomeType: TypeAlias = Literal["1", "2", "3", "4"]
 Cpd: TypeAlias = Literal["1", "2", "3", "4", "5", "6"]
@@ -64,14 +61,3 @@ ProteomesMiscellaneous: TypeAlias = Literal[
     "busco", "cpd", "genome_assembly", "genome_representation", "protein_count"
 ]
 ProteomesFields: TypeAlias = Literal[ProteomesNamesTaxonomy, ProteomesMiscellaneous]
-
-
-@dataclass
-class ProteomesSearch(Search):
-    """Client for querying the [proteomes Uniprot dataset](https://www.uniprot.org/help/proteomes)"""
-
-    dataset: Literal["proteomes"] = field(default="proteomes", init=False)
-    query: ProteomesQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[ProteomesFields]
-    "Fields to return in the result object"

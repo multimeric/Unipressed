@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 
 class UniparcQueryDict(TypedDict):
@@ -93,14 +90,3 @@ UniparcFields: TypeAlias = Literal[
     UniparcDateOf,
     UniparcFamilyDomains,
 ]
-
-
-@dataclass
-class UniparcSearch(Search):
-    """Client for querying the [uniparc Uniprot dataset](https://www.uniprot.org/help/uniparc)"""
-
-    dataset: Literal["uniparc"] = field(default="uniparc", init=False)
-    query: UniparcQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[UniparcFields]
-    "Fields to return in the result object"

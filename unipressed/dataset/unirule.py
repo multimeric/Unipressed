@@ -1,19 +1,13 @@
 from typing import Any, Literal, Mapping
 
 from unipressed.dataset.core import UniprotDataset
-from unipressed.dataset.generated_types.unirule import (
-    UniruleFields,
-    UniruleQuery,
-    UniruleSearch,
-)
+from unipressed.dataset.generated_types.unirule import UniruleFields, UniruleQuery
 
 UniruleFormats = Literal["json", "list"]
 
 
 class Unirule(
-    UniprotDataset[
-        UniruleQuery, Mapping[str, Any], UniruleFields, UniruleSearch, UniruleFormats
-    ]
+    UniprotDataset[UniruleQuery, Mapping[str, Any], UniruleFields, UniruleFormats]
 ):
     @classmethod
     def name(cls):

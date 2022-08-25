@@ -3,19 +3,23 @@ from __future__ import annotations
 import ast
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Iterable, Optional, cast, get_args
+from typing import TYPE_CHECKING, Iterable, Optional
 
 import black
 import inflection
 import requests
 import typer
 
-from codegen.search.uniprot_types import UniprotEnumEntry, is_enum, is_general
-from codegen.search.validate import validate_query_fields
+from codegen.dataset.datasets import datasets
+from codegen.dataset.uniprot_types import is_enum, is_general
+from codegen.dataset.validate import validate_query_fields
 from codegen.util import make_literal
 
 if TYPE_CHECKING:
-    from .uniprot_types import UniprotConcreteLeafField, UniprotSearchField
+    from codegen.dataset.uniprot_types import (
+        UniprotConcreteLeafField,
+        UniprotSearchField,
+    )
 
 # If the functions return anything, print it
 app = typer.Typer(result_callback=lambda x: print(x))
@@ -402,49 +406,8 @@ def generate_query_fields(dataset: str, type_name: str) -> Iterable[ast.stmt]:
     return top_level
 
 
-def generate_search_subclass(
-    dataset: str, query_type: ast.Name, field_type: ast.Name
-) -> ast.ClassDef:
-    """Makes the definition of a dataset-specific Search class such as UnirefSearch
-
-    Args:
-        dataset (str): The dataset for which to generate the class
-        query_type (ast.Name): The name of the type the defines valid queries to this database
-        field_type (ast.Name): The name of the type that defines valid fields for this database
-    """
-    return ast.ClassDef(
-        name=dataset.capitalize() + "Search",
-        bases=[ast.Name("Search")],
-        body=[
-            ast.Expr(
-                ast.Constant(
-                    f"Client for querying the [{dataset} Uniprot dataset](https://www.uniprot.org/help/{dataset})"
-                )
-            ),
-            ast.AnnAssign(
-                target=ast.Name("dataset"),
-                annotation=ast.Name(f'Literal["{dataset}"]'),
-                simple=True,
-                value=ast.Name(f'field(default="{dataset}", init=False)'),
-            ),
-            ast.AnnAssign(target=ast.Name("query"), annotation=query_type, simple=True),
-            ast.Expr(ast.Constant("A query that filters the returned proteins")),
-            ast.AnnAssign(
-                target=ast.Name("fields"),
-                annotation=ast.Subscript(ast.Name("Iterable"), field_type),
-                simple=True,
-            ),
-            ast.Expr(ast.Constant("Fields to return in the result object")),
-        ],
-        keywords=[],
-        starargs=[],
-        decorator_list=[ast.Name(id="dataclass")],
-    )
-
-
 @app.command()
 def make_dataset(dataset: str):
-    dataset = cast(str, dataset)
     module = ast.Module(
         body=[
             ast.ImportFrom(
@@ -473,24 +436,9 @@ def make_dataset(dataset: str):
                 level=0,
             ),
             ast.ImportFrom(
-                module="dataclasses",
-                names=[
-                    ast.alias("dataclass"),
-                    ast.alias("field"),
-                ],
-                level=0,
-            ),
-            ast.ImportFrom(
                 module="datetime",
                 names=[
                     ast.alias("date"),
-                ],
-                level=0,
-            ),
-            ast.ImportFrom(
-                module="unipressed.search.base",
-                names=[
-                    ast.alias("Search"),
                 ],
                 level=0,
             ),
@@ -508,14 +456,6 @@ def make_dataset(dataset: str):
     new_top_level = generate_return_fields(dataset, field_type_name)
     module.body += new_top_level
 
-    module.body.append(
-        generate_search_subclass(
-            dataset=dataset,
-            query_type=ast.Name(query_type_name),
-            field_type=ast.Name(field_type_name),
-        )
-    )
-
     return black.format_file_contents(
         ast.unparse(ast.fix_missing_locations(module)),
         fast=False,
@@ -525,7 +465,7 @@ def make_dataset(dataset: str):
 
 @app.command()
 def make_all_datasets(root: Path):
-    for dataset in get_args(str):
+    for dataset in datasets:
         result = make_dataset(dataset)
         (root / f"{dataset}.py").write_text(result)
 

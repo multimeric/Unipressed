@@ -1,11 +1,7 @@
 from typing import Any, Literal, Mapping
 
 from unipressed.dataset.core import UniprotDataset
-from unipressed.dataset.generated_types.citations import (
-    CitationsFields,
-    CitationsQuery,
-    CitationsSearch,
-)
+from unipressed.dataset.generated_types.citations import CitationsFields, CitationsQuery
 
 CitationsFormats = Literal["json", "list", "tsv", "xlsx"]
 
@@ -15,7 +11,6 @@ class Citations(
         CitationsQuery,
         Mapping[str, Any],
         CitationsFields,
-        CitationsSearch,
         CitationsFormats,
     ]
 ):

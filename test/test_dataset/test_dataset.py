@@ -3,7 +3,7 @@ import itertools
 import pytest
 from typing_extensions import Type
 
-from unipressed import all_clients
+from unipressed.dataset import all_clients
 from unipressed.dataset.core import FetchManyDataset, UniprotDataset
 
 

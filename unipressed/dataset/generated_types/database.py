@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 
 class DatabaseQueryDict(TypedDict):
@@ -38,14 +35,3 @@ DatabaseCrossReference: TypeAlias = Literal[
 DatabaseFields: TypeAlias = Literal[
     DatabaseCrossReference,
 ]
-
-
-@dataclass
-class DatabaseSearch(Search):
-    """Client for querying the [database Uniprot dataset](https://www.uniprot.org/help/database)"""
-
-    dataset: Literal["database"] = field(default="database", init=False)
-    query: DatabaseQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[DatabaseFields]
-    "Fields to return in the result object"

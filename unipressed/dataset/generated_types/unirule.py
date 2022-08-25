@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 
 class UniruleQueryDict(TypedDict):
@@ -66,14 +63,3 @@ UniruleUnirule: TypeAlias = Literal[
 UniruleFields: TypeAlias = Literal[
     UniruleUnirule,
 ]
-
-
-@dataclass
-class UniruleSearch(Search):
-    """Client for querying the [unirule Uniprot dataset](https://www.uniprot.org/help/unirule)"""
-
-    dataset: Literal["unirule"] = field(default="unirule", init=False)
-    query: UniruleQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[UniruleFields]
-    "Fields to return in the result object"

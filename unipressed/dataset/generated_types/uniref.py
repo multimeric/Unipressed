@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 Identity: TypeAlias = Literal["1.0", "0.9", "0.5"]
 
@@ -99,14 +96,3 @@ UnirefDateOf: TypeAlias = Literal[
 UnirefFields: TypeAlias = Literal[
     UnirefNamesTaxonomy, UnirefSequences, UnirefMiscellaneous, UnirefDateOf
 ]
-
-
-@dataclass
-class UnirefSearch(Search):
-    """Client for querying the [uniref Uniprot dataset](https://www.uniprot.org/help/uniref)"""
-
-    dataset: Literal["uniref"] = field(default="uniref", init=False)
-    query: UnirefQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[UnirefFields]
-    "Fields to return in the result object"

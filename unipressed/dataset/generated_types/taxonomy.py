@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 Rank: TypeAlias = Literal[
     "SUPERKINGDOM",
@@ -92,14 +89,3 @@ TaxonomyTaxonomy: TypeAlias = Literal[
 TaxonomyFields: TypeAlias = Literal[
     TaxonomyTaxonomy,
 ]
-
-
-@dataclass
-class TaxonomySearch(Search):
-    """Client for querying the [taxonomy Uniprot dataset](https://www.uniprot.org/help/taxonomy)"""
-
-    dataset: Literal["taxonomy"] = field(default="taxonomy", init=False)
-    query: TaxonomyQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[TaxonomyFields]
-    "Fields to return in the result object"

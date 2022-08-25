@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 
 class DiseasesQueryDict(TypedDict):
@@ -36,14 +33,3 @@ DiseasesDisease: TypeAlias = Literal[
 DiseasesFields: TypeAlias = Literal[
     DiseasesDisease,
 ]
-
-
-@dataclass
-class DiseasesSearch(Search):
-    """Client for querying the [diseases Uniprot dataset](https://www.uniprot.org/help/diseases)"""
-
-    dataset: Literal["diseases"] = field(default="diseases", init=False)
-    query: DiseasesQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[DiseasesFields]
-    "Fields to return in the result object"

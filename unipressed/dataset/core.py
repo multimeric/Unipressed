@@ -1,22 +1,9 @@
 from __future__ import annotations
 
 import gzip
-from abc import ABC, ABCMeta, abstractmethod
-from ast import Bytes
+from abc import ABCMeta, abstractmethod
 from io import IOBase
-from typing import (
-    Any,
-    Generic,
-    Iterable,
-    Literal,
-    Mapping,
-    Type,
-    TypedDict,
-    TypeVar,
-    Union,
-    get_args,
-    overload,
-)
+from typing import Generic, Iterable, Literal, Type, get_args, overload
 
 import requests
 
@@ -28,11 +15,9 @@ from unipressed.dataset.type_vars import (
     QueryType,
 )
 
-SearchType = TypeVar("SearchType", bound=Search)
-
 
 class UniprotDataset(
-    Generic[QueryType, JsonResultType, FieldsType, SearchType, FormatType],
+    Generic[QueryType, JsonResultType, FieldsType, FormatType],
     metaclass=ABCMeta,
 ):
     @classmethod
@@ -54,7 +39,7 @@ class UniprotDataset(
         format: FormatType | Literal["json"] = "json",
         fields: Iterable[FieldsType] | None = None,
         size: int = 500,
-    ) -> Search:
+    ) -> Search[QueryType, JsonResultType, FieldsType, FormatType]:
         """
         Creates an object that can be used to perform a search query over this dataset
         """
@@ -145,18 +130,11 @@ class UniprotDataset(
         return cls._type_args()[2]
 
     @classmethod
-    def _search_type(cls):
-        """
-        Returns the type of the Search subclass for this dataset
-        """
-        return cls._type_args()[3]
-
-    @classmethod
     def _format_type(cls):
         """
         Returns the type of allowed formats for search queries
         """
-        return cls._type_args()[4]
+        return cls._type_args()[3]
 
     @classmethod
     def _allowed_formats(cls) -> set[str]:
@@ -167,7 +145,7 @@ class UniprotDataset(
 
 
 class FetchManyDataset(
-    UniprotDataset[QueryType, JsonResultType, FieldsType, SearchType, FormatType]
+    UniprotDataset[QueryType, JsonResultType, FieldsType, FormatType]
 ):
     """
     Subset of datasets that can be queried by multiple IDs

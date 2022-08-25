@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 Existence: TypeAlias = Literal["1", "2", "3", "4", "5"]
 Organelle: TypeAlias = Literal[
@@ -1647,14 +1644,3 @@ UniprotkbFields: TypeAlias = Literal[
     UniprotkbGeneExpression,
     UniprotkbFamilyAndDomain,
 ]
-
-
-@dataclass
-class UniprotkbSearch(Search):
-    """Client for querying the [uniprotkb Uniprot dataset](https://www.uniprot.org/help/uniprotkb)"""
-
-    dataset: Literal["uniprotkb"] = field(default="uniprotkb", init=False)
-    query: UniprotkbQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[UniprotkbFields]
-    "Fields to return in the result object"

@@ -1,6 +1,17 @@
 
 ## Changelog
 
+### 1.0.0
+
+#### Changed
+
+* *Breaking*: Reworked the search API. Broadly this means that rather than using `unipressed.UniprotkbSearch`, you should now use the `unipressed.Uniprotkb` class, which encapsulates the search logic, which you can access using `Uniprotkb.search()`.
+
+#### Added
+
+* The new client objects support `.fetch_one()` and `.fetch_many()` which can be used to look up one or more database entries using their IDs
+* An ID mapping client. This can be accessed as `unipressed.IdMappingRequest`
+
 ### 0.2.0
 
 **Note, if you are using Visual Studio Code, please update Pylance to at least version 2022.8.20.

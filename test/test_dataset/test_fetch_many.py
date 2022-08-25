@@ -7,7 +7,7 @@ from unipressed import Uniprotkb
 
 def test_uniprotkb_json():
     ids = ["A0A0C5B5G6", "A0A1B0GTW7"]
-    for record in Uniprotkb.fetch_many():
+    for record in Uniprotkb.fetch_many(ids):
         assert isinstance(record, dict)
         assert record["primaryAccession"] in ids
 

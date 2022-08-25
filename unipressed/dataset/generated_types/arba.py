@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 
 class ArbaQueryDict(TypedDict):
@@ -53,14 +50,3 @@ ArbaArba: TypeAlias = Literal[
 ArbaFields: TypeAlias = Literal[
     ArbaArba,
 ]
-
-
-@dataclass
-class ArbaSearch(Search):
-    """Client for querying the [arba Uniprot dataset](https://www.uniprot.org/help/arba)"""
-
-    dataset: Literal["arba"] = field(default="arba", init=False)
-    query: ArbaQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[ArbaFields]
-    "Fields to return in the result object"

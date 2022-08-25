@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from datetime import date
 from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
-
-from unipressed.dataset.search import Search
 
 
 class KeywordsQueryDict(TypedDict):
@@ -40,14 +37,3 @@ KeywordsKeyword: TypeAlias = Literal[
 KeywordsFields: TypeAlias = Literal[
     KeywordsKeyword,
 ]
-
-
-@dataclass
-class KeywordsSearch(Search):
-    """Client for querying the [keywords Uniprot dataset](https://www.uniprot.org/help/keywords)"""
-
-    dataset: Literal["keywords"] = field(default="keywords", init=False)
-    query: KeywordsQuery
-    "A query that filters the returned proteins"
-    fields: Iterable[KeywordsFields]
-    "Fields to return in the result object"
