@@ -1,6 +1,7 @@
 import codecs
+import sys
 
-import skbio
+import pytest
 
 from unipressed import Uniprotkb
 
@@ -12,7 +13,10 @@ def test_uniprotkb_json():
         assert record["primaryAccession"] in ids
 
 
+@pytest.mark.skipif(sys.version_info < (3, 8), reason="requires Python 3.8+")
 def test_uniprotkb_fasta():
+    import skbio
+
     ids = ["A0A0C5B5G6", "A0A1B0GTW7"]
     res = Uniprotkb.fetch_many(["A0A0C5B5G6", "A0A1B0GTW7"], format="fasta")
     text_stream = codecs.getreader("utf-8")(res)
