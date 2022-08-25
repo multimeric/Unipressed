@@ -147,7 +147,7 @@ def test_paginated(fifty_accessions: Set[str], fifty_gene_names: Set[str]):
     request = IdMappingRequest(
         source="UniProtKB_AC-ID", dest="Gene_Name", ids=fifty_accessions
     ).submit()
-    sleep(1)
+    sleep(5)
     for i, result in enumerate(request.each_result()):
         assert result["from"] in fifty_accessions
         assert result["to"] in fifty_gene_names
