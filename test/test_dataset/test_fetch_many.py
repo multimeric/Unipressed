@@ -13,7 +13,10 @@ def test_uniprotkb_json():
         assert record["primaryAccession"] in ids
 
 
-@pytest.mark.skipif(sys.version_info < (3, 8), reason="requires Python 3.8+")
+@pytest.mark.skipif(
+    sys.version_info < (3, 8) or sys.version_info > (3, 10),
+    reason="skbio is fussy about the Python versions it supports",
+)
 def test_uniprotkb_fasta():
     import skbio
 
