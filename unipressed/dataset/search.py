@@ -94,7 +94,7 @@ class Search(
     Generic[QueryType, JsonResultType, FieldsType, FormatType],
 ):
     """
-    Base class for all search requests.
+    Class coordinating search requests. Generally you shouldn't instantiate this manually, but should rather use [unipressed.UniprotDataset.search][] to do so.
     """
 
     query: QueryType

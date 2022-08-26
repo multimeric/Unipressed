@@ -1,9 +1,3 @@
-```python
-from rich.pretty import install
-# Use rich to pretty print outputs, but truncate nested objects
-install(max_depth=2)
-```
-
 # Unipressed
 
 **Please visit the [project website](https://multimeric.github.io/Unipressed/) for more comprehensive documentation.**
@@ -15,7 +9,6 @@ It provides thoroughly typed and documented code to ensure your use of the libra
 
 ### Example
 Let's say we're interested in very long proteins that are encoded within a chloroplast, in any organism:
-
 
 ```python
 import json
@@ -34,7 +27,19 @@ for record in Uniprotkb.search(
 ```
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A088CK67'</span>, <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>, <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span><span style="font-weight: bold">}</span>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">{</span>
+    <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A088CK67'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="font-weight: bold">[</span>
+        <span style="font-weight: bold">{</span>
+            <span style="color: #008000; text-decoration-color: #008000">'geneName'</span>: <span style="font-weight: bold">{</span>
+                <span style="color: #008000; text-decoration-color: #008000">'evidences'</span>: <span style="font-weight: bold">[{</span><span style="color: #008000; text-decoration-color: #008000">'evidenceCode'</span>: <span style="color: #008000; text-decoration-color: #008000">'ECO:0000313'</span>, <span style="color: #008000; text-decoration-color: #008000">'source'</span>: <span style="color: #008000; text-decoration-color: #008000">'EMBL'</span>, <span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'AID67672.1'</span><span style="font-weight: bold">}]</span>,
+                <span style="color: #008000; text-decoration-color: #008000">'value'</span>: <span style="color: #008000; text-decoration-color: #008000">'ftsH'</span>
+            <span style="font-weight: bold">}</span>
+        <span style="font-weight: bold">}</span>
+    <span style="font-weight: bold">]</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'length'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5242</span><span style="font-weight: bold">}</span>
+<span style="font-weight: bold">}</span>
 </pre>
 
 
@@ -67,13 +72,11 @@ pip install unipressed
 
 The `unipressed` module exports a client object for each UniProt dataset:
 
-
 ```python
 from unipressed import Uniprotkb, Uniparc
 ```
 
 With one of these clients, you can search the dataset:
-
 
 ```python
 records = Uniprotkb.search({
@@ -111,7 +114,6 @@ next(records)
 
 You can request a single record by ID:
 
-
 ```python
 Uniprotkb.fetch_one("Q96RW7")
 ```
@@ -143,11 +145,9 @@ Uniprotkb.fetch_one("Q96RW7")
 
 You can also request multiple records:
 
-
 ```python
 install(max_depth=2)
 ```
-
 
 ```python
 Uniprotkb.fetch_many(["A0A0C5B5G6", "A0A1B0GTW7"])
@@ -203,7 +203,6 @@ Uniprotkb.fetch_many(["A0A0C5B5G6", "A0A1B0GTW7"])
 
 Unipressed also provides one other unique client, which is designed for mapping identifiers. You provide the source and destination database (both of which will autocomplete in VS Code), and a list of identifiers for the source database.
 
-
 ```python
 from unipressed import IdMappingRequest
 request = IdMappingRequest(
@@ -215,9 +214,9 @@ list(request.each_result())
 
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
 <span style="font-weight: bold">[</span>
-    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0PK11'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'CLRN2'</span><span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A1L190'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'SYCE3'</span><span style="font-weight: bold">}</span>,
     <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0JP26'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'POTEB3'</span><span style="font-weight: bold">}</span>,
-    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A1L190'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'SYCE3'</span><span style="font-weight: bold">}</span>
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0PK11'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'CLRN2'</span><span style="font-weight: bold">}</span>
 <span style="font-weight: bold">]</span>
 </pre>
 

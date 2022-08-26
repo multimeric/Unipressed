@@ -21,9 +21,9 @@ class Uniprotkb(
         return "uniprotkb"
 
     @classmethod
-    def bulk_endpoint(cls):
+    def _bulk_endpoint(cls):
         return "accessions"
 
     @classmethod
-    def id_field(cls, record: Mapping[str, Any]) -> str:
+    def _id_field(cls, record: Mapping[str, Any]) -> str:
         return record["primaryAccession"]

@@ -21,9 +21,9 @@ class Taxonomy(
         return "taxonomy"
 
     @classmethod
-    def bulk_endpoint(cls):
+    def _bulk_endpoint(cls):
         return "taxonIds"
 
     @classmethod
-    def id_field(cls, record: Mapping[str, Any]) -> str:
+    def _id_field(cls, record: Mapping[str, Any]) -> str:
         return record["taxonId"]

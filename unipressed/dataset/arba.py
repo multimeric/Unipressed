@@ -14,5 +14,5 @@ class Arba(UniprotDataset[ArbaQuery, Mapping[str, Any], ArbaFields, ArbaFormats]
         return "arba"
 
     @classmethod
-    def id_field(cls, record: Any) -> str:
+    def _id_field(cls, record: Any) -> str:
         return record["uniRuleId"]

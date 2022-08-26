@@ -16,7 +16,7 @@ def test_dataset(client: Type[UniprotDataset]):
     first_records = list(itertools.islice(records, 20))
     ids = []
     for record in first_records:
-        ids.append(client.id_field(record))
+        ids.append(client._id_field(record))
 
     # Test the search method with all other formats
     for format in client._allowed_formats() - {"json"}:
@@ -26,7 +26,7 @@ def test_dataset(client: Type[UniprotDataset]):
 
     # Test the fetch_one method with JSON
     fetch_one = client.fetch_one(ids[0], format="json", parse=True)
-    assert client.id_field(fetch_one) == client.id_field(first_records[0])
+    assert client._id_field(fetch_one) == client._id_field(first_records[0])
 
     # Test the fetch_one method with other formats
     for format in client._allowed_formats() - {"json"}:

@@ -3,7 +3,7 @@ from __future__ import annotations
 import gzip
 from abc import ABCMeta, abstractmethod
 from io import IOBase
-from typing import Generic, Iterable, Type, overload
+from typing import Any, Generic, Iterable, Type, overload
 
 import requests
 from typing_extensions import Literal, get_args
@@ -21,8 +21,12 @@ class UniprotDataset(
     Generic[QueryType, JsonResultType, FieldsType, FormatType],
     metaclass=ABCMeta,
 ):
+    """
+    The base class for all UniProt dataset clients. All methods documented here are available in any of the subclasses. This is a static class that you will never need to instantiate.
+    """
+
     @classmethod
-    def id_field(cls, record: JsonResultType) -> str:
+    def _id_field(cls, record: JsonResultType) -> str:
         """
         Given a record, extracts the accession/ID field from it
         """
@@ -63,14 +67,19 @@ class UniprotDataset(
         ...
 
     @classmethod
-    def fetch_one(cls, id, format="json", parse=True):
+    def fetch_one(
+        cls, id: str, format: str = "json", parse: bool = True
+    ) -> Any | gzip.GzipFile:
         """
-        Fetches a single record from this dataset from its ID
+        Fetches a single record from this dataset using its ID.
 
         Args:
-            id : The ID of the record to fetch. The format of this will depend on the dataset
-            format : The format of the result
+            id : The ID of the record to fetch. The format of this will depend on the dataset.
+            format : The format of the result. The available options will depend on the subclass you are using, but the type checker/autocomplete will enforce available options
             parse : If true, parse the result into a JSON dictionary. Defaults to True.
+
+        Returns:
+            : If parse is True, a dictionary. Otherwise, a file object containing the results in the specified format.
         """
         res = requests.get(
             f"https://rest.uniprot.org/{cls.name()}/{id}.{format}", stream=True
@@ -149,20 +158,20 @@ class FetchManyDataset(
     UniprotDataset[QueryType, JsonResultType, FieldsType, FormatType]
 ):
     """
-    Subset of datasets that can be queried by multiple IDs
+    Dataset subclass for datasets that can be queried by multiple IDs. Not all datasets support this.
     """
 
     @classmethod
     @abstractmethod
-    def bulk_id_param(cls) -> str:
+    def _bulk_id_param(cls) -> str:
         """
         The name of the GET query parameter used to define the list of IDs in a bulk query
         """
-        return cls.bulk_endpoint()
+        return cls._bulk_endpoint()
 
     @classmethod
     @abstractmethod
-    def bulk_endpoint(cls) -> str:
+    def _bulk_endpoint(cls) -> str:
         """
         The name of the URL used to query a bulk list of IDs
         """
@@ -204,8 +213,8 @@ class FetchManyDataset(
             : If parse is True, a list of dictionaries. Otherwise, a file object containing the results in the specified format.
         """
         res = requests.get(
-            f"https://rest.uniprot.org/{cls.name()}/{cls.bulk_endpoint()}",
-            params={cls.bulk_id_param(): ",".join(ids), "format": format},
+            f"https://rest.uniprot.org/{cls.name()}/{cls._bulk_endpoint()}",
+            params={cls._bulk_id_param(): ",".join(ids), "format": format},
             stream=True,
         )
         res.raise_for_status()

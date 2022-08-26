@@ -16,5 +16,5 @@ class Uniref(
         return "uniref"
 
     @classmethod
-    def bulk_endpoint(cls):
+    def _bulk_endpoint(cls):
         return "ids"

@@ -21,5 +21,5 @@ class Citations(
         return "citations"
 
     @classmethod
-    def id_field(cls, record: Any) -> str:
+    def _id_field(cls, record: Any) -> str:
         return record["citation"]["id"]
