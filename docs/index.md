@@ -28,11 +28,11 @@ hide:
 
 ## API
 
-::: unipressed.dataset.core.UniprotDataset
+::: unipressed.dataset.core.DatasetClient
     options:
         show_bases: False
 
-::: unipressed.dataset.core.FetchManyDataset
+::: unipressed.dataset.core.FetchManyClient
 
 ::: unipressed.dataset.search.Search
     options:
@@ -42,53 +42,53 @@ hide:
             - each_page
             - each_record
 
-::: unipressed.IdMappingRequest
+::: unipressed.IdMappingClient
 
 ::: unipressed.id_mapping.core.IdMappingJob
 
 ::: unipressed.id_mapping.core.IdMappingResult
 
-::: unipressed.Arba
+::: unipressed.ArbaClient
     options:
         members: None
 
-::: unipressed.Citations
+::: unipressed.CitationsClient
     options:
         members: None
 
-::: unipressed.Diseases
+::: unipressed.DiseasesClient
     options:
         members: None
 
-::: unipressed.Keywords
+::: unipressed.KeywordsClient
     options:
         members: None
 
-::: unipressed.Locations
+::: unipressed.LocationsClient
     options:
         members: None
 
-::: unipressed.Proteomes
+::: unipressed.ProteomesClient
     options:
         members: None
 
-::: unipressed.Taxonomy
+::: unipressed.TaxonomyClient
     options:
         members: None
 
-::: unipressed.Uniparc
+::: unipressed.UniparcClient
     options:
         members: None
 
-::: unipressed.Uniprotkb
+::: unipressed.UniprotkbClient
     options:
         members: None
 
-::: unipressed.Uniref
+::: unipressed.UnirefClient
     options:
         members: None
 
-::: unipressed.Unirule
+::: unipressed.UniruleClient
     options:
         members: None
 

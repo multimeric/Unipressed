@@ -5,12 +5,13 @@
 
 #### Changed
 
-* *Breaking*: Reworked the search API. Broadly this means that rather than using `unipressed.UniprotkbSearch`, you should now use the `unipressed.Uniprotkb` class, which encapsulates the search logic, which you can access using `Uniprotkb.search()`.
+* **Breaking**: Reworked the search API. Broadly this means that rather than using `unipressed.UniprotkbSearch`, you should now use the `unipressed.UniprotkbClient` class, which encapsulates the dataset's APIs. You can then perform a search query using `Uniprotkb.search()`.
+* **Breaking**: Restructured the Python package. Most imports have changed.
 
 #### Added
 
 * The new client objects support `.fetch_one()` and `.fetch_many()` which can be used to look up one or more database entries using their IDs
-* An ID mapping client. This can be accessed as `unipressed.IdMappingRequest`
+* An ID mapping client. This can be accessed as `unipressed.IdMappingClient`
 
 ### 0.2.0
 
