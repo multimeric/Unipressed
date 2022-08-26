@@ -8,10 +8,12 @@ plugins:
     handlers:
       python:
         options:
-          show_source: true
-          heading_level: 4
+          show_root_heading: true
+          show_source: false
+          heading_level: 3
           show_root_toc_entry: true
           show_signature_annotations: true
+          docstring_section_style: list
 - include-markdown
 markdown_extensions:
   - pymdownx.highlight:

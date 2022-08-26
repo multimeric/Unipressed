@@ -28,60 +28,68 @@ hide:
 
 ## API
 
-### `Search`
-::: unipressed.base.Search
+::: unipressed.dataset.core.DatasetClient
+    options:
+        show_bases: False
 
-### `ArbaSearch`
-::: unipressed.ArbaSearch
+::: unipressed.dataset.core.FetchManyClient
+
+::: unipressed.dataset.search.Search
+    options:
+        show_bases: False
+        members:
+            - each_response
+            - each_page
+            - each_record
+
+::: unipressed.IdMappingClient
+
+::: unipressed.id_mapping.core.IdMappingJob
+
+::: unipressed.id_mapping.core.IdMappingResult
+
+::: unipressed.ArbaClient
     options:
         members: None
 
-### `CitationsSearch`
-::: unipressed.CitationsSearch
+::: unipressed.CitationsClient
     options:
         members: None
 
-### `DiseasesSearch`
-::: unipressed.DiseasesSearch
+::: unipressed.DiseasesClient
     options:
         members: None
 
-### `KeywordsSearch`
-::: unipressed.KeywordsSearch
+::: unipressed.KeywordsClient
     options:
         members: None
 
-### `LocationsSearch`
-::: unipressed.LocationsSearch
+::: unipressed.LocationsClient
     options:
         members: None
 
-### `ProteomesSearch`
-::: unipressed.ProteomesSearch
+::: unipressed.ProteomesClient
     options:
         members: None
 
-### `TaxonomySearch`
-::: unipressed.TaxonomySearch
+::: unipressed.TaxonomyClient
     options:
         members: None
 
-### `UniparcSearch`
-::: unipressed.UniparcSearch
+::: unipressed.UniparcClient
     options:
         members: None
 
-### `UniprotkbSearch`
-::: unipressed.UniprotkbSearch
+::: unipressed.UniprotkbClient
     options:
         members: None
 
-### `UnirefSearch`
-::: unipressed.UnirefSearch
+::: unipressed.UnirefClient
     options:
         members: None
 
-### `UniruleSearch`
-::: unipressed.UniruleSearch
+::: unipressed.UniruleClient
     options:
         members: None
+
+{% include-markdown "../CHANGELOG.md" %}
