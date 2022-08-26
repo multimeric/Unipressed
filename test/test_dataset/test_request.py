@@ -78,9 +78,9 @@ def test_main_example():
     """
     Validate the readme example
     """
-    from unipressed import Uniprotkb
+    from unipressed import UniprotkbClient
 
-    for record in Uniprotkb.search(
+    for record in UniprotkbClient.search(
         query={"and_": [{"organelle": "chloroplast"}, {"length": (5000, "*")}]},
         fields=["length", "gene_names"],
     ).each_record():
@@ -94,7 +94,7 @@ def test_date_field():
     Validate a date field
     """
     records = list(
-        Uniprotkb.search(
+        UniprotkbClient.search(
             query={
                 "date_created": (date(2022, 1, 18), date(2022, 1, 19)),
                 "organism_id": "9606",
@@ -110,7 +110,7 @@ def test_uniref():
     assert (
         len(
             list(
-                Uniref.search(
+                UnirefClient.search(
                     query={
                         "and_": [
                             {
@@ -129,14 +129,14 @@ def test_uniref():
 def test_uniparc():
     # This is an example from the uniprot website
     assert_valid_request(
-        Uniparc.search(query={"and_": [{"database": "RefSeq"}, "APP"]})
+        UniparcClient.search(query={"and_": [{"database": "RefSeq"}, "APP"]})
     )
 
 
 def test_proteomes():
     next(
         iter(
-            Proteomes.search(
+            ProteomesClient.search(
                 query={"and_": [{"busco": (90, 100)}, {"proteome_type": "1"}]}
             ).each_response()
         )
@@ -145,13 +145,13 @@ def test_proteomes():
 
 def test_taxonomy():
     assert_valid_request(
-        Taxonomy.search(query={"and_": [{"rank": "FAMILY"}, "hominidae"]})
+        TaxonomyClient.search(query={"and_": [{"rank": "FAMILY"}, "hominidae"]})
     )
 
 
 def test_keywords():
     assert_valid_request(
-        Keywords.search(
+        KeywordsClient.search(
             query={"and_": [{"category": "technical_term"}, {"name": "food"}]}
         )
     )
@@ -159,17 +159,17 @@ def test_keywords():
 
 def test_citations():
     assert_valid_request(
-        Citations.search(query={"and_": [{"published": "2022"}, "COVID-19"]})
+        CitationsClient.search(query={"and_": [{"published": "2022"}, "COVID-19"]})
     )
 
 
 def test_diseases():
-    assert_valid_request(Diseases.search(query={"id": "DI-00001"}))
+    assert_valid_request(DiseasesClient.search(query={"id": "DI-00001"}))
 
 
 def test_cross_refs():
     assert_valid_request(
-        Database.search(
+        DatabaseClient.search(
             query={
                 # Find all databases that contain the word "Gene"
                 "name": "Gene"
@@ -180,7 +180,7 @@ def test_cross_refs():
 
 def test_subcellular():
     assert_valid_request(
-        Locations.search(
+        LocationsClient.search(
             query={
                 # Find the location with id SL-0011
                 "id": "SL-0011"
@@ -191,7 +191,7 @@ def test_subcellular():
 
 def test_unirule():
     assert_valid_request(
-        Unirule.search(
+        UniruleClient.search(
             query={"and_": [{"taxonomy": "fungi"}, {"protein_name": "glucanase"}]}
         )
     )
@@ -199,7 +199,7 @@ def test_unirule():
 
 def test_arba():
     assert_valid_request(
-        Arba.search(
+        ArbaClient.search(
             query={"and_": [{"taxonomy": "chloroflexi"}, {"keyword": "metal-binding"}]}
         )
     )
