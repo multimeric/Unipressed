@@ -2,14 +2,14 @@ from typing import Any, Mapping
 
 from typing_extensions import Literal
 
-from unipressed.dataset.core import UniprotDataset
+from unipressed.dataset.core import DatasetClient
 from unipressed.dataset.generated_types.citations import CitationsFields, CitationsQuery
 
 CitationsFormats = Literal["json", "list", "tsv", "xlsx"]
 
 
-class Citations(
-    UniprotDataset[
+class CitationsClient(
+    DatasetClient[
         CitationsQuery,
         Mapping[str, Any],
         CitationsFields,

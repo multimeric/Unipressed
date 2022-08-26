@@ -2,14 +2,14 @@ from typing import Any, Mapping
 
 from typing_extensions import Literal
 
-from unipressed.dataset.core import UniprotDataset
+from unipressed.dataset.core import DatasetClient
 from unipressed.dataset.generated_types.locations import LocationsFields, LocationsQuery
 
 LocationsFormats = Literal["json", "tsv", "xlsx", "list", "obo"]
 
 
-class Locations(
-    UniprotDataset[
+class LocationsClient(
+    DatasetClient[
         LocationsQuery,
         Mapping[str, Any],
         LocationsFields,

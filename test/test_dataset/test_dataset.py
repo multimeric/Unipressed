@@ -4,11 +4,11 @@ import pytest
 from typing_extensions import Type
 
 from unipressed.dataset import all_clients
-from unipressed.dataset.core import FetchManyDataset, UniprotDataset
+from unipressed.dataset.core import DatasetClient, FetchManyClient
 
 
 @pytest.mark.parametrize(["client"], [[client] for client in all_clients])
-def test_dataset(client: Type[UniprotDataset]):
+def test_dataset(client: Type[DatasetClient]):
     # Test the search method
     records = client.search("*", format="json").each_record()
 
@@ -48,7 +48,7 @@ def test_dataset(client: Type[UniprotDataset]):
             # If it's a text format, we can coarsely check that the file is valid by decoding it
             content.decode()
 
-    if isinstance(client, FetchManyDataset):
+    if isinstance(client, FetchManyClient):
         # Test the fetch_many method with JSON
         client.fetch_many(ids, format="json", parse=True)
 

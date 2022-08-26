@@ -1,8 +1,8 @@
-from unipressed import Uniprotkb
+from unipressed import UniprotkbClient
 
 
 def test_uniprotkb_parsed():
-    ret = Uniprotkb.fetch_one("A1A519")
+    ret = UniprotkbClient.fetch_one("A1A519")
 
     assert isinstance(ret, dict)
     assert ret["primaryAccession"] == "A1A519"
@@ -12,7 +12,7 @@ def test_uniprotkb_parsed():
 def test_uniprotkb_fasta():
     import io
 
-    ret = Uniprotkb.fetch_one("A1A519", format="fasta")
+    ret = UniprotkbClient.fetch_one("A1A519", format="fasta")
 
     assert isinstance(ret, io.IOBase)
     content = ret.read()

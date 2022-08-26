@@ -15,22 +15,20 @@ class IdMappingError(Exception):
 
 
 @dataclass
-class IdMappingRequest:
-    source: From
-    dest: To
-    ids: Iterable[str]
-
-    def _submit(self) -> requests.Response:
+class IdMappingClient:
+    @classmethod
+    def _submit(cls, source: From, dest: To, ids: Iterable[str]) -> requests.Response:
         return requests.post(
             "https://rest.uniprot.org/idmapping/run",
-            data={"ids": ",".join(self.ids), "from": self.source, "to": self.dest},
+            data={"ids": ",".join(ids), "from": source, "to": dest},
         )
 
-    def submit(self) -> IdMappingJob:
+    @classmethod
+    def submit(cls, source: From, dest: To, ids: Iterable[str]) -> IdMappingJob:
         """
         Submits this ID mapping request to the UniProt server, and returns a new object that can be used to access the results
         """
-        res = self._submit()
+        res = cls._submit(source, dest, ids)
         job_id = res.json()["jobId"]
         return IdMappingJob(job_id)
 

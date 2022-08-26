@@ -9,13 +9,13 @@ if sys.version_info < (3, 9):
         reason="Python 3.9 required for this set of tests", allow_module_level=True
     )
 
-from typing import Type, get_args, get_type_hints
+from typing import Type
 
-from unipressed.dataset import UniprotDataset, all_clients
+from unipressed.dataset import DatasetClient, all_clients
 
 
 @pytest.mark.parametrize(["client"], [[it] for it in all_clients])
-def test_valid_query_fields(client: Type[UniprotDataset]):
+def test_valid_query_fields(client: Type[DatasetClient]):
     """
     Test that all the query fields defined by our schemas are accepted by Uniprot
     """
@@ -35,7 +35,7 @@ def test_valid_query_fields(client: Type[UniprotDataset]):
 
 
 @pytest.mark.parametrize(["client"], [[it] for it in all_clients])
-def test_valid_return_fields(client: Type[UniprotDataset]):
+def test_valid_return_fields(client: Type[DatasetClient]):
     """
     Test that all the return fields defined by our schemas are accepted by Uniprot
     """

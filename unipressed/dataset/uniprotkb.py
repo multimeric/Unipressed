@@ -2,14 +2,14 @@ from typing import Any, Mapping
 
 from typing_extensions import Literal
 
-from unipressed.dataset.core import FetchManyDataset, UniprotDataset
+from unipressed.dataset.core import FetchManyClient
 from unipressed.dataset.generated_types.uniprotkb import UniprotkbFields, UniprotkbQuery
 
 UniprotkbFormats = Literal["txt", "xml", "fasta", "gff", "json", "list", "tsv", "xlsx"]
 
 
-class Uniprotkb(
-    FetchManyDataset[
+class UniprotkbClient(
+    FetchManyClient[
         UniprotkbQuery,
         Mapping[str, Any],
         UniprotkbFields,

@@ -2,14 +2,14 @@ from typing import Any, Mapping
 
 from typing_extensions import Literal
 
-from unipressed.dataset.core import FetchManyDataset
+from unipressed.dataset.core import FetchManyClient
 from unipressed.dataset.generated_types.uniparc import UniparcFields, UniparcQuery
 
 UniparcFormats = Literal["fasta", "tsv", "xlsx", "json", "xml"]
 
 
-class Uniparc(
-    FetchManyDataset[UniparcQuery, Mapping[str, Any], UniparcFields, UniparcFormats]
+class UniparcClient(
+    FetchManyClient[UniparcQuery, Mapping[str, Any], UniparcFields, UniparcFormats]
 ):
     @classmethod
     def name(cls):

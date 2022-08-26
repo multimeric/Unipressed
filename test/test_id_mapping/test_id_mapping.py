@@ -3,7 +3,7 @@ from typing import Set
 
 import pytest
 
-from unipressed.id_mapping import IdMappingError, IdMappingRequest
+from unipressed.id_mapping import IdMappingClient, IdMappingError
 
 
 @pytest.fixture
@@ -121,9 +121,9 @@ def fifty_gene_names() -> Set[str]:
 def test_gene_names():
     inputs = {"A1L190", "A0JP26", "A0PK11"}
     outputs = {"CLRN2", "POTEB3", "SYCE3"}
-    request = IdMappingRequest(
+    request = IdMappingClient.submit(
         source="UniProtKB_AC-ID", dest="Gene_Name", ids=inputs
-    ).submit()
+    )
     sleep(1)
     for result in request.each_result():
         assert result["from"] in inputs
@@ -135,18 +135,18 @@ def test_too_slow(fifty_accessions: Set[str], fifty_gene_names: Set[str]):
     If we request 50 items, but don't give uniprot enough time to process them, we should still
     handle this correctly
     """
-    request = IdMappingRequest(
+    request = IdMappingClient.submit(
         source="UniProtKB_AC-ID", dest="Gene_Name", ids=fifty_accessions
-    ).submit()
+    )
     with pytest.raises(IdMappingError):
         for result in request.each_result():
             pass
 
 
 def test_paginated(fifty_accessions: Set[str], fifty_gene_names: Set[str]):
-    request = IdMappingRequest(
+    request = IdMappingClient.submit(
         source="UniProtKB_AC-ID", dest="Gene_Name", ids=fifty_accessions
-    ).submit()
+    )
     sleep(5)
     for i, result in enumerate(request.each_result()):
         assert result["from"] in fifty_accessions

@@ -17,7 +17,7 @@ from unipressed.dataset.type_vars import (
 )
 
 
-class UniprotDataset(
+class DatasetClient(
     Generic[QueryType, JsonResultType, FieldsType, FormatType],
     metaclass=ABCMeta,
 ):
@@ -154,9 +154,7 @@ class UniprotDataset(
         return set(get_args(cls._format_type()))
 
 
-class FetchManyDataset(
-    UniprotDataset[QueryType, JsonResultType, FieldsType, FormatType]
-):
+class FetchManyClient(DatasetClient[QueryType, JsonResultType, FieldsType, FormatType]):
     """
     Dataset subclass for datasets that can be queried by multiple IDs. Not all datasets support this.
     """

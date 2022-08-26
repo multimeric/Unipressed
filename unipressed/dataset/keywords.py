@@ -2,14 +2,14 @@ from typing import Any, Mapping
 
 from typing_extensions import Literal
 
-from unipressed.dataset.core import UniprotDataset
+from unipressed.dataset.core import DatasetClient
 from unipressed.dataset.generated_types.keywords import KeywordsFields, KeywordsQuery
 
 KeywordsFormats = Literal["json", "tsv", "xlsx", "list", "obo"]
 
 
-class Keywords(
-    UniprotDataset[
+class KeywordsClient(
+    DatasetClient[
         KeywordsQuery,
         Mapping[str, Any],
         KeywordsFields,

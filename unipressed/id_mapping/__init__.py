@@ -1,1 +1,1 @@
-from unipressed.id_mapping.core import IdMappingError, IdMappingRequest
+from unipressed.id_mapping.core import IdMappingClient, IdMappingError
