@@ -31,7 +31,7 @@ jobs:
       - name: Test readme notebook
         if: matrix['python-version'] != '3.7'
         run: |
-          poetry run jupyter nbconvert README.ipynb
+          poetry run jupyter nbconvert --to markdown README.ipynb
 
       - name: Test docs build
         run: |

@@ -6264,8 +6264,8 @@ list(request.each_result())
 
 
 
-    [{'from': 'A0PK11', 'to': 'CLRN2'},
-     {'from': 'A1L190', 'to': 'SYCE3'},
+    [{'from': 'A1L190', 'to': 'SYCE3'},
+     {'from': 'A0PK11', 'to': 'CLRN2'},
      {'from': 'A0JP26', 'to': 'POTEB3'}]
 
 
