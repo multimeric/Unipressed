@@ -33,6 +33,7 @@ jobs:
       - name: Test readme notebook
         if: matrix['python-version'] != '3.7'
         run: |
+          poetry install --with readme
           poetry run jupyter nbconvert --to markdown README.ipynb
 
       - name: Test docs build
