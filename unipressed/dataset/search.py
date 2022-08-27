@@ -134,7 +134,7 @@ class Search(
 
     def each_response(self) -> Iterable[requests.Response]:
         """
-        Returns a generator of [`requests.Response`](https://requests.readthedocs.io/en/latest/api/#requests.Response) objects, one for each page of the result
+        Returns a generator of [`requests.Response`](https://requests.readthedocs.io/en/latest/api/#requests.Response) objects, one for each page of the result.
         """
         session = requests.Session()
         request = SearchRequest(self).to_request()
@@ -150,7 +150,7 @@ class Search(
 
     def each_page(self) -> Iterable[TextIO]:
         """
-        Returns a generator of unzipped [file objects](https://docs.python.org/3/library/io.html#io.TextIOBase), one for each page of the result
+        Returns a generator of unzipped [file objects](https://docs.python.org/3/library/io.html#io.TextIOBase), one for each page of the result.
         """
         for response in self.each_response():
             response.raise_for_status()

@@ -207,7 +207,18 @@ request = IdMappingClient.submit(
 list(request.each_result())
 ```
 
-Note that, if you submit a large number of IDs, you might need to add a `sleep()` call between submitting the request and retrieving the results:
+
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">[</span>
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0PK11'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'CLRN2'</span><span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A1L190'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'SYCE3'</span><span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0JP26'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'POTEB3'</span><span style="font-weight: bold">}</span>
+<span style="font-weight: bold">]</span>
+</pre>
+
+
+
+Note that, if you submit a large number of IDs, you might need to add a `sleep()` call between submitting the request and retrieving the results.
 
 ### Query Syntax
 
@@ -256,7 +267,7 @@ UniprotkbClient.search(query={
 
 A few query fields are *ranges*, which you input using a tuple with two elements, indicating the start and end of the range.
 If you use the literal `"*"` then you can leave the range open at one end. 
-For example, this query returns any protein that is in the range $(5000, \infty)$
+For example, this query returns any protein that is in the range $[5000, \infty)$
 
 ```python
 UniprotkbClient.search(query={"length": (5000, "*")})

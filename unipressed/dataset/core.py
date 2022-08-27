@@ -28,7 +28,7 @@ class DatasetClient(
     @classmethod
     def _id_field(cls, record: JsonResultType) -> str:
         """
-        Given a record, extracts the accession/ID field from it
+        Given a record, extracts the accession/ID field from it.
         """
         return record["id"]
 
@@ -46,7 +46,8 @@ class DatasetClient(
         size: int = 500,
     ) -> Search[QueryType, JsonResultType, FieldsType, FormatType]:
         """
-        Creates an object that can be used to perform a search query over this dataset
+        Creates an object that can be used to perform a search query over this dataset.
+        Refer to the [unipressed.dataset.search.Search][] reference for more information on how to use it.
         """
         return Search[QueryType, JsonResultType, FieldsType, FormatType](
             query=query, format=format, dataset=cls.name(), fields=fields, size=size
@@ -69,13 +70,13 @@ class DatasetClient(
     @classmethod
     def fetch_one(
         cls, id: str, format: str = "json", parse: bool = True
-    ) -> Any | gzip.GzipFile:
+    ) -> JsonResultType | IOBase:
         """
         Fetches a single record from this dataset using its ID.
 
         Args:
             id : The ID of the record to fetch. The format of this will depend on the dataset.
-            format : The format of the result. The available options will depend on the subclass you are using, but the type checker/autocomplete will enforce available options
+            format : The format of the result. The available options will depend on the subclass you are using, but the type checker/autocomplete will enforce available options.
             parse : If true, parse the result into a JSON dictionary. Defaults to True.
 
         Returns:
@@ -95,14 +96,14 @@ class DatasetClient(
     @classmethod
     def _type_args(cls) -> tuple[Type, ...]:
         """
-        Returns the type arguments for this dataset
+        Returns the type arguments for this dataset.
         """
         return get_args(cls.__orig_bases__[0])  # type: ignore
 
     @classmethod
     def _allowed_query_fields(cls) -> set[str]:
         """
-        Returns the type arguments for the queries to this dataset
+        Returns the type arguments for the queries to this dataset.
         """
         query_dict, _ = get_args(cls._query_type())
         return query_dict.__optional_keys__ | query_dict.__required_keys__ - {
@@ -114,35 +115,35 @@ class DatasetClient(
     @classmethod
     def _allowed_return_fields(cls) -> set[str]:
         """
-        Returns the type arguments for the queries to this dataset
+        Returns the type arguments for the queries to this dataset.
         """
         return set(get_args(cls._field_type()))
 
     @classmethod
     def _query_type(cls):
         """
-        Returns the type arguments for the queries to this dataset
+        Returns the type arguments for the queries to this dataset.
         """
         return cls._type_args()[0]
 
     @classmethod
     def _result_type(cls):
         """
-        Returns the type of query results to this dataset
+        Returns the type of query results to this dataset.
         """
         return cls._type_args()[1]
 
     @classmethod
     def _field_type(cls):
         """
-        Returns the type of allowed fields for search queries
+        Returns the type of allowed fields for search queries.
         """
         return cls._type_args()[2]
 
     @classmethod
     def _format_type(cls):
         """
-        Returns the type of allowed formats for search queries
+        Returns the type of allowed formats for search queries.
         """
         return cls._type_args()[3]
 
@@ -163,7 +164,7 @@ class FetchManyClient(DatasetClient[QueryType, JsonResultType, FieldsType, Forma
     @abstractmethod
     def _bulk_id_param(cls) -> str:
         """
-        The name of the GET query parameter used to define the list of IDs in a bulk query
+        The name of the GET query parameter used to define the list of IDs in a bulk query.
         """
         return cls._bulk_endpoint()
 
@@ -171,7 +172,7 @@ class FetchManyClient(DatasetClient[QueryType, JsonResultType, FieldsType, Forma
     @abstractmethod
     def _bulk_endpoint(cls) -> str:
         """
-        The name of the URL used to query a bulk list of IDs
+        The name of the URL used to query a bulk list of IDs.
         """
         ...
 
@@ -198,7 +199,7 @@ class FetchManyClient(DatasetClient[QueryType, JsonResultType, FieldsType, Forma
         ids: Iterable[str],
         format: FormatType | Literal["json"] = "json",
         parse: bool = True,
-    ):
+    ) -> Iterable[JsonResultType] | IOBase:
         """
         Fetches multiple records using their accessions.
 

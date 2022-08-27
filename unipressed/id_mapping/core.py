@@ -16,6 +16,10 @@ class IdMappingError(Exception):
 
 @dataclass
 class IdMappingClient:
+    """
+    Client for submitting requests to convert between identifiers.
+    """
+
     @classmethod
     def _submit(cls, source: From, dest: To, ids: Iterable[str]) -> requests.Response:
         return requests.post(
@@ -35,11 +39,15 @@ class IdMappingClient:
 
 @dataclass
 class IdMappingJob:
+    """
+    Object that tracks the status and results of an ID mapping request that has been sent to the UniProt server.
+    """
+
     job_id: str
 
     def get_status(self) -> str:
         """
-        Returns a string describing the status of the job (ie if it has completed or not)
+        Returns a string describing the status of the job (ie if it has completed or not).
         """
         return requests.get(
             f"https://rest.uniprot.org/idmapping/status/{self.job_id}"
@@ -47,7 +55,7 @@ class IdMappingJob:
 
     def each_result(self) -> Iterable[IdMappingResult]:
         """
-        Returns a generator over dictionaries of results, one for each input ID
+        Returns a generator over dictionaries of results, one for each input ID.
         """
         res = requests.get(f"https://rest.uniprot.org/idmapping/results/{self.job_id}")
         for page in iter_pages(res):
