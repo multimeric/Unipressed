@@ -86,6 +86,10 @@ def test_serialize_int_range():
     assert serialize_query((1, 3)) == "[1 TO 3]"
 
 
+def test_serialize_int_range_list():
+    assert serialize_query([1, 3]) == "[1 TO 3]"
+
+
 def test_serialize_half_int_range():
     assert serialize_query((1, "*")) == "[1 TO *]"
 
