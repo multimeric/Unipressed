@@ -27,7 +27,7 @@ jobs:
           poetry-version: 1.2.0rc2
 
       - name: Export dependencies
-        run: poetry export --with docs --without-hashes > requirements.txt
+        run: poetry export --with docs --without-hashes --output requirements.txt
 
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
