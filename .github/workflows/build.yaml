@@ -20,7 +20,7 @@ jobs:
         uses: abatilo/actions-poetry@v2.1.3
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --extras 'lint test'
 
       - uses: pre-commit/action@v3.0.0
 
