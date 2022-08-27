@@ -23,9 +23,11 @@ jobs:
 
       - name: Python Poetry Action
         uses: abatilo/actions-poetry@v2.1.6
+        with:
+          poetry-version: 1.2.0rc2
 
       - name: Export dependencies
-        run: poetry export --dev --extras 'docs' --without-hashes > requirements.txt
+        run: poetry export --with docs --without-hashes > requirements.txt
 
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
