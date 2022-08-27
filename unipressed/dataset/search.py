@@ -3,6 +3,7 @@ from __future__ import annotations
 import dataclasses
 import datetime
 import gzip
+from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Generic, Iterable, TextIO
 
@@ -74,7 +75,11 @@ def serialize_query(query: Any, level: int = 0) -> str:
             return f"({ret})"
         else:
             return ret
-    elif isinstance(query, tuple) and len(query) == 2:
+    elif isinstance(query, str):
+        # Strings can be used directly as queries
+        return query
+    elif isinstance(query, Sequence) and len(query) == 2:
+        # A length 2 sequence is treated as a range
         a, b = query
         return f"[{serialize_query(a)} TO {serialize_query(b)}]"
     elif isinstance(query, datetime.date):
