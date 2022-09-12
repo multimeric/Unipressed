@@ -1,6 +1,14 @@
 
 ## Changelog
 
+### 1.1.0
+
+#### Changed
+* `unipressed.IdMappingClient.get_status()` now returns a `Literal`, which gives your type checker/IDE access to the possible return values.
+
+#### Fixed
+* `unipressed.IdMappingClient.get_status()` now wraps a bug in the UniProt API ([#293](https://github.com/ebi-uniprot/uniprot-rest-api/issues/293)), ensuring that it will return a valid job status even when the API itself does not. [[#21](https://github.com/multimeric/Unipressed/issues/21)]
+
 ### 1.0.0
 
 #### Changed
