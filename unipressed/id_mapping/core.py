@@ -68,7 +68,7 @@ class IdMappingJob:
             return "FINISHED"
         else:
             raise IdMappingError(
-                "Unknown response returned by UniProt. Received {data}"
+                f"Unknown response returned by UniProt. Received {data}"
             )
 
     def each_result(self) -> Iterable[IdMappingResult]:
