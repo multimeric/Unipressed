@@ -124,7 +124,11 @@ def test_gene_names():
     request = IdMappingClient.submit(
         source="UniProtKB_AC-ID", dest="Gene_Name", ids=inputs
     )
+    # At this point it might be already finished
+    assert request.get_status() in {"RUNNING", "FINISHED"}
     sleep(1)
+    # At this point it should definitely be finished
+    assert request.get_status() == "FINISHED"
     for result in request.each_result():
         assert result["from"] in inputs
         assert result["to"] in outputs
