@@ -51,7 +51,12 @@ class DatasetClient(
         Refer to the [unipressed.dataset.search.Search][] reference for more information on how to use it.
         """
         return Search[QueryType, JsonResultType, FieldsType, FormatType](
-            query=query, format=format, dataset=cls.name(), fields=fields, size=size, include_isoform=include_isoform
+            query=query,
+            format=format,
+            dataset=cls.name(),
+            fields=fields,
+            size=size,
+            include_isoform=include_isoform,
         )
 
     @overload

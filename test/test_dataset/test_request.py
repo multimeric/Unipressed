@@ -206,8 +206,13 @@ def test_arba():
         )
     )
 
-@pytest.mark.paremetrize("include_isoform,expected_result_count", [(True, 2), (False, 1)])
-def test_UnirefClient_search_include_isoform(include_isoform: bool, expected_result_count: int):
+
+@pytest.mark.parametrize(
+    "include_isoform,expected_result_count", [(True, 2), (False, 1)]
+)
+def test_UnirefClient_search_include_isoform(
+    include_isoform: bool, expected_result_count: int
+):
     records = list(
         UniprotkbClient.search(
             query={
