@@ -25,15 +25,11 @@ class UnirefQueryDict(TypedDict):
         tuple[
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -42,15 +38,11 @@ class UnirefQueryDict(TypedDict):
         tuple[
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -59,15 +51,11 @@ class UnirefQueryDict(TypedDict):
         tuple[
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -90,9 +78,7 @@ UnirefNamesTaxonomy: TypeAlias = Literal[
 ]
 UnirefSequences: TypeAlias = Literal["identity", "length", "sequence"]
 UnirefMiscellaneous: TypeAlias = Literal["types", "members", "count"]
-UnirefDateOf: TypeAlias = Literal[
-    "created",
-]
+UnirefDateOf: TypeAlias = Literal["created",]
 UnirefFields: TypeAlias = Literal[
     UnirefNamesTaxonomy, UnirefSequences, UnirefMiscellaneous, UnirefDateOf
 ]

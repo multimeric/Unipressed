@@ -60,6 +60,4 @@ UniruleUnirule: TypeAlias = Literal[
     "annotation_covered",
     "predicted_protein_name",
 ]
-UniruleFields: TypeAlias = Literal[
-    UniruleUnirule,
-]
+UniruleFields: TypeAlias = Literal[UniruleUnirule,]

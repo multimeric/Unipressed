@@ -47,6 +47,4 @@ ArbaQuery: TypeAlias = Union[ArbaQueryDict, str]
 ArbaArba: TypeAlias = Literal[
     "rule_id", "statistics", "taxonomic_scope", "annotation_covered"
 ]
-ArbaFields: TypeAlias = Literal[
-    ArbaArba,
-]
+ArbaFields: TypeAlias = Literal[ArbaArba,]

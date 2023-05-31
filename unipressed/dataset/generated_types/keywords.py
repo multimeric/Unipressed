@@ -34,6 +34,4 @@ KeywordsKeyword: TypeAlias = Literal[
     "parents",
     "statistics",
 ]
-KeywordsFields: TypeAlias = Literal[
-    KeywordsKeyword,
-]
+KeywordsFields: TypeAlias = Literal[KeywordsKeyword,]

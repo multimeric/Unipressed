@@ -86,6 +86,4 @@ TaxonomyTaxonomy: TypeAlias = Literal[
     "links",
     "statistics",
 ]
-TaxonomyFields: TypeAlias = Literal[
-    TaxonomyTaxonomy,
-]
+TaxonomyFields: TypeAlias = Literal[TaxonomyTaxonomy,]

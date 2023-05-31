@@ -39,15 +39,11 @@ class UniparcQueryDict(TypedDict):
         tuple[
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -65,9 +61,7 @@ UniparcNamesTaxonomy: TypeAlias = Literal[
     "upi", "gene", "organism_id", "organism", "protein", "proteome"
 ]
 UniparcSequences: TypeAlias = Literal["checksum", "length", "sequence"]
-UniparcMiscellaneous: TypeAlias = Literal[
-    "accession",
-]
+UniparcMiscellaneous: TypeAlias = Literal["accession",]
 UniparcDateOf: TypeAlias = Literal["first_seen", "last_seen"]
 UniparcFamilyDomains: TypeAlias = Literal[
     "CDD",
