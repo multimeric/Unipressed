@@ -25,6 +25,8 @@ jobs:
         run: poetry install --with lint --with tests
 
       - uses: pre-commit/action@v3.0.0
+        if: matrix['python-version'] != '3.7'
+
 
       - name: Test with pytest
         run: |
