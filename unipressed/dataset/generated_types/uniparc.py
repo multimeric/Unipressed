@@ -30,24 +30,20 @@ class UniparcQueryDict(TypedDict):
     protein: NotRequired[str]
     "Protein name\ne.g. sample protein"
     database: NotRequired[str]
-    "Database\ne.g. sample database\n* EnsemblBacteria: EnsemblBacteria\n* EnsemblFungi: EnsemblFungi\n* EnsemblMetazoa: EnsemblMetazoa\n* EnsemblPlants: EnsemblPlants\n* EnsemblProtists: EnsemblProtists\n* embl-cds: EMBL CDS\n* EMBLWGS: EMBLWGS\n* EMBL_CON: EMBL_CON\n* EMBL_TPA: EMBL_TPA\n* EMBL_TSA: EMBL_TSA\n* Ensembl: Ensembl\n* EPO: EPO\n* FlyBase: FlyBase\n* H-InvDB: H-InvDB\n* IPI: IPI\n* JPO: JPO\n* KIPO: KIPO\n* PATRIC: PATRIC\n* PDB: PDB\n* PIR: PIR\n* PIRARC: PIRARC\n* PRF: PRF\n* RefSeq: RefSeq\n* REMTREMBL: REMTREMBL\n* SEED: SEED\n* SGD: SGD\n* UniProt: UniProtKB\n* isoforms: UniProtKB/Swiss-Prot isoforms\n* TAIR: TAIR\n* TREMBLNEW: TREMBLNEW\n* TREMBL_VARSPLIC: TREMBL_VARSPLIC\n* TROME: TROME\n* UNIMES: UNIMES\n* USPTO: USPTO\n* VectorBase: VectorBase\n* VEGA: VEGA\n* WormBase: WormBase\n* WBParaSite: WBParaSite"
+    "Database\ne.g. sample database\n* EnsemblBacteria: EnsemblBacteria\n* EnsemblFungi: EnsemblFungi\n* EnsemblMetazoa: EnsemblMetazoa\n* EnsemblPlants: EnsemblPlants\n* EnsemblProtists: EnsemblProtists\n* embl-cds: EMBL CDS\n* EMBL_CON: EMBL_CON\n* EMBL_TPA: EMBL_TPA\n* EMBL_TSA: EMBL_TSA\n* EMBLWGS: EMBLWGS\n* Ensembl: Ensembl\n* EnsemblRapid: EnsemblRapid\n* EPO: EPO\n* FlyBase: FlyBase\n* FusionGDB: FusionGDB\n* H-InvDB: H-InvDB\n* IPI: IPI\n* JPO: JPO\n* KIPO: KIPO\n* PATRIC: PATRIC\n* PDB: PDB\n* PIR: PIR\n* PIRARC: PIRARC\n* PRF: PRF\n* RefSeq: RefSeq\n* REMTREMBL: REMTREMBL\n* SEED: SEED\n* SGD: SGD\n* UniProt: UniProtKB\n* isoforms: UniProtKB/Swiss-Prot isoforms\n* TAIR: TAIR\n* TREMBLNEW: TREMBLNEW\n* TREMBL_VARSPLIC: TREMBL_VARSPLIC\n* TROME: TROME\n* UNIMES: UNIMES\n* USPTO: USPTO\n* VectorBase: VectorBase\n* VEGA: VEGA\n* WBParaSite: WBParaSite\n* WormBase: WormBase"
     active: NotRequired[str]
-    "Active\ne.g. sample active\n* EnsemblBacteria: EnsemblBacteria\n* EnsemblFungi: EnsemblFungi\n* EnsemblMetazoa: EnsemblMetazoa\n* EnsemblPlants: EnsemblPlants\n* EnsemblProtists: EnsemblProtists\n* embl-cds: EMBL CDS\n* EMBLWGS: EMBLWGS\n* EMBL_CON: EMBL_CON\n* EMBL_TSA: EMBL_TSA\n* Ensembl: Ensembl\n* EPO: EPO\n* FlyBase: FlyBase\n* JPO: JPO\n* KIPO: KIPO\n* PATRIC: PATRIC\n* PDB: PDB\n* RefSeq: RefSeq\n* SEED: SEED\n* SGD: SGD\n* UniProt: UniProtKB\n* isoforms: UniProtKB/Swiss-Prot isoforms\n* TAIR: TAIR\n* TROME: TROME\n* USPTO: USPTO\n* VEGA: VEGA\n* WormBase: WormBase\n* WBParaSite: WBParaSite"
+    "Active\ne.g. sample active\n* EnsemblBacteria: EnsemblBacteria\n* EnsemblFungi: EnsemblFungi\n* EnsemblMetazoa: EnsemblMetazoa\n* EnsemblPlants: EnsemblPlants\n* EnsemblProtists: EnsemblProtists\n* embl-cds: EMBL CDS\n* EMBL_CON: EMBL_CON\n* EMBL_TSA: EMBL_TSA\n* EMBLWGS: EMBLWGS\n* Ensembl: Ensembl\n* EnsemblRapid: EnsemblRapid\n* EPO: EPO\n* FlyBase: FlyBase\n* FusionGDB: FusionGDB\n* JPO: JPO\n* KIPO: KIPO\n* PATRIC: PATRIC\n* PDB: PDB\n* RefSeq: RefSeq\n* SEED: SEED\n* SGD: SGD\n* UniProt: UniProtKB\n* isoforms: UniProtKB/Swiss-Prot isoforms\n* TAIR: TAIR\n* TROME: TROME\n* USPTO: USPTO\n* VEGA: VEGA\n* WBParaSite: WBParaSite\n* WormBase: WormBase"
     checksum: NotRequired[str]
     "Checksum (CRC64/MD5)\ne.g. sample checksum"
     length: NotRequired[
         tuple[
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -65,9 +61,7 @@ UniparcNamesTaxonomy: TypeAlias = Literal[
     "upi", "gene", "organism_id", "organism", "protein", "proteome"
 ]
 UniparcSequences: TypeAlias = Literal["checksum", "length", "sequence"]
-UniparcMiscellaneous: TypeAlias = Literal[
-    "accession",
-]
+UniparcMiscellaneous: TypeAlias = Literal["accession",]
 UniparcDateOf: TypeAlias = Literal["first_seen", "last_seen"]
 UniparcFamilyDomains: TypeAlias = Literal[
     "CDD",

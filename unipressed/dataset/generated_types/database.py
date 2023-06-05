@@ -32,6 +32,4 @@ DatabaseCrossReference: TypeAlias = Literal[
     "category",
     "statistics",
 ]
-DatabaseFields: TypeAlias = Literal[
-    DatabaseCrossReference,
-]
+DatabaseFields: TypeAlias = Literal[DatabaseCrossReference,]
