@@ -86,4 +86,4 @@ class IdMappingJob:
                 yield from parsed["results"]
 
 
-IdMappingResult: TypeAlias = TypedDict("IdMappingResult", {"from": str, "to": str})
+IdMappingResult = TypedDict("IdMappingResult", {"from": str, "to": str})
