@@ -30,6 +30,4 @@ DiseasesDisease: TypeAlias = Literal[
     "keywords",
     "statistics",
 ]
-DiseasesFields: TypeAlias = Literal[
-    DiseasesDisease,
-]
+DiseasesFields: TypeAlias = Literal[DiseasesDisease,]

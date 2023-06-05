@@ -4,7 +4,7 @@ import ast
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Iterable, Optional
+from typing import TYPE_CHECKING, Iterable, Optional, cast
 
 import black
 import inflection
@@ -12,7 +12,7 @@ import requests
 import typer
 
 from codegen.dataset.datasets import datasets
-from codegen.dataset.uniprot_types import is_enum, is_general
+from codegen.dataset.uniprot_types import UniprotEvidenceField, is_enum, is_general
 from codegen.dataset.validate import validate_query_fields
 from codegen.util import make_literal
 
@@ -209,7 +209,11 @@ def convert_type(
             add_entry(ast.Name("bool"))
         else:
             raise Exception()
-    elif field["fieldType"] == "evidence" and field["dataType"] == "string":
+    elif (
+        field["fieldType"] in {"evidence", "experimental_evidence"}
+        and field["dataType"] == "string"
+    ):
+        field = cast(UniprotEvidenceField, field)
         # For some reason, the go field has implicit subfields, but none of the other evidence fields does this
         if field["id"].endswith("evidence"):
             for group in field["evidenceGroups"]:
@@ -273,9 +277,11 @@ def convert_type(
                 )
             )
         else:
-            raise Exception()
+            raise Exception(
+                f"Unknown data type {field['dataType']} for range field type"
+            )
     else:
-        raise Exception()
+        raise Exception(f"Unknown field type {field['fieldType']}")
 
     if is_general(field):
         autocomplete = field.get("autoCompleteQueryTerm")

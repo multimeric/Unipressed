@@ -67,7 +67,7 @@ def fifty_gene_names() -> Set[str]:
     return {
         "MT-RNR1",
         "CIROP",
-        "UHRF1BP1L",
+        "BLTP3B",
         "POTEB3",
         "CLRN2",
         "ARHGAP10",
