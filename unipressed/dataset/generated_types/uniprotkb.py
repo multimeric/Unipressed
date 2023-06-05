@@ -1,9 +1,7 @@
 from __future__ import annotations
-
+from typing import Union, Iterable
+from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from datetime import date
-from typing import Iterable, Union
-
-from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 Existence: TypeAlias = Literal["1", "2", "3", "4", "5"]
 Organelle: TypeAlias = Literal[
@@ -52,641 +50,216 @@ class UniprotkbQueryDict(TypedDict):
     "Enzyme classification [EC]\ne.g. 1.1.2.3"
     cc_cofactor_chebi: NotRequired[str]
     "Cc cofactor chebi\ne.g. 29105"
-    ccev_cofactor_chebi: NotRequired[str]
-    "Ccev cofactor chebi\ne.g. manual"
+    cc_cofactor_chebi_exp: NotRequired[str]
+    "Cc cofactor chebi exp\ne.g. 29105"
     cc_cofactor_note: NotRequired[str]
     "Cc cofactor note\ne.g. subunit"
-    ccev_cofactor_note: NotRequired[str]
-    "Ccev cofactor note\ne.g. ECO_0000269"
+    cc_cofactor_note_exp: NotRequired[str]
+    "Cc cofactor note exp\ne.g. subunit"
     cc_bpcp: NotRequired[str]
-    'Cc bpcp\ne.g. "some value"'
-    ccev_bpcp: NotRequired[str]
-    "Ccev bpcp\ne.g. automatic"
+    "Cc bpcp\ne.g. prosthetic"
+    cc_bpcp_exp: NotRequired[str]
+    "Cc bpcp exp\ne.g. prosthetic"
     cc_bpcp_absorption: NotRequired[str]
     "Cc bpcp absorption\ne.g. prosthetic"
-    ccev_bpcp_absorption: NotRequired[str]
-    "Ccev bpcp absorption\ne.g. ECO_0000213"
+    cc_bpcp_absorption_exp: NotRequired[str]
+    "Cc bpcp absorption exp\ne.g. prosthetic"
     cc_bpcp_kinetics: NotRequired[str]
     "Cc bpcp kinetics\ne.g. aspartate"
-    ccev_bpcp_kinetics: NotRequired[str]
-    "Ccev bpcp kinetics\ne.g. experimental"
+    cc_bpcp_kinetics_exp: NotRequired[str]
+    "Cc bpcp kinetics exp\ne.g. aspartate"
     cc_bpcp_ph_dependence: NotRequired[str]
     "Cc bpcp ph dependence\ne.g. optimum"
-    ccev_bpcp_ph_dependence: NotRequired[str]
-    "Ccev bpcp ph dependence\ne.g. ECO_0000305"
+    cc_bpcp_ph_dependence_exp: NotRequired[str]
+    "Cc bpcp ph dependence exp\ne.g. optimum"
     cc_bpcp_redox_potential: NotRequired[str]
     "Cc bpcp redox potential\ne.g. siroheme"
-    ccev_bpcp_redox_potential: NotRequired[str]
-    "Ccev bpcp redox potential\ne.g. manual"
+    cc_bpcp_redox_potential_exp: NotRequired[str]
+    "Cc bpcp redox potential exp\ne.g. siroheme"
     cc_bpcp_temp_dependence: NotRequired[str]
     "Cc bpcp temp dependence\ne.g. *"
-    ccev_bpcp_temp_dependence: NotRequired[str]
-    "Ccev bpcp temp dependence\ne.g. manual"
+    cc_bpcp_temp_dependence_exp: NotRequired[str]
+    "Cc bpcp temp dependence exp\ne.g. *"
     cc_catalytic_activity: NotRequired[str]
     "Cc catalytic activity\ne.g. tyrosine"
-    ccev_catalytic_activity: NotRequired[str]
-    "Ccev catalytic activity\ne.g. manual"
+    cc_catalytic_activity_exp: NotRequired[str]
+    "Cc catalytic activity exp\ne.g. tyrosine"
     cc_activity_regulation: NotRequired[str]
     "Cc activity regulation\ne.g. inhibited"
-    ccev_activity_regulation: NotRequired[str]
-    "Ccev activity regulation\ne.g. manual"
+    cc_activity_regulation_exp: NotRequired[str]
+    "Cc activity regulation exp\ne.g. inhibited"
     cc_function: NotRequired[str]
     "Cc function\ne.g. enzyme"
-    ccev_function: NotRequired[str]
-    "Ccev function\ne.g. experimental"
+    cc_function_exp: NotRequired[str]
+    "Cc function exp\ne.g. enzyme"
     cc_caution: NotRequired[str]
     "Cc caution\ne.g. kinase"
-    ccev_caution: NotRequired[str]
-    "Ccev caution\ne.g. manual"
+    cc_caution_exp: NotRequired[str]
+    "Cc caution exp\ne.g. kinase"
     ft_sites: NotRequired[str]
     "Ft sites\ne.g. translocation"
-    ftlen_sites: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen sites\ne.g. [0 TO 100]"
-    ftev_sites: NotRequired[str]
-    "Ftev sites\ne.g. manual"
+    ft_sites_exp: NotRequired[str]
+    "Ft sites exp\ne.g. translocation"
     ft_act_site: NotRequired[str]
     "Ft act site\ne.g. phosphocysteine"
-    ftlen_act_site: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen act site\ne.g. [0 TO 100]"
-    ftev_act_site: NotRequired[str]
-    "Ftev act site\ne.g. manual"
+    ft_act_site_exp: NotRequired[str]
+    "Ft act site exp\ne.g. phosphocysteine"
     ft_binding: NotRequired[str]
     "Ft binding\ne.g. phosphocysteine"
-    ftlen_binding: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen binding\ne.g. [0 TO 100]"
-    ftev_binding: NotRequired[str]
-    "Ftev binding\ne.g. any"
+    ft_binding_exp: NotRequired[str]
+    "Ft binding exp\ne.g. phosphocysteine"
     ft_site: NotRequired[str]
     "Ft site\ne.g. phosphocysteine"
-    ftlen_site: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen site\ne.g. [0 TO 100]"
-    ftev_site: NotRequired[str]
-    "Ftev site\ne.g. any"
+    ft_site_exp: NotRequired[str]
+    "Ft site exp\ne.g. phosphocysteine"
     ft_dna_bind: NotRequired[str]
     "Ft dna bind\ne.g. *"
-    ftlen_dna_bind: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen dna bind\ne.g. [0 TO 100]"
-    ftev_dna_bind: NotRequired[str]
-    "Ftev dna bind\ne.g. any"
+    ft_dna_bind_exp: NotRequired[str]
+    "Ft dna bind exp\ne.g. *"
     cc_pathway: NotRequired[str]
     "Cc pathway\ne.g. metabolism"
-    ccev_pathway: NotRequired[str]
-    "Ccev pathway\ne.g. any"
+    cc_pathway_exp: NotRequired[str]
+    "Cc pathway exp\ne.g. metabolism"
     cc_miscellaneous: NotRequired[str]
     "Cc miscellaneous\ne.g. abscisic"
-    ccev_miscellaneous: NotRequired[str]
-    "Ccev miscellaneous\ne.g. any"
+    cc_miscellaneous_exp: NotRequired[str]
+    "Cc miscellaneous exp\ne.g. abscisic"
     cc_scl_term: NotRequired[str]
     "Cc scl term\ne.g. membrane"
-    ccev_scl_term: NotRequired[str]
-    "Ccev scl term\ne.g. manual"
+    cc_scl_term_exp: NotRequired[str]
+    "Cc scl term exp\ne.g. membrane"
     cc_scl_note: NotRequired[str]
     "Cc scl note\ne.g. membrane"
-    ccev_scl_note: NotRequired[str]
-    "Ccev scl note\ne.g. manual"
+    cc_scl_note_exp: NotRequired[str]
+    "Cc scl note exp\ne.g. membrane"
     ft_transmem: NotRequired[str]
     "Ft transmem\ne.g. forming"
-    ftlen_transmem: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen transmem\ne.g. [0 TO 100]"
-    ftev_transmem: NotRequired[str]
-    "Ftev transmem\ne.g. manual"
+    ft_transmem_exp: NotRequired[str]
+    "Ft transmem exp\ne.g. forming"
     ft_topo_dom: NotRequired[str]
     "Ft topo dom\ne.g. forming"
-    ftlen_topo_dom: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen topo dom\ne.g. [0 TO 100]"
-    ftev_topo_dom: NotRequired[str]
-    "Ftev topo dom\ne.g. manual"
+    ft_topo_dom_exp: NotRequired[str]
+    "Ft topo dom exp\ne.g. forming"
     ft_intramem: NotRequired[str]
     "Ft intramem\ne.g. forming"
-    ftlen_intramem: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen intramem\ne.g. [0 TO 100]"
-    ftev_intramem: NotRequired[str]
-    "Ftev intramem\ne.g. manual"
+    ft_intramem_exp: NotRequired[str]
+    "Ft intramem exp\ne.g. forming"
     cc_disease: NotRequired[str]
     "Cc disease\ne.g. nephrotic"
-    ccev_disease: NotRequired[str]
-    "Ccev disease\ne.g. manual"
+    cc_disease_exp: NotRequired[str]
+    "Cc disease exp\ne.g. nephrotic"
     cc_allergen: NotRequired[str]
     "Cc allergen\ne.g. allergic"
-    ccev_allergen: NotRequired[str]
-    "Ccev allergen\ne.g. manual"
+    cc_allergen_exp: NotRequired[str]
+    "Cc allergen exp\ne.g. allergic"
     cc_toxic_dose: NotRequired[str]
     "Cc toxic dose\ne.g. intracistenal"
-    ccev_toxic_dose: NotRequired[str]
-    "Ccev toxic dose\ne.g. manual"
+    cc_toxic_dose_exp: NotRequired[str]
+    "Cc toxic dose exp\ne.g. intracistenal"
     cc_biotechnology: NotRequired[str]
     "Cc biotechnology\ne.g. vaccine"
-    ccev_biotechnology: NotRequired[str]
-    "Ccev biotechnology\ne.g. manual"
+    cc_biotechnology_exp: NotRequired[str]
+    "Cc biotechnology exp\ne.g. vaccine"
     cc_pharmaceutical: NotRequired[str]
     "Cc pharmaceutical\ne.g. peptide"
-    ccev_pharmaceutical: NotRequired[str]
-    "Ccev pharmaceutical\ne.g. manual"
+    cc_pharmaceutical_exp: NotRequired[str]
+    "Cc pharmaceutical exp\ne.g. peptide"
     cc_disruption_phenotype: NotRequired[str]
     "Cc disruption phenotype\ne.g. infected"
-    ccev_disruption_phenotype: NotRequired[str]
-    "Ccev disruption phenotype\ne.g. any"
+    cc_disruption_phenotype_exp: NotRequired[str]
+    "Cc disruption phenotype exp\ne.g. infected"
     ft_mutagen: NotRequired[str]
     "Ft mutagen\ne.g. phosphatase"
-    ftlen_mutagen: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen mutagen\ne.g. [0 TO 100]"
-    ftev_mutagen: NotRequired[str]
-    "Ftev mutagen\ne.g. manual"
+    ft_mutagen_exp: NotRequired[str]
+    "Ft mutagen exp\ne.g. phosphatase"
     cc_ptm: NotRequired[str]
     "Cc ptm\ne.g. mitosis"
-    ccev_ptm: NotRequired[str]
-    "Ccev ptm\ne.g. any"
+    cc_ptm_exp: NotRequired[str]
+    "Cc ptm exp\ne.g. mitosis"
     ft_mod_res: NotRequired[str]
     "Ft mod res\ne.g. phosphoserine"
-    ftlen_mod_res: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen mod res\ne.g. [0 TO 100]"
-    ftev_mod_res: NotRequired[str]
-    "Ftev mod res\ne.g. manual"
+    ft_mod_res_exp: NotRequired[str]
+    "Ft mod res exp\ne.g. phosphoserine"
     ft_lipid: NotRequired[str]
     "Ft lipid\ne.g. cysteine"
-    ftlen_lipid: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen lipid\ne.g. [0 TO 100]"
-    ftev_lipid: NotRequired[str]
-    "Ftev lipid\ne.g. manual"
+    ft_lipid_exp: NotRequired[str]
+    "Ft lipid exp\ne.g. cysteine"
     ft_carbohyd: NotRequired[str]
     "Ft carbohyd\ne.g. cysteine"
-    ftlen_carbohyd: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen carbohyd\ne.g. [0 TO 100]"
-    ftev_carbohyd: NotRequired[str]
-    "Ftev carbohyd\ne.g. manual"
+    ft_carbohyd_exp: NotRequired[str]
+    "Ft carbohyd exp\ne.g. cysteine"
     ft_disulfid: NotRequired[str]
     "Ft disulfid\ne.g. reversible"
-    ftlen_disulfid: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen disulfid\ne.g. [0 TO 100]"
-    ftev_disulfid: NotRequired[str]
-    "Ftev disulfid\ne.g. manual"
+    ft_disulfid_exp: NotRequired[str]
+    "Ft disulfid exp\ne.g. reversible"
     ft_crosslnk: NotRequired[str]
     "Ft crosslnk\ne.g. lysine"
-    ftlen_crosslnk: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen crosslnk\ne.g. [0 TO 100]"
-    ftev_crosslnk: NotRequired[str]
-    "Ftev crosslnk\ne.g. manual"
+    ft_crosslnk_exp: NotRequired[str]
+    "Ft crosslnk exp\ne.g. lysine"
     ft_molecule_processing: NotRequired[str]
     "Ft molecule processing\ne.g. disulfide"
-    ftlen_molecule_processing: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen molecule processing\ne.g. [0 TO 100]"
-    ftev_molecule_processing: NotRequired[str]
-    "Ftev molecule processing\ne.g. manual"
+    ft_molecule_processing_exp: NotRequired[str]
+    "Ft molecule processing exp\ne.g. disulfide"
     ft_chain: NotRequired[str]
     "Ft chain\ne.g. kinase"
-    ftlen_chain: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen chain\ne.g. [0 TO 100]"
-    ftev_chain: NotRequired[str]
-    "Ftev chain\ne.g. manual"
+    ft_chain_exp: NotRequired[str]
+    "Ft chain exp\ne.g. kinase"
     ft_init_met: NotRequired[str]
     "Ft init met\ne.g. Removed"
-    ftlen_init_met: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen init met\ne.g. [0 TO 100]"
-    ftev_init_met: NotRequired[str]
-    "Ftev init met\ne.g. manual"
+    ft_init_met_exp: NotRequired[str]
+    "Ft init met exp\ne.g. Removed"
     ft_peptide: NotRequired[str]
     "Ft peptide\ne.g. Removed"
-    ftlen_peptide: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen peptide\ne.g. [0 TO 100]"
-    ftev_peptide: NotRequired[str]
-    "Ftev peptide\ne.g. any"
+    ft_peptide_exp: NotRequired[str]
+    "Ft peptide exp\ne.g. Removed"
     ft_signal: NotRequired[str]
     "Ft signal\ne.g. cleaved"
-    ftlen_signal: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen signal\ne.g. [0 TO 100]"
-    ftev_signal: NotRequired[str]
-    "Ftev signal\ne.g. manual"
+    ft_signal_exp: NotRequired[str]
+    "Ft signal exp\ne.g. cleaved"
     ft_propep: NotRequired[str]
     "Ft propep\ne.g. Activation peptide"
-    ftlen_propep: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen propep\ne.g. [0 TO 100]"
-    ftev_propep: NotRequired[str]
-    "Ftev propep\ne.g. manual"
+    ft_propep_exp: NotRequired[str]
+    "Ft propep exp\ne.g. Activation peptide"
     ft_transit: NotRequired[str]
     "Ft transit\ne.g. Mitochondrion"
-    ftlen_transit: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen transit\ne.g. [0 TO 100]"
-    ftev_transit: NotRequired[str]
-    "Ftev transit\ne.g. manual"
+    ft_transit_exp: NotRequired[str]
+    "Ft transit exp\ne.g. Mitochondrion"
     cc_developmental_stage: NotRequired[str]
     "Cc developmental stage\ne.g. brain"
-    ccev_developmental_stage: NotRequired[str]
-    "Ccev developmental stage\ne.g. manual"
+    cc_developmental_stage_exp: NotRequired[str]
+    "Cc developmental stage exp\ne.g. brain"
     cc_induction: NotRequired[str]
     "Cc induction\ne.g. calcium"
-    ccev_induction: NotRequired[str]
-    "Ccev induction\ne.g. manual"
+    cc_induction_exp: NotRequired[str]
+    "Cc induction exp\ne.g. calcium"
     cc_tissue_specificity: NotRequired[str]
     "Cc tissue specificity\ne.g. pancreas"
-    ccev_tissue_specificity: NotRequired[str]
-    "Ccev tissue specificity\ne.g. manual"
+    cc_tissue_specificity_exp: NotRequired[str]
+    "Cc tissue specificity exp\ne.g. pancreas"
     interactor: NotRequired[str]
     "Binary Interaction\ne.g. EBI-1042898"
     cc_subunit: NotRequired[str]
     "Cc subunit\ne.g. homodimer"
-    ccev_subunit: NotRequired[str]
-    "Ccev subunit\ne.g. manual"
+    cc_subunit_exp: NotRequired[str]
+    "Cc subunit exp\ne.g. homodimer"
     structure_3d: NotRequired[bool]
     "3D Structure\ne.g. true\n* true: Yes\n* false: No"
     ft_secstruct: NotRequired[str]
     "Ft secstruct\ne.g. *"
-    ftlen_secstruct: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen secstruct\ne.g. [0 TO 100]"
-    ftev_secstruct: NotRequired[str]
-    "Ftev secstruct\ne.g. manual"
+    ft_secstruct_exp: NotRequired[str]
+    "Ft secstruct exp\ne.g. *"
     ft_helix: NotRequired[str]
     "Ft helix\ne.g. *"
-    ftlen_helix: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen helix\ne.g. [0 TO 100]"
-    ftev_helix: NotRequired[str]
-    "Ftev helix\ne.g. manual"
+    ft_helix_exp: NotRequired[str]
+    "Ft helix exp\ne.g. *"
     ft_turn: NotRequired[str]
     "Ft turn\ne.g. *"
-    ftlen_turn: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen turn\ne.g. [0 TO 100]"
-    ftev_turn: NotRequired[str]
-    "Ftev turn\ne.g. manual"
+    ft_turn_exp: NotRequired[str]
+    "Ft turn exp\ne.g. *"
     ft_strand: NotRequired[str]
     "Ft strand\ne.g. *"
-    ftlen_strand: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen strand\ne.g. [0 TO 100]"
-    ftev_strand: NotRequired[str]
-    "Ftev strand\ne.g. manual"
+    ft_strand_exp: NotRequired[str]
+    "Ft strand exp\ne.g. *"
     mass: NotRequired[
         tuple[
             Union[
@@ -723,28 +296,28 @@ class UniprotkbQueryDict(TypedDict):
     "Sequence length\ne.g. [441 TO 450]"
     cc_ap: NotRequired[str]
     "Cc ap\ne.g. tissues"
-    ccev_ap: NotRequired[str]
-    "Ccev ap\ne.g. manual"
+    cc_ap_exp: NotRequired[str]
+    "Cc ap exp\ne.g. tissues"
     cc_ap_apu: NotRequired[str]
     "Cc ap apu\ne.g. *"
-    ccev_ap_apu: NotRequired[str]
-    "Ccev ap apu\ne.g. any"
+    cc_ap_apu_exp: NotRequired[str]
+    "Cc ap apu exp\ne.g. *"
     cc_ap_as: NotRequired[str]
     "Cc ap as\ne.g. experimental"
-    ccev_ap_as: NotRequired[str]
-    "Ccev ap as\ne.g. experimental"
+    cc_ap_as_exp: NotRequired[str]
+    "Cc ap as exp\ne.g. experimental"
     cc_ap_ai: NotRequired[str]
     "Cc ap ai\ne.g. acetylalanine"
-    ccev_ap_ai: NotRequired[str]
-    "Ccev ap ai\ne.g. any"
+    cc_ap_ai_exp: NotRequired[str]
+    "Cc ap ai exp\ne.g. acetylalanine"
     cc_ap_rf: NotRequired[str]
     "Cc ap rf\ne.g. translation"
-    ccev_ap_rf: NotRequired[str]
-    "Ccev ap rf\ne.g. manual"
+    cc_ap_rf_exp: NotRequired[str]
+    "Cc ap rf exp\ne.g. translation"
     cc_sequence_caution: NotRequired[str]
     "Cc sequence caution\ne.g. translated"
-    ccev_sequence_caution: NotRequired[str]
-    "Ccev sequence caution\ne.g. any"
+    cc_sequence_caution_exp: NotRequired[str]
+    "Cc sequence caution exp\ne.g. translated"
     cc_sc_framesh: NotRequired[str]
     "Frameshift\ne.g. *"
     cc_sc_einit: NotRequired[str]
@@ -757,209 +330,56 @@ class UniprotkbQueryDict(TypedDict):
     "Erroneous translation\ne.g. choice"
     cc_sc_misc: NotRequired[str]
     "Cc sc misc\ne.g. sequence"
-    ccev_sc_misc: NotRequired[str]
-    "Ccev sc misc\ne.g. any"
+    cc_sc_misc_exp: NotRequired[str]
+    "Cc sc misc exp\ne.g. sequence"
     cc_mass_spectrometry: NotRequired[str]
     "Cc mass spectrometry\ne.g. electrospray"
-    ccev_mass_spectrometry: NotRequired[str]
-    "Ccev mass spectrometry\ne.g. manual"
+    cc_mass_spectrometry_exp: NotRequired[str]
+    "Cc mass spectrometry exp\ne.g. electrospray"
     cc_polymorphism: NotRequired[str]
     "Cc polymorphism\ne.g. transcript"
-    ccev_polymorphism: NotRequired[str]
-    "Ccev polymorphism\ne.g. manual"
+    cc_polymorphism_exp: NotRequired[str]
+    "Cc polymorphism exp\ne.g. transcript"
     cc_rna_editing: NotRequired[str]
     "Cc rna editing\ne.g. target"
-    ccev_rna_editing: NotRequired[str]
-    "Ccev rna editing\ne.g. manual"
+    cc_rna_editing_exp: NotRequired[str]
+    "Cc rna editing exp\ne.g. target"
     ft_variants: NotRequired[str]
     "Ft variants\ne.g. colorectal"
-    ftlen_variants: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen variants\ne.g. [0 TO 100]"
-    ftev_variants: NotRequired[str]
-    "Ftev variants\ne.g. manual"
+    ft_variants_exp: NotRequired[str]
+    "Ft variants exp\ne.g. colorectal"
     ft_variant: NotRequired[str]
     "Ft variant\ne.g. colorectal"
-    ftlen_variant: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen variant\ne.g. [0 TO 100]"
-    ftev_variant: NotRequired[str]
-    "Ftev variant\ne.g. manual"
+    ft_variant_exp: NotRequired[str]
+    "Ft variant exp\ne.g. colorectal"
     ft_var_seq: NotRequired[str]
     "Ft var seq\ne.g. isoform"
-    ftlen_var_seq: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen var seq\ne.g. [0 TO 100]"
-    ftev_var_seq: NotRequired[str]
-    "Ftev var seq\ne.g. manual"
+    ft_var_seq_exp: NotRequired[str]
+    "Ft var seq exp\ne.g. isoform"
     ft_non_std: NotRequired[str]
     "Ft non std\ne.g. selenocysteine"
-    ftlen_non_std: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen non std\ne.g. [0 TO 100]"
-    ftev_non_std: NotRequired[str]
-    "Ftev non std\ne.g. manual"
+    ft_non_std_exp: NotRequired[str]
+    "Ft non std exp\ne.g. selenocysteine"
     ft_non_ter: NotRequired[str]
     "Ft non ter\ne.g. *"
-    ftlen_non_ter: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen non ter\ne.g. [0 TO 100]"
-    ftev_non_ter: NotRequired[str]
-    "Ftev non ter\ne.g. manual"
+    ft_non_ter_exp: NotRequired[str]
+    "Ft non ter exp\ne.g. *"
     ft_non_cons: NotRequired[str]
     "Ft non cons\ne.g. *"
-    ftlen_non_cons: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen non cons\ne.g. [0 TO 100]"
-    ftev_non_cons: NotRequired[str]
-    "Ftev non cons\ne.g. manual"
+    ft_non_cons_exp: NotRequired[str]
+    "Ft non cons exp\ne.g. *"
     ft_conflict: NotRequired[str]
     "Ft conflict\ne.g. *"
-    ftlen_conflict: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen conflict\ne.g. [0 TO 100]"
-    ftev_conflict: NotRequired[str]
-    "Ftev conflict\ne.g. manual"
+    ft_conflict_exp: NotRequired[str]
+    "Ft conflict exp\ne.g. *"
     ft_unsure: NotRequired[str]
     "Ft unsure\ne.g. *"
-    ftlen_unsure: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen unsure\ne.g. [0 TO 100]"
-    ftev_unsure: NotRequired[str]
-    "Ftev unsure\ne.g. manual"
+    ft_unsure_exp: NotRequired[str]
+    "Ft unsure exp\ne.g. *"
     ft_positional: NotRequired[str]
     "Ft positional\ne.g. colorectal"
-    ftlen_positional: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen positional\ne.g. [0 TO 100]"
-    ftev_positional: NotRequired[str]
-    "Ftev positional\ne.g. manual"
+    ft_positional_exp: NotRequired[str]
+    "Ft positional exp\ne.g. colorectal"
     fragment: NotRequired[bool]
     "Fragment\ne.g. true\n* true: Yes\n* false: No"
     organelle: NotRequired[Organelle]
@@ -976,169 +396,50 @@ class UniprotkbQueryDict(TypedDict):
     "Transposon\ne.g. tn3"
     ft_domain: NotRequired[str]
     "Ft domain\ne.g. phosphatase"
-    ftlen_domain: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen domain\ne.g. [0 TO 100]"
-    ftev_domain: NotRequired[str]
-    "Ftev domain\ne.g. manual"
+    ft_domain_exp: NotRequired[str]
+    "Ft domain exp\ne.g. phosphatase"
     cc_domain: NotRequired[str]
     "Cc domain\ne.g. conformation"
-    ccev_domain: NotRequired[str]
-    "Ccev domain\ne.g. any"
+    cc_domain_exp: NotRequired[str]
+    "Cc domain exp\ne.g. conformation"
     family: NotRequired[str]
     "Protein family\ne.g. pa28"
     ft_coiled: NotRequired[str]
     "Ft coiled\ne.g. *"
-    ftlen_coiled: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen coiled\ne.g. [0 TO 100]"
-    ftev_coiled: NotRequired[str]
-    "Ftev coiled\ne.g. manual"
+    ft_coiled_exp: NotRequired[str]
+    "Ft coiled exp\ne.g. *"
     ft_compbias: NotRequired[str]
     "Ft compbias\ne.g. glu-rich"
-    ftlen_compbias: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen compbias\ne.g. [0 TO 100]"
-    ftev_compbias: NotRequired[str]
-    "Ftev compbias\ne.g. manual"
+    ft_compbias_exp: NotRequired[str]
+    "Ft compbias exp\ne.g. glu-rich"
     ft_motif: NotRequired[str]
     "Ft motif\ne.g. motif"
-    ftlen_motif: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen motif\ne.g. [0 TO 100]"
-    ftev_motif: NotRequired[str]
-    "Ftev motif\ne.g. manual"
+    ft_motif_exp: NotRequired[str]
+    "Ft motif exp\ne.g. motif"
     ft_region: NotRequired[str]
     "Ft region\ne.g. motif"
-    ftlen_region: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen region\ne.g. [0 TO 100]"
-    ftev_region: NotRequired[str]
-    "Ftev region\ne.g. manual"
+    ft_region_exp: NotRequired[str]
+    "Ft region exp\ne.g. motif"
     ft_repeat: NotRequired[str]
     "Ft repeat\ne.g. motif"
-    ftlen_repeat: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen repeat\ne.g. [0 TO 100]"
-    ftev_repeat: NotRequired[str]
-    "Ftev repeat\ne.g. manual"
+    ft_repeat_exp: NotRequired[str]
+    "Ft repeat exp\ne.g. motif"
     cc_similarity: NotRequired[str]
     "Cc similarity\ne.g. phosphatase"
-    ccev_similarity: NotRequired[str]
-    "Ccev similarity\ne.g. manual"
+    cc_similarity_exp: NotRequired[str]
+    "Cc similarity exp\ne.g. phosphatase"
     ft_zn_fing: NotRequired[str]
     "Ft zn fing\ne.g. UBP"
-    ftlen_zn_fing: NotRequired[
-        tuple[
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-            Union[
-                int,
-                Literal[
-                    "*",
-                ],
-            ],
-        ]
-    ]
-    "Ftlen zn fing\ne.g. [0 TO 100]"
-    ftev_zn_fing: NotRequired[str]
-    "Ftev zn fing\ne.g. manual"
+    ft_zn_fing_exp: NotRequired[str]
+    "Ft zn fing exp\ne.g. UBP"
     xref: NotRequired[str]
     "Any cross-reference"
     database: NotRequired[str]
     "Database\ne.g. Bgee"
     cc_webresource: NotRequired[str]
     "Cc webresource\ne.g. lck"
-    ccev_webresource: NotRequired[str]
-    "Ccev webresource\ne.g. manual"
+    cc_webresource_exp: NotRequired[str]
+    "Cc webresource exp\ne.g. lck"
     date_created: NotRequired[
         tuple[
             Union[
@@ -1463,6 +764,7 @@ UniprotkbPtm: TypeAlias = Literal[
     "xref_carbonyldb",
     "xref_depod",
     "xref_glyconnect",
+    "xref_glycosmos",
     "xref_glygen",
     "xref_metosite",
     "xref_phosphositeplus",
@@ -1516,6 +818,7 @@ UniprotkbGenomeAnnotation: TypeAlias = Literal[
     "xref_wbparasitetranscriptprotein",
 ]
 UniprotkbOrganismSpecific: TypeAlias = Literal[
+    "xref_agr",
     "xref_arachnoserver",
     "xref_araport",
     "xref_cgd",

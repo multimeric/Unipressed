@@ -209,7 +209,7 @@ def convert_type(
             add_entry(ast.Name("bool"))
         else:
             raise Exception()
-    elif field["fieldType"] == "evidence" and field["dataType"] == "string":
+    elif field["fieldType"] in {"evidence", "experimental_evidence"} and field["dataType"] == "string":
         # For some reason, the go field has implicit subfields, but none of the other evidence fields does this
         if field["id"].endswith("evidence"):
             for group in field["evidenceGroups"]:
@@ -273,9 +273,9 @@ def convert_type(
                 )
             )
         else:
-            raise Exception()
+            raise Exception(f"Unknown data type {field['dataType']} for range field type")
     else:
-        raise Exception()
+        raise Exception(f"Unknown field type {field['fieldType']}")
 
     if is_general(field):
         autocomplete = field.get("autoCompleteQueryTerm")

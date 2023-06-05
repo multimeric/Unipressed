@@ -1,9 +1,7 @@
 from __future__ import annotations
-
+from typing import Union, Iterable
+from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
 from datetime import date
-from typing import Iterable, Union
-
-from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 Identity: TypeAlias = Literal["1.0", "0.9", "0.5"]
 
