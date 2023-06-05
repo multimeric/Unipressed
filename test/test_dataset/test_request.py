@@ -1,5 +1,7 @@
 from datetime import date
 
+import pytest
+
 from unipressed import *
 from unipressed.dataset.search import Search
 
@@ -203,3 +205,22 @@ def test_arba():
             query={"and_": [{"taxonomy": "chloroflexi"}, {"keyword": "metal-binding"}]}
         )
     )
+
+
+@pytest.mark.parametrize(
+    "include_isoform,expected_result_count", [(True, 2), (False, 1)]
+)
+def test_UnirefClient_search_include_isoform(
+    include_isoform: bool, expected_result_count: int
+):
+    records = list(
+        UniprotkbClient.search(
+            query={
+                "accession": "Q8WU66",
+                "organism_id": "9606",
+            },
+            fields=["date_created", "protein_name"],
+            include_isoform=include_isoform,
+        ).each_record()
+    )
+    assert len(records) == expected_result_count
