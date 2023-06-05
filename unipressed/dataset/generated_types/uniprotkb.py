@@ -1,7 +1,9 @@
 from __future__ import annotations
-from typing import Union, Iterable
-from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
+
 from datetime import date
+from typing import Iterable, Union
+
+from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 Existence: TypeAlias = Literal["1", "2", "3", "4", "5"]
 Organelle: TypeAlias = Literal[
@@ -264,15 +266,11 @@ class UniprotkbQueryDict(TypedDict):
         tuple[
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -281,15 +279,11 @@ class UniprotkbQueryDict(TypedDict):
         tuple[
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -444,15 +438,11 @@ class UniprotkbQueryDict(TypedDict):
         tuple[
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -461,15 +451,11 @@ class UniprotkbQueryDict(TypedDict):
         tuple[
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -478,15 +464,11 @@ class UniprotkbQueryDict(TypedDict):
         tuple[
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -553,15 +535,11 @@ class UniprotkbQueryDict(TypedDict):
         tuple[
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 date,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -699,9 +677,7 @@ UniprotkbPtmProcessing: TypeAlias = Literal[
 UniprotkbStructure: TypeAlias = Literal[
     "structure_3d", "ft_strand", "ft_helix", "ft_turn"
 ]
-UniprotkbPublications: TypeAlias = Literal[
-    "lit_pubmed_id",
-]
+UniprotkbPublications: TypeAlias = Literal["lit_pubmed_id",]
 UniprotkbDateOf: TypeAlias = Literal[
     "date_created", "date_modified", "date_sequence_modified", "version"
 ]

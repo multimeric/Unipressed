@@ -1,7 +1,9 @@
 from __future__ import annotations
-from typing import Union, Iterable
-from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
+
 from datetime import date
+from typing import Iterable, Union
+
+from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 
 class ArbaQueryDict(TypedDict):
@@ -45,6 +47,4 @@ ArbaQuery: TypeAlias = Union[ArbaQueryDict, str]
 ArbaArba: TypeAlias = Literal[
     "rule_id", "statistics", "taxonomic_scope", "annotation_covered"
 ]
-ArbaFields: TypeAlias = Literal[
-    ArbaArba,
-]
+ArbaFields: TypeAlias = Literal[ArbaArba,]

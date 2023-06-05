@@ -1,7 +1,9 @@
 from __future__ import annotations
-from typing import Union, Iterable
-from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
+
 from datetime import date
+from typing import Iterable, Union
+
+from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 
 class UniparcQueryDict(TypedDict):
@@ -37,15 +39,11 @@ class UniparcQueryDict(TypedDict):
         tuple[
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
             Union[
                 int,
-                Literal[
-                    "*",
-                ],
+                Literal["*",],
             ],
         ]
     ]
@@ -63,9 +61,7 @@ UniparcNamesTaxonomy: TypeAlias = Literal[
     "upi", "gene", "organism_id", "organism", "protein", "proteome"
 ]
 UniparcSequences: TypeAlias = Literal["checksum", "length", "sequence"]
-UniparcMiscellaneous: TypeAlias = Literal[
-    "accession",
-]
+UniparcMiscellaneous: TypeAlias = Literal["accession",]
 UniparcDateOf: TypeAlias = Literal["first_seen", "last_seen"]
 UniparcFamilyDomains: TypeAlias = Literal[
     "CDD",

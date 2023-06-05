@@ -1,7 +1,9 @@
 from __future__ import annotations
-from typing import Union, Iterable
-from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
+
 from datetime import date
+from typing import Iterable, Union
+
+from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 
 class DiseasesQueryDict(TypedDict):
@@ -28,6 +30,4 @@ DiseasesDisease: TypeAlias = Literal[
     "keywords",
     "statistics",
 ]
-DiseasesFields: TypeAlias = Literal[
-    DiseasesDisease,
-]
+DiseasesFields: TypeAlias = Literal[DiseasesDisease,]

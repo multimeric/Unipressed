@@ -1,7 +1,9 @@
 from __future__ import annotations
-from typing import Union, Iterable
-from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
+
 from datetime import date
+from typing import Iterable, Union
+
+from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 
 class CitationsQueryDict(TypedDict):
@@ -41,6 +43,4 @@ CitationsLiterature: TypeAlias = Literal[
     "lit_abstract",
     "statistics",
 ]
-CitationsFields: TypeAlias = Literal[
-    CitationsLiterature,
-]
+CitationsFields: TypeAlias = Literal[CitationsLiterature,]

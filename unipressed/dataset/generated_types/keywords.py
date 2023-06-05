@@ -1,7 +1,9 @@
 from __future__ import annotations
-from typing import Union, Iterable
-from typing_extensions import TypeAlias, Literal, TypedDict, NotRequired
+
 from datetime import date
+from typing import Iterable, Union
+
+from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
 
 class KeywordsQueryDict(TypedDict):
@@ -32,6 +34,4 @@ KeywordsKeyword: TypeAlias = Literal[
     "parents",
     "statistics",
 ]
-KeywordsFields: TypeAlias = Literal[
-    KeywordsKeyword,
-]
+KeywordsFields: TypeAlias = Literal[KeywordsKeyword,]
