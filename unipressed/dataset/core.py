@@ -161,7 +161,6 @@ class FetchManyClient(DatasetClient[QueryType, JsonResultType, FieldsType, Forma
     """
 
     @classmethod
-    @abstractmethod
     def _bulk_id_param(cls) -> str:
         """
         The name of the GET query parameter used to define the list of IDs in a bulk query.

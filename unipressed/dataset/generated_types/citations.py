@@ -43,6 +43,4 @@ CitationsLiterature: TypeAlias = Literal[
     "lit_abstract",
     "statistics",
 ]
-CitationsFields: TypeAlias = Literal[
-    CitationsLiterature,
-]
+CitationsFields: TypeAlias = Literal[CitationsLiterature,]

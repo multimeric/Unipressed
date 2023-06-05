@@ -36,6 +36,4 @@ LocationsSubcellularLocation: TypeAlias = Literal[
     "part_of",
     "statistics",
 ]
-LocationsFields: TypeAlias = Literal[
-    LocationsSubcellularLocation,
-]
+LocationsFields: TypeAlias = Literal[LocationsSubcellularLocation,]

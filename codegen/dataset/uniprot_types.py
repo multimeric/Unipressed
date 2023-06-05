@@ -53,7 +53,7 @@ class UniprotGeneralField(UniprotLeafField):
 
 
 class UniprotEvidenceField(UniprotLeafField):
-    fieldType: Literal["evidence"]
+    fieldType: Literal["evidence", "experimental_evidence"]
     dataType: Literal["string", "integer", "date", "boolean"]
     evidenceGroups: list[EvidenceGroup]
 
