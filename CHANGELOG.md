@@ -4,7 +4,7 @@
 ### 1.2.0
 
 #### Added
-* `DatasetClient.search()` now has an `include_isoform` parameter, which specifies if you want isoforms to be returned [[#27](https://github.com/multimeric/Unipressed/pull/27), @godotgildor]
+* `DatasetClient.search()` now has an `include_isoform` parameter, which specifies if you want isoforms to be returned [[#27](https://github.com/multimeric/Unipressed/pull/27), [@godotgildor](https://github.com/godotgildor)]
 * Python 3.11 is now officially supported
 
 #### Changed
