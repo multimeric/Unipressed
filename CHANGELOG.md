@@ -1,6 +1,17 @@
 
 ## Changelog
 
+### 1.2.0
+
+#### Added
+* `DatasetClient.search()` now has an `include_isoform` parameter, which specifies if you want isoforms to be returned [[#27](https://github.com/multimeric/Unipressed/pull/27), [@godotgildor](https://github.com/godotgildor)]
+* Python 3.11 is now officially supported
+
+#### Changed
+* Auto-generated type definitions have been regenerated [[#28](https://github.com/multimeric/Unipressed/pull/28)]. This pulls upstream changes from Uniprot which are description-only:
+    * All the `cc_` query fields for `Arba` and `Unirule` such as `cc_cofactor` and `cc_domain` hav updated descriptions
+    * `Uniparc`'s list of databases has increased in the `database` query field
+
 ### 1.1.0
 
 #### Changed
