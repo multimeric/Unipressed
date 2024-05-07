@@ -67,6 +67,7 @@ From: TypeAlias = Literal[
     "MGI",
     "MIM",
     "neXtProt",
+    "OpenTargets",
     "Orphanet",
     "PharmGKB",
     "PomBase",
@@ -167,6 +168,7 @@ To: TypeAlias = Literal[
     "MGI",
     "MIM",
     "neXtProt",
+    "OpenTargets",
     "Orphanet",
     "PharmGKB",
     "PomBase",
@@ -199,3 +201,4 @@ To: TypeAlias = Literal[
     "DisProt",
     "IDEAL",
 ]
+
