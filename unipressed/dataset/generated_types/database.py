@@ -27,7 +27,7 @@ DatabaseCrossReference: TypeAlias = Literal[
     "pubmed_id",
     "doi_id",
     "link_type",
-    "server",
+    "servers",
     "dbUrl",
     "category",
     "statistics",

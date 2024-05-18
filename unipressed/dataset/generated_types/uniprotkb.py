@@ -8,6 +8,7 @@ from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 Existence: TypeAlias = Literal["1", "2", "3", "4", "5"]
 Organelle: TypeAlias = Literal[
     "mitochondrion",
+    "plasmid",
     "plastid",
     "chloroplast",
     "cyanelle",
@@ -245,7 +246,7 @@ class UniprotkbQueryDict(TypedDict):
     cc_subunit_exp: NotRequired[str]
     "Cc subunit exp\ne.g. homodimer"
     structure_3d: NotRequired[bool]
-    "3D Structure\ne.g. true\n* true: Yes\n* false: No"
+    "3D Structure\ne.g. true"
     ft_secstruct: NotRequired[str]
     "Ft secstruct\ne.g. *"
     ft_secstruct_exp: NotRequired[str]
@@ -375,11 +376,11 @@ class UniprotkbQueryDict(TypedDict):
     ft_positional_exp: NotRequired[str]
     "Ft positional exp\ne.g. colorectal"
     fragment: NotRequired[bool]
-    "Fragment\ne.g. true\n* true: Yes\n* false: No"
+    "Fragment\ne.g. true"
     organelle: NotRequired[Organelle]
-    "Encoded in\ne.g. mitochondrion\n* mitochondrion: Mitochondrion\n* plastid: Plastid\n* chloroplast: Chloroplast\n* cyanelle: Cyanelle\n* apicoplast: Apicoplast\n* organellar chromatophore: Organellar chromatophore\n* non-photosynthetic plastid: Non-photosynthetic plastid\n* nucleomorph: Nucleomorph\n* hydrogenosome: Hydrogenosome"
+    "Encoded in\ne.g. mitochondrion\n* mitochondrion: Mitochondrion\n* plasmid: Plasmid\n* plastid: Plastid\n* chloroplast: Chloroplast\n* cyanelle: Cyanelle\n* apicoplast: Apicoplast\n* organellar chromatophore: Organellar chromatophore\n* non-photosynthetic plastid: Non-photosynthetic plastid\n* nucleomorph: Nucleomorph\n* hydrogenosome: Hydrogenosome"
     precursor: NotRequired[bool]
-    "Precursor\ne.g. true\n* true: Yes\n* false: No"
+    "Precursor\ne.g. true"
     tissue: NotRequired[str]
     "Tissue\ne.g. head"
     strain: NotRequired[str]
@@ -403,9 +404,9 @@ class UniprotkbQueryDict(TypedDict):
     ft_coiled_exp: NotRequired[str]
     "Ft coiled exp\ne.g. *"
     ft_compbias: NotRequired[str]
-    "Ft compbias\ne.g. glu-rich"
+    "Ft compbias\ne.g. basic residues"
     ft_compbias_exp: NotRequired[str]
-    "Ft compbias exp\ne.g. glu-rich"
+    "Ft compbias exp\ne.g. basic residues"
     ft_motif: NotRequired[str]
     "Ft motif\ne.g. motif"
     ft_motif_exp: NotRequired[str]
@@ -561,9 +562,9 @@ class UniprotkbQueryDict(TypedDict):
     scope: NotRequired[str]
     "Cited for\ne.g. microtubule"
     reviewed: NotRequired[bool]
-    "Reviewed\ne.g. true\n* true: Yes\n* false: No"
+    "Reviewed\ne.g. true"
     active: NotRequired[bool]
-    "Active\ne.g. true\n* true: Yes\n* false: No"
+    "Active\ne.g. true"
     uniref_cluster_50: NotRequired[str]
     "UniRef50\ne.g. UniRef50_P05067"
     uniref_cluster_90: NotRequired[str]
@@ -677,7 +678,7 @@ UniprotkbPtmProcessing: TypeAlias = Literal[
 UniprotkbStructure: TypeAlias = Literal[
     "structure_3d", "ft_strand", "ft_helix", "ft_turn"
 ]
-UniprotkbPublications: TypeAlias = Literal["lit_pubmed_id",]
+UniprotkbPublications: TypeAlias = Literal["lit_pubmed_id", "lit_doi_id"]
 UniprotkbDateOf: TypeAlias = Literal[
     "date_created", "date_modified", "date_sequence_modified", "version"
 ]
@@ -690,14 +691,16 @@ UniprotkbFamilyDomains: TypeAlias = Literal[
     "protein_families",
     "ft_region",
     "ft_repeat",
+    "cc_similarity",
     "ft_zn_fing",
 ]
 UniprotkbSequence: TypeAlias = Literal[
-    "xref_ccds", "xref_embl", "xref_pir", "xref_refseq"
+    "xref_ccds", "xref_embl", "xref_generif", "xref_pir", "xref_refseq"
 ]
 UniprotkbThreedStructure: TypeAlias = Literal[
     "xref_alphafolddb",
     "xref_bmrb",
+    "xref_emdb",
     "xref_pcddb",
     "xref_pdb",
     "xref_pdbsum",
@@ -749,7 +752,7 @@ UniprotkbPtm: TypeAlias = Literal[
     "xref_iptmnet",
 ]
 UniprotkbPolymorphismAndMutation: TypeAlias = Literal[
-    "xref_biomuta", "xref_dmdm", "xref_dbsnp"
+    "xref_alzforum", "xref_biomuta", "xref_dmdm", "xref_dbsnp"
 ]
 UniprotkbTwodGel: TypeAlias = Literal[
     "xref_compluyeast-2dpage",
@@ -770,6 +773,7 @@ UniprotkbProteomic: TypeAlias = Literal[
     "xref_peptideatlas",
     "xref_promex",
     "xref_proteomicsdb",
+    "xref_pumba",
     "xref_topdownproteomics",
     "xref_jpost",
 ]
@@ -791,7 +795,6 @@ UniprotkbGenomeAnnotation: TypeAlias = Literal[
     "xref_ucsc",
     "xref_vectorbase",
     "xref_wbparasite",
-    "xref_wbparasitetranscriptprotein",
 ]
 UniprotkbOrganismSpecific: TypeAlias = Literal[
     "xref_agr",
@@ -807,6 +810,8 @@ UniprotkbOrganismSpecific: TypeAlias = Literal[
     "xref_genereviews",
     "xref_hgnc",
     "xref_hpa",
+    "xref_ic4r",
+    "xref_japonicusdb",
     "xref_legiolist",
     "xref_leproma",
     "xref_mgi",
@@ -860,10 +865,14 @@ UniprotkbOther: TypeAlias = Literal[
     "xref_evolutionarytrace",
     "xref_genewiki",
     "xref_genomernai",
+    "xref_orcid",
+    "xref_pgenn",
     "xref_phi-base",
     "xref_pro",
     "xref_pharos",
+    "xref_pubtator",
     "xref_rnact",
+    "xref_emind",
 ]
 UniprotkbGeneExpression: TypeAlias = Literal[
     "xref_bgee",
@@ -879,16 +888,15 @@ UniprotkbFamilyAndDomain: TypeAlias = Literal[
     "xref_hamap",
     "xref_ideal",
     "xref_interpro",
+    "xref_ncbifam",
     "xref_panther",
     "xref_pirsf",
     "xref_prints",
     "xref_prosite",
     "xref_pfam",
-    "xref_prodom",
     "xref_sfld",
     "xref_smart",
     "xref_supfam",
-    "xref_tigrfams",
 ]
 UniprotkbFields: TypeAlias = Literal[
     UniprotkbNamesTaxonomy,

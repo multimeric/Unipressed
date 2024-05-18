@@ -87,7 +87,12 @@ def test_main_example():
         fields=["length", "gene_names"],
     ).each_record():
         assert isinstance(record, dict)
-        assert set(record.keys()) == {"primaryAccession", "genes", "sequence"}
+        assert set(record.keys()) == {
+            "primaryAccession",
+            "genes",
+            "sequence",
+            "entryType",
+        }
         assert record["sequence"]["length"] > 5000
 
 
@@ -104,7 +109,7 @@ def test_date_field():
             fields=["date_created", "protein_name"],
         ).each_record()
     )
-    assert len(records) == 544
+    assert len(records) == 542
 
 
 def test_uniref():
