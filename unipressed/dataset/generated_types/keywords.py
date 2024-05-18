@@ -5,6 +5,19 @@ from typing import Iterable, Union
 
 from typing_extensions import Literal, NotRequired, TypeAlias, TypedDict
 
+Category: TypeAlias = Literal[
+    "technical_term",
+    "ptm",
+    "molecular_function",
+    "ligand",
+    "domain",
+    "disease",
+    "developmental_stage",
+    "coding_sequence_diversity",
+    "cellular_component",
+    "biological_process",
+]
+
 
 class KeywordsQueryDict(TypedDict):
     and_: NotRequired[Iterable["KeywordsQuery"]]
@@ -17,7 +30,7 @@ class KeywordsQueryDict(TypedDict):
     "Name\ne.g. 2Fe-2S"
     keyword_id: NotRequired[str]
     "Keyword [AC]\ne.g. KW-0001"
-    category: NotRequired[str]
+    category: NotRequired[Category]
     "Category\ne.g. Domain\n* technical_term: Technical term [KW-9990]\n* ptm: PTM [KW-9991]\n* molecular_function: Molecular function [KW-9992]\n* ligand: Ligand [KW-9993]\n* domain: Domain [KW-9994]\n* disease: Disease [KW-9995]\n* developmental_stage: Developmental stage [KW-9996]\n* coding_sequence_diversity: Coding sequence diversity [KW-9997]\n* cellular_component: Cellular component [KW-9998]\n* biological_process: Biological process [KW-9999]"
 
 

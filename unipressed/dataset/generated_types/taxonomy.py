@@ -62,7 +62,7 @@ class TaxonomyQueryDict(TypedDict):
     host: NotRequired[int]
     "Virus host\ne.g. 85621"
     linked: NotRequired[bool]
-    "With external info\ne.g. true\n* true: Yes\n* false: No"
+    "With external info\ne.g. true"
     parent: NotRequired[str]
     "Parent\ne.g. 9606"
     ancestor: NotRequired[str]
