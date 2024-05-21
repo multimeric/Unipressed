@@ -201,4 +201,3 @@ To: TypeAlias = Literal[
     "DisProt",
     "IDEAL",
 ]
-
