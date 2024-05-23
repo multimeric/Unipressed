@@ -6,7 +6,7 @@
 #### Changed
 
 * Auto-generated type definitions for the datasets have been regenerated [[#31](https://github.com/multimeric/Unipressed/pull/31)]. This pulls upstream changes from Uniprot. For a full list of changes [view this commit diff](https://github.com/multimeric/Unipressed/pull/31/commits/3dcf6f9b405807c44c9252eb6a603e915827021f).
-* Auto-generated type definitions for the ID mapper have been regenerated [[#30]](https://github.com/multimeric/Unipressed/pull/30) [@hlfernandez](https://github.com/hlfernandez)
+* Auto-generated type definitions for the ID mapper have been regenerated [[#30](https://github.com/multimeric/Unipressed/pull/30) [@hlfernandez](https://github.com/hlfernandez)]
 * Remove Python 3.7 support and support 3.12
 
 ### 1.2.0
