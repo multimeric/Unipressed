@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Iterable
+from typing import Iterable, Unpack
 
 import requests
-from typing_extensions import Literal, TypeAlias, TypedDict
+from typing_extensions import Literal, TypeAlias, TypedDict, overload
 
-from unipressed.id_mapping.types import From, To
+import unipressed.id_mapping.types as id_types
 from unipressed.util import iter_pages
 
 UniprotStatus: TypeAlias = Literal[
@@ -36,7 +36,14 @@ class IdMappingClient:
         )
 
     @classmethod
-    def submit(cls, source: From, dest: To, ids: Iterable[str]) -> IdMappingJob:
+    @overload
+    def submit(cls, **kwargs: Unpack[id_types.Rule1]):
+        ...
+
+    @classmethod
+    def submit(
+        cls, source: str, dest: str, ids: Iterable[str], taxon_id: str | None = None
+    ) -> IdMappingJob:
         """
         Submits this ID mapping request to the UniProt server, and returns a new object that can be used to access the results
         """
