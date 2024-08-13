@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Iterable, Unpack
+from typing import Callable, Iterable
 
 import requests
-from typing_extensions import Literal, TypeAlias, TypedDict, overload
+from typing_extensions import Literal, ParamSpec, TypeAlias, TypedDict, TypeVar
 
 import unipressed.id_mapping.types as id_types
 from unipressed.util import iter_pages
@@ -16,6 +16,24 @@ UniprotStatus: TypeAlias = Literal[
     "FINISHED",
     "ERROR",
 ]
+
+Param1 = ParamSpec("Param1")
+Param2 = ParamSpec("Param2")
+Ret1 = TypeVar("Ret1")
+Ret2 = TypeVar("Ret2")
+
+
+def copy_signature(
+    f: Callable[Param1, Ret1]
+) -> Callable[[Callable[Param2, Ret2]], Callable[Param1, Ret2]]:
+    """
+    Copies the argument signature from function f and applies it to the decorated function, but keeps the return value
+    """
+
+    def _inner(f: Callable[Param2, Ret2]):
+        return f
+
+    return _inner  # type: ignore
 
 
 class IdMappingError(Exception):
@@ -29,17 +47,13 @@ class IdMappingClient:
     """
 
     @classmethod
-    def _submit(cls, source: From, dest: To, ids: Iterable[str]) -> requests.Response:
+    def _submit(cls, source: str, dest: str, ids: Iterable[str]) -> requests.Response:
         return requests.post(
             "https://rest.uniprot.org/idmapping/run",
             data={"ids": ",".join(ids), "from": source, "to": dest},
         )
 
-    @classmethod
-    @overload
-    def submit(cls, **kwargs: Unpack[id_types.Rule1]):
-        ...
-
+    @copy_signature(id_types.SubmitDummyClass.submit)
     @classmethod
     def submit(
         cls, source: str, dest: str, ids: Iterable[str], taxon_id: str | None = None
