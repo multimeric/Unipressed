@@ -8,9 +8,6 @@ import black
 import requests
 import typer
 
-# ast.unparse uses Python 3.9+
-assert sys.version_info >= (3, 9)
-
 app = typer.Typer(result_callback=lambda x: print(x))
 
 
@@ -107,6 +104,10 @@ class Rule:
             taxon_id=self.taxon_id,
             overload=True,
         )
+
+
+# ast.unparse uses Python 3.9
+assert sys.version_info >= (3, 9)
 
 
 @app.command()
