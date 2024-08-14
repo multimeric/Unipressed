@@ -47,7 +47,7 @@ class UnirefQueryDict(TypedDict):
         ]
     ]
     "Sequence length\ne.g. [100 TO 300]"
-    created: NotRequired[
+    date_modified: NotRequired[
         tuple[
             Union[
                 date,
@@ -59,7 +59,7 @@ class UnirefQueryDict(TypedDict):
             ],
         ]
     ]
-    "Date published\ne.g. [2011-10-10 TO 2019-10-10]"
+    "Date of last modification\ne.g. [2011-10-10 TO 2019-10-10]"
     uniprot_id: NotRequired[str]
     "UniProtKB ID/AC\ne.g. sample uniprot id"
     upi: NotRequired[str]
@@ -78,7 +78,7 @@ UnirefNamesTaxonomy: TypeAlias = Literal[
 ]
 UnirefSequences: TypeAlias = Literal["identity", "length", "sequence"]
 UnirefMiscellaneous: TypeAlias = Literal["types", "members", "count"]
-UnirefDateOf: TypeAlias = Literal["created",]
+UnirefDateOf: TypeAlias = Literal["date_modified",]
 UnirefFields: TypeAlias = Literal[
     UnirefNamesTaxonomy, UnirefSequences, UnirefMiscellaneous, UnirefDateOf
 ]

@@ -728,7 +728,6 @@ UniprotkbChemistry: TypeAlias = Literal[
 UniprotkbProteinFamilygroup: TypeAlias = Literal[
     "xref_allergome",
     "xref_cazy",
-    "xref_clae",
     "xref_esther",
     "xref_imgt_gene-db",
     "xref_merops",
@@ -755,19 +754,11 @@ UniprotkbPolymorphismAndMutation: TypeAlias = Literal[
     "xref_alzforum", "xref_biomuta", "xref_dmdm", "xref_dbsnp"
 ]
 UniprotkbTwodGel: TypeAlias = Literal[
-    "xref_compluyeast-2dpage",
-    "xref_dosac-cobs-2dpage",
-    "xref_ogp",
-    "xref_reproduction-2dpage",
-    "xref_swiss-2dpage",
-    "xref_ucd-2dpage",
-    "xref_world-2dpage",
+    "xref_compluyeast-2dpage", "xref_ogp", "xref_reproduction-2dpage"
 ]
 UniprotkbProteomic: TypeAlias = Literal[
     "xref_cptac",
-    "xref_epd",
     "xref_massive",
-    "xref_maxqb",
     "xref_pride",
     "xref_paxdb",
     "xref_peptideatlas",
@@ -841,7 +832,6 @@ UniprotkbPhylogenomic: TypeAlias = Literal[
     "xref_genetree",
     "xref_hogenom",
     "xref_inparanoid",
-    "xref_ko",
     "xref_oma",
     "xref_orthodb",
     "xref_phylomedb",
@@ -875,11 +865,7 @@ UniprotkbOther: TypeAlias = Literal[
     "xref_emind",
 ]
 UniprotkbGeneExpression: TypeAlias = Literal[
-    "xref_bgee",
-    "xref_cleanex",
-    "xref_collectf",
-    "xref_expressionatlas",
-    "xref_genevisible",
+    "xref_bgee", "xref_cleanex", "xref_collectf", "xref_expressionatlas"
 ]
 UniprotkbFamilyAndDomain: TypeAlias = Literal[
     "xref_cdd",
