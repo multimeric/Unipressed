@@ -1,6 +1,14 @@
 
 ## Changelog
 
+### 1.4.0
+
+#### Changed
+
+* Auto-generated type definitions for the datasets have been regenerated [[#37](https://github.com/multimeric/Unipressed/pull/37)]. This pulls upstream changes from Uniprot. For a full list of changes [view this commit diff](https://github.com/multimeric/Unipressed/pull/31/commits/7e620c46175b6ec03e073fc78444a43e96821c31).
+    * Uniref's `created` `query` parameter has been replaced by `last_modified`
+    * UniprotKB has lost various `fields`: `xref_genevisible`, `xref_dosac-cobs-2dpage"`, `xref_swiss-2dpage`, `xref_ucd-2dpage`, `xref_world-2dpage`, `xref_epd`, `xref_maxqb`, `xref_ko` and `xref_genevisible`
+
 ### 1.3.0
 
 #### Changed

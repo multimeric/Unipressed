@@ -88,6 +88,7 @@ def test_main_example():
     ).each_record():
         assert isinstance(record, dict)
         assert set(record.keys()) == {
+            "extraAttributes",
             "primaryAccession",
             "genes",
             "sequence",

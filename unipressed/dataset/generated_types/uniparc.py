@@ -128,6 +128,8 @@ class UniparcQueryDict(TypedDict):
     "Feature ID\ne.g. IPR004251"
     proteomecomponent: NotRequired[str]
     "Proteome Component\ne.g. chromosome"
+    organism_id: NotRequired[int]
+    "Organism ID\ne.g. 10254"
 
 
 UniparcQuery: TypeAlias = Union[UniparcQueryDict, str]
