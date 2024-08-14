@@ -1,7 +1,7 @@
 import ast
 from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Optional
 
 import black
 import requests
@@ -42,7 +42,7 @@ def make_function(
             ast.Subscript(ast.Name("Iterable"), ast.Name("str")),
         ),
     ]
-    defaults: list[ast.expr | None] = [None, None, None]
+    defaults: list[Optional[ast.expr]] = [None, None, None]
 
     if taxon_id:
         # taxon_id: Optional[str] = None
@@ -106,7 +106,7 @@ class Rule:
 
 
 @app.command()
-def main():
+def main() -> None:
     rules: defaultdict[int, Rule] = defaultdict(Rule)
 
     # Build up a list of rules
