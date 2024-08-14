@@ -159,7 +159,7 @@ class SubmitDummyClass:
         source: Literal["Gene_Name",],
         dest: Literal["UniProtKB", "UniProtKB-Swiss-Prot"],
         ids: Iterable[str],
-        taxon_id: Optional[str] = None,
+        taxon_id: Optional[int] = None,
     ):
         ...
 
@@ -266,6 +266,6 @@ class SubmitDummyClass:
 
     @classmethod
     def submit(
-        cls, source: str, dest: str, ids: Iterable[str], taxon_id: Optional[str] = None
+        cls, source: str, dest: str, ids: Iterable[str], taxon_id: Optional[int] = None
     ):
         ...

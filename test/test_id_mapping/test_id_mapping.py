@@ -158,3 +158,29 @@ def test_paginated(fifty_accessions: Set[str], fifty_gene_names: Set[str]):
 
     # We should have seen 50 entries
     assert i == 49
+
+
+def test_taxon_id_yeast():
+    # Checks that setting a taxon_id filter returns results from only yeast
+    request = IdMappingClient.submit(
+        source="Gene_Name", dest="UniProtKB", ids={"STE2"}, taxon_id=4932
+    )
+    sleep(5)
+    results = {result["to"] for result in request.each_result()}
+    assert len(results) >= 5
+    # Real yeast gene
+    assert "P0CI39" in results
+    # Mouse gene
+    assert "P14719" not in results
+
+
+def test_taxon_id_all():
+    # Checks that setting no taxon_id filter returns results from multiple taxa
+    request = IdMappingClient.submit(source="Gene_Name", dest="UniProtKB", ids={"STE2"})
+    sleep(5)
+    results = {result["to"] for result in request.each_result()}
+    assert len(results) > 5
+    # Real yeast gene
+    assert "P0CI39" in results
+    # Mouse gene
+    assert "P14719" in results

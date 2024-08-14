@@ -50,7 +50,7 @@ def make_function(
             # taxon_id: bool
             ast.arg(
                 "taxon_id",
-                annotation=ast.Subscript(ast.Name("Optional"), ast.Name("str")),
+                annotation=ast.Subscript(ast.Name("Optional"), ast.Name("int")),
             )
         )
         defaults.append(ast.Constant(None))
