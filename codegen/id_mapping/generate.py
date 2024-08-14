@@ -1,4 +1,5 @@
 import ast
+import sys
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import List, Optional
@@ -107,6 +108,9 @@ class Rule:
 
 @app.command()
 def main() -> None:
+    # ast.unparse uses Python 3.9+
+    assert sys.version_info >= (3, 9)
+
     rules: defaultdict[int, Rule] = defaultdict(Rule)
 
     # Build up a list of rules
