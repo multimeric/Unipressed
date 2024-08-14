@@ -1622,6 +1622,7 @@ Markdown = ">=3.3"
 MarkupSafe = ">=1.1"
 mkdocs = ">=1.4"
 mkdocs-autorefs = ">=0.3.1"
+mkdocstrings-python = {version = ">=0.5.2", optional = true, markers = "extra == \"python\""}
 platformdirs = ">=2.2.0"
 pymdown-extensions = ">=6.3"
 typing-extensions = {version = ">=4.1", markers = "python_version < \"3.10\""}
@@ -3127,4 +3128,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "cdaa4040661532498b6fa1adfc9bfd6c6777327f285231eb2f8745f985f8a8f3"
+content-hash = "8ff1472d19e6b97dd5d59c8bcf09436924df9e8c90b94cdd2e209b72109ea5ed"

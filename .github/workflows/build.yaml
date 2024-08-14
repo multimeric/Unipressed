@@ -22,7 +22,7 @@ jobs:
           poetry-version: '1.5.1'
 
       - name: Install dependencies
-        run: poetry install --with lint --with tests
+        run: poetry install --all-extras
 
       - uses: pre-commit/action@v3.0.0
 
