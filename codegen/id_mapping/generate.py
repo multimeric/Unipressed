@@ -8,6 +8,9 @@ import black
 import requests
 import typer
 
+# ast.unparse uses Python 3.9+
+assert sys.version_info >= (3, 9)
+
 app = typer.Typer(result_callback=lambda x: print(x))
 
 
@@ -108,9 +111,6 @@ class Rule:
 
 @app.command()
 def main() -> None:
-    # ast.unparse uses Python 3.9+
-    assert sys.version_info >= (3, 9)
-
     rules: defaultdict[int, Rule] = defaultdict(Rule)
 
     # Build up a list of rules

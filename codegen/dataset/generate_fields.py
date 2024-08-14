@@ -22,6 +22,10 @@ if TYPE_CHECKING:
         UniprotSearchField,
     )
 
+# We use some python 3.8+ features here
+assert sys.version_info >= (3, 9)
+
+
 # If the functions return anything, print it
 app = typer.Typer(result_callback=lambda x: print(x))
 
@@ -411,10 +415,6 @@ def generate_query_fields(dataset: str, type_name: str) -> Iterable[ast.stmt]:
     ]
 
     return top_level
-
-
-# We use some python 3.8+ features here
-assert sys.version_info >= (3, 9)
 
 
 @app.command()
