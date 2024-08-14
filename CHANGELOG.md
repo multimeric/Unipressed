@@ -1,6 +1,13 @@
 
 ## Changelog
 
+### 1.4.0
+
+#### Added
+
+* The `taxon_id` argument to `IdMapper.submit` [[#36]](https://github.com/multimeric/Unipressed/pull/36)
+* Detailed type annotations for `IdMapper.submit`, that enforce only certain pairs of `source`/`dest` databases
+
 ### 1.3.0
 
 #### Changed
