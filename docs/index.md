@@ -84,13 +84,6 @@ hide:
     options:
         members: None
 
-::: unipressed.dataset.uniprotkb.UniprotkbFormats
-
-::: unipressed.dataset.generated_types.uniprotkb.UniprotkbFields
-    handler: literal
-
-::: unipressed.dataset.generated_types.uniprotkb.UniprotkbQuery
-
 ::: unipressed.UnirefClient
     options:
         members: None
