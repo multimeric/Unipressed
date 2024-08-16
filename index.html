@@ -1,0 +1,2851 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Unipressed</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unipressed" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Unipressed" class="md-header__button md-logo" aria-label="Unipressed" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unipressed
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/multimeric/Unipressed" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Unipressed" class="md-nav__button md-logo" aria-label="Unipressed" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unipressed
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/multimeric/Unipressed" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataset-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Clients
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      ID Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-with-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use with Visual Studio Code
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      Screenshots
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.DatasetClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      DatasetClient
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DatasetClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.DatasetClient.fetch_one" class="md-nav__link">
+    <span class="md-ellipsis">
+      fetch_one
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.DatasetClient.search" class="md-nav__link">
+    <span class="md-ellipsis">
+      search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.FetchManyClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      FetchManyClient
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FetchManyClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.FetchManyClient.fetch_many" class="md-nav__link">
+    <span class="md-ellipsis">
+      fetch_many
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search.each_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search.each_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search.each_record" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_record
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.IdMappingClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      IdMappingClient
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IdMappingClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.IdMappingClient.submit" class="md-nav__link">
+    <span class="md-ellipsis">
+      submit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingJob" class="md-nav__link">
+    <span class="md-ellipsis">
+      IdMappingJob
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IdMappingJob">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingJob.each_result" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_result
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingJob.get_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingResult" class="md-nav__link">
+    <span class="md-ellipsis">
+      IdMappingResult
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.ArbaClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      ArbaClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.CitationsClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      CitationsClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.DiseasesClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      DiseasesClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.KeywordsClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      KeywordsClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.LocationsClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      LocationsClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.ProteomesClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      ProteomesClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.TaxonomyClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      TaxonomyClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UniparcClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UniparcClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UniprotkbClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UniprotkbClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UnirefClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnirefClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UniruleClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UniruleClient
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changelog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Changelog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#140" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#130" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#120" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.0.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.0.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#020" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.2.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Removed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataset-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Clients
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      ID Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-with-visual-studio-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use with Visual Studio Code
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      Screenshots
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.DatasetClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      DatasetClient
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DatasetClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.DatasetClient.fetch_one" class="md-nav__link">
+    <span class="md-ellipsis">
+      fetch_one
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.DatasetClient.search" class="md-nav__link">
+    <span class="md-ellipsis">
+      search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.FetchManyClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      FetchManyClient
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FetchManyClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.core.FetchManyClient.fetch_many" class="md-nav__link">
+    <span class="md-ellipsis">
+      fetch_many
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search.each_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search.each_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.dataset.search.Search.each_record" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_record
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.IdMappingClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      IdMappingClient
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IdMappingClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.IdMappingClient.submit" class="md-nav__link">
+    <span class="md-ellipsis">
+      submit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingJob" class="md-nav__link">
+    <span class="md-ellipsis">
+      IdMappingJob
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IdMappingJob">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingJob.each_result" class="md-nav__link">
+    <span class="md-ellipsis">
+      each_result
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingJob.get_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.id_mapping.core.IdMappingResult" class="md-nav__link">
+    <span class="md-ellipsis">
+      IdMappingResult
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.ArbaClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      ArbaClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.CitationsClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      CitationsClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.DiseasesClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      DiseasesClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.KeywordsClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      KeywordsClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.LocationsClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      LocationsClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.ProteomesClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      ProteomesClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.TaxonomyClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      TaxonomyClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UniparcClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UniparcClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UniprotkbClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UniprotkbClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UnirefClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnirefClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unipressed.UniruleClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      UniruleClient
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changelog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Changelog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#140" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#130" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#120" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#100" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.0.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.0.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#020" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.2.0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Removed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<!-- BEGIN INCLUDE ../README.md -->
+<h1 id="unipressed">Unipressed</h1>
+<p><strong>Please visit the <a href="https://multimeric.github.io/Unipressed/">project website</a> for more comprehensive documentation.</strong></p>
+<h2 id="introduction">Introduction</h2>
+<p>Unipressed (Uniprot REST) is an API client for the protein database <a href="https://www.uniprot.org/">Uniprot</a>.
+It provides thoroughly typed and documented code to ensure your use of the library is easy, fast, and correct!</p>
+<h3 id="example">Example</h3>
+<p>Let's say we're interested in very long proteins that are encoded within a chloroplast, in any organism:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">unipressed</span> <span class="kn">import</span> <span class="n">UniprotkbClient</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">query</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="s2">&quot;and_&quot;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="p">{</span><span class="s2">&quot;organelle&quot;</span><span class="p">:</span> <span class="s2">&quot;chloroplast&quot;</span><span class="p">},</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="p">{</span><span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="p">]</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="p">},</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="s2">&quot;gene_names&quot;</span><span class="p">]</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">)</span><span class="o">.</span><span class="n">each_record</span><span class="p">():</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">display</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+</code></pre></div>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">{</span>
+    <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A088CK67'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="font-weight: bold">[</span>
+        <span style="font-weight: bold">{</span>
+            <span style="color: #008000; text-decoration-color: #008000">'geneName'</span>: <span style="font-weight: bold">{</span>
+                <span style="color: #008000; text-decoration-color: #008000">'evidences'</span>: <span style="font-weight: bold">[{</span><span style="color: #008000; text-decoration-color: #008000">'evidenceCode'</span>: <span style="color: #008000; text-decoration-color: #008000">'ECO:0000313'</span>, <span style="color: #008000; text-decoration-color: #008000">'source'</span>: <span style="color: #008000; text-decoration-color: #008000">'EMBL'</span>, <span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'AID67672.1'</span><span style="font-weight: bold">}]</span>,
+                <span style="color: #008000; text-decoration-color: #008000">'value'</span>: <span style="color: #008000; text-decoration-color: #008000">'ftsH'</span>
+            <span style="font-weight: bold">}</span>
+        <span style="font-weight: bold">}</span>
+    <span style="font-weight: bold">]</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'length'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5242</span><span style="font-weight: bold">}</span>
+<span style="font-weight: bold">}</span>
+</pre>
+
+<h3 id="advantages">Advantages</h3>
+<ul>
+<li>Detailed type hints for autocompleting queries as you type</li>
+<li>Autocompletion for return fields</li>
+<li>Documentation for each field</li>
+<li>Automatic results parsing, for <code>json</code>, <code>tsv</code>, <code>list</code>, and <code>xml</code></li>
+<li>Built-in pagination, so you don't have to handle any of that yourself!</li>
+<li>Most of the API is automatically generated, ensuring very rapid updates whenever the API changes</li>
+<li>Thoroughly tested, with 41 unit tests and counting!</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<h3 id="installation">Installation</h3>
+<p>If you're using poetry:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>unipressed
+</code></pre></div></p>
+<p>Otherwise:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>unipressed
+</code></pre></div></p>
+<h3 id="dataset-clients">Dataset Clients</h3>
+<p>The <code>unipressed</code> module exports a client object for each UniProt dataset:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">unipressed</span> <span class="kn">import</span> <span class="n">UniprotkbClient</span><span class="p">,</span> <span class="n">UniparcClient</span>
+</code></pre></div>
+<p>With one of these clients, you can search the dataset:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">records</span> <span class="o">=</span> <span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">({</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">6000</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">})</span><span class="o">.</span><span class="n">each_record</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># Show the first record</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">next</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
+</code></pre></div>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">{</span>
+    <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'Q96RW7'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'secondaryAccessions'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'HMCN1_HUMAN'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+<span style="font-weight: bold">}</span>
+</pre>
+
+<p>You can request a single record by ID:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">fetch_one</span><span class="p">(</span><span class="s2">&quot;Q96RW7&quot;</span><span class="p">)</span>
+</code></pre></div>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">{</span>
+    <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'Q96RW7'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'secondaryAccessions'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'HMCN1_HUMAN'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+<span style="font-weight: bold">}</span>
+</pre>
+
+<p>You can also request multiple records:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">fetch_many</span><span class="p">([</span><span class="s2">&quot;A0A0C5B5G6&quot;</span><span class="p">,</span> <span class="s2">&quot;A0A1B0GTW7&quot;</span><span class="p">])</span>
+</code></pre></div>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">[</span>
+    <span style="font-weight: bold">{</span>
+        <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A0C5B5G6'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'MOTSC_HUMAN'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'geneLocations'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+    <span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span>
+        <span style="color: #008000; text-decoration-color: #008000">'entryType'</span>: <span style="color: #008000; text-decoration-color: #008000">'UniProtKB reviewed (Swiss-Prot)'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'primaryAccession'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0A1B0GTW7'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'secondaryAccessions'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtkbId'</span>: <span style="color: #008000; text-decoration-color: #008000">'CIROP_HUMAN'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'entryAudit'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'annotationScore'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5.0</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'organism'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinExistence'</span>: <span style="color: #008000; text-decoration-color: #008000">'1: Evidence at protein level'</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'proteinDescription'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'genes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'comments'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'features'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'keywords'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'references'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'uniProtKBCrossReferences'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'sequence'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>,
+        <span style="color: #008000; text-decoration-color: #008000">'extraAttributes'</span>: <span style="color: #808000; text-decoration-color: #808000">...</span>
+    <span style="font-weight: bold">}</span>
+<span style="font-weight: bold">]</span>
+</pre>
+
+<h3 id="id-mapping">ID Mapping</h3>
+<p>Unipressed also provides one other unique client, which is designed for mapping identifiers. You provide the source and destination database (both of which will autocomplete in VS Code), and a list of identifiers for the source database.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">unipressed</span> <span class="kn">import</span> <span class="n">IdMappingClient</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">request</span> <span class="o">=</span> <span class="n">IdMappingClient</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">source</span><span class="o">=</span><span class="s2">&quot;UniProtKB_AC-ID&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;Gene_Name&quot;</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;A1L190&quot;</span><span class="p">,</span> <span class="s2">&quot;A0JP26&quot;</span><span class="p">,</span> <span class="s2">&quot;A0PK11&quot;</span><span class="p">}</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">list</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">each_result</span><span class="p">())</span>
+</code></pre></div>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">[</span>
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A1L190'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'SYCE3'</span><span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0PK11'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'CLRN2'</span><span style="font-weight: bold">}</span>,
+    <span style="font-weight: bold">{</span><span style="color: #008000; text-decoration-color: #008000">'from'</span>: <span style="color: #008000; text-decoration-color: #008000">'A0JP26'</span>, <span style="color: #008000; text-decoration-color: #008000">'to'</span>: <span style="color: #008000; text-decoration-color: #008000">'POTEB3'</span><span style="font-weight: bold">}</span>
+<span style="font-weight: bold">]</span>
+</pre>
+
+<p>Note that, if you submit a large number of IDs, you might need to add a <code>sleep()</code> call between submitting the request and retrieving the results.</p>
+<h3 id="query-syntax">Query Syntax</h3>
+<p>The query syntax refers to the values you pass in to the <code>query</code> argument of the <code>search()</code> method.</p>
+<p>In general, you can't go wrong by following the type hints.
+I strongly recommend using something like <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance"><code>pylance</code></a> for <a href="https://code.visualstudio.com/">Visual Studio Code</a>, which will provide automatic completions and warn you when you have used the wrong syntax.</p>
+<p>If you already know how to use the Uniprot query language, you can always just input your queries as strings:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;(gene:BRCA*) AND (organism_id:10090)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>However, if you want some built-in query validation and code completion using Python's type system, then you can instead use a dictionary.
+The simplest query is a dictionary with a single key: </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;family&quot;</span><span class="p">:</span> <span class="s2">&quot;kinase&quot;</span><span class="p">})</span>
+</code></pre></div>
+<p>You can compile more complex queries using the <code>and_</code>, <code>or_</code> and <code>not_</code> keys.
+These first two operators take a list of query dictionaries: </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="s2">&quot;and_&quot;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="p">{</span><span class="s2">&quot;family&quot;</span><span class="p">:</span> <span class="s2">&quot;kinase&quot;</span><span class="p">},</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        <span class="p">{</span><span class="s2">&quot;organism_id&quot;</span><span class="p">:</span> <span class="s2">&quot;9606&quot;</span><span class="p">},</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="p">]</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">})</span>
+</code></pre></div>
+<p>Most "leaf" nodes of the query tree (ie those that aren't operators like <code>and_</code>) are strings, integers or floats, which you input as normal Python literals as you can see above.
+For string fields, you also have access to wildcards, namely the <code>*</code> character. 
+For example, if you want every human protein belonging to a gene whose name starts with <code>PRO</code>, you could use:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="s2">&quot;and_&quot;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>        <span class="p">{</span><span class="s2">&quot;gene&quot;</span><span class="p">:</span> <span class="s2">&quot;PRO*&quot;</span><span class="p">},</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        <span class="p">{</span><span class="s2">&quot;organism_id&quot;</span><span class="p">:</span> <span class="s2">&quot;9606&quot;</span><span class="p">},</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="p">]</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">})</span>
+</code></pre></div>
+<p>A few query fields are <em>ranges</em>, which you input using a tuple with two elements, indicating the start and end of the range.
+If you use the literal <code>"*"</code> then you can leave the range open at one end. 
+For example, this query returns any protein that is in the range <span class="arithmatex">\([5000, \infty)\)</span></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)})</span>
+</code></pre></div>
+<p>Finally, a few query fields take dates.
+These you input as a Python <code>datetime.date</code> object.
+For example, to find proteins added to UniProt since July 2022, we would do:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">UniprotkbClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;date_created&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;*&quot;</span><span class="p">)})</span>
+</code></pre></div>
+<h3 id="use-with-visual-studio-code">Use with Visual Studio Code</h3>
+<p>To get VS Code to offer suggestions, press the <code>Trigger Suggest</code> shortcut which is usually bound to <code>Ctrl + Space</code>.
+In particular, code completion generally won't work <em>until</em> you open a string literal using a quotation mark.</p>
+<p>Secondly, to get live access to the documentation, you can either use the <code>Show Hover</code> shortcut, which is usually bound to <code>Ctrl + K, Ctrl + I</code>, or you can install the <a href="https://marketplace.visualstudio.com/items?itemName=bierner.docs-view"><code>docs-view</code></a> extension, which lets you view the docstrings in the sidebar without interfering with your code.</p>
+<!-- END INCLUDE -->
+
+<h2 id="screenshots">Screenshots</h2>
+<figure>
+<p><img alt="" src="media/query_keys.png" width="400" /></p>
+<figcaption> Autocompletion for query keys</figcaption>
+</figure>
+<figure>
+<p><img alt="" src="media/enum_values.png" width="400" /></p>
+<figcaption> Autocompletion for query values</figcaption>
+</figure>
+<figure>
+<p><img alt="" src="media/docstrings.png" width="400" /></p>
+<figcaption>Documentation for almost all types</figcaption>
+</figure>
+<figure>
+<p><img alt="" src="media/field_completion.png" width="400" /></p>
+<figcaption> Autocompletion for return fields</figcaption>
+</figure>
+<h2 id="api">API</h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.dataset.core.DatasetClient" class="doc doc-heading">
+            <code>unipressed.dataset.core.DatasetClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+
+
+      <p>The base class for all UniProt dataset clients. All methods documented here are available in any of the subclasses. This is a static class that you will never need to instantiate.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.dataset.core.DatasetClient.fetch_one" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">fetch_one</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">parse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JsonResultType</span> <span class="o">|</span> <span class="n">IOBase</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Fetches a single record from this dataset using its ID.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code>id</code></b>
+          –
+          <div class="doc-md-description">
+            <p>The ID of the record to fetch. The format of this will depend on the dataset.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>format</code></b>
+          –
+          <div class="doc-md-description">
+            <p>The format of the result. The available options will depend on the subclass you are using, but the type checker/autocomplete will enforce available options.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>parse</code></b>
+          –
+          <div class="doc-md-description">
+            <p>If true, parse the result into a JSON dictionary. Defaults to True.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="unipressed.dataset.type_vars.JsonResultType">JsonResultType</span> | <span title="io.IOBase">IOBase</span></code>
+          –
+          <div class="doc-md-description">
+            <p>If parse is True, a dictionary. Otherwise, a file object containing the results in the specified format.</p>
+          </div>
+        </li>
+    </ul>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.dataset.core.DatasetClient.search" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="n">QueryType</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">FieldsType</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">include_isoform</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Search</span><span class="p">[</span><span class="n">QueryType</span><span class="p">,</span> <span class="n">JsonResultType</span><span class="p">,</span> <span class="n">FieldsType</span><span class="p">,</span> <span class="n">FormatType</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Creates an object that can be used to perform a search query over this dataset.
+Refer to the <a class="autorefs autorefs-internal" href="#unipressed.dataset.search.Search">unipressed.dataset.search.Search</a> reference for more information on how to use it.</p>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.dataset.core.FetchManyClient" class="doc doc-heading">
+            <code>unipressed.dataset.core.FetchManyClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.type_vars.QueryType">QueryType</span>, <span title="unipressed.dataset.type_vars.JsonResultType">JsonResultType</span>, <span title="unipressed.dataset.type_vars.FieldsType">FieldsType</span>, <span title="unipressed.dataset.type_vars.FormatType">FormatType</span>]</code></p>
+
+
+      <p>Dataset subclass for datasets that can be queried by multiple IDs. Not all datasets support this.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.dataset.core.FetchManyClient.fetch_many" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">fetch_many</span><span class="p">(</span><span class="n">ids</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">parse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">JsonResultType</span><span class="p">]</span> <span class="o">|</span> <span class="n">IOBase</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Fetches multiple records using their accessions.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code>ids</code></b>
+          –
+          <div class="doc-md-description">
+            <p>The accessions to query</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>format</code></b>
+          –
+          <div class="doc-md-description">
+            <p>The format to return the records. Defaults to "json".</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>parse</code></b>
+          –
+          <div class="doc-md-description">
+            <p>Only supported for JSON. If True, parses the result instead of returning a raw file. Defaults to True.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="typing.Iterable">Iterable</span>[<span title="unipressed.dataset.type_vars.JsonResultType">JsonResultType</span>] | <span title="io.IOBase">IOBase</span></code>
+          –
+          <div class="doc-md-description">
+            <p>If parse is True, a list of dictionaries. Otherwise, a file object containing the results in the specified format.</p>
+          </div>
+        </li>
+    </ul>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.dataset.search.Search" class="doc doc-heading">
+            <code>unipressed.dataset.search.Search</code>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+
+
+      <p>Class coordinating search requests. Generally you shouldn't instantiate this manually, but should rather use <a class="autorefs autorefs-internal" href="#unipressed.dataset.core.DatasetClient.search">unipressed.DatasetClient.search</a> to do so.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.dataset.search.Search.each_response" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">each_response</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">requests</span><span class="o">.</span><span class="n">Response</span><span class="p">]</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Returns a generator of <a href="https://requests.readthedocs.io/en/latest/api/#requests.Response"><code>requests.Response</code></a> objects, one for each page of the result.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.dataset.search.Search.each_page" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">each_page</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">TextIO</span><span class="p">]</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Returns a generator of unzipped <a href="https://docs.python.org/3/library/io.html#io.TextIOBase">file objects</a>, one for each page of the result.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.dataset.search.Search.each_record" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">each_record</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Returns a generator of records, which are defined by the format field of the original request.
+For example, with <code>format="json"</code>, this will be an iterator over dictionaries parsed from JSON.</p>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.IdMappingClient" class="doc doc-heading">
+            <code>unipressed.IdMappingClient</code>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+
+
+      <p>Client for submitting requests to convert between identifiers.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.IdMappingClient.submit" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">submit</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ids</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">taxon_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IdMappingJob</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Submits this ID mapping request to the UniProt server, and returns a new object that can be used to access the results</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code>source</code></b>
+              (<code>str</code>)
+          –
+          <div class="doc-md-description">
+            <p>Name of the database from which the ids originate</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>dest</code></b>
+              (<code>str</code>)
+          –
+          <div class="doc-md-description">
+            <p>Name of the database that the IDs will be converted to</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>ids</code></b>
+              (<code><span title="typing.Iterable">Iterable</span>[str]</code>)
+          –
+          <div class="doc-md-description">
+            <p>Set of IDs to convert</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+          <b><code>taxon_id</code></b>
+              (<code>int | None</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optionally, a UniProt taxon ID to restrict the results to. For example, you can use <code>4932</code> to
+restrict the results to Baker's yest (https://www.uniprot.org/taxonomy/4932).</p>
+          </div>
+        </li>
+    </ul>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.id_mapping.core.IdMappingJob" class="doc doc-heading">
+            <code>unipressed.id_mapping.core.IdMappingJob</code>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+
+
+      <p>Object that tracks the status and results of an ID mapping request that has been sent to the UniProt server.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.id_mapping.core.IdMappingJob.each_result" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">each_result</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">IdMappingResult</span><span class="p">]</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Returns a generator over dictionaries of results, one for each input ID.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="unipressed.id_mapping.core.IdMappingJob.get_status" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">UniprotStatus</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+      <p>Returns a string describing the status of the job (ie if it has completed or not).</p>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="unipressed.id_mapping.core.IdMappingResult" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">unipressed</span><span class="o">.</span><span class="n">id_mapping</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">IdMappingResult</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;IdMappingResult&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.ArbaClient" class="doc doc-heading">
+            <code>unipressed.ArbaClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.generated_types.arba.ArbaQuery">ArbaQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.arba.ArbaFields">ArbaFields</span>, <span title="unipressed.dataset.arba.ArbaFormats">ArbaFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.CitationsClient" class="doc doc-heading">
+            <code>unipressed.CitationsClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.generated_types.citations.CitationsQuery">CitationsQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.citations.CitationsFields">CitationsFields</span>, <span title="unipressed.dataset.citations.CitationsFormats">CitationsFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.DiseasesClient" class="doc doc-heading">
+            <code>unipressed.DiseasesClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.generated_types.diseases.DiseasesQuery">DiseasesQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.diseases.DiseasesFields">DiseasesFields</span>, <span title="unipressed.dataset.diseases.DiseasesFormats">DiseasesFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.KeywordsClient" class="doc doc-heading">
+            <code>unipressed.KeywordsClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.generated_types.keywords.KeywordsQuery">KeywordsQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.keywords.KeywordsFields">KeywordsFields</span>, <span title="unipressed.dataset.keywords.KeywordsFormats">KeywordsFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.LocationsClient" class="doc doc-heading">
+            <code>unipressed.LocationsClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.generated_types.locations.LocationsQuery">LocationsQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.locations.LocationsFields">LocationsFields</span>, <span title="unipressed.dataset.locations.LocationsFormats">LocationsFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.ProteomesClient" class="doc doc-heading">
+            <code>unipressed.ProteomesClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.generated_types.proteomes.ProteomesQuery">ProteomesQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.proteomes.ProteomesFields">ProteomesFields</span>, <span title="unipressed.dataset.proteomes.ProteomesFormats">ProteomesFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.TaxonomyClient" class="doc doc-heading">
+            <code>unipressed.TaxonomyClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.FetchManyClient" href="#unipressed.dataset.core.FetchManyClient">FetchManyClient</a>[<span title="unipressed.dataset.generated_types.taxonomy.TaxonomyQuery">TaxonomyQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.taxonomy.TaxonomyFields">TaxonomyFields</span>, <span title="unipressed.dataset.taxonomy.TaxonomyFormats">TaxonomyFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.UniparcClient" class="doc doc-heading">
+            <code>unipressed.UniparcClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.FetchManyClient" href="#unipressed.dataset.core.FetchManyClient">FetchManyClient</a>[<span title="unipressed.dataset.generated_types.uniparc.UniparcQuery">UniparcQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.uniparc.UniparcFields">UniparcFields</span>, <span title="unipressed.dataset.uniparc.UniparcFormats">UniparcFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.UniprotkbClient" class="doc doc-heading">
+            <code>unipressed.UniprotkbClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.FetchManyClient" href="#unipressed.dataset.core.FetchManyClient">FetchManyClient</a>[<span title="unipressed.dataset.generated_types.uniprotkb.UniprotkbQuery">UniprotkbQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.uniprotkb.UniprotkbFields">UniprotkbFields</span>, <span title="unipressed.dataset.uniprotkb.UniprotkbFormats">UniprotkbFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.UnirefClient" class="doc doc-heading">
+            <code>unipressed.UnirefClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.FetchManyClient" href="#unipressed.dataset.core.FetchManyClient">FetchManyClient</a>[<span title="unipressed.dataset.generated_types.uniref.UnirefQuery">UnirefQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.uniref.UnirefFields">UnirefFields</span>, <span title="unipressed.dataset.uniref.UnirefFormats">UnirefFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="unipressed.UniruleClient" class="doc doc-heading">
+            <code>unipressed.UniruleClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="unipressed.dataset.core.DatasetClient" href="#unipressed.dataset.core.DatasetClient">DatasetClient</a>[<span title="unipressed.dataset.generated_types.unirule.UniruleQuery">UniruleQuery</span>, <span title="typing.Mapping">Mapping</span>[str, <span title="typing.Any">Any</span>], <span title="unipressed.dataset.generated_types.unirule.UniruleFields">UniruleFields</span>, <span title="unipressed.dataset.unirule.UniruleFormats">UniruleFormats</span>]</code></p>
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><!-- BEGIN INCLUDE ../CHANGELOG.md -->
+
+<h2 id="changelog">Changelog</h2>
+<h3 id="140">1.4.0</h3>
+<h4 id="added">Added</h4>
+<ul>
+<li>The <code>taxon_id</code> argument to <code>IdMapper.submit</code> <a href="https://github.com/multimeric/Unipressed/pull/36">[#36]</a></li>
+<li>Detailed type annotations for <code>IdMapper.submit</code>, that enforce only certain pairs of <code>source</code>/<code>dest</code> databases</li>
+</ul>
+<h4 id="changed">Changed</h4>
+<ul>
+<li>Auto-generated type definitions for the datasets have been regenerated [<a href="https://github.com/multimeric/Unipressed/pull/37">#37</a>]. This pulls upstream changes from Uniprot. For a full list of changes <a href="https://github.com/multimeric/Unipressed/pull/31/commits/7e620c46175b6ec03e073fc78444a43e96821c31">view this commit diff</a>.<ul>
+<li>Uniref's <code>created</code> <code>query</code> parameter has been replaced by <code>last_modified</code></li>
+<li>UniprotKB has lost various <code>fields</code>: <code>xref_genevisible</code>, <code>xref_dosac-cobs-2dpage"</code>, <code>xref_swiss-2dpage</code>, <code>xref_ucd-2dpage</code>, <code>xref_world-2dpage</code>, <code>xref_epd</code>, <code>xref_maxqb</code>, <code>xref_ko</code> and <code>xref_genevisible</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="130">1.3.0</h3>
+<h4 id="changed_1">Changed</h4>
+<ul>
+<li>Auto-generated type definitions for the datasets have been regenerated [<a href="https://github.com/multimeric/Unipressed/pull/31">#31</a>]. This pulls upstream changes from Uniprot. For a full list of changes <a href="https://github.com/multimeric/Unipressed/pull/31/commits/3dcf6f9b405807c44c9252eb6a603e915827021f">view this commit diff</a>.</li>
+<li>Auto-generated type definitions for the ID mapper have been regenerated [<a href="https://github.com/multimeric/Unipressed/pull/30">#30</a>, <a href="https://github.com/hlfernandez">@hlfernandez</a>]</li>
+<li>Remove Python 3.7 support and support 3.12</li>
+</ul>
+<h3 id="120">1.2.0</h3>
+<h4 id="added_1">Added</h4>
+<ul>
+<li><code>DatasetClient.search()</code> now has an <code>include_isoform</code> parameter, which specifies if you want isoforms to be returned [<a href="https://github.com/multimeric/Unipressed/pull/27">#27</a>, <a href="https://github.com/godotgildor">@godotgildor</a>]</li>
+<li>Python 3.11 is now officially supported</li>
+</ul>
+<h4 id="changed_2">Changed</h4>
+<ul>
+<li>Auto-generated type definitions have been regenerated [<a href="https://github.com/multimeric/Unipressed/pull/28">#28</a>]. This pulls upstream changes from Uniprot which are description-only:<ul>
+<li>All the <code>cc_</code> query fields for <code>Arba</code> and <code>Unirule</code> such as <code>cc_cofactor</code> and <code>cc_domain</code> hav updated descriptions</li>
+<li><code>Uniparc</code>'s list of databases has increased in the <code>database</code> query field</li>
+</ul>
+</li>
+</ul>
+<h3 id="110">1.1.0</h3>
+<h4 id="changed_3">Changed</h4>
+<ul>
+<li><code>unipressed.IdMappingClient.get_status()</code> now returns a <code>Literal</code>, which gives your type checker/IDE access to the possible return values.</li>
+</ul>
+<h4 id="fixed">Fixed</h4>
+<ul>
+<li><code>unipressed.IdMappingClient.get_status()</code> now wraps a bug in the UniProt API (<a href="https://github.com/ebi-uniprot/uniprot-rest-api/issues/293">#293</a>), ensuring that it will return a valid job status even when the API itself does not. [<a href="https://github.com/multimeric/Unipressed/issues/21">#21</a>]</li>
+</ul>
+<h3 id="100">1.0.0</h3>
+<h4 id="changed_4">Changed</h4>
+<ul>
+<li><strong>Breaking</strong>: Reworked the search API. Broadly this means that rather than using <code>unipressed.UniprotkbSearch</code>, you should now use the <code>unipressed.UniprotkbClient</code> class, which encapsulates the dataset's APIs. You can then perform a search query using <code>Uniprotkb.search()</code>.</li>
+<li><strong>Breaking</strong>: Restructured the Python package. Most imports have changed.</li>
+</ul>
+<h4 id="added_2">Added</h4>
+<ul>
+<li>The new client objects support <code>.fetch_one()</code> and <code>.fetch_many()</code> which can be used to look up one or more database entries using their IDs</li>
+<li>An ID mapping client. This can be accessed as <code>unipressed.IdMappingClient</code></li>
+</ul>
+<h3 id="020">0.2.0</h3>
+<p><strong>Note, if you are using Visual Studio Code, please update Pylance to at least version 2022.8.20.
+A bug in earlier versions will give you false errors with this new release of <code>unipressed</code></strong>.</p>
+<h4 id="added_3">Added</h4>
+<ul>
+<li>
+<p>Also allow strings within the query dictionary, so that e.g. this is now allowed:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="s2">&quot;and_&quot;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>        <span class="s2">&quot;foo*&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>        <span class="s2">&quot;*bar&quot;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="p">]</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">}</span>
+</code></pre></div>
+    This will search for all proteins that have any field that starts with <code>foo</code> and any field that ends with <code>bar</code>.</p>
+</li>
+<li>
+<p>Auto generated docstrings for all fields</p>
+</li>
+<li>Examples to the documentation of each field</li>
+<li>Certain missing query fields for the <code>arba</code> dataset:<ul>
+<li><code>cc_scl_term</code></li>
+</ul>
+</li>
+<li>Certain missing query fields for the <code>proteomes</code> dataset:<ul>
+<li><code>organism_id</code></li>
+<li><code>taxonomy_id</code></li>
+</ul>
+</li>
+<li>Certain missing query fields for the <code>unirule</code> dataset:<ul>
+<li><code>cc_scl_term</code></li>
+</ul>
+</li>
+<li>Certain missing query fields for the <code>uniparc</code> dataset:<ul>
+<li><code>taxonomy_id</code></li>
+</ul>
+</li>
+<li>Certain missing query fields for the <code>uniprotkb</code> dataset:<ul>
+<li><code>organism_id</code></li>
+<li><code>taxonomy_id</code></li>
+<li><code>virus_host_id</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="removed">Removed</h4>
+<ul>
+<li>Uniprot seem to have removed certain <code>uniprokb</code> query fields, so these are now not part of the accepted query type:<ul>
+<li><code>ft_metal</code></li>
+<li><code>ftlen_metal</code></li>
+<li><code>ft_ca_bind</code></li>
+<li><code>ftlen_ca_bind</code></li>
+<li><code>ft_np_bind</code></li>
+<li><code>ftlen_np_bind</code></li>
+</ul>
+</li>
+<li>Likewise, some <code>uniprotkb</code> return fields have been removed:<ul>
+<li><code>ft_ca_bind</code></li>
+<li><code>ft_metal</code></li>
+<li><code>ft_np_bind</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="internal">Internal</h4>
+<ul>
+<li>Move from <code>pyhumps</code> to <code>inflection</code> for code generation</li>
+<li>Add a test for the date field</li>
+<li>Added tests for all datasets</li>
+<li>Add types for code generation API</li>
+</ul>
+<!-- END INCLUDE -->
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
