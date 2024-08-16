@@ -3,6 +3,11 @@
 
 ### 1.4.0
 
+#### Added
+
+* The `taxon_id` argument to `IdMapper.submit` [[#36]](https://github.com/multimeric/Unipressed/pull/36)
+* Detailed type annotations for `IdMapper.submit`, that enforce only certain pairs of `source`/`dest` databases
+
 #### Changed
 
 * Auto-generated type definitions for the datasets have been regenerated [[#37](https://github.com/multimeric/Unipressed/pull/37)]. This pulls upstream changes from Uniprot. For a full list of changes [view this commit diff](https://github.com/multimeric/Unipressed/pull/31/commits/7e620c46175b6ec03e073fc78444a43e96821c31).

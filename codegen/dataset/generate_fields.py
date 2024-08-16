@@ -22,6 +22,7 @@ if TYPE_CHECKING:
         UniprotSearchField,
     )
 
+
 # If the functions return anything, print it
 app = typer.Typer(result_callback=lambda x: print(x))
 

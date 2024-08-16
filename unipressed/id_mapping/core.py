@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Iterable
+from typing import Any, Callable, Iterable
 
 import requests
-from typing_extensions import Literal, TypeAlias, TypedDict
+from typing_extensions import Literal, ParamSpec, TypeAlias, TypedDict, TypeVar
 
-from unipressed.id_mapping.types import From, To
+import unipressed.id_mapping.types as id_types
 from unipressed.util import iter_pages
 
 UniprotStatus: TypeAlias = Literal[
@@ -16,6 +16,24 @@ UniprotStatus: TypeAlias = Literal[
     "FINISHED",
     "ERROR",
 ]
+
+Param1 = ParamSpec("Param1")
+Param2 = ParamSpec("Param2")
+Ret1 = TypeVar("Ret1")
+Ret2 = TypeVar("Ret2")
+
+
+def copy_signature(
+    f: Callable[Param1, Ret1]
+) -> Callable[[Callable[Param2, Ret2]], Callable[Param1, Ret2]]:
+    """
+    Copies the argument signature from function f and applies it to the decorated function, but keeps the return value
+    """
+
+    def _inner(f: Callable[Param2, Ret2]):
+        return f
+
+    return _inner  # type: ignore
 
 
 class IdMappingError(Exception):
@@ -29,18 +47,33 @@ class IdMappingClient:
     """
 
     @classmethod
-    def _submit(cls, source: From, dest: To, ids: Iterable[str]) -> requests.Response:
+    def _submit(
+        cls, source: str, dest: str, ids: Iterable[str], taxon_id: int | None
+    ) -> requests.Response:
+        data: dict[str, Any] = {"ids": ",".join(ids), "from": source, "to": dest}
+        if taxon_id is not None:
+            data["taxId"] = taxon_id
         return requests.post(
             "https://rest.uniprot.org/idmapping/run",
-            data={"ids": ",".join(ids), "from": source, "to": dest},
+            data=data,
         )
 
+    @copy_signature(id_types.SubmitDummyClass.submit)
     @classmethod
-    def submit(cls, source: From, dest: To, ids: Iterable[str]) -> IdMappingJob:
+    def submit(
+        cls, source: str, dest: str, ids: Iterable[str], taxon_id: int | None = None
+    ) -> IdMappingJob:
         """
         Submits this ID mapping request to the UniProt server, and returns a new object that can be used to access the results
+
+        Args:
+            source: Name of the database from which the ids originate
+            dest: Name of the database that the IDs will be converted to
+            ids: Set of IDs to convert
+            taxon_id: Optionally, a UniProt taxon ID to restrict the results to. For example, you can use `4932` to
+                restrict the results to Baker's yest (https://www.uniprot.org/taxonomy/4932).
         """
-        res = cls._submit(source, dest, ids)
+        res = cls._submit(source, dest, ids, taxon_id=taxon_id)
         job_id = res.json()["jobId"]
         return IdMappingJob(job_id)
 
