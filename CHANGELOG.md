@@ -1,6 +1,12 @@
 
 ## Changelog
 
+### Master (unreleased)
+
+#### Changed
+
+* Regenerated the generated code. For the detailed changes please refer to the [git diff](https://github.com/multimeric/Unipressed/commit/6ff916761afe9801f75b28d6bd21ec141109ea62).
+
 ### 1.4.0
 
 #### Added
