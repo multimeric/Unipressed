@@ -14,15 +14,15 @@ class UniruleQueryDict(TypedDict):
     not_: NotRequired[Iterable["UniruleQuery"]]
     "Negate a filter"
     protein_name: NotRequired[str]
-    "Protein Name [DE]\ne.g. mas5"
+    "Protein Name [DE]\ne.g. Malate dehydrogenase"
     gene: NotRequired[str]
-    "Gene Name [GN]\ne.g. ydj1"
+    "Gene Name [GN]\ne.g. rbfA"
     organism: NotRequired[str]
-    "Organism [OS]\ne.g. saccharomyces"
+    "Organism [OS]\ne.g. Helicobacter pylori"
     taxonomy: NotRequired[str]
-    "Taxonomy [OC]\ne.g. human"
+    "Taxonomy [OC]\ne.g. Fungi"
     ec: NotRequired[str]
-    "Enzyme classification [EC]\ne.g. 1.1.2.3"
+    "Enzyme classification [EC]\ne.g. 4.1.1.39"
     cc_cofactor: NotRequired[str]
     "Cofactor\ne.g. 29105"
     cc_cofactor_note: NotRequired[str]
@@ -38,17 +38,17 @@ class UniruleQueryDict(TypedDict):
     cc_subcellular_location_note: NotRequired[str]
     "Note\ne.g. membrane"
     cc_induction: NotRequired[str]
-    "Induction\ne.g. calcium"
+    "Induction\ne.g. maltose"
     cc_domain: NotRequired[str]
-    "Domain comments [CC]\ne.g. conformation"
+    "Domain comments [CC]\ne.g. DNA-binding domain"
     family: NotRequired[str]
-    "Protein family\ne.g. pa28"
+    "Protein family\ne.g. Tyr protein kinase family"
     cc_similarity: NotRequired[str]
-    "Comment similarity\ne.g. phosphatase"
+    "Comment similarity\ne.g. MPI phosphatase"
     go: NotRequired[str]
     "Gene Ontology [GO]\ne.g. 0009986"
     keyword: NotRequired[str]
-    "Keyword [KW]\ne.g. chromosomal"
+    "Keyword [KW]\ne.g. Activator"
 
 
 UniruleQuery: TypeAlias = Union[UniruleQueryDict, str]

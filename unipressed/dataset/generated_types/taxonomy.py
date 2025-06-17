@@ -52,15 +52,15 @@ class TaxonomyQueryDict(TypedDict):
     scientific: NotRequired[str]
     "Scientific name\ne.g. 16SrII"
     common: NotRequired[str]
-    "Common name\ne.g. sample name"
+    "Common name\ne.g. mouse"
     mnemonic: NotRequired[str]
-    "Mnemonic\ne.g. sample mnemonic"
+    "Mnemonic\ne.g. 9BACT"
     rank: NotRequired[Rank]
     "Rank\ne.g. SPECIES_GROUP\n* SUPERKINGDOM: Superkingdom\n* KINGDOM: Kingdom\n* SUBKINGDOM: Subkingdom\n* SUPERPHYLUM: Superphylum\n* PHYLUM: Phylum\n* SUBPHYLUM: Subphylum\n* SUPERCLASS: Superclass\n* CLASS: Class\n* SUBCLASS: Subclass\n* INFRACLASS: Infraclass\n* COHORT: Cohort\n* SUBCOHORT: Subcohort\n* SUPERORDER: Superorder\n* ORDER: Order\n* SUBORDER: Suborder\n* INFRAORDER: Infraorder\n* PARVORDER: Parvorder\n* SUPERFAMILY: Superfamily\n* FAMILY: Family\n* SUBFAMILY: Subfamily\n* TRIBE: Tribe\n* SUBTRIBE: Subtribe\n* GENUS: Genus\n* SUBGENUS: Subgenus\n* SPECIES_GROUP: Species group\n* SPECIES_SUBGROUP: Species subgroup\n* SPECIES: Species\n* SUBSPECIES: Subspecies\n* VARIETAS: Varietas\n* FORMA: Forma\n* NO_RANK: No rank"
     strain: NotRequired[str]
-    "Strain\ne.g. SPECIES_GROUP"
+    "Strain\ne.g. UA858"
     host: NotRequired[int]
-    "Virus host\ne.g. 85621"
+    "Virus host\ne.g. 9606"
     linked: NotRequired[bool]
     "With external info\ne.g. true"
     parent: NotRequired[str]

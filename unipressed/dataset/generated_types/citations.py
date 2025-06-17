@@ -14,17 +14,17 @@ class CitationsQueryDict(TypedDict):
     not_: NotRequired[Iterable["CitationsQuery"]]
     "Negate a filter"
     title: NotRequired[str]
-    "Title\ne.g. sample title"
+    "Title\ne.g. VEGF is required for growth and survival in neonatal mice."
     author: NotRequired[str]
-    "Author\ne.g. sample author name"
+    "Author\ne.g. Smith"
     journal: NotRequired[str]
-    "Journal\ne.g. sample journal"
+    "Journal\ne.g. Biochemistry"
     published: NotRequired[str]
-    "Year published\ne.g. sample"
+    "Year published\ne.g. 2024"
     id: NotRequired[str]
     "Citation Id\ne.g. 15772651"
     doi: NotRequired[str]
-    "DOI\ne.g. 10.1007/s11882-009-0055-9"
+    "DOI\ne.g. 10.1016/j.burns.2017.03.013"
 
 
 CitationsQuery: TypeAlias = Union[CitationsQueryDict, str]

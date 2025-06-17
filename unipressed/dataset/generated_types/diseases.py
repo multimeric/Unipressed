@@ -16,7 +16,7 @@ class DiseasesQueryDict(TypedDict):
     name: NotRequired[str]
     "Name\ne.g. alzheimer disease"
     id: NotRequired[str]
-    "Disease [AC]\ne.g. DI-12345"
+    "Disease [AC]\ne.g. DI-00086"
 
 
 DiseasesQuery: TypeAlias = Union[DiseasesQueryDict, str]
