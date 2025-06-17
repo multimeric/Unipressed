@@ -52,7 +52,7 @@ class IdMappingClient:
     ) -> requests.Response:
         data: dict[str, Any] = {"ids": ",".join(ids), "from": source, "to": dest}
         if taxon_id is not None:
-            data["taxId"] = taxon_id
+            data["taxid"] = taxon_id
         return requests.post(
             "https://rest.uniprot.org/idmapping/run",
             data=data,
