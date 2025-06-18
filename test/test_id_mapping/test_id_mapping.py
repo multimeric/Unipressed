@@ -184,3 +184,13 @@ def test_taxon_id_all():
     assert "P0CI39" in results
     # Mouse gene
     assert "P14719" in results
+
+def test_taxon_id_different_database():
+    # Checks that the taxId parameter works in different databases (P38398 comes from human BRCA1)
+    request = IdMappingClient.submit(
+        source="UniProtKB_AC-ID", dest="Ensembl_Protein", ids={"P38398"}, taxon_id=9606
+    )
+    sleep(5)
+    results = {result["to"] for result in request.each_result()}
+    assert len(results) >= 1
+    assert "ENSP00000312236.5" in results
