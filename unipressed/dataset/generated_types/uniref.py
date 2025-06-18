@@ -18,9 +18,9 @@ class UnirefQueryDict(TypedDict):
     id: NotRequired[str]
     "UniRef ID\ne.g. UniRef100_A0A001"
     name: NotRequired[str]
-    "Cluster name\ne.g. sample name"
+    "Cluster name\ne.g. Integrase core domain protein"
     identity: NotRequired[Identity]
-    "Sequence identity\ne.g. sample identity\n* 1.0: 100%\n* 0.9: 90%\n* 0.5: 50%"
+    "Sequence identity\ne.g. 1.0\n* 1.0: 100%\n* 0.9: 90%\n* 0.5: 50%"
     count: NotRequired[
         tuple[
             Union[
@@ -33,7 +33,7 @@ class UnirefQueryDict(TypedDict):
             ],
         ]
     ]
-    "Cluster size\ne.g. [100 TO 300]"
+    "Cluster size\ne.g. [1 TO 10]"
     length: NotRequired[
         tuple[
             Union[
@@ -46,7 +46,7 @@ class UnirefQueryDict(TypedDict):
             ],
         ]
     ]
-    "Sequence length\ne.g. [100 TO 300]"
+    "Sequence length\ne.g. [1 TO 100]"
     date_modified: NotRequired[
         tuple[
             Union[
@@ -60,12 +60,12 @@ class UnirefQueryDict(TypedDict):
         ]
     ]
     "Date of last modification\ne.g. [2011-10-10 TO 2019-10-10]"
-    uniprot_id: NotRequired[str]
-    "UniProtKB ID/AC\ne.g. sample uniprot id"
-    upi: NotRequired[str]
-    "UniParc ID\ne.g. UPI0123456789"
+    uniprotkb: NotRequired[str]
+    "UniProtKB ID/AC\ne.g. P35222"
+    uniparc: NotRequired[str]
+    "UniParc ID\ne.g. UPI000002DB1C"
     taxonomy_name: NotRequired[str]
-    "Taxonomy [OC]\ne.g. sample name"
+    "Taxonomy [OC]\ne.g. mammalia"
     taxonomy_id: NotRequired[str]
     "Taxonomy id"
     cluster: NotRequired[str]

@@ -92,17 +92,19 @@ class UniparcQueryDict(TypedDict):
     uniprotkb: NotRequired[str]
     "UniProtKB AC\ne.g. P12345"
     isoform: NotRequired[str]
-    "UniProtKB isoform ID\ne.g. P12345"
-    upid: NotRequired[str]
-    "Proteome ID\ne.g. UP123456789"
+    "UniProtKB isoform ID\ne.g. O60260-2"
+    proteome: NotRequired[str]
+    "Proteome ID\ne.g. UP000005640"
+    organism_id: NotRequired[int]
+    "Organism\ne.g. 10254"
     taxonomy_name: NotRequired[str]
-    "Taxonomy [OC]\ne.g. Human"
+    "Taxonomy [OC]\ne.g. Mammalia"
     taxonomy_id: NotRequired[str]
     "Taxonomy id"
     gene: NotRequired[str]
     "Gene name [GN]\ne.g. PROZ"
-    protein: NotRequired[str]
-    "Protein name\ne.g. Protein Z"
+    protein_name: NotRequired[str]
+    "Protein name\ne.g. Elastin"
     database: NotRequired[Database]
     "Database\ne.g. Gene3D\n* EnsemblBacteria: EnsemblBacteria\n* EnsemblFungi: EnsemblFungi\n* EnsemblMetazoa: EnsemblMetazoa\n* EnsemblPlants: EnsemblPlants\n* EnsemblProtists: EnsemblProtists\n* embl-cds: EMBL CDS\n* EMBL_CON: EMBL_CON\n* EMBL_TPA: EMBL_TPA\n* EMBL_TSA: EMBL_TSA\n* EMBLWGS: EMBLWGS\n* Ensembl: Ensembl\n* EnsemblRapid: EnsemblRapid\n* EPO: EPO\n* FlyBase: FlyBase\n* FusionGDB: FusionGDB\n* H-InvDB: H-InvDB\n* IPI: IPI\n* JPO: JPO\n* KIPO: KIPO\n* PATRIC: PATRIC\n* PDB: PDB\n* PIR: PIR\n* PIRARC: PIRARC\n* PRF: PRF\n* RefSeq: RefSeq\n* REMTREMBL: REMTREMBL\n* SEED: SEED\n* SGD: SGD\n* UniProt: UniProtKB\n* isoforms: UniProtKB/Swiss-Prot isoforms\n* TAIR: TAIR\n* TREMBLNEW: TREMBLNEW\n* TREMBL_VARSPLIC: TREMBL_VARSPLIC\n* TROME: TROME\n* UNIMES: UNIMES\n* USPTO: USPTO\n* VectorBase: VectorBase\n* VEGA: VEGA\n* WBParaSite: WBParaSite\n* WormBase: WormBase"
     active: NotRequired[Active]
@@ -121,20 +123,25 @@ class UniparcQueryDict(TypedDict):
             ],
         ]
     ]
-    "Sequence length\ne.g. [100 TO 300]"
+    "Sequence length\ne.g. [50 TO 100]"
     dbid: NotRequired[str]
     "Database ID\ne.g. AAC02967"
     feature_id: NotRequired[str]
     "Feature ID\ne.g. IPR004251"
     proteomecomponent: NotRequired[str]
     "Proteome Component\ne.g. chromosome"
-    organism_id: NotRequired[int]
-    "Organism ID\ne.g. 10254"
 
 
 UniparcQuery: TypeAlias = Union[UniparcQueryDict, str]
 UniparcNamesTaxonomy: TypeAlias = Literal[
-    "upi", "gene", "organism_id", "organism", "protein", "proteome"
+    "upi",
+    "gene",
+    "organism_id",
+    "organism",
+    "protein",
+    "proteome",
+    "common_taxons",
+    "common_taxon_ids",
 ]
 UniparcSequences: TypeAlias = Literal["checksum", "length", "sequence"]
 UniparcMiscellaneous: TypeAlias = Literal["accession",]
@@ -152,6 +159,7 @@ UniparcFamilyDomains: TypeAlias = Literal[
     "SMART",
     "SUPFAM",
     "NCBIfam",
+    "FunFam",
 ]
 UniparcFields: TypeAlias = Literal[
     UniparcNamesTaxonomy,

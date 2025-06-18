@@ -31,7 +31,7 @@ class ProteomesQueryDict(TypedDict):
     genome_accession: NotRequired[str]
     "Genome Accession\ne.g. CM000663"
     genome_assembly: NotRequired[str]
-    "Genome Assembly\ne.g. GCA_000001405.27"
+    "Genome Assembly\ne.g. GCA_000005845.2"
     cpd: NotRequired[Cpd]
     "CPD (Complete Proteome Detector)\ne.g. 1\n* 1: Standard\n* 2: Close to standard (high value)\n* 3: Close to standard (low value)\n* 4: Outlier (high value)\n* 5: Outlier (low value)\n* 6: Unknown"
     busco: NotRequired[
@@ -46,7 +46,7 @@ class ProteomesQueryDict(TypedDict):
             ],
         ]
     ]
-    "BUSCO (Complete %)\ne.g. 97"
+    "BUSCO (Complete %)\ne.g. [97-100]"
 
 
 ProteomesQuery: TypeAlias = Union[ProteomesQueryDict, str]

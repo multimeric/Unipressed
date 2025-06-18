@@ -31,16 +31,18 @@ class UniprotkbQueryDict(TypedDict):
     "UniProtKB AC\ne.g. P12345"
     id: NotRequired[str]
     "Entry Name [ID]\ne.g. P53_HUMAN"
+    sec_acc: NotRequired[str]
+    "Secondary Accession\ne.g. B2R5V1"
     protein_name: NotRequired[str]
-    "Protein Name [DE]\ne.g. mas5"
+    "Protein Name [DE]\ne.g. Elastin"
     gene: NotRequired[str]
-    "Gene Name [GN]\ne.g. ydj1"
+    "Gene Name [GN]\ne.g. YDJ1"
     organism_name: NotRequired[str]
     "Organism [OS]\ne.g. saccharomyces"
     organism_id: NotRequired[str]
     "Organism id"
     taxonomy_name: NotRequired[str]
-    "Taxonomy [OC]\ne.g. human"
+    "Taxonomy [OC]\ne.g. mammalia"
     taxonomy_id: NotRequired[str]
     "Taxonomy id"
     virus_host_name: NotRequired[str]
@@ -136,17 +138,17 @@ class UniprotkbQueryDict(TypedDict):
     cc_scl_note_exp: NotRequired[str]
     "Cc scl note exp\ne.g. membrane"
     ft_transmem: NotRequired[str]
-    "Ft transmem\ne.g. forming"
+    "Ft transmem\ne.g. helical"
     ft_transmem_exp: NotRequired[str]
-    "Ft transmem exp\ne.g. forming"
+    "Ft transmem exp\ne.g. helical"
     ft_topo_dom: NotRequired[str]
-    "Ft topo dom\ne.g. forming"
+    "Ft topo dom\ne.g. cytoplasmic"
     ft_topo_dom_exp: NotRequired[str]
-    "Ft topo dom exp\ne.g. forming"
+    "Ft topo dom exp\ne.g. cytoplasmic"
     ft_intramem: NotRequired[str]
-    "Ft intramem\ne.g. forming"
+    "Ft intramem\ne.g. helical"
     ft_intramem_exp: NotRequired[str]
-    "Ft intramem exp\ne.g. forming"
+    "Ft intramem exp\ne.g. helical"
     cc_disease: NotRequired[str]
     "Cc disease\ne.g. nephrotic"
     cc_disease_exp: NotRequired[str]
@@ -188,9 +190,9 @@ class UniprotkbQueryDict(TypedDict):
     ft_lipid_exp: NotRequired[str]
     "Ft lipid exp\ne.g. cysteine"
     ft_carbohyd: NotRequired[str]
-    "Ft carbohyd\ne.g. cysteine"
+    "Ft carbohyd\ne.g. GlcNAc"
     ft_carbohyd_exp: NotRequired[str]
-    "Ft carbohyd exp\ne.g. cysteine"
+    "Ft carbohyd exp\ne.g. GlcNAc"
     ft_disulfid: NotRequired[str]
     "Ft disulfid\ne.g. reversible"
     ft_disulfid_exp: NotRequired[str]
@@ -275,7 +277,7 @@ class UniprotkbQueryDict(TypedDict):
             ],
         ]
     ]
-    "Mass(Da)\ne.g. [441126 TO 441126]"
+    "Mass(Da)\ne.g. [10000 TO 11000]"
     length: NotRequired[
         tuple[
             Union[
@@ -318,7 +320,7 @@ class UniprotkbQueryDict(TypedDict):
     cc_sc_einit: NotRequired[str]
     "Erroneous initiation\ne.g. extended"
     cc_sc_eterm: NotRequired[str]
-    "Erroneous termination\ne.g. translated"
+    "Erroneous termination\ne.g. truncated"
     cc_sc_epred: NotRequired[str]
     "Erroneous gene model prediction\ne.g. *"
     cc_sc_etran: NotRequired[str]
@@ -447,7 +449,7 @@ class UniprotkbQueryDict(TypedDict):
             ],
         ]
     ]
-    "Date Of Creation\ne.g. [2018-03-04 TO 2018-03-08]"
+    "Date Of Creation\ne.g. [2023-05-13 TO 2024-05-13]"
     date_modified: NotRequired[
         tuple[
             Union[
@@ -460,7 +462,7 @@ class UniprotkbQueryDict(TypedDict):
             ],
         ]
     ]
-    "Date of last entry modification\ne.g. [2018-03-04 TO 2018-03-08]"
+    "Date of last entry modification\ne.g. [2023-05-13 TO 2024-05-13]"
     date_sequence_modified: NotRequired[
         tuple[
             Union[
@@ -473,7 +475,7 @@ class UniprotkbQueryDict(TypedDict):
             ],
         ]
     ]
-    "Date of last sequence modification\ne.g. [2018-03-04 TO 2018-03-08]"
+    "Date of last sequence modification\ne.g. [2023-05-13 TO 2024-05-13]"
     go: NotRequired[str]
     "Go\ne.g. 0009986"
     go_manual: NotRequired[str]
@@ -523,11 +525,11 @@ class UniprotkbQueryDict(TypedDict):
     go_iea: NotRequired[str]
     "go, inferred from electronic annotation [iea]"
     chebi: NotRequired[str]
-    "CHEBI ID\ne.g. 29105"
+    "Name or ID (CHEBI)\ne.g. Search by Name or ID (CHEBI)"
     inchikey: NotRequired[str]
     "InChIKey\ne.g. XLYOFNOQVPJJNP-UHFFFAOYSA-N"
     keyword: NotRequired[str]
-    "Keyword [KW]\ne.g. chromosomal"
+    "Keyword [KW]\ne.g. activator"
     lit_author: NotRequired[str]
     "Author\ne.g. smith"
     lit_journal: NotRequired[str]
@@ -548,19 +550,19 @@ class UniprotkbQueryDict(TypedDict):
     lit_pubmed: NotRequired[str]
     "PubMed ID\ne.g. 15165820"
     lit_title: NotRequired[str]
-    "Title\ne.g. protein"
+    "Title\ne.g. apoptosis"
     lit_citation_id: NotRequired[str]
     "Citation ID\ne.g. CI-6EPRJ6MFFS5LC"
     computational_pubmed_id: NotRequired[str]
-    "Computational PubMed ID\ne.g. 15165820"
+    "Computational PubMed ID\ne.g. 1697263"
     community_pubmed_id: NotRequired[str]
-    "Community PubMed ID\ne.g. 15165820"
+    "Community PubMed ID\ne.g. 30699149"
     proteome: NotRequired[str]
     "Proteome ID\ne.g. UP000005640"
     proteomecomponent: NotRequired[str]
     "Proteome Component\ne.g. chromosome"
     scope: NotRequired[str]
-    "Cited for\ne.g. microtubule"
+    "Cited for\ne.g. function"
     reviewed: NotRequired[bool]
     "Reviewed\ne.g. true"
     active: NotRequired[bool]
@@ -753,9 +755,7 @@ UniprotkbPtm: TypeAlias = Literal[
 UniprotkbPolymorphismAndMutation: TypeAlias = Literal[
     "xref_alzforum", "xref_biomuta", "xref_dmdm", "xref_dbsnp"
 ]
-UniprotkbTwodGel: TypeAlias = Literal[
-    "xref_compluyeast-2dpage", "xref_ogp", "xref_reproduction-2dpage"
-]
+UniprotkbTwodGel: TypeAlias = Literal["xref_ogp", "xref_reproduction-2dpage"]
 UniprotkbProteomic: TypeAlias = Literal[
     "xref_cptac",
     "xref_massive",
@@ -769,7 +769,7 @@ UniprotkbProteomic: TypeAlias = Literal[
     "xref_jpost",
 ]
 UniprotkbProtocolsAndMaterials: TypeAlias = Literal[
-    "xref_abcd", "xref_antibodypedia", "xref_cptc", "xref_dnasu"
+    "xref_abcd", "xref_antibodypedia", "xref_cptc", "xref_dnasu", "xref_ycharos"
 ]
 UniprotkbGenomeAnnotation: TypeAlias = Literal[
     "xref_ensembl",
@@ -846,11 +846,13 @@ UniprotkbEnzymeAndPathway: TypeAlias = Literal[
     "xref_reactome",
     "xref_sabio-rk",
     "xref_signor",
+    "xref_strenda-db",
     "xref_signalink",
     "xref_unipathway",
 ]
 UniprotkbOther: TypeAlias = Literal[
     "xref_biogrid-orcs",
+    "xref_cd-code",
     "xref_chitars",
     "xref_evolutionarytrace",
     "xref_genewiki",
@@ -868,8 +870,10 @@ UniprotkbGeneExpression: TypeAlias = Literal[
     "xref_bgee", "xref_cleanex", "xref_collectf", "xref_expressionatlas"
 ]
 UniprotkbFamilyAndDomain: TypeAlias = Literal[
+    "xref_antifam",
     "xref_cdd",
     "xref_disprot",
+    "xref_funfam",
     "xref_gene3d",
     "xref_hamap",
     "xref_ideal",
