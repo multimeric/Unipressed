@@ -16,18 +16,14 @@ jobs:
       - name: Install compiler
         run: sudo apt-get install build-essential
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
 
-      - name: Python Poetry Action
-        uses: abatilo/actions-poetry@v2.3.0
-        with:
-          poetry-version: '1.5.1'
+      - name: Set up Python 3.10
+        run: uv python install 3.10
 
       - name: Export dependencies
-        run: poetry export --with docs --without-hashes --output requirements.txt
+        run: uv export --extra docs --no-hashes --output-file requirements.txt
 
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
