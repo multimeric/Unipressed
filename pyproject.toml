@@ -1,44 +1,48 @@
-[tool.poetry]
+[project]
 name = "unipressed"
 version = "1.4.0"
 description = "Comprehensive Python client for the Uniprot REST API"
-authors = ["Michael Milton <michael.r.milton@gmail.com>"]
-license = "MIT"
+authors = [{name = "Michael Milton", email = "michael.r.milton@gmail.com"}]
+license = {text = "MIT"}
 readme = "README.md"
-homepage = "https://multimeric.github.io/Unipressed"
-repository = "https://github.com/multimeric/Unipressed"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.28.1",
+    "typing-extensions>=4.3.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-requests = "^2.28.1"
-typing-extensions = "^4.3.0"
+[project.urls]
+Homepage = "https://multimeric.github.io/Unipressed"
+Repository = "https://github.com/multimeric/Unipressed"
 
-[tool.poetry.group.tests.dependencies]
-pytest = { version = "^7.1.2" }
-fastaparser = "^1.1"
-
-[tool.poetry.group.docs.dependencies]
-mkdocstrings = { version = "^0.25.2", extras = ["python"] }
-mkdocs = "^1.6.0"
-mkdocs-material = "^9.5.31"
-mkdocs-include-markdown-plugin = "^6.2.2"
-rich = "^13.7.1"
-
-[tool.poetry.group.readme.dependencies]
-jupyter = { version = "^1.0.0", python = ">=3.8" }
-
-[tool.poetry.group.lint.dependencies]
-pre-commit = { version = "^2.20.0" }
-types-requests = { version = "^2.28.7" }
-
-[tool.poetry.group.codegen.dependencies]
-typer = { version = "^0.6.1" }
-inflection = { version = "^0.5.1" }
-black = { version = "^22.6.0" }
+[project.optional-dependencies]
+tests = [
+    "pytest>=7.1.2",
+    "fastaparser>=1.1",
+]
+docs = [
+    "mkdocstrings[python]>=0.25.2",
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.5.31",
+    "mkdocs-include-markdown-plugin>=6.2.2",
+    "rich>=13.7.1",
+]
+readme = [
+    "jupyter>=1.0.0",
+]
+lint = [
+    "pre-commit>=2.20.0",
+    "types-requests>=2.28.7",
+]
+codegen = [
+    "typer>=0.6.1",
+    "inflection>=0.5.1",
+    "black>=22.6.0",
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.isort]
 profile = "black"
