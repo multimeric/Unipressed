@@ -5,6 +5,8 @@
 
 #### Changed
 
+* Stop supporting Python 3.8 and 3.9 and support Python 3.13 and 3.14
+* Move the build system from `poetry-core` to `hatchling` [[#43](https://github.com/multimeric/Unipressed/pull/43)]
 * Regenerated the generated code. For the detailed changes please refer to the [git diff](https://github.com/multimeric/Unipressed/commit/6ff916761afe9801f75b28d6bd21ec141109ea62).
 
 ### 1.4.0
