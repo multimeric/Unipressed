@@ -5,7 +5,7 @@ description = "Comprehensive Python client for the Uniprot REST API"
 authors = [{name = "Michael Milton", email = "michael.r.milton@gmail.com"}]
 license = {text = "MIT"}
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
     "requests>=2.28.1",
     "typing-extensions>=4.3.0",
